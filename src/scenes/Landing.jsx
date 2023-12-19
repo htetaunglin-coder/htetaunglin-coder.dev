@@ -14,8 +14,12 @@ const Landing = () => {
 
           <TextReval>
             <div className="text-center text-clamp-title font-righteous flex gap-4">
-              <h2 className="text-stroke-black">HI, My Name is </h2>
-              <h2 className="text-light-blue">Htet Aung Lin </h2>
+              <h2 className="text-stroke-black dark:text-stroke-white">
+                HI, My Name is{" "}
+              </h2>
+              <h2 className="text-navy-blue dark:text-light-blue">
+                Htet Aung Lin{" "}
+              </h2>
             </div>
           </TextReval>
         ) : (
@@ -27,8 +31,12 @@ const Landing = () => {
             }}
             duration={3}
             className="text-start text-clamp-title font-righteous flex flex-col">
-            <h2 className="text-stroke-black">HI, My Name is </h2>
-            <h2 className="text-light-blue ml-[20%] -mt-2">Htet Aung Lin </h2>
+            <h2 className="text-stroke-black dark:text-stroke-white">
+              HI, My Name is{" "}
+            </h2>
+            <h2 className="text-navy-blue dark:text-light-blue ml-[20%] -mt-2">
+              Htet Aung Lin{" "}
+            </h2>
           </AnimatedDiv>
         )}
 
@@ -40,7 +48,7 @@ const Landing = () => {
           }}
           delayTime={2.75}
           duration={0.5}>
-          <h3 className="font-sans text-sm font-bold -mt-1 mr-10 mb-4 text-light-blue text-start underline ss:no-underline ss:text-base sm:text-xl md:text-2xl ss:text-end">
+          <h3 className="font-sans text-sm font-bold -mt-1 mr-10 mb-4 text-navy-blue dark:text-light-blue text-start underline ss:no-underline ss:text-base sm:text-xl md:text-2xl ss:text-end">
             A Junior Frontend Developer
           </h3>
         </AnimatedDiv>
@@ -54,7 +62,7 @@ const Landing = () => {
               visible: { opacity: 1 },
             }}
             duration={0.5}>
-            <h3 className="my-4 text-clamp-sm leading-5 ss:leading-normal -mt-1 font-dmSans text-pink text-start ">
+            <h3 className="my-4 text-clamp-sm leading-5 ss:leading-normal -mt-1 font-dmSans text-dark-pink dark:text-pink text-start font-[500] dark:font-normal">
               {isSmallSize ? (
                 <>
                   I'm passionate about building visually stunning websites with
@@ -82,7 +90,7 @@ const Landing = () => {
           }}
           duration={0.5}>
           <a
-            className="bg-pink border border-pink text-flat-black rounded-sm py-3 px-7 font-bold font-dmSans text-sm xs:text-md sm:text-lg hover:bg-transparent hover:text-pink transition duration-500"
+            className="bg-dark-pink dark:bg-pink border border-pink text-flat-black rounded-sm py-3 px-7 font-bold font-dmSans text-sm xs:text-md sm:text-lg hover:bg-transparent hover:text-dark-pink dark:hover:text-pink transition duration-500"
             href="#contact">
             Contact Me
           </a>

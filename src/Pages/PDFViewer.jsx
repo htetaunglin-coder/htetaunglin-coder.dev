@@ -1,5 +1,6 @@
 import React from "react";
 import Resume from "../assets/Htet_Aung Lin_Resume.pdf";
+import Transition from "../components/animation/Transition";
 
 const PDFViewer = () => {
   return (
@@ -15,4 +16,4 @@ const PDFViewer = () => {
   );
 };
 
-export default PDFViewer;
+export default Transition(PDFViewer);

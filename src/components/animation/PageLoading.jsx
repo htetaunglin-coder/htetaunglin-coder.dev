@@ -2,7 +2,7 @@ import React from "react";
 
 const PageLoading = () => {
   return (
-    <div className="w-full h-screen bg-flat-black">
+    <div className="w-full h-screen bg-zinc-500 dark:bg-flat-black">
       <div className="loading-window ">
         <div className="car">
           <div className="strike"></div>

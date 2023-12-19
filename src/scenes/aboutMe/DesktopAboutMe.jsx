@@ -17,11 +17,13 @@ const Article = ({ title, text, delayTime = 0, className }) => {
       duration={0.5}
       delayTime={delayTime}
       className={className}>
-      <h4 className="text-gray-400 flex items-center font-semibold text-base">
+      <h4 className="text-gray-800 dark:text-gray-400 flex items-center font-semibold text-base">
         <FaChevronRight size={15} />
         {title}
       </h4>
-      <p className="text-pink font-dmSans ml-14 text-base">{text}</p>
+      <p className="text-red-800 dark:text-pink font-dmSans ml-14 text-base font-medium dark:font-normal">
+        {text}
+      </p>
     </AnimatedDiv>
   );
 };

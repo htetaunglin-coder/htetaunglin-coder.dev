@@ -15,7 +15,7 @@ export const EachProject = ({ title, img, techs, webSiteLink, source }) => {
       }}
       transition={{ duration: 1.5 }}
       className={`text-center w-full relative max-w-md mx-auto sm:max-w-none cursor-pointer border  ${
-        isActive ? "border-gray-500" : "border-gray-800"
+        isActive ? "border-gray-500" : "border-gray-500 dark:border-gray-800"
       }`}>
       <LazyImage
         src={img}

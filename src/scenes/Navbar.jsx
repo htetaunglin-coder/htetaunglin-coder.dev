@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import useMediaQuery from "../hooks/useMediaQuery";
-import menuIcon from "../assets/menu-icon.svg";
 import { Link } from "react-router-dom";
-import { FaRegFileLines } from "react-icons/fa6";
+import { FaRegFileLines, FaBars } from "react-icons/fa6";
+import ToggleTheme from "../components/ToggleTheme";
 
 const MobileNavLink = ({ page, setState }) => {
   const lowerCasePage = page.toLowerCase();
@@ -44,7 +44,9 @@ const Navbar = () => {
   return (
     <header
       className={`z-50 w-full fixed top-0 ${
-        isNavbarActive && "bg-[#0a0a0abb] shadow-lg shadow-black/10"
+        isNavbarActive
+          ? "bg-gray-300/90 dark:bg-flat-black/70 shadow-lg shadow-black/10"
+          : ""
       }`}>
       {/* overlay */}
       {isMenuToggled && (
@@ -54,21 +56,28 @@ const Navbar = () => {
       <div className="flex items-center justify-between mx-auto w-5/6 py-3 sm:py-5 gap-2">
         <Link
           to="/"
-          className="font-serif text-xl xs:text-2xl sm:text-3xl text-pink">
+          className="font-serif text-xl xs:text-2xl sm:text-3xl text-dark-pink dark:text-pink">
           HTLA
         </Link>
 
         {/* DESKTOP NAV */}
         {isDesktop ? (
-          <nav className="flex justify-between gap-16 md:gap-20 font-dmSans text-sm text-pink">
+          <nav className="flex justify-between gap-12 md:gap-20 font-dmSans text-sm text-red-800 dark:text-pink">
             <DesktopNavLink page="Home" />
             <DesktopNavLink page="About Me" />
             <DesktopNavLink page="Skills" />
             <DesktopNavLink page="Project" />
             <DesktopNavLink page="Contact" />
+            <ToggleTheme
+              className={"md:hidden text-gray-800 dark:text-gray-300 text-lg"}
+            />
           </nav>
         ) : (
+          // mobile nav
           <div className="flex items-center">
+            <ToggleTheme
+              className={"text-gray-800 dark:text-gray-300 mr-2 text-sm"}
+            />
             <Link
               className="text-gray-300 mr-2 flex gap-1 items-center bg-gray-800 py-1 px-1 xs:px-2 rounded-sm"
               to="/resume">
@@ -83,9 +92,9 @@ const Navbar = () => {
               </p>
             </Link>
             <button
-              className="rounded-full border p-[5px] bg-red"
+              className="rounded-full border border-gray-800 dark:border-gray-300 p-[5px] text-gray-800 dark:text-gray-300"
               onClick={() => setIsMenuToggled(!isMenuToggled)}>
-              <img alt="menu-icon" src={menuIcon} />
+              <FaBars />
             </button>
           </div>
         )}

@@ -2,14 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   mode: "jit",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         "flat-black": "#0a0a0a",
         pink: "#c5a0a0",
         secondary: "#131313",
-        palePink: "#806868",
+        "pale-pink": "#806868",
         "light-blue": "#8f8bb4",
+        "dark-pink": "#9e5e5e",
+        "navy-blue": "#46427c",
       },
       fontFamily: {
         playfair: ["Playfair Display", "serif"],

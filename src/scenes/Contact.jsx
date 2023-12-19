@@ -50,7 +50,7 @@ const Contact = () => {
       .finally(() => setLoading(false));
   };
 
-  const inputElClass = `w-full bg-transparent font-semibold placeholder-palePink text-pink my-2 border-b  p-3 text-sm sm:text-base ${
+  const inputElClass = `w-full bg-transparent font-semibold placeholder-dark-pink dark:placeholder-pale-pink text-pink my-2 border-b  p-3 text-sm sm:text-base ${
     errors.email ? "border-red-500" : "border-zinc-800"
   } ${loading && "pointer-events-none brightness-50"}`;
 
@@ -66,7 +66,7 @@ const Contact = () => {
           visible: { opacity: 1, y: 0 },
         }}
         className="w-full mb-10">
-        <h3 className=" font-righteous text-3xl sm:text-5xl text-light-blue">
+        <h3 className=" font-righteous text-3xl sm:text-5xl text-navy-blue dark:text-light-blue">
           CONTACT ME
         </h3>
       </AnimatedDiv>
@@ -80,7 +80,7 @@ const Contact = () => {
         delayTime={0.2}
         duration={0.5}
         className="w-full max-w-4xl border border-zinc-800 p-5 md:mt-0">
-        <form onSubmit={handleSubmit(sendEmail)} ref={form}>
+        <form onSubmit={handleSubmit(sendEmail)} ref={form} autoComplete="true">
           {errors.name && (
             <p className="text-rose-500 font-dmSans">{errors?.name.message}</p>
           )}
@@ -88,6 +88,7 @@ const Contact = () => {
             className={inputElClass}
             type="text"
             name="name"
+            autoComplete="true"
             placeholder="NAME"
             {...register("name")}
           />
@@ -99,6 +100,7 @@ const Contact = () => {
             type="text"
             placeholder="EMAIL"
             name="email"
+            autoComplete="true"
             {...register("email")}
           />
 
@@ -118,7 +120,7 @@ const Contact = () => {
           />
 
           <button
-            className={`p-3 sm:p-5 text-zinc-900 font-semibold mt-2 transition duration-500 border border-pink bg-pink rounded hover:bg-transparent hover:text-pink text-sm sm:text-base ${
+            className={`p-3 sm:p-5 text-gray-300 dark:text-zinc-900 font-semibold mt-2 transition duration-500 border border-dark-pink dark:border-pink bg-dark-pink dark:bg-pink rounded hover:bg-transparent hover:text-dark-pink dark:hover:text-pink text-sm sm:text-base ${
               loading && "pointer-events-none brightness-50"
             }`}
             type="submit">

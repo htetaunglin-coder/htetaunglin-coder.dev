@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import "./css/fonts.css";
 import "./css/util.css";
 import "./css/animation.css";
 import "./css/loading.css";
@@ -15,7 +16,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="app relative bg-flat-black">
+    <div className="app relative bg-gray-300 dark:bg-flat-black">
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route

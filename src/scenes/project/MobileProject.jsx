@@ -26,10 +26,10 @@ const MobileProject = () => {
           loading="lazy"
         />
         <div className="max-w-xs mt-3">
-          <h1 className="text-xl font-playfair text-white">
+          <h1 className="text-xl font-playfair text-flat-black dark:text-white font-bold dark:font-normal">
             Recipe App Using React JS
           </h1>
-          <p className="text-pink font-dmSans text-sm lg:text-base leading-5 mt-2">
+          <p className="text-red-800 dark:text-pink font-dmSans text-sm lg:text-base leading-5 mt-2">
             This project is a React-based web application that allows users to
             search their favorite recipes. The app uses an API to fetch recipe
             data and display it in a user-friendly interface.
@@ -57,7 +57,7 @@ const MobileProject = () => {
               <a
                 target="_blank"
                 href="https://github.com/HTLA380/EasyBank-Landing-Page.git"
-                className="text-pink mx-1 inline-block text-xl">
+                className="text-dark-pink dark:text-pink mx-1 inline-block text-xl">
                 <FiGithub />
               </a>
             </div>
@@ -66,7 +66,7 @@ const MobileProject = () => {
       </AnimatedDiv>
       <Link
         to="/projects"
-        className="bg-transparent border-2 border-gray-400 text-gray-400 block w-fit mt-5 py-2 px-4 rounded-md border-solid font-semibold hover:bg-gray-400 hover:text-flat-black duration-500 hover:tracking-widest mx-auto text-sm">
+        className="bg-transparent border-2 border-gray-800 dark:border-gray-400 text-gray-800 dark:text-gray-400 block w-fit mt-5 py-2 px-4 rounded-md border-solid font-semibold hover:bg-gray-400 hover:text-flat-black duration-500 hover:tracking-widest mx-auto text-sm">
         All Projects
       </Link>
     </section>

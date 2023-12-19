@@ -1,0 +1,79 @@
+/* <<<--- Dm Sans Font --->>> */
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-Black.ttf) format("truetype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-ExtraBold.ttf) format("truetype");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-Medium.ttf) format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Dm Sans";
+  src: url(../fonts/DmSans/DMSans-Light.ttf) format("truetype");
+  font-weight: 300;
+}
+
+/* <<<--- Playfair Display Font --->>> */
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-Black.ttf)
+    format("truetype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-ExtraBold.ttf)
+    format("truetype");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-SemiBold.ttf)
+    format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-Medium.ttf)
+    format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf)
+    format("truetype");
+  font-weight: 400;
+}
+
+/* <<<--- Righteous Font --->>> */
+@font-face {
+  font-family: "Righteous";
+  src: url(../fonts/Righteous/Righteous-Regular.ttf) format("truetype");
+}

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import SocialMedia from "../../scenes/SocialMedia";
 import { FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaRegFileLines } from "react-icons/fa6";
+import Tooltip from "../../components/Tooltip";
+import ToggleTheme from "../../components/ToggleTheme";
 
 function ProjectPage() {
   return (
@@ -17,18 +19,17 @@ function ProjectPage() {
       <nav className="flex items-center justify-between mx-auto w-5/6 py-5">
         <Link
           to="/"
-          className="font-serif text-xl xs:text-2xl sm:text-3xl text-pink">
+          className="font-serif text-xl xs:text-2xl sm:text-3xl text-dark-pink dark:text-pink">
           HTLA
         </Link>
-        <div className="flex md:gap-4 sm:gap-8 items-center text-gray-400 text-xl">
+        <div className="flex md:gap-4 sm:gap-8 items-center text-gray-800 dark:text-gray-400 text-xl">
+          <ToggleTheme className="text-sm sm:text-base mr-2" />
           <Link
             to="/resume"
-            className="text-pink bg-gray-900 p-2 rounded-md flex items-center w-fit gap-1 hover:bg-pink hover:text-gray-900 transition duration-300">
-            <FaRegFileLines size={20} />
-            <p className="font-righteous text-sm font-normal tracking-widest">
-              Resume
-            </p>
-          </Link>{" "}
+            className="text-pink bg-gray-900 p-2 rounded-md flex items-center w-fit gap-1 hover:bg-pink hover:text-gray-900 transition duration-300 text-xs sm:text-sm">
+            <FaRegFileLines />
+            <p className="font-righteous font-normal tracking-widest">Resume</p>
+          </Link>
           <a
             className="mx-1"
             target="_blank"
@@ -49,15 +50,10 @@ function ProjectPage() {
       </nav>
       {/* DESKTOP NAV */}
 
-      <main className="bg-flat-black w-5/6 max-w-screen-lg mx-auto min-h-screen pb-32 pt-20">
+      <main className="w-5/6 max-w-screen-lg mx-auto min-h-screen pb-32 pt-20">
         <div className="flex justify-between items-center">
           <SectionTitle content={"Projects"} />
-          <span className="text-xl text-gray-200 cursor-pointer relative group">
-            <FaQuestionCircle />
-            <p className="absolute text-sm w-fit whitespace-nowrap bg-white text-flat-black font-dmSans right-5 py-1 px-2 rounded duration-200 opacity-0 group-hover:opacity-100">
-              Click the image to see the information
-            </p>
-          </span>
+          <Tooltip content={"Click the image to see more information"} />
         </div>
         <motion.div
           initial="hidden"
@@ -77,8 +73,8 @@ function ProjectPage() {
         </motion.div>
         <Link
           to="/"
-          className="text-pink mt-4 bg-gray-900 p-2 rounded-md flex items-center w-fit gap-1 hover:bg-pink hover:text-gray-900 transition duration-300">
-          <FaArrowLeft size={20} />
+          className="text-pink mt-4 bg-gray-900 p-2 rounded-md flex items-center w-fit gap-1 hover:bg-pink hover:text-gray-900 transition duration-300 text-xs sm:text-sm">
+          <FaArrowLeft />
           <p className="font-righteous tracking-widest">Home</p>
         </Link>
       </main>
