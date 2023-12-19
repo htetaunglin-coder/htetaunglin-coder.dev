@@ -1,5 +1,5 @@
 import Landing from "../scenes/Landing";
-import DesktopSkills from "../scenes/Skills/DesktopSkills";
+import DesktopSkills from "../scenes/skills/DesktopSkills";
 import MobileSkills from "../scenes/skills/MobileSkills";
 import Contact from "../scenes/Contact";
 import Footer from "../scenes/Footer";
