@@ -66,7 +66,9 @@ const MobileProject = () => {
       </AnimatedDiv>
       <Link
         to="/projects"
-        className="bg-transparent border-2 border-gray-800 dark:border-gray-400 text-gray-800 dark:text-gray-400 block w-fit mt-5 py-2 px-4 rounded-md border-solid font-semibold hover:bg-gray-400 hover:text-flat-black duration-500 hover:tracking-widest mx-auto text-sm">
+        className="bg-transparent border-2 border-gray-800 dark:border-gray-400 text-gray-800 dark:text-gray-400 block w-fit mt-5 py-2 px-4 rounded-md border-solid font-semibold hover:bg-gray-400 hover:text-flat-black
+        dark:hover:text-flat-black 
+         duration-500 hover:tracking-widest mx-auto text-sm">
         All Projects
       </Link>
     </section>
