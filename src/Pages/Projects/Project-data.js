@@ -53,6 +53,6 @@ export default [
     img: Project6,
     techs: ["React Js", "Tailwind Css", "Framer Motion", "TypeWriter Effect"],
     webSiteLink: "https://cobalt-clone.netlify.app/",
-    source: "https://github.com/HTLA380/Cobalt-Clone",
+    source: "https://github.com/HTLA380/Desktop-Cobalt-Clone.git",
   },
 ];
