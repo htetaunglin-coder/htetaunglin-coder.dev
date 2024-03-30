@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FaRegFileLines, FaBars } from "react-icons/fa6";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
-import ToggleTheme from "./ToggleTheme";
+import ToggleTheme from "../toggletheme/ToggleTheme";
 
 const MobileNavLink = ({
   page,
