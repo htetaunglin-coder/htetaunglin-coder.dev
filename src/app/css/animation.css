@@ -1,0 +1,72 @@
+@tailwind components;
+
+@layer components {
+  @supports (-webkit-text-stroke: 1px black) {
+    .text-stroke-white {
+      -webkit-text-stroke: 1px #bdbbb6;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-stroke-black {
+      -webkit-text-stroke: 1px #333;
+      -webkit-text-fill-color: transparent;
+    }
+    .stroke-cyan {
+      -webkit-text-stroke: 1px #dc4492;
+      -webkit-text-fill-color: #ffedd5;
+    }
+  }
+}
+
+.text-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-effect .overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #0a0a0a;
+  border-left: 2px solid #fff;
+  transform: translateX(0%);
+  animation: translateOverlay 3s forwards cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+@keyframes translateOverlay {
+  to {
+    transform: translateX(101%);
+  }
+}
+
+.animate-text {
+  animation: text-animation 0.5s ease-in 5s infinite alternate-reverse;
+}
+
+@keyframes text-animation {
+  0% {
+    transform: translateX(-0.5rem);
+  }
+  100% {
+    transform: translate(0);
+    color: red;
+  }
+}
+
+.slide-in {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transform-origin: bottom;
+}
+
+.slide-out {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transform-origin: top;
+}

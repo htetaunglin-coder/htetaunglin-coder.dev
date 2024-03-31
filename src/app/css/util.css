@@ -1,0 +1,11 @@
+.text-clamp-title {
+  font-size: clamp(1.875rem, 6vw, 4rem);
+}
+
+.text-clamp-sm {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+.text-clamp-md {
+  font-size: clamp(1rem, 4vw, 1.875rem);
+}
