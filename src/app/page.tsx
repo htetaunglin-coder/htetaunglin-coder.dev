@@ -8,6 +8,7 @@ import { DesktopAboutMe, MobileAboutMe } from "@/containers/home-page/about-me-s
 import MobileSkills, { DesktopSkills } from "@/containers/home-page/skills-section";
 import { DesktopProject, MobileProject } from "@/containers/home-page/project-section";
 import Contact from "@/containers/home-page/contact-section";
+import Footer from "@/components/footer/Footer";
 
 const Home = () => {
   const isDesktop = useMediaQuery("(min-width: 48rem)");
@@ -32,6 +33,7 @@ const Home = () => {
         <div className="w-5/6 max-w-screen-smd mx-auto md:h-full">
           <Contact />
         </div>
+        <Footer />
       </AnimatePresence>
     </div>
   );
