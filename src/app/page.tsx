@@ -6,6 +6,7 @@ import HeroSection from "@/containers/home-page/hero-section";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { DesktopAboutMe, MobileAboutMe } from "@/containers/home-page/about-me-section";
 import MobileSkills, { DesktopSkills } from "@/containers/home-page/skills-section";
+import { DesktopProject, MobileProject } from "@/containers/home-page/project-section";
 
 const Home = () => {
   const isDesktop = useMediaQuery("(min-width: 48rem)");
@@ -23,6 +24,9 @@ const Home = () => {
         </div>
         <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
           {isDesktop ? <DesktopSkills /> : <MobileSkills />}
+        </div>
+        <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
+          {isDesktop ? <DesktopProject /> : <MobileProject />}
         </div>
       </AnimatePresence>
     </div>
