@@ -14,27 +14,29 @@ const Home = () => {
   const isDesktop = useMediaQuery("(min-width: 48rem)");
 
   return (
-    <div className="relative">
-      <div
-        id="home"
-        className="relative flex items-center justify-center w-5/6 min-h-screen mx-auto border-b max-w-screen-smd md:items-start md:pt-56 scroll-effect border-b-gray-700">
-        <HeroSection />
+    <Transition>
+      <div className="relative">
+        <div
+          id="home"
+          className="relative flex items-center justify-center w-5/6 min-h-screen mx-auto border-b max-w-screen-smd md:items-start md:pt-56 scroll-effect border-b-gray-700">
+          <HeroSection />
+        </div>
+        <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700">
+          {isDesktop ? <DesktopAboutMe /> : <MobileAboutMe />}
+        </div>
+        <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
+          {isDesktop ? <DesktopSkills /> : <MobileSkills />}
+        </div>
+        <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
+          {isDesktop ? <DesktopProject /> : <MobileProject />}
+        </div>
+        <div className="w-5/6 max-w-screen-smd mx-auto md:h-full">
+          <Contact />
+        </div>
+        <Footer />
       </div>
-      <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700">
-        {isDesktop ? <DesktopAboutMe /> : <MobileAboutMe />}
-      </div>
-      <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
-        {isDesktop ? <DesktopSkills /> : <MobileSkills />}
-      </div>
-      <div className="w-5/6 max-w-screen-smd mx-auto h-full relative border-b border-b-gray-700 ">
-        {isDesktop ? <DesktopProject /> : <MobileProject />}
-      </div>
-      <div className="w-5/6 max-w-screen-smd mx-auto md:h-full">
-        <Contact />
-      </div>
-      <Footer />
-    </div>
+    </Transition>
   );
 };
 
-export default Transition(Home);
+export default Home;

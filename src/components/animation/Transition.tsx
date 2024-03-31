@@ -1,10 +1,24 @@
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+"use client";
 
-const Transition = (OgComponent: () => ReactNode) => {
-  return () => (
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+interface TransitionProps {
+  children: React.ReactNode;
+}
+
+const Transition: React.FC<TransitionProps> = ({ children }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
+  return (
     <>
-      <OgComponent />
+      {children}
       <motion.div
         className="slide-in bg-zinc-500 dark:bg-secondary"
         initial={{ scaleY: 0 }}
@@ -20,7 +34,8 @@ const Transition = (OgComponent: () => ReactNode) => {
         transition={{
           duration: 1,
           ease: [0.85, 0, 0.15, 1],
-        }}></motion.div>
+        }}
+      />
     </>
   );
 };
