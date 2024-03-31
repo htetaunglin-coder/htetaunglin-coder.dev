@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-const Transition = (OgComponent) => {
+const Transition = (OgComponent: () => ReactNode) => {
   return () => (
     <>
       <OgComponent />

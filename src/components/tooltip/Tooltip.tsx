@@ -1,7 +1,7 @@
 import React from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 
-const Tooltip = ({ content }) => {
+const Tooltip = ({ content }: { content: string }) => {
   return (
     <span className="text-xl text-gray-800 dark:text-gray-200 cursor-pointer relative group">
       <FaQuestionCircle />
