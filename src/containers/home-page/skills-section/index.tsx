@@ -87,7 +87,7 @@ const MobileSkills = () => {
         }}
         className="pb-10 mx-auto max-w-sm mt-3">
         {skillData.map((data) => (
-          <SplideSlide key={data.title}>
+          <SplideSlide key={`mobile-${data.title}`}>
             <img src={data.imageUrl} loading="lazy" className="brightness-75 w-full px-5 mt-4" />
             <p className="text-gray-800 dark:text-gray-200 text-center font-dmSans pt-2 text-xs font-medium dark:font-normal">
               {data.title}
