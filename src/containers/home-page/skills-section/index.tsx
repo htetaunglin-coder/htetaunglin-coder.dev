@@ -1,6 +1,7 @@
 import SectionTitle from "@/components/sectionTItle/SectionTItle";
 import skillData from "./data.json";
 import { motion } from "framer-motion";
+// @ts-ignore
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import "@splidejs/react-splide/css/core";
