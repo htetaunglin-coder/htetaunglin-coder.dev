@@ -1,21 +1,15 @@
-"use client";
+import { useEffect, useState } from "react";
 
-import { useState, useEffect } from "react";
-
-const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(false);
+export default function useMediaQuery(mediaQueryString: string) {
+  const [matches, setMatches] = useState<boolean>();
 
   useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    window.addEventListener("resize", listener);
-    return () => window.removeEventListener("resize", listener);
-  }, [matches, query]);
+    const mediaQueryList = window.matchMedia(mediaQueryString);
+    const listener = () => setMatches(!!mediaQueryList.matches);
+    listener();
+    mediaQueryList.addEventListener("change", listener); // updated from .addListener
+    return () => mediaQueryList.removeEventListener("change", listener); // updated from .removeListener
+  }, [mediaQueryString]);
 
   return matches;
-};
-
-export default useMediaQuery;
+}
