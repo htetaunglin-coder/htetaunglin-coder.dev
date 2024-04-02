@@ -12,16 +12,20 @@
     "title": "Javascript"
   },
   {
+    "imageUrl": "/assets/images/skills/react.svg",
+    "title": "React"
+  },
+  {
+    "imageUrl": "/assets/images/skills/next-js.svg",
+    "title": "Nextjs"
+  },
+  {
     "imageUrl": "/assets/images/skills/sass.svg",
     "title": "Sass/Scss"
   },
   {
     "imageUrl": "/assets/images/skills/tailwind.svg",
     "title": "Tailwind"
-  },
-  {
-    "imageUrl": "/assets/images/skills/react.svg",
-    "title": "React"
   },
   {
     "imageUrl": "/assets/images/skills/git.svg",
