@@ -53,7 +53,7 @@ const Contact = () => {
     </AnimatedDiv>
   );
 
-  const inputElClass = `w-full bg-transparent font-semibold placeholder-dark-pink dark:placeholder-pale-pink text-pink my-2 border-b  p-3 text-sm sm:text-base ${
+  const inputElClass = `w-full bg-transparent font-semibold placeholder-pink dark:placeholder-pale-pink text-dark-pink dark:text-pink my-2 border-b  p-3 text-sm sm:text-base ${
     errors.email ? "border-red-500" : "border-zinc-800"
   } ${loading && "pointer-events-none brightness-50"}`;
 
