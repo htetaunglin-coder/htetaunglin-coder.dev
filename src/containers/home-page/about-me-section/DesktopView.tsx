@@ -9,7 +9,7 @@ import AnimatedDiv from "@/components/animation/AnimateDiv";
 
 const DesktopView = () => {
   return (
-    <div>
+    <div className="pr-10 xl:p-0">
       <Article
         title={data[0].title}
         text={data[0].text}
@@ -77,11 +77,11 @@ const Article: React.FC<ArticleProps> = ({
     delayTime={delayTime}
     className={className}
   >
-    <h4 className="flex items-center text-base font-semibold text-gray-800 dark:text-gray-400">
+    <h4 className="flex items-center text-sm font-semibold text-gray-800 dark:text-gray-400 lg:text-base">
       <FaChevronRight size={15} />
       {title}
     </h4>
-    <p className="ml-14 font-dmSans text-base font-medium text-red-800 dark:font-normal dark:text-pink">
+    <p className="ml-14 font-dmSans text-sm font-medium text-red-800 dark:font-normal dark:text-pink lg:text-base">
       {text}
     </p>
   </AnimatedDiv>

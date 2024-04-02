@@ -28,15 +28,15 @@
     "title": "Tailwind"
   },
   {
-    "imageUrl": "/assets/images/skills/git.svg",
+    "imageUrl": "/assets/images/skills/typescript.svg",
     "title": "Typescript"
   },
   {
-    "imageUrl": "/assets/images/skills/github.svg",
+    "imageUrl": "/assets/images/skills/git.svg",
     "title": "Git"
   },
   {
-    "imageUrl": "/assets/images/skills/typescript.svg",
+    "imageUrl": "/assets/images/skills/github.svg",
     "title": "Github"
   }
 ]
