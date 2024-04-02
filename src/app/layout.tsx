@@ -3,6 +3,7 @@ import "./css/globals.css";
 import "./css/animation.css";
 import "./css/fonts.css";
 import "./css/util.css";
+import Head from "next/head";
 
 // ======================================================================
 
@@ -17,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
       <body className={"bg-gray-300 dark:bg-flat-black"}>{children}</body>
     </html>
   );
