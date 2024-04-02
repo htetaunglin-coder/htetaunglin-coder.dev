@@ -4,6 +4,7 @@ import skillData from "../_data/skill-data.json";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import "@splidejs/react-splide/css/core";
+import Image from "next/image";
 
 // ====================================================================
 
@@ -24,10 +25,13 @@ const MobileView = () => {
     >
       {skillData.map((data) => (
         <SplideSlide key={`mobile-${data.title}`}>
-          <img
+          <Image
+            width={40}
+            height={40}
+            alt={data.title}
             src={data.imageUrl}
             loading="lazy"
-            className="mt-4 w-full px-5 brightness-75"
+            className={`mt-4 w-full px-5 brightness-75 ${data.title === "Nextjs" && "dark:invert"}`}
           />
           <p className="pt-2 text-center font-dmSans text-xs font-medium text-gray-800 dark:font-normal dark:text-gray-200">
             {data.title}

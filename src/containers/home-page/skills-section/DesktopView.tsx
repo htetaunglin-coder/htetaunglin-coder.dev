@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import skillData from "../_data/skill-data.json";
+import Image from "next/image";
 
 // ==================================================================
 
@@ -45,10 +46,12 @@ const EachSkill: React.FC<EachSkillProps> = ({ data }) => {
       className="w-full"
       key={data.title}
     >
-      <img
+      <Image
         src={data.imageUrl}
         alt={data.title}
-        className="mx-auto w-1/3 max-w-[3rem] select-none brightness-[0.8]"
+        width={40}
+        height={40}
+        className={`mx-auto w-1/3 max-w-[3rem] select-none brightness-[0.8] ${data.title === "Nextjs" && "dark:invert"}`}
         draggable="false"
         loading="lazy"
       />
