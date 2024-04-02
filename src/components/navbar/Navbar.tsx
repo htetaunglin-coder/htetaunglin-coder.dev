@@ -132,13 +132,13 @@ const NavLink = ({ page, isDesktop }: { page: string; isDesktop: boolean }) => {
     "mt-2 block border-b border-b-gray-400 px-4 py-2 font-semibold text-flat-black sm:inline-block";
 
   return (
-    <Link
+    <a
       className={isDesktop ? desktopLinkStyles : mobileLinkStyles}
       style={{ transition: "all 0.2s ease-in-out" }}
       href={`#${lowerCasePage}`}
     >
       {page}
-    </Link>
+    </a>
   );
 };
 
