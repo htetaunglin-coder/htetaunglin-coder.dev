@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+// =========================================================
+
 interface AnimateDivProps {
   variants: any;
   className?: string;
@@ -8,7 +10,13 @@ interface AnimateDivProps {
   children: React.ReactNode;
 }
 
-const AnimatedDiv: React.FC<AnimateDivProps> = ({ variants, className, delayTime, duration, children }) => {
+const AnimatedDiv: React.FC<AnimateDivProps> = ({
+  variants,
+  className,
+  delayTime,
+  duration,
+  children,
+}) => {
   return (
     <motion.div
       className={className || ""}
@@ -19,7 +27,8 @@ const AnimatedDiv: React.FC<AnimateDivProps> = ({ variants, className, delayTime
         delay: delayTime ? delayTime : 0,
         duration: duration || 0.5,
       }}
-      variants={variants}>
+      variants={variants}
+    >
       {children}
     </motion.div>
   );

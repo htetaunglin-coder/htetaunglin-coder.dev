@@ -1,9 +1,11 @@
 import React from "react";
 import "./css/loading.css";
 
+// =========================================================
+
 const Loader = () => {
   return (
-    <div className="w-full h-screen bg-gray-300">
+    <div className="h-screen w-full bg-gray-300">
       <div className="loading-window ">
         <div className="car">
           <div className="strike"></div>

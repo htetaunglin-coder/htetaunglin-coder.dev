@@ -9,7 +9,7 @@ import { FaRegFileLines, FaBars } from "react-icons/fa6";
 
 import ToggleTheme from "../toggletheme/ToggleTheme";
 
-// ==================================================================
+// =========================================================
 
 const Navbar = () => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);

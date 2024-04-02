@@ -3,13 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 
+// =========================================================
+
 const ToggleTheme = ({ className }: { className?: string }) => {
   const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     if (
       localStorage.getItem("color-theme") === "dark" ||
-      (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      (!("color-theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       setTheme("dark");
     } else {
@@ -42,7 +45,10 @@ const ToggleTheme = ({ className }: { className?: string }) => {
   };
 
   return (
-    <button className={`hover:brightness-75 transition duration-200 ${className}`} onClick={toggleTheme}>
+    <button
+      className={`transition duration-200 hover:brightness-75 ${className}`}
+      onClick={toggleTheme}
+    >
       {theme == "dark" ? <FiMoon /> : <FiSun />}
     </button>
   );

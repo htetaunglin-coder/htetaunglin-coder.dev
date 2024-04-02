@@ -3,7 +3,8 @@ import "./css/globals.css";
 import "./css/animation.css";
 import "./css/fonts.css";
 import "./css/util.css";
-import AnimatePresenceWrapper from "@/components/animation/AnimatePresenceWrapper";
+
+// ======================================================================
 
 export const metadata: Metadata = {
   title: "Create Next App",
