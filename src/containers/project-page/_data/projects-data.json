@@ -1,0 +1,51 @@
+[
+  {
+    "title": "React Board",
+    "imgUrl": "/assets/images/projects/project-1.png",
+    "techs": ["React", "Typescript", "Material UI", "Chart.js"],
+    "liveUrl": "https://htl-react-board.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/React-Dashboard"
+  },
+  {
+    "title": "Cobalt Clone",
+    "imgUrl": "/assets/images/projects/project-2.png",
+    "techs": ["React Js", "Tailwind Css", "Framer Motion", "TypeWriter Effect"],
+    "liveUrl": "https://cobalt-clone.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/Cobalt-Clone"
+  },
+  {
+    "title": "Recipe App Using React JS",
+    "imgUrl": "/assets/images/projects/project-3.jpeg",
+    "techs": ["HTML", "Css", "React", "styled-components"],
+    "liveUrl": "https://htla-recipe-app.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/Recipe-App.git"
+  },
+  {
+    "title": "REST Countries API with color theme switcher",
+    "imgUrl": "/assets/images/projects/project-5.jpeg",
+    "techs": ["HTML", "Css", "BootStrap", "Javascript", "REST API"],
+    "liveUrl": "https://rest-county-api-htl.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/REST-Countries-AP.git"
+  },
+  {
+    "title": "E-commerce product page",
+    "imgUrl": "/assets/images/projects/project-4.jpeg",
+    "techs": ["HTML", "Sass & Css", "Javascript"],
+    "liveUrl": "https://e-commerce-page-htl.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/E-commerce-product-pag.git"
+  },
+  {
+    "title": "EasyBank Landing Page",
+    "imgUrl": "/assets/images/projects/project-6.jpeg",
+    "techs": ["HTML", "Sass & Css", "Javascript"],
+    "liveUrl": "https://htl-easybank-landing.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/EasyBank-Landing-Pag.git"
+  },
+  {
+    "title": "Sunnyside agency landing page",
+    "imgUrl": "/assets/images/projects/project-7.jpeg",
+    "techs": ["HTML", "Sass & Css", "Javascript"],
+    "liveUrl": "https://htla-tech.netlify.app/",
+    "sourceUrl": "https://github.com/HTLA380/SunnySide-Landing-Page.git"
+  }
+]

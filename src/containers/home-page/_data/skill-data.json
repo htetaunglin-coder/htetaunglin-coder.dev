@@ -1,0 +1,38 @@
+[
+  {
+    "imageUrl": "/assets/images/skills/html.svg",
+    "title": "HTML"
+  },
+  {
+    "imageUrl": "/assets/images/skills/css.svg",
+    "title": "Css"
+  },
+  {
+    "imageUrl": "/assets/images/skills/javascript.svg",
+    "title": "Javascript"
+  },
+  {
+    "imageUrl": "/assets/images/skills/sass.svg",
+    "title": "Sass/Scss"
+  },
+  {
+    "imageUrl": "/assets/images/skills/tailwind.svg",
+    "title": "Tailwind"
+  },
+  {
+    "imageUrl": "/assets/images/skills/react.svg",
+    "title": "React"
+  },
+  {
+    "imageUrl": "/assets/images/skills/git.svg",
+    "title": "Typescript"
+  },
+  {
+    "imageUrl": "/assets/images/skills/github.svg",
+    "title": "Git"
+  },
+  {
+    "imageUrl": "/assets/images/skills/typescript.svg",
+    "title": "Github"
+  }
+]
