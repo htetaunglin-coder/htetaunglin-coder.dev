@@ -93,7 +93,7 @@ const HeroSection = () => {
       duration={0.5}
     >
       <a
-        className="xs:text-md rounded-sm border border-pink bg-dark-pink px-7 py-3 font-dmSans text-sm font-bold text-flat-black transition duration-500 hover:bg-transparent hover:text-dark-pink dark:bg-pink dark:hover:text-pink sm:text-lg"
+        className="xs:text-md rounded-sm border border-pink bg-dark-pink px-7 py-3 font-dmSans text-sm font-bold text-flat-black transition duration-500 hover:bg-transparent hover:text-dark-pink dark:bg-pink dark:hover:bg-transparent dark:hover:text-pink sm:text-lg"
         href="#contact"
       >
         Contact Me
