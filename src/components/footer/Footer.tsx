@@ -11,9 +11,13 @@ const Footer = () => {
       <div className="mx-auto flex w-4/5 max-w-screen-smd items-center justify-between gap-4">
         <p className="font-dmSans text-sm text-gray-400 sm:text-base">
           Design and Built By{" "}
-          <span className="whitespace-nowrap text-pink underline">
+          <a
+            href="https://github.com/HTLA380"
+            target="_blank"
+            className="whitespace-nowrap text-pink underline"
+          >
             Htet Aung Lin{" "}
-          </span>
+          </a>
         </p>
         <div className="flex gap-4 text-lg text-white md:hidden">
           {" "}
