@@ -40,6 +40,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
         alt={title}
         width={400}
         height={400}
+        loading="lazy"
         className="aspect-4/3 h-full w-full object-cover"
       />
       <div

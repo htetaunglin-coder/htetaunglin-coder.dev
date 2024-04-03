@@ -5,7 +5,7 @@ import "./css/loading.css";
 
 const Loader = () => {
   return (
-    <div className="h-screen w-full bg-gray-300">
+    <div className="h-screen w-full bg-gray-300 dark:bg-secondary">
       <div className="loading-window ">
         <div className="car">
           <div className="strike"></div>
