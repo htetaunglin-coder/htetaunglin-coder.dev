@@ -10,9 +10,9 @@ const DesktopView = () => {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        transition={{ staggerChildren: 0.15 }}
+        transition={{ staggerChildren: 0.25 }}
         viewport={{ once: true }}
-        className="mt-16 grid grid-cols-5 items-center justify-between gap-14"
+        className="mt-16 grid grid-cols-4 place-items-center justify-center gap-14 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14"
       >
         {skillData.map((data) => (
           <EachSkill key={data.title} data={data} />
@@ -32,16 +32,14 @@ const EachSkill: React.FC<EachSkillProps> = ({ data }) => {
       variants={{
         hidden: {
           opacity: 0,
-          x: -30,
         },
         visible: {
-          x: 0,
           opacity: 1,
         },
       }}
       transition={{
         duration: 0.5,
-        ease: "linear",
+        ease: "easeInOut",
       }}
       className="w-full"
       key={data.title}

@@ -28,6 +28,10 @@
     "title": "Tailwind"
   },
   {
+    "imageUrl": "/assets/images/skills/material-ui.svg",
+    "title": "Material UI"
+  },
+  {
     "imageUrl": "/assets/images/skills/typescript.svg",
     "title": "Typescript"
   },
@@ -38,5 +42,9 @@
   {
     "imageUrl": "/assets/images/skills/github.svg",
     "title": "Github"
+  },
+  {
+    "imageUrl": "/assets/images/skills/node-js.svg",
+    "title": "NodeJS"
   }
 ]
