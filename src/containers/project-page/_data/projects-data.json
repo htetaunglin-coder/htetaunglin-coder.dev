@@ -9,9 +9,9 @@
   {
     "title": "Cobalt Clone",
     "imgUrl": "/assets/images/projects/project-2.png",
-    "techs": ["React Js", "Tailwind Css", "Framer Motion", "TypeWriter Effect"],
+    "techs": ["Next.Js", "Tailwind Css", "Framer Motion", "TypeWriter Effect"],
     "liveUrl": "https://cobalt-clone.netlify.app/",
-    "sourceUrl": "https://github.com/HTLA380/Cobalt-Clone"
+    "sourceUrl": "https://github.com/HTLA380/Desktop-Cobalt-Clone.git"
   },
   {
     "title": "Recipe App Using React JS",
