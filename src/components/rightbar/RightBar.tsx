@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 
-import { FiFacebook, FiLinkedin, FiGithub } from "react-icons/fi";
+import Link from "next/link";
 import { FaRegFileLines } from "react-icons/fa6";
+import { FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 
 import ToggleTheme from "../toggletheme/ToggleTheme";
 
@@ -15,7 +15,7 @@ const rightBarData = [
   },
   {
     icon: <FiLinkedin size={20} />,
-    url: "https://www.linkedin.com/in/htet-aung-lin-741968291",
+    url: "https://www.linkedin.com/in/htetaunglin-coder",
   },
   { icon: <FiGithub size={20} />, url: "https://github.com/HTLA380" },
 ];

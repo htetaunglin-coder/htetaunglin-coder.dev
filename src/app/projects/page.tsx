@@ -1,15 +1,14 @@
 "use client";
 
 import React from "react";
+
 import Link from "next/link";
-
-import { FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaRegFileLines } from "react-icons/fa6";
+import { FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 
-import ToggleTheme from "@/components/toggletheme/ToggleTheme";
-import Footer from "@/components/footer/Footer";
 import Transition from "@/components/animation/Transition";
-
+import Footer from "@/components/footer/Footer";
+import ToggleTheme from "@/components/toggletheme/ToggleTheme";
 import ProjectShowCase from "@/containers/project-page/project-showcase-section";
 
 // =========================================================
@@ -43,8 +42,7 @@ const ProjectPage = () => {
           <a
             className="mx-1"
             target="_blank"
-            href="https://www.linkedin.com/in/htet-aung-lin-741968291
-"
+            href="https://www.linkedin.com/in/htetaunglin-coder"
           >
             <FiLinkedin />
           </a>

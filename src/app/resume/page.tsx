@@ -5,7 +5,7 @@ const Resume = () => {
     <main className="h-screen w-screen">
       <iframe
         className="h-full w-full"
-        src={"/assets/images/Htet_Aung_Lin_Resume.pdf"}
+        src={"/assets/images/HTET_AUNG_LIN_RESUME.pdf"}
       />
     </main>
   );
