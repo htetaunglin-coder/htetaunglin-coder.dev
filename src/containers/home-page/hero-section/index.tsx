@@ -86,11 +86,10 @@ const BackgroundProfileImg: React.FC<ImageProps> = ({ url }) => (
       src={url}
       width={715}
       height={620}
-      priority={false}
+      priority={true}
       alt="Profile Image"
       className="w-full select-none"
       draggable="false"
-      loading="lazy"
     />
   </span>
 );

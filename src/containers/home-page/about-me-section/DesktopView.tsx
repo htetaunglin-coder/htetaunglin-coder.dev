@@ -33,7 +33,6 @@ const DesktopView = () => {
             height={400}
             className="w-full select-none"
             draggable="false"
-            priority={false}
             loading="lazy"
           />
         </span>
