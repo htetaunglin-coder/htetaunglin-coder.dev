@@ -10,14 +10,20 @@ import ToggleTheme from "../toggletheme/ToggleTheme";
 
 const rightBarData = [
   {
+    id: 0,
     icon: <FiFacebook size={20} />,
     url: "https://www.facebook.com/profile.php?id=100083287641210",
   },
   {
+    id: 1,
     icon: <FiLinkedin size={20} />,
     url: "https://www.linkedin.com/in/htetaunglin-coder",
   },
-  { icon: <FiGithub size={20} />, url: "https://github.com/HTLA380" },
+  {
+    id: 2,
+    icon: <FiGithub size={20} />,
+    url: "https://github.com/HTLA380",
+  },
 ];
 
 const RightBar = () => {
@@ -26,7 +32,7 @@ const RightBar = () => {
       <ToggleTheme />
       {rightBarData.map((data) => (
         <a
-          key={data.url}
+          key={data.id}
           className="transition duration-200 hover:text-gray-600"
           target="_blank"
           href={data.url}
