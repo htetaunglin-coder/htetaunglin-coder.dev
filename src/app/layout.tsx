@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
 import "./css/globals.css";
 import "./css/animation.css";
 import "./css/fonts.css";
 import "./css/util.css";
+
+import type Metadata from "next";
 import Head from "next/head";
+
 import Providers from "./providers";
 
 // ======================================================================
