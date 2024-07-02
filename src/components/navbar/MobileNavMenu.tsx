@@ -44,7 +44,6 @@ const MobileNavMenu: React.FC<MobileNavMenuProps> = ({ navLinkItems }) => {
           <FaBars />
         </button>
       </div>
-
       <OverLayMenu
         isActive={isMenuToggled}
         setIsActive={setIsMenuToggled}
@@ -66,13 +65,15 @@ const OverLayMenu: React.FC<OverLayMenuProps> = ({
   navLinkItems,
 }) => (
   <>
-    <div className="absolute h-screen w-full bg-flat-black opacity-80"></div>
+    {isActive && (
+      <div className="absolute inset-0 h-screen w-full bg-flat-black opacity-80"></div>
+    )}
     <div
       style={{
         right: isActive ? "0px" : "-50%",
         transition: "right 0.3s 0.1s ease-in-out",
       }}
-      className="fixed bottom-0 top-0 w-1/2 bg-white text-flat-black sm:hidden"
+      className="fixed top-0 h-screen w-1/2 bg-white text-flat-black sm:hidden"
     >
       {/* CLOSE ICON */}
       <div className="flex justify-end px-5 pt-5">
@@ -87,7 +88,7 @@ const OverLayMenu: React.FC<OverLayMenuProps> = ({
       {navLinkItems.map((item) => (
         <MobileNavLink
           key={item}
-          href={item.toLocaleLowerCase()}
+          href={`#${item.toLocaleLowerCase()}`}
           content={item}
         />
       ))}
