@@ -1,5 +1,10 @@
+"use client";
+
 import React from "react";
+
 import { motion } from "framer-motion";
+
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 // =========================================================
 
@@ -14,7 +19,9 @@ const TextReveal: React.FC<TextRevealProps> = ({
   width = "fit-content",
   delay = 1,
 }) => {
-  return (
+  const isDesktop = useMediaQuery("(min-width: 48rem)");
+
+  return isDesktop ? (
     <div style={{ position: "relative", width, overflow: "hidden" }}>
       {children}
       <motion.div
@@ -33,6 +40,19 @@ const TextReveal: React.FC<TextRevealProps> = ({
         }}
       ></motion.div>
     </div>
+  ) : (
+    <motion.div
+      className="text-clamp-title flex flex-col text-start font-righteous"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{
+        duration: 0.5,
+      }}
+      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+    >
+      {children}
+    </motion.div>
   );
 };
 
