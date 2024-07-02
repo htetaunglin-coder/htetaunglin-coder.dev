@@ -1,10 +1,14 @@
-import skillData from "../_data/skill-data.json";
+"use client";
+
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/core";
+
+import Image from "next/image";
 
 // @ts-ignore
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-import "@splidejs/react-splide/css/core";
-import Image from "next/image";
+
+import skillData from "../_data/skill-data.json";
 
 // ====================================================================
 
@@ -21,7 +25,7 @@ const MobileView = () => {
           },
         },
       }}
-      className="mx-auto mt-3 max-w-sm pb-10"
+      className="mx-auto mt-3 block max-w-sm pb-10 sm:hidden"
     >
       {skillData.map((data) => (
         <SplideSlide key={`mobile-${data.title}`}>

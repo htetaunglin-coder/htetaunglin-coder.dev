@@ -88,6 +88,7 @@ const OverLayMenu: React.FC<OverLayMenuProps> = ({
       {navLinkItems.map((item) => (
         <MobileNavLink
           key={item}
+          onClick={() => setIsActive(false)}
           href={`#${item.toLocaleLowerCase()}`}
           content={item}
         />
@@ -100,18 +101,21 @@ interface MobileNavLinkProps {
   href: string;
   content: string;
   className?: string;
+  onClick: () => void;
 }
 
 const MobileNavLink: React.FC<MobileNavLinkProps> = ({
   href,
   content,
   className,
+  onClick,
 }) => (
   <a
     className={cn(
       "mt-2 block border-b border-b-gray-400 px-4 py-2 font-semibold text-flat-black sm:inline-block",
       className,
     )}
+    onClick={onClick}
     style={{ transition: "all 0.2s ease-in-out" }}
     href={href}
   >

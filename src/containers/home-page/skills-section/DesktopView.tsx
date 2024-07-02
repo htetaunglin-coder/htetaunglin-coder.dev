@@ -1,24 +1,25 @@
+"use client";
+
 import { motion } from "framer-motion";
-import skillData from "../_data/skill-data.json";
 import Image from "next/image";
+
+import skillData from "../_data/skill-data.json";
 
 // ==================================================================
 
 const DesktopView = () => {
   return (
-    <>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        transition={{ staggerChildren: 0.25 }}
-        viewport={{ once: true }}
-        className="mt-16 grid grid-cols-4 place-items-center justify-center gap-14 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14"
-      >
-        {skillData.map((data) => (
-          <EachSkill key={data.title} data={data} />
-        ))}
-      </motion.div>
-    </>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      transition={{ staggerChildren: 0.25 }}
+      viewport={{ once: true }}
+      className="mt-16 hidden grid-cols-4 place-items-center justify-center gap-14 sm:grid lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14"
+    >
+      {skillData.map((data) => (
+        <EachSkill key={data.title} data={data} />
+      ))}
+    </motion.div>
   );
 };
 

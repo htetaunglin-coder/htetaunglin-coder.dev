@@ -1,14 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
+"use client";
 
-import { FaArrowLeft } from "react-icons/fa";
+import React from 'react';
 
-import ProjectData from "../_data/projects-data.json";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
 
-import { EachProject } from "./EachProject";
-import Tooltip from "@/components/tooltip/Tooltip";
-import SectionTitle from "@/components/sectionTitle/SectionTitle";
+import SectionTitle from '@/components/sectionTitle/SectionTitle';
+import Tooltip from '@/components/tooltip/Tooltip';
+
+import ProjectData from '../_data/projects-data.json';
+import { EachProject } from './EachProject';
 
 // =========================================================
 
