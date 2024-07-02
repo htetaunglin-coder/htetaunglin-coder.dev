@@ -59,6 +59,7 @@ const ProjectImage = ({ url, altText }: { url: string; altText: string }) => (
     width={400}
     height={400}
     alt={altText}
+    priority={false}
     className="h-full w-full max-w-xs object-cover sm:w-1/2 sm:max-w-none"
     loading="lazy"
   />
