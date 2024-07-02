@@ -1,15 +1,17 @@
 import React from "react";
-import Image from "next/image";
-import data from "../_data/about-me-data.json";
 
+import Image from "next/image";
 import { FaChevronRight } from "react-icons/fa";
+
 import AnimatedDiv from "@/components/animation/AnimateDiv";
+
+import data from "../_data/about-me-data.json";
 
 // =============================================================
 
 const DesktopView = () => {
   return (
-    <div className="pr-10 xl:p-0">
+    <div className="hidden pr-10 sm:block xl:p-0">
       <Article
         title={data[0].title}
         text={data[0].text}
@@ -75,8 +77,7 @@ const Article: React.FC<ArticleProps> = ({
     }}
     duration={0.5}
     delayTime={delayTime}
-    className={className}
-  >
+    className={className}>
     <h4 className="flex items-center text-sm font-semibold text-gray-800 dark:text-gray-400 lg:text-base">
       <FaChevronRight size={15} />
       {title}

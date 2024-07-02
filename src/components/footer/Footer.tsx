@@ -1,9 +1,26 @@
 import Link from "next/link";
-
 import { FaRegFileLines } from "react-icons/fa6";
-import { FiFacebook, FiLinkedin, FiGithub } from "react-icons/fi";
+import { FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 
 // =========================================================
+
+const FOOTER_ITEMS = [
+  {
+    name: "facebook",
+    Icon: FiFacebook,
+    url: "https://www.facebook.com/profile.php?id=100083287641210",
+  },
+  {
+    name: "linkedin",
+    Icon: FiLinkedin,
+    url: "https://www.linkedin.com/in/htetaunglin-coder",
+  },
+  {
+    name: "github",
+    Icon: FiGithub,
+    url: "https://github.com/HTLA380",
+  },
+];
 
 const Footer = () => {
   return (
@@ -14,29 +31,17 @@ const Footer = () => {
           <a
             href="https://github.com/HTLA380"
             target="_blank"
-            className="whitespace-nowrap text-pink underline"
-          >
+            className="whitespace-nowrap text-pink underline">
             Htet Aung Lin{" "}
           </a>
         </p>
         <div className="flex gap-4 text-lg text-white md:hidden">
-          {" "}
-          <a
-            target="_blank"
-            href="https://www.facebook.com/profile.php?id=100083287641210"
-          >
-            <FiFacebook />
-          </a>
-          <a
-            target="_blank"
-            href="https://www.linkedin.com/in/htet-aung-lin-741968291
-      "
-          >
-            <FiLinkedin />
-          </a>
-          <a target="_blank" href="https://github.com/HTLA380">
-            <FiGithub />
-          </a>
+          {FOOTER_ITEMS.map((item) => (
+            <a key={item.name} target="_blank" href={item.url}>
+              <FiFacebook />
+            </a>
+          ))}
+
           <Link className="text-pink" href="/resume">
             <FaRegFileLines size={20} />
           </Link>

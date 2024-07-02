@@ -1,14 +1,16 @@
-import React from "react";
-import { useState } from "react";
-import data from "../_data/about-me-data.json";
+"use client";
+
+import React, { useState } from "react";
 
 import { FaChevronDown } from "react-icons/fa6";
+
+import data from "../_data/about-me-data.json";
 
 // =============================================================
 
 const MobileView = () => {
   return (
-    <div>
+    <div className="block sm:hidden">
       <div className="mb-3 mt-5 rounded-md bg-secondary px-4 py-2">
         <h4 className="mb-1 flex items-center text-xs font-semibold text-gray-400">
           {data[0].title}
@@ -27,13 +29,15 @@ const MobileView = () => {
   );
 };
 
-interface AccordionProps {
+const Accordion = ({
+  title,
+  text,
+  id,
+}: {
   title: string;
   text: string;
   id: string;
-}
-
-const Accordion: React.FC<AccordionProps> = ({ title, text, id }) => {
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -48,8 +52,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, text, id }) => {
       <label
         className="flex w-full cursor-pointer items-center justify-between"
         htmlFor={id ? id : "expandCollapse"}
-        onClick={() => setOpen(!open)}
-      >
+        onClick={() => setOpen(!open)}>
         <h4 className={"text-xs font-semibold text-gray-400"}>{title}</h4>
         <button className="text-white">
           <FaChevronDown size={12} />

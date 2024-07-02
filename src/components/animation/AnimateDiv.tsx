@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 // =========================================================
@@ -27,8 +29,7 @@ const AnimatedDiv: React.FC<AnimateDivProps> = ({
         delay: delayTime ? delayTime : 0,
         duration: duration || 0.5,
       }}
-      variants={variants}
-    >
+      variants={variants}>
       {children}
     </motion.div>
   );

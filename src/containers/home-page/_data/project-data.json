@@ -1,0 +1,9 @@
+{
+  "imageUrl": "/assets/images/projects/project-1.png",
+  "altText": "ReactBoard Using Material UI",
+  "title": "ReactBoard Using Material UI",
+  "description": " Developed using React, Material UI, and ChartJS, this dashboard application employs mock data to demonstrate my skills.",
+  "technologies": ["React", "Material UI", "Chart JS"],
+  "websiteUrl": "https://htl-react-board.netlify.app/",
+  "sourceUrl": "https://github.com/HTLA380/React-Dashboard.git"
+}

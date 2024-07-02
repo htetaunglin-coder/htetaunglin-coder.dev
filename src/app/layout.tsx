@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
 import "./css/globals.css";
 import "./css/animation.css";
 import "./css/fonts.css";
 import "./css/util.css";
+
+import { type Metadata } from "next";
 import Head from "next/head";
+
 import Providers from "./providers";
 
 // ======================================================================
@@ -24,8 +26,7 @@ export default function RootLayout({
       </Head>
       <body
         suppressHydrationWarning
-        className={"bg-gray-300 dark:bg-flat-black"}
-      >
+        className={"bg-gray-300 dark:bg-flat-black"}>
         <Providers>{children}</Providers>
       </body>
     </html>

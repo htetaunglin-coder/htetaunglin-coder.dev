@@ -1,5 +1,5 @@
-import RightBar from "@/components/rightbar/RightBar";
 import Navbar from "@/components/navbar/Navbar";
+import RightBar from "@/components/rightbar/RightBar";
 
 // =========================================================
 

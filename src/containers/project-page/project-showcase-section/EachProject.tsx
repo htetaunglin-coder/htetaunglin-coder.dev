@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Image from "next/image";
 
+import { motion } from "framer-motion";
+import Image from "next/image";
 import { FiGithub } from "react-icons/fi";
 import { GoProjectSymlink } from "react-icons/go";
-import { motion } from "framer-motion";
 
 // =========================================================
 
@@ -33,8 +33,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
       transition={{ duration: 1.5 }}
       className={`relative mx-auto w-full max-w-md cursor-pointer border text-center sm:max-w-none  ${
         isActive ? "border-gray-500" : "border-gray-500 dark:border-gray-800"
-      }`}
-    >
+      }`}>
       <Image
         src={imgUrl}
         alt={title}
@@ -47,8 +46,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
         className={`absolute inset-0 flex flex-col items-center justify-center bg-flat-black p-2 duration-300 ${
           isActive ? "opacity-95" : "opacity-0"
         }`}
-        onClick={() => setIsActive((prev) => !prev)}
-      >
+        onClick={() => setIsActive((prev) => !prev)}>
         <h1 className="max-w-xs font-playfair text-xl text-white">{title}</h1>
 
         <ul className="mt-3 max-w-xs">
@@ -56,8 +54,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
             return (
               <li
                 key={eachTech}
-                className="m-1 inline-block rounded bg-pink px-2 font-dmSans text-xs font-semibold uppercase text-flat-black"
-              >
+                className="m-1 inline-block rounded bg-pink px-2 font-dmSans text-xs font-semibold uppercase text-flat-black">
                 {eachTech}
               </li>
             );
@@ -70,8 +67,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
             href={liveUrl}
             className={`mx-1 flex items-center justify-center gap-2 rounded bg-light-blue px-3 py-1 font-dmSans text-sm font-semibold text-flat-black hover:brightness-75 ${
               isActive ? "pointer-events-auto" : "pointer-events-none"
-            }`}
-          >
+            }`}>
             <GoProjectSymlink size={20} /> <p>Visit</p>
           </a>
           <a
@@ -79,8 +75,7 @@ export const EachProject: React.FC<EachProjectProps> = ({
             href={sourceUrl}
             className={`mx-1 inline-block text-2xl text-white ${
               isActive ? "pointer-events-auto" : "pointer-events-none"
-            }`}
-          >
+            }`}>
             <FiGithub />
           </a>
         </div>
