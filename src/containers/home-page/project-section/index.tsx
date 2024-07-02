@@ -26,8 +26,7 @@ const ProjectSection = () => {
   return (
     <section
       id="project"
-      className="relative mx-auto h-full w-5/6 max-w-screen-smd border-b border-b-gray-700 py-20"
-    >
+      className="relative mx-auto h-full w-5/6 max-w-screen-smd border-b border-b-gray-700 py-20">
       <SectionTitle content={"Projects"} />
 
       <AnimatedDiv
@@ -37,8 +36,7 @@ const ProjectSection = () => {
         }}
         delayTime={0.2}
         duration={1}
-        className="mx-auto mt-8 flex flex-col items-center text-center sm:flex-row sm:gap-10 sm:text-start md:w-11/12"
-      >
+        className="mx-auto mt-8 flex flex-col items-center text-center sm:flex-row sm:gap-10 sm:text-start md:w-11/12">
         <ProjectImage url={imageUrl} altText={altText} />
         <div className="mt-3 max-w-xs sm:w-1/2 sm:max-w-none">
           <Title content={title} />
@@ -93,8 +91,7 @@ const Description = ({
           {technologies.map((item) => (
             <li
               className="m-1 inline-block rounded bg-navy-blue px-2 font-dmSans text-sm font-semibold uppercase text-gray-300 dark:bg-light-blue dark:text-flat-black"
-              key={item}
-            >
+              key={item}>
               {item}
             </li>
           ))}
@@ -104,15 +101,13 @@ const Description = ({
         <a
           target="_blank"
           href={websiteUrl}
-          className="mx-1 flex items-center justify-center gap-2 rounded bg-gray-800 px-3 py-1 font-dmSans font-semibold text-gray-300 hover:brightness-75 dark:bg-gray-400 dark:text-flat-black"
-        >
+          className="mx-1 flex items-center justify-center gap-2 rounded bg-gray-800 px-3 py-1 font-dmSans font-semibold text-gray-300 hover:brightness-75 dark:bg-gray-400 dark:text-flat-black">
           <GoProjectSymlink size={20} /> <p>Visit</p>
         </a>
         <a
           target="_blank"
           href={sourceUrl}
-          className="mx-1 inline-block text-2xl text-dark-pink dark:text-pink"
-        >
+          className="mx-1 inline-block text-2xl text-dark-pink dark:text-pink">
           <FiGithub />
         </a>
       </div>
@@ -132,15 +127,13 @@ const Description = ({
           <a
             target="_blank"
             href={websiteUrl}
-            className="mx-1 flex items-center justify-center gap-2 rounded bg-gray-400 px-3 py-1 font-dmSans text-sm font-semibold text-flat-black hover:brightness-75"
-          >
+            className="mx-1 flex items-center justify-center gap-2 rounded bg-gray-400 px-3 py-1 font-dmSans text-sm font-semibold text-flat-black hover:brightness-75">
             <GoProjectSymlink size={20} /> <p>Visit</p>
           </a>
           <a
             target="_blank"
             href={sourceUrl}
-            className="mx-1 inline-block text-xl text-dark-pink dark:text-pink"
-          >
+            className="mx-1 inline-block text-xl text-dark-pink dark:text-pink">
             <FiGithub />
           </a>
         </div>
@@ -152,8 +145,7 @@ const Description = ({
 const ProjectLinkButton = () => (
   <Link
     href="/projects"
-    className="mx-auto mt-5 block w-fit rounded-md border-2 border-solid border-gray-800 bg-transparent px-4 py-2 text-sm font-semibold text-gray-800 duration-500 hover:bg-gray-400 hover:tracking-widest hover:text-flat-black dark:border-gray-400 dark:text-gray-400 dark:hover:text-flat-black sm:mt-10 sm:text-base"
-  >
+    className="mx-auto mt-5 block w-fit rounded-md border-2 border-solid border-gray-800 bg-transparent px-4 py-2 text-sm font-semibold text-gray-800 duration-500 hover:bg-gray-400 hover:tracking-widest hover:text-flat-black dark:border-gray-400 dark:text-gray-400 dark:hover:text-flat-black sm:mt-10 sm:text-base">
     All Projects
   </Link>
 );

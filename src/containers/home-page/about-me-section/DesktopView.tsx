@@ -77,8 +77,7 @@ const Article: React.FC<ArticleProps> = ({
     }}
     duration={0.5}
     delayTime={delayTime}
-    className={className}
-  >
+    className={className}>
     <h4 className="flex items-center text-sm font-semibold text-gray-800 dark:text-gray-400 lg:text-base">
       <FaChevronRight size={15} />
       {title}

@@ -37,8 +37,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
           duration: 1.75,
           delay: delay,
           ease: [0.85, 0, 0.15, 1],
-        }}
-      ></motion.div>
+        }}></motion.div>
     </div>
   ) : (
     <motion.div
@@ -49,8 +48,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
       transition={{
         duration: 0.5,
       }}
-      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-    >
+      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
       {children}
     </motion.div>
   );

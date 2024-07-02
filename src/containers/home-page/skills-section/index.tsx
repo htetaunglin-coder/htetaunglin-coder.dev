@@ -11,8 +11,7 @@ const SkillSection = () => {
   return (
     <section
       id="skills"
-      className="relative mx-auto h-full w-5/6 max-w-screen-smd border-b border-b-gray-700 py-16 sm:py-24"
-    >
+      className="relative mx-auto h-full w-5/6 max-w-screen-smd border-b border-b-gray-700 py-16 sm:py-24">
       <SectionTitle content="Skills" />
       <DesktopView />
       <MobileView />

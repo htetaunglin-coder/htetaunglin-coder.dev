@@ -8,8 +8,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="mx-auto flex w-5/6 max-w-screen-smd flex-col items-center pb-20 pt-10 md:h-full md:py-48"
-    >
+      className="mx-auto flex w-5/6 max-w-screen-smd flex-col items-center pb-20 pt-10 md:h-full md:py-48">
       <Title content="CONTACT ME" />
       <AnimatedDiv
         variants={{
@@ -18,8 +17,7 @@ const Contact = () => {
         }}
         delayTime={0.2}
         duration={0.5}
-        className="w-full max-w-4xl border border-zinc-800 p-5 md:mt-0"
-      >
+        className="w-full max-w-4xl border border-zinc-800 p-5 md:mt-0">
         <ContactForm />
       </AnimatedDiv>
     </section>
@@ -37,8 +35,7 @@ const Title: React.FC<TitleProps> = ({ content }: { content: string }) => (
       hidden: { opacity: 0, y: 50 },
       visible: { opacity: 1, y: 0 },
     }}
-    className="mb-10 w-full"
-  >
+    className="mb-10 w-full">
     <h3 className=" font-righteous text-3xl text-navy-blue dark:text-light-blue sm:text-5xl">
       {content}
     </h3>

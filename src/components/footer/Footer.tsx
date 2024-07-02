@@ -31,8 +31,7 @@ const Footer = () => {
           <a
             href="https://github.com/HTLA380"
             target="_blank"
-            className="whitespace-nowrap text-pink underline"
-          >
+            className="whitespace-nowrap text-pink underline">
             Htet Aung Lin{" "}
           </a>
         </p>

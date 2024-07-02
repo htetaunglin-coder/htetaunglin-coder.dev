@@ -35,16 +35,14 @@ const RightBar = () => {
           key={data.id}
           className="transition duration-200 hover:text-gray-600"
           target="_blank"
-          href={data.url}
-        >
+          href={data.url}>
           {data.icon}
         </a>
       ))}
 
       <Link
         className="-ml-3 flex flex-col items-center justify-center text-dark-pink transition duration-200 hover:text-gray-600 dark:text-pink"
-        href="/resume"
-      >
+        href="/resume">
         <FaRegFileLines size={20} />
         <p className="font-righteous text-xs tracking-widest">Resume</p>
       </Link>

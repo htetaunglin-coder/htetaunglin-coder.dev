@@ -44,8 +44,7 @@ const DesktopNavLink: React.FC<DesktopNavMenuLinkProps> = ({
       className,
     )}
     style={{ transition: "all 0.2s ease-in-out" }}
-    href={href}
-  >
+    href={href}>
     {content}
   </a>
 );

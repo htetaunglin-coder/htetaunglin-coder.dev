@@ -52,8 +52,7 @@ const Accordion = ({
       <label
         className="flex w-full cursor-pointer items-center justify-between"
         htmlFor={id ? id : "expandCollapse"}
-        onClick={() => setOpen(!open)}
-      >
+        onClick={() => setOpen(!open)}>
         <h4 className={"text-xs font-semibold text-gray-400"}>{title}</h4>
         <button className="text-white">
           <FaChevronDown size={12} />

@@ -22,16 +22,14 @@ const MobileNavMenu: React.FC<MobileNavMenuProps> = ({ navLinkItems }) => {
         <ToggleTheme className="mr-2 text-sm text-gray-800 dark:text-gray-300" />
         <MobileNavLinkButton
           href="/resume"
-          classNames="bg-gray-800 text-gray-300"
-        >
+          classNames="bg-gray-800 text-gray-300">
           <FaRegFileLines size={20} />
           <p className="font-righteous text-xs tracking-widest">Resume</p>
         </MobileNavLinkButton>
 
         <MobileNavLinkButton
           href="/projects"
-          classNames="bg-pink text-flat-black"
-        >
+          classNames="bg-pink text-flat-black">
           <p className="font-righteous text-xs font-bold uppercase tracking-wide">
             Projects
           </p>
@@ -39,8 +37,7 @@ const MobileNavMenu: React.FC<MobileNavMenuProps> = ({ navLinkItems }) => {
 
         <button
           className="rounded-full border border-gray-800 p-[5px] text-gray-800 dark:border-gray-300 dark:text-gray-300"
-          onClick={() => setIsMenuToggled(true)}
-        >
+          onClick={() => setIsMenuToggled(true)}>
           <FaBars />
         </button>
       </div>
@@ -73,14 +70,12 @@ const OverLayMenu: React.FC<OverLayMenuProps> = ({
         right: isActive ? "0px" : "-50%",
         transition: "right 0.3s 0.1s ease-in-out",
       }}
-      className="fixed top-0 h-screen w-1/2 bg-white text-flat-black sm:hidden"
-    >
+      className="fixed top-0 h-screen w-1/2 bg-white text-flat-black sm:hidden">
       {/* CLOSE ICON */}
       <div className="flex justify-end px-5 pt-5">
         <button
           className="mb-5 mr-4 text-2xl text-black"
-          onClick={() => setIsActive(false)}
-        >
+          onClick={() => setIsActive(false)}>
           <FaTimes />
         </button>
       </div>
@@ -117,8 +112,7 @@ const MobileNavLink: React.FC<MobileNavLinkProps> = ({
     )}
     onClick={onClick}
     style={{ transition: "all 0.2s ease-in-out" }}
-    href={href}
-  >
+    href={href}>
     {content}
   </a>
 );
@@ -139,8 +133,7 @@ const MobileNavLinkButton: React.FC<MobileNavLinkButtonProps> = ({
       "mr-2 flex items-center gap-1 rounded-sm px-1 py-1 font-righteous text-xs xs:px-2",
       classNames,
     )}
-    href={href}
-  >
+    href={href}>
     {children}
   </Link>
 );

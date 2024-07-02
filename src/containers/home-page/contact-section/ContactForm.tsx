@@ -76,8 +76,7 @@ const ContactForm = () => {
         className={`mt-2 rounded border border-dark-pink bg-dark-pink p-3 text-sm font-semibold text-gray-300 transition duration-500 hover:bg-transparent hover:text-dark-pink dark:border-pink dark:bg-pink dark:text-zinc-900 dark:hover:bg-transparent dark:hover:text-pink sm:p-5 sm:text-base ${
           loading && "pointer-events-none brightness-50"
         }`}
-        type="submit"
-      >
+        type="submit">
         SEND ME A MESSAGE
       </button>
     </form>

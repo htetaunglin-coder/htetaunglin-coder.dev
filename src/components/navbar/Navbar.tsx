@@ -22,8 +22,7 @@ const Navbar = () => {
 const Logo = ({ content }: { content: string }) => (
   <Link
     href="/"
-    className="font-serif text-xl text-dark-pink dark:text-pink xs:text-2xl sm:text-3xl"
-  >
+    className="font-serif text-xl text-dark-pink dark:text-pink xs:text-2xl sm:text-3xl">
     {content}
   </Link>
 );

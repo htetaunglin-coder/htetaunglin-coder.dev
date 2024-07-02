@@ -14,8 +14,7 @@ const DesktopView = () => {
       whileInView="visible"
       transition={{ staggerChildren: 0.25 }}
       viewport={{ once: true }}
-      className="mt-16 hidden grid-cols-4 place-items-center justify-center gap-14 sm:grid lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14"
-    >
+      className="mt-16 hidden grid-cols-4 place-items-center justify-center gap-14 sm:grid lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14">
       {skillData.map((data) => (
         <EachSkill key={data.title} data={data} />
       ))}
@@ -43,8 +42,7 @@ const EachSkill: React.FC<EachSkillProps> = ({ data }) => {
         ease: "easeInOut",
       }}
       className="w-full"
-      key={data.title}
-    >
+      key={data.title}>
       <Image
         src={data.imageUrl}
         alt={data.title}

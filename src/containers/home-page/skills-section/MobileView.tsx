@@ -25,8 +25,7 @@ const MobileView = () => {
           },
         },
       }}
-      className="mx-auto mt-3 block max-w-sm pb-10 sm:hidden"
-    >
+      className="mx-auto mt-3 block max-w-sm pb-10 sm:hidden">
       {skillData.map((data) => (
         <SplideSlide key={`mobile-${data.title}`}>
           <div className="flex w-full flex-col items-center justify-center">

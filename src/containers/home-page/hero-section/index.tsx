@@ -13,8 +13,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="scroll-effect relative mx-auto flex min-h-screen w-5/6 max-w-screen-smd items-center justify-center border-b border-b-gray-700 md:items-start md:pt-56"
-    >
+      className="scroll-effect relative mx-auto flex min-h-screen w-5/6 max-w-screen-smd items-center justify-center border-b border-b-gray-700 md:items-start md:pt-56">
       <div className="text-center">
         <Title name={name} />
         <Position content={position} />
@@ -54,8 +53,7 @@ const Position: React.FC<ContentProps> = ({ content }) => (
       visible: { opacity: 1 },
     }}
     delayTime={2.75}
-    duration={0.5}
-  >
+    duration={0.5}>
     <h3 className="-mt-1 mb-4 mr-10 text-start font-sans text-sm font-bold text-navy-blue underline dark:text-light-blue ss:text-end ss:text-base ss:no-underline sm:text-xl md:text-2xl">
       {content}
     </h3>
@@ -70,8 +68,7 @@ const Description: React.FC<ContentProps> = ({ content }) => (
         hidden: { opacity: 0 },
         visible: { opacity: 1 },
       }}
-      duration={0.5}
-    >
+      duration={0.5}>
       <h3 className="text-clamp-sm my-4 -mt-1 max-w-96 text-start font-dmSans font-[500] leading-5 text-dark-pink dark:font-normal dark:text-pink ss:leading-normal">
         {content}
       </h3>
@@ -106,12 +103,10 @@ const CallToAction: React.FC = () => (
       hidden: { opacity: 0 },
       visible: { opacity: 1 },
     }}
-    duration={0.5}
-  >
+    duration={0.5}>
     <a
       className="xs:text-md rounded-sm border border-pink bg-dark-pink px-7 py-3 font-dmSans text-sm font-bold text-flat-black transition duration-500 hover:bg-transparent hover:text-dark-pink dark:bg-pink dark:hover:bg-transparent dark:hover:text-pink sm:text-lg"
-      href="#contact"
-    >
+      href="#contact">
       Contact Me
     </a>
   </AnimatedDiv>
