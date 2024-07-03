@@ -16,7 +16,7 @@ const DesktopNavMenu: React.FC<DesktopNavMenuInterface> = ({
       {navLinkItems.map((item) => (
         <DesktopNavLink
           key={`desktop-${item}`}
-          href={item.toLocaleLowerCase()}
+          href={`#${item.toLocaleLowerCase()}`}
           content={item}
         />
       ))}
