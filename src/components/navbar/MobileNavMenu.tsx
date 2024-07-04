@@ -70,11 +70,11 @@ const OverLayMenu: React.FC<OverLayMenuProps> = ({
         right: isActive ? "0px" : "-50%",
         transition: "right 0.3s 0.1s ease-in-out",
       }}
-      className="fixed top-0 h-screen w-1/2 bg-white text-flat-black sm:hidden">
+      className="fixed top-0 h-screen w-1/2 bg-white text-flat-black dark:bg-neutral-900 dark:text-white sm:hidden">
       {/* CLOSE ICON */}
       <div className="flex justify-end px-5 pt-5">
         <button
-          className="mb-5 mr-4 text-2xl text-black"
+          className="mb-5 mr-4 text-2xl text-black dark:text-white"
           onClick={() => setIsActive(false)}>
           <FaTimes />
         </button>
@@ -107,7 +107,7 @@ const MobileNavLink: React.FC<MobileNavLinkProps> = ({
 }) => (
   <a
     className={cn(
-      "mt-2 block border-b border-b-gray-400 px-4 py-2 font-semibold text-flat-black sm:inline-block",
+      "mt-2 block border-b border-b-gray-400 px-4 py-2 font-semibold text-flat-black dark:text-white sm:inline-block",
       className,
     )}
     onClick={onClick}
