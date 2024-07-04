@@ -36,9 +36,9 @@ const Footer = () => {
           </a>
         </p>
         <div className="flex gap-4 text-lg text-white md:hidden">
-          {FOOTER_ITEMS.map((item) => (
-            <a key={item.name} target="_blank" href={item.url}>
-              <FiFacebook />
+          {FOOTER_ITEMS.map(({ name, url, Icon }) => (
+            <a key={name} target="_blank" href={url}>
+              <Icon />
             </a>
           ))}
 
