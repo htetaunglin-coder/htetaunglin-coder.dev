@@ -55,8 +55,8 @@ const ProjectPage = () => {
           <div className="mx-auto flex h-full w-5/6 items-center justify-center">
             <h5 className="text-center text-xs font-medium">
               Some of the projects on this page are older ones I developed in
-              2023. My latest projects may not be included here. If you'd like
-              to see more recent work, feel free to connect with me on
+              2023. My latest projects may not be included here. If you&lsquo;d
+              like to see more recent work, feel free to connect with me on
               <a
                 href="https://www.linkedin.com/in/htetaunglin-coder/"
                 target="_blank"
