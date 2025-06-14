@@ -51,6 +51,23 @@ const ProjectPage = () => {
   return (
     <Transition>
       <>
+        <div className="h-6 w-full bg-gray-400/50 dark:bg-neutral-800/50">
+          <div className="mx-auto flex h-full w-5/6 items-center justify-center">
+            <h5 className="text-center text-xs font-medium">
+              Some of the projects on this page are older ones I developed in
+              2023. My latest projects may not be included here. If you'd like
+              to see more recent work, feel free to connect with me on
+              <a
+                href="https://www.linkedin.com/in/htetaunglin-coder/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 underline">
+                LinkedIn
+              </a>
+              .
+            </h5>
+          </div>
+        </div>
         {renderNavbar}
         <ProjectShowCase />
         <Footer />

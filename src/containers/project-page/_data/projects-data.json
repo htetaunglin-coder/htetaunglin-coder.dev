@@ -1,10 +1,10 @@
 [
   {
-    "title": "React Board",
-    "imgUrl": "/assets/images/projects/project-1.png",
-    "techs": ["React", "Typescript", "Material UI", "Chart.js"],
-    "liveUrl": "https://htl-react-board.netlify.app/",
-    "sourceUrl": "https://github.com/HTLA380/React-Dashboard"
+    "title": "MijnUI Component Library",
+    "imgUrl": "/assets/images/projects/project-8.png",
+    "techs": ["React", "TailwindCss", "RadixUI", "Fumadocs", "Storybook"],
+    "liveUrl": "https://mijn-ui.vercel.app",
+    "sourceUrl": "https://github.com/mijn-ui"
   },
   {
     "title": "Cobalt Clone",
