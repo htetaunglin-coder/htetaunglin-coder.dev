@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+import { buttonStyles } from "./ui/button";
 
 type LangSwitcherProps = {
   className?: ComponentProps<typeof Link>["className"];
@@ -15,8 +16,8 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
   return (
     <Link
       className={cn(
-        buttonVariants({ variant: "outline", size: "icon" }),
-        className,
+        buttonStyles().base({ variant: "ghost", iconOnly: true }),
+        className
       )}
       href={locale === "en" ? "/pl" : "/en"}
     >

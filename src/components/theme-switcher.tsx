@@ -1,28 +1,79 @@
 "use client";
-
+import { Monitor, Moon, Sun } from "lucide-react";
+import { motion } from "motion/react";
 import { useTheme } from "next-themes";
-import { ComponentProps } from "react";
+import { useEffect, useState } from "react";
 
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type ThemeSwitcherProps = {
-  className?: ComponentProps<"button">["className"];
+const themes = [
+  {
+    key: "system",
+    icon: Monitor,
+    label: "System theme",
+  },
+  {
+    key: "light",
+    icon: Sun,
+    label: "Light theme",
+  },
+  {
+    key: "dark",
+    icon: Moon,
+    label: "Dark theme",
+  },
+];
+
+export type ThemeSwitcherProps = {
+  className?: string;
 };
 
 export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <Button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className={cn("cursor-pointer", className)}
-      size="icon"
-      aria-label="Toggle theme"
+    <div
+      className={cn(
+        "relative isolate flex h-8 rounded-full bg-bg-default p-1",
+        className
+      )}
     >
-      <Icons.sun className="dark:hidden" />
-      <Icons.moon className="hidden dark:block" />
-    </Button>
+      {themes.map(({ key, icon: Icon, label }) => {
+        const isActive = theme === key;
+        return (
+          <button
+            aria-label={label}
+            className="relative h-6 w-6 rounded-full"
+            key={key}
+            onClick={() => setTheme(key)}
+            type="button"
+          >
+            {isActive && (
+              <motion.div
+                className="absolute inset-0 rounded-full bg-bg-secondary"
+                layoutId="activeTheme"
+                transition={{ type: "spring", duration: 0.5 }}
+              />
+            )}
+            <Icon
+              className={cn(
+                "relative z-10 m-auto h-4 w-4",
+                isActive ? "text-fg-default" : "text-fg-tertiary"
+              )}
+            />
+          </button>
+        );
+      })}
+    </div>
   );
 };
