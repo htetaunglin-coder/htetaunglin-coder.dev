@@ -1,9 +1,13 @@
-import { env } from "@/env.mjs";
-
 export const siteConfig = {
-  title: "Next.js Starter",
+  title: "Htet Aung Lin",
   description:
-    "A Next.js starter template, packed with features like TypeScript, Tailwind CSS, Next-auth, Eslint, testing tools and more. Jumpstart your project with efficiency and style.",
-  keywords: ["Next.js", "TypeScript", "Tailwind CSS", "Next-auth"],
-  url: env.APP_URL,
+    "I build things for the web with React and a bit of design sense. I enjoy learning, improving, and making videos about what I discover along the way.",
+  keywords: [
+    "Frontend Developer",
+    "Next.js Developer",
+    "React Developer",
+    "React",
+    "Next.js",
+  ],
+  url: process.env.APP_URL,
 };

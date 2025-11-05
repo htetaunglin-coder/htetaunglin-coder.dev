@@ -1,59 +1,115 @@
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
+import { Slot, Slottable } from "@radix-ui/react-slot";
+import { LoaderCircleIcon } from "lucide-react";
+import type * as React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 import { cn } from "@/lib/utils";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-      },
+import type { ComponentSlots } from "./types";
+
+const buttonStyles = tv({
+  slots: {
+    base: "inline-flex cursor-pointer items-center justify-center gap-0.5 font-medium text-sm outline-none duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default disabled:pointer-events-none disabled:opacity-50",
+    icon: "size-5 animate-spin text-current",
+  },
+  variants: {
+    variant: {
+      default:
+        "border bg-bg-default-alt text-fg-default shadow-xs hover:bg-bg-accent focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:bg-bg-accent/70",
+      secondary:
+        "bg-bg-secondary text-fg-secondary shadow-xs hover:bg-bg-accent focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:bg-bg-accent/70",
+      outlined:
+        "border bg-transparent text-fg-default shadow-xs hover:bg-bg-accent focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:bg-bg-accent/70",
+      brand:
+        "bg-bg-brand text-on-bg-brand shadow-xs hover:bg-bg-brand/80 focus-visible:ring-outline-brand active:bg-bg-brand/70",
+      danger:
+        "bg-bg-danger text-on-bg-danger shadow-xs hover:bg-bg-danger/80 focus-visible:ring-outline-danger active:bg-bg-danger/70",
+      ghost:
+        "text-fg-default hover:bg-bg-accent focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:bg-bg-accent/70",
+      inverse:
+        "bg-bg-inverse text-fg-inverse shadow-xs hover:bg-bg-inverse/80 focus-visible:ring-outline-inverse active:bg-bg-inverse/70",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      sm: "h-8 rounded-md px-3",
+      md: "h-9 rounded-md px-3",
+      lg: "h-12 rounded-lg px-4",
+    },
+    iconOnly: {
+      true: "gap-0 px-0",
+      false: "",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+    iconOnly: false,
+  },
+  compoundVariants: [
+    {
+      iconOnly: true,
+      size: "sm",
+      class: {
+        base: "size-8",
+      },
+    },
+    {
+      iconOnly: true,
+      size: "md",
+      class: {
+        base: "size-9",
+      },
+    },
+    {
+      iconOnly: true,
+      size: "lg",
+      class: {
+        base: "size-12",
+      },
+    },
+  ],
+});
 
-function Button({
+export type ButtonVariantProps = VariantProps<typeof buttonStyles>;
+export type ButtonSlots = keyof ReturnType<typeof buttonStyles>;
+export { buttonStyles };
+
+/* -------------------------------------------------------------------------- */
+
+export type ButtonBaseProps = ComponentSlots<ButtonSlots> &
+  React.ComponentPropsWithRef<"button"> & {
+    asChild?: boolean;
+    loading?: boolean;
+  };
+
+export type ButtonProps = ButtonBaseProps & ButtonVariantProps;
+
+const Button = ({
   className,
+  classNames,
   variant,
   size,
+  iconOnly,
+  loading,
+  disabled,
   asChild = false,
+  children,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot : "button";
+}: ButtonProps) => {
+  const Component = asChild ? Slot : "button";
+  const { base, icon } = buttonStyles({ variant, size, iconOnly });
 
   return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+    <Component
+      className={base({ className: cn(classNames?.base, className) })}
+      disabled={loading || disabled}
       {...props}
-    />
+    >
+      {loading && (
+        <LoaderCircleIcon className={icon({ className: classNames?.icon })} />
+      )}
+      <Slottable>{loading ? "Loading..." : children}</Slottable>
+    </Component>
   );
-}
+};
 
-export { Button, buttonVariants };
+export { Button };
