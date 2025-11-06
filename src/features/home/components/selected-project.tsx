@@ -1,10 +1,12 @@
-import { ArrowRight } from "lucide-react";
+"use client";
 
+import { ArrowRight } from "lucide-react";
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
 
 const SelectedProject = () => (
-  <div className="w-full">
+  <FadeStaggeredAnimation className="w-full" direction="up">
     <div className="flex items-center gap-2">
       <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
         Selected Project
@@ -39,7 +41,7 @@ const SelectedProject = () => (
         </NavLink>
       </Button>
     </div>
-  </div>
+  </FadeStaggeredAnimation>
 );
 
 export { SelectedProject };

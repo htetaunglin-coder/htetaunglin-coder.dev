@@ -13,27 +13,27 @@ const HomePage = () => (
         <Hero />
       </section>
 
-      <section className="px-6 pt-24 lg:pt-32" id="selected-project">
+      <section className="px-6 pt-24 lg:pt-28" id="selected-project">
         <SelectedProject />
       </section>
 
-      <section className="px-6 pt-32 lg:pt-40" id="experience">
+      <section className="px-6 pt-32 lg:pt-52" id="experience">
         <Experience />
       </section>
 
-      <section className="px-6 pt-32 lg:pt-40" id="technologies">
+      <section className="px-6 pt-32 lg:pt-52" id="technologies">
         <Technologies />
       </section>
 
-      <section className="px-6 pt-32 lg:pt-40" id="contributions">
+      <section className="px-6 pt-32 lg:pt-52" id="contributions">
         <Contributions />
       </section>
 
-      <section className="px-6 pt-32 lg:pt-40" id="testimonial">
+      <section className="px-6 pt-32 lg:pt-52" id="testimonial">
         <Testimonial />
       </section>
 
-      <section className="px-6 pt-32 lg:pt-40" id="contact">
+      <section className="px-6 pt-32 lg:pt-52" id="contact">
         <Contact />
       </section>
     </div>

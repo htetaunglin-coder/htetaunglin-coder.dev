@@ -1,5 +1,8 @@
-import { SOCIAL_LINKS } from "@/constants/social-links";
+"use client";
 
+import { useInView } from "motion/react";
+import { useRef } from "react";
+import { SOCIAL_LINKS } from "@/constants/social-links";
 import { Signature } from "./icons/signature";
 import { Tooltip } from "./tooltip-wrapper";
 import { Button } from "./ui/button";
@@ -19,10 +22,7 @@ const Footer = () => (
               Htet Aung Lin
             </NavLink>
           </p>
-
-          <NavLink className="inline-block w-16 text-fg-brand" href={"/"}>
-            <Signature />
-          </NavLink>
+          <FooterSignature />
         </div>
 
         <div className="space-y-1">
@@ -56,3 +56,22 @@ const Footer = () => (
 );
 
 export { Footer };
+
+const FooterSignature = () => {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-80px",
+  });
+
+  return (
+    <NavLink
+      className="inline-block h-12 w-20 text-fg-brand"
+      href={"/"}
+      ref={ref}
+    >
+      {isInView && <Signature animate />}
+    </NavLink>
+  );
+};

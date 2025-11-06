@@ -1,3 +1,4 @@
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { NavLink } from "@/components/ui/nav-link";
 import { getGitHubContributions } from "../../api/contribution";
 import { GithubContributionGraph } from "./contribution-graph";
@@ -6,7 +7,7 @@ const Contributions = async () => {
   const contribution = await getGitHubContributions();
 
   return (
-    <div className="w-full">
+    <FadeStaggeredAnimation className="w-full" direction="up">
       <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
         Contributions
       </h2>
@@ -28,7 +29,7 @@ const Contributions = async () => {
         </NavLink>{" "}
         if you want to know a bit more about me.{" "}
       </p>
-    </div>
+    </FadeStaggeredAnimation>
   );
 };
 

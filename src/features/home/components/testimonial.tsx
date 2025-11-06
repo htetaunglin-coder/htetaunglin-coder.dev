@@ -1,8 +1,9 @@
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { DashedLine } from "@/components/decorations/dashed-line";
 
 const Testimonial = () => {
   return (
-    <div className="w-full overflow-hidden">
+    <FadeStaggeredAnimation className="w-full overflow-hidden" direction="up">
       <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
         Testimonials
       </h2>
@@ -139,7 +140,7 @@ const Testimonial = () => {
           </p>
         </div>
       </div>
-    </div>
+    </FadeStaggeredAnimation>
   );
 };
 
