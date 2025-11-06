@@ -1,3 +1,6 @@
+"use client";
+
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { cn } from "@/lib/utils";
 
 type TimelineItem = {
@@ -66,7 +69,7 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
 ];
 
 const Experience = () => (
-  <div className="w-full">
+  <FadeStaggeredAnimation className="w-full" direction="up">
     <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
       Experience
     </h2>
@@ -129,7 +132,7 @@ const Experience = () => (
         ))}
       </div>
     </div>
-  </div>
+  </FadeStaggeredAnimation>
 );
 
 export { Experience };

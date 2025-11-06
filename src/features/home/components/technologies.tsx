@@ -1,5 +1,7 @@
-import type React from "react";
+"use client";
 
+import type React from "react";
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
@@ -63,7 +65,7 @@ const TECH_DATA: readonly TechnologyItem[] = [
 ];
 
 const Technologies = () => (
-  <div className="w-full">
+  <FadeStaggeredAnimation className="w-full" direction="up">
     <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
       Technologies
     </h2>
@@ -91,7 +93,7 @@ const Technologies = () => (
         clean, performant web experiences.
       </span>
     </p>
-  </div>
+  </FadeStaggeredAnimation>
 );
 
 export { Technologies };
