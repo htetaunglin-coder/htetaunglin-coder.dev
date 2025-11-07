@@ -1,11 +1,18 @@
 import { ArrowRight, Globe } from "lucide-react";
+import { FadeAnimation } from "@/components/animations/fade-animation";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
 import { ThemeImage } from "@/components/ui/theme-image";
 import { cn, formatDate, formatDisplayUrl } from "@/lib/utils";
 import type { ProjectItem } from "../data";
 
-const ProjectShowcaseCard = ({ project }: { project: ProjectItem }) => {
+const ProjectShowcaseCard = ({
+  project,
+  firestProject,
+}: {
+  project: ProjectItem;
+  firestProject: boolean;
+}) => {
   const lightSrc =
     typeof project.image === "object" ? project.image.light : project.image;
   const darkSrc =
@@ -13,7 +20,12 @@ const ProjectShowcaseCard = ({ project }: { project: ProjectItem }) => {
 
   return (
     <div className="space-y-6">
-      <div className="group relative z-[calc(var(--grainy-overlay-z-index)+1)] aspect-[16/9.5] w-full overflow-hidden rounded-2xl bg-zinc-500 brightness-90 dark:brightness-[0.875]">
+      <FadeAnimation
+        as="div"
+        className="group relative z-[calc(var(--grainy-overlay-z-index)+1)] aspect-[16/9.5] w-full overflow-hidden rounded-2xl bg-zinc-500 brightness-90 dark:brightness-[0.875]"
+        delay={firestProject ? 0.75 : 0}
+        direction="up"
+      >
         <ThemeImage
           alt={project.title}
           className="object-cover object-center"
@@ -38,9 +50,13 @@ const ProjectShowcaseCard = ({ project }: { project: ProjectItem }) => {
             </p>
           </div>
         </div>
-      </div>
+      </FadeAnimation>
 
-      <div className="mt-2 flex justify-between gap-4 px-6">
+      <FadeAnimation
+        as="div"
+        className="mt-2 flex justify-between gap-4 px-6"
+        direction="up"
+      >
         <div className="max-w-lg flex-grow">
           <h3 className="font-semibold text-fg-secondary text-lg">
             {project.title}
@@ -76,7 +92,7 @@ const ProjectShowcaseCard = ({ project }: { project: ProjectItem }) => {
             )}
           </div>
         </div>
-      </div>
+      </FadeAnimation>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { memo } from "react";
+import { FadeAnimation } from "@/components/animations/fade-animation";
 
 const suggestedMessages = [
   "Can you tell me about yourself and your experience?",
@@ -17,13 +17,12 @@ const PureSuggestedActions = ({
 }) => (
   <div className="flex w-full flex-col">
     {suggestedMessages.map((suggestedMessage, index) => (
-      <motion.div
-        animate={{ opacity: 1, y: 0 }}
+      <FadeAnimation
+        as="div"
         className="flex items-start gap-2 border-outline-secondary/60 border-t py-1 first:border-none"
-        exit={{ opacity: 0, y: 20 }}
-        initial={{ opacity: 0, y: 20 }}
+        delay={0.1 * index + 1.25}
+        direction="up"
         key={suggestedMessage}
-        transition={{ delay: 0.05 * index }}
       >
         <button
           className="w-full cursor-pointer rounded-md py-2 text-left text-fg-tertiary hover:bg-bg-secondary/60 sm:px-3"
@@ -32,7 +31,7 @@ const PureSuggestedActions = ({
         >
           {suggestedMessage}
         </button>
-      </motion.div>
+      </FadeAnimation>
     ))}
   </div>
 );

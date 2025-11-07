@@ -1,147 +1,137 @@
+"use client";
+
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { DashedLine } from "@/components/decorations/dashed-line";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
-const Testimonial = () => {
+type TestimonialData = {
+  id: string;
+  author: {
+    name: string;
+    role: string;
+    company?: string;
+    avatarUrl?: string;
+  };
+  content: string;
+};
+
+const TESTIMONIALS: readonly TestimonialData[] = [
+  {
+    id: "sann-ko-ko",
+    author: {
+      name: "Sann Ko Ko",
+      role: "Product Owner",
+      company: "Praktikon B.V",
+      avatarUrl: "/images/people/sann_ko_ko.jpg",
+    },
+    content:
+      "Working with Htet was a fantastic experience. He has an incredible ability to turn ideas into reality, making the process very enjoyable. It's rare to find someone who can translate concepts into designs so perfectly on the first try.",
+  },
+  {
+    id: "khin-maung-htet",
+    author: {
+      name: "Khin Maung Htet",
+      role: "Software Developer",
+      company: "Pico",
+      avatarUrl: "/images/people/khin_mg_htet.jpg",
+    },
+    content:
+      "Working with Htet Aung Lin honestly changed the way I look at teamwork. He's incredibly organized and pays attention to every little detail, not in a rigid way, but in a way that shows how much he truly cares about what he's doing. His determination and consistency are on another level, and his work ethic just pulls me to work harder.",
+  },
+  {
+    id: "wai-yan-phone-aant",
+    author: {
+      name: "Wai Yan Phone Aant",
+      role: "Full Stack Developer",
+      company: "Pico",
+      avatarUrl: "/images/people/wai_yan_phone_aant.jpg",
+    },
+    content:
+      "It has been an absolute pleasure collaborating with Htet Aung Lin. He is an incredibly creative front-end developer, and I truly value the quality and aesthetic of the designs he consistently produces. As a backend engineer, I especially appreciate his flexibility and his open approach to discussion and negotiation.",
+  },
+  {
+    id: "aung-khant-kyaw",
+    author: {
+      name: "Aung Khant Kyaw",
+      role: "Software Developer",
+    },
+    content:
+      "Had a phenomenal experience collaborating with Htet Aung Lin on MijnUI React library. Not only is building an entire UI library solo an impressive technical feat, but his constructive and actionable code reviews are just as commendable. Truly a versatile, creative and remarkable developer!",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+
+const Testimonial = () => (
+  <FadeStaggeredAnimation className="w-full overflow-hidden" direction="up">
+    <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
+      Testimonials
+    </h2>
+
+    <p className="mt-1 max-w-3xl text-balance text-base/relaxed text-fg-tertiary">
+      I've had the chance to work with some amazing people. Here's what they
+      think about our time building things together.
+    </p>
+
+    <div className="relative mt-6 grid w-full grid-cols-1 gap-12 text-fg-default sm:mt-4 sm:grid-cols-2 sm:gap-0">
+      <DashedLine className="hidden sm:block" orientation="horizontal" />
+      <DashedLine className="hidden sm:block" orientation="vertical" />
+
+      {TESTIMONIALS.map((testimonial, index) => (
+        <TestimonialCard
+          className={index % 2 === 0 ? "sm:pl-1" : "sm:pr-0"}
+          key={testimonial.id}
+          testimonial={testimonial}
+        />
+      ))}
+    </div>
+  </FadeStaggeredAnimation>
+);
+
+export { Testimonial };
+
+/* -------------------------------------------------------------------------- */
+
+const TestimonialCard = ({
+  testimonial,
+  className,
+}: {
+  testimonial: TestimonialData;
+  className?: string;
+}) => {
+  const { author, content } = testimonial;
+
   return (
-    <FadeStaggeredAnimation className="w-full overflow-hidden" direction="up">
-      <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
-        Testimonials
-      </h2>
-
-      <p className="mt-1 max-w-3xl text-balance text-base/relaxed text-fg-tertiary">
-        I&apos;ve had the chance to work with some amazing people. Here&apos;s
-        what they think about our time building things together.
-      </p>
-
-      <div className="relative mt-6 grid w-full grid-cols-1 gap-12 text-fg-default sm:mt-4 sm:grid-cols-2 sm:gap-0">
-        <DashedLine className="hidden sm:block" orientation="horizontal" />
-        <DashedLine className="hidden sm:block" orientation="vertical" />
-
-        <div className="flex size-full w-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pt-8 sm:pl-1">
-          <div className="flex gap-6">
-            <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
-              {/* biome-ignore lint/performance/noImgElement: off */}
-              {/* biome-ignore lint/correctness/useImageSize: off */}
-              <img
-                alt="avatar"
-                className="size-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww"
-              />
-            </div>
-
-            <div>
-              <h5 className="font-medium text-fg-default text-sm">
-                Sann Ko Ko
-              </h5>
-              <p className="text-fg-tertiary/80 text-xs">
-                Product Manager at BSCV
-              </p>
-            </div>
-          </div>
-
-          <p className="text-fg-tertiary text-sm">
-            Working with Htet was a fantastic experience. He has an incredible
-            ability to turn ideas into reality, making the process very
-            enjoyable. It&apos;s rare to find someone who can translate concepts
-            into designs so perfectly on the first try.
-          </p>
+    <div
+      className={cn(
+        "flex size-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pt-8",
+        className
+      )}
+    >
+      <div className="flex gap-6">
+        <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
+          <Avatar className="size-full rounded-none">
+            <AvatarFallback className="rounded-none text-sm">
+              {author.name[0]}
+            </AvatarFallback>
+            <AvatarImage
+              alt={`${author.name} avatar`}
+              className="rounded-none"
+              src={author.avatarUrl}
+            />
+          </Avatar>
         </div>
 
-        <div className="flex size-full w-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pt-8 sm:pr-0">
-          <div className="flex gap-6">
-            <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
-              {/* biome-ignore lint/performance/noImgElement: off */}
-              {/* biome-ignore lint/correctness/useImageSize: off */}
-              <img
-                alt="avatar"
-                className="size-full object-cover object-center"
-                src="/images/khin_mg_htet.jpg"
-              />
-            </div>
-
-            <div>
-              <h5 className="font-medium text-fg-default text-sm">
-                Khin Maung Htet
-              </h5>
-              <p className="text-fg-tertiary/80 text-xs">
-                Software Developer at Pico
-              </p>
-            </div>
-          </div>
-
-          <p className="text-fg-tertiary text-sm">
-            Working with Htet Aung Lin honestly changed the way I look at
-            teamwork. He’s incredibly organized and pays attention to every
-            little detail, not in a rigid way, but in a way that shows how much
-            he truly cares about what he’s doing. His determination and
-            consistency are on another level, and his work ethic just pulls me
-            to work harder.
-          </p>
-        </div>
-
-        <div className="flex size-full w-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pl-1">
-          <div className="flex gap-6">
-            <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
-              {/* biome-ignore lint/performance/noImgElement: off */}
-              {/* biome-ignore lint/correctness/useImageSize: off */}
-              <img
-                alt="avatar"
-                className="size-full object-cover object-center"
-                src="/images/wai_yan_phone_aant.jpg"
-              />
-            </div>
-
-            <div>
-              <h5 className="font-medium text-fg-default text-sm">
-                Wai Yan Phone Aant
-              </h5>
-              <p className="text-fg-tertiary/80 text-xs">
-                Full Stack Developer at Pico
-              </p>
-            </div>
-          </div>
-
-          <p className="line-clamp-6 text-fg-tertiary text-sm">
-            It has been an absolute pleasure collaborating with Htet Aung Lin.
-            He is an incredibly creative front-end developer, and I truly value
-            the quality and aesthetic of the designs he consistently produces.
-            As a backend engineer, I especially appreciate his flexibility and
-            his open approach to discussion and negotiation.
-          </p>
-        </div>
-
-        <div className="flex size-full w-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pr-0">
-          <div className="flex gap-6">
-            <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
-              {/* biome-ignore lint/performance/noImgElement: off */}
-              {/* biome-ignore lint/correctness/useImageSize: off */}
-              <img
-                alt="avatar"
-                className="size-full object-cover object-center"
-                src="https://plus.unsplash.com/premium_photo-1691784781482-9af9bce05096?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-              />
-            </div>
-
-            <div>
-              <h5 className="font-medium text-fg-default text-sm">
-                Fabian Schmidt
-              </h5>
-              <p className="text-fg-tertiary/80 text-xs">
-                Senior ML Engineer at Tesco
-              </p>
-            </div>
-          </div>
-
-          <p className="text-fg-tertiary text-sm">
-            Working with Htet was a pleasure. He was able to help me with the
-            design of my projects from start to finish. He communicated his
-            UI/UX ideas in a clear and convincing way and made my work a lot
-            easier.
+        <div>
+          <h5 className="font-medium text-fg-default text-sm">{author.name}</h5>
+          <p className="text-fg-tertiary/80 text-xs">
+            {author.role} {author.company && `at ${author.company}`}
           </p>
         </div>
       </div>
-    </FadeStaggeredAnimation>
+
+      <p className="text-fg-tertiary text-sm">{content}</p>
+    </div>
   );
 };
-
-export { Testimonial };
