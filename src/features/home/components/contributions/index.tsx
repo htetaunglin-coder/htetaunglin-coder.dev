@@ -1,4 +1,4 @@
-import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
+import { FadeAnimation } from "@/components/animations/fade-animation";
 import { NavLink } from "@/components/ui/nav-link";
 import { getGitHubContributions } from "../../api/contribution";
 import { GithubContributionGraph } from "./contribution-graph";
@@ -7,16 +7,30 @@ const Contributions = async () => {
   const contribution = await getGitHubContributions();
 
   return (
-    <FadeStaggeredAnimation className="w-full" direction="up">
-      <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
+    <div className="w-full">
+      <FadeAnimation
+        as="h2"
+        className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold"
+        direction="up"
+      >
         Contributions
-      </h2>
+      </FadeAnimation>
 
-      <div className="mt-4 w-full border-b border-b-outline-secondary pb-6 text-fg-tertiary/80 sm:mt-8">
+      <FadeAnimation
+        as="div"
+        className="mt-4 w-full border-b border-b-outline-secondary pb-6 text-fg-tertiary/80 sm:mt-8"
+        delay={0.25}
+        direction="up"
+      >
         <GithubContributionGraph contributions={contribution} />
-      </div>
+      </FadeAnimation>
 
-      <p className="mt-4 text-fg-tertiary text-sm sm:text-base/relaxed">
+      <FadeAnimation
+        as="p"
+        className="mt-4 text-fg-tertiary text-sm sm:text-base/relaxed"
+        delay={0.25}
+        direction="up"
+      >
         {" "}
         I code almost every day, some projects make it here, some don&apos;t.
         You can check the{" "}
@@ -28,8 +42,8 @@ const Contributions = async () => {
           About page
         </NavLink>{" "}
         if you want to know a bit more about me.{" "}
-      </p>
-    </FadeStaggeredAnimation>
+      </FadeAnimation>
+    </div>
   );
 };
 

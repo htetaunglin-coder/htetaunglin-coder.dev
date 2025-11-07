@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { BasicMarkdown } from "@/components/basic-markdown-parser";
 import { cn } from "@/lib/utils";
 import { getAgeFromDOB } from "../utils";
@@ -40,7 +41,11 @@ const About = () => (
   <div className="w-full">
     <div className="space-y-32 sm:space-y-32">
       {ABOUT_ME.map((section, index) => (
-        <div key={section.id}>
+        <FadeStaggeredAnimation
+          delay={index * 0.25}
+          direction="up"
+          key={section.id}
+        >
           <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-0">
             <Title>{section.title}</Title>
             {index === 0 && (
@@ -50,7 +55,7 @@ const About = () => (
                   className="select-none object-cover object-center"
                   draggable={false}
                   fill
-                  src="/images/profile-image.jpg"
+                  src="/images/people/profile-image.jpg"
                 />
               </div>
             )}
@@ -60,10 +65,10 @@ const About = () => (
               {section.content}
             </BasicMarkdown>
           </p>
-        </div>
+        </FadeStaggeredAnimation>
       ))}
 
-      <div>
+      <FadeStaggeredAnimation delay={0.25} direction="up">
         <Title>Outside of coding</Title>
         <p className="mt-2 text-base text-fg-secondary/90 sm:mt-4 sm:ml-20 sm:max-w-none sm:text-lg">
           I&apos;m really into psychology and stoicism, learning how thoughts
@@ -89,7 +94,7 @@ const About = () => (
               className="select-none object-cover object-center"
               draggable={false}
               fill
-              src="/images/hangout.jpg"
+              src="/images/people/hangout.jpg"
             />
 
             <div className="pointer-events-none absolute inset-0 select-none bg-black/10 dark:bg-black/20">
@@ -111,7 +116,7 @@ const About = () => (
             </div>
           </div>
         </div>
-      </div>
+      </FadeStaggeredAnimation>
     </div>
   </div>
 );

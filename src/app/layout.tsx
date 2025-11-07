@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
+import { MotionConfig } from "motion/react";
 import type { Metadata } from "next";
-
 import GrainyOverlay from "@/components/decorations/grainy-overlay";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toast";
@@ -55,8 +55,7 @@ const RootLayout = async ({
           skipDelayDuration={0}
         >
           <Toaster expand={true} />
-          {children}
-          {/* <Footer /> */}
+          <MotionConfig reducedMotion="user">{children}</MotionConfig>
           <GrainyOverlay />
         </TooltipProvider>
       </ThemeProvider>

@@ -21,7 +21,7 @@ import {
 } from "@/constants/navigation";
 import { SOCIAL_LINKS } from "@/constants/social-links";
 import { cn } from "@/lib/utils";
-
+import { FadeStaggeredAnimation } from "./animations/fade-animation";
 import { AnimatedGradientText } from "./decorations/animated-gradient-text";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Button } from "./ui/button";
@@ -51,7 +51,12 @@ const Header = ({
       <PopoverAnchor>
         <div className="flex w-fit max-w-4xl items-center gap-6 rounded-lg bg-bg-secondary/80 px-2 backdrop-blur-[3px]">
           <div className="flex items-center">
-            <ul className="hidden items-center text-base sm:flex">
+            <FadeStaggeredAnimation
+              as="ul"
+              className="hidden items-center text-base sm:flex"
+              direction="down"
+              staggerChildren={0.05}
+            >
               {MAIN_PAGES.map((page) => (
                 <li key={page.id}>
                   <NavLink
@@ -64,7 +69,7 @@ const Header = ({
               ))}
               <div className="h-8 w-px bg-outline-default" />
               <MorePages />
-            </ul>
+            </FadeStaggeredAnimation>
 
             <MobileMenu />
           </div>

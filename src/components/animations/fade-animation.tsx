@@ -1,17 +1,7 @@
 "use client";
 
-import { motion, useInView, type Variants } from "motion/react";
+import { motion, useInView } from "motion/react";
 import * as React from "react";
-
-const FADE_UP_VARIANT: Variants = {
-  show: { opacity: 1, y: 0, transition: { type: "spring" } },
-  hidden: { opacity: 0, y: 18 },
-};
-
-const FADE_DOWN_VARIANT: Variants = {
-  show: { opacity: 1, y: 0, transition: { type: "spring" } },
-  hidden: { opacity: 0, y: -18 },
-};
 
 /* -------------------------------------------------------------------------- */
 
@@ -58,7 +48,20 @@ const FadeStaggeredAnimation = ({
       {React.Children.map(children, (child) =>
         React.isValidElement(child) ? (
           <motion.div
-            variants={direction === "up" ? FADE_UP_VARIANT : FADE_DOWN_VARIANT}
+            variants={{
+              hidden: {
+                opacity: 0,
+                y: direction === "up" ? 18 : -18,
+              },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  stiffness: 80,
+                },
+              },
+            }}
           >
             {child}
           </motion.div>
@@ -82,7 +85,7 @@ type FadeAnimationProps = {
 
 const FadeAnimation = ({
   direction,
-  delay = 0.25,
+  delay = 0,
   className,
   as: Component = "span",
   children,
@@ -96,7 +99,21 @@ const FadeAnimation = ({
       className={className}
       initial="hidden"
       transition={{ delay, type: "spring", stiffness: 80 }}
-      variants={direction === "up" ? FADE_UP_VARIANT : FADE_DOWN_VARIANT}
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: direction === "up" ? 18 : -18,
+        },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            stiffness: 80,
+            delay,
+          },
+        },
+      }}
       viewport={{ once: true, amount: 0.3 }}
       whileInView="show"
     >

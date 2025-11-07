@@ -1,10 +1,10 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { motion } from "framer-motion";
 import { ArrowDownIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useStickToBottom } from "use-stick-to-bottom";
+import { FadeAnimation } from "@/components/animations/fade-animation";
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -67,16 +67,14 @@ const ChatView = () => {
               ) : (
                 <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6">
                   <div className="-mt-[calc(var(--header-height)_+_2rem)] w-full max-w-2xl space-y-2 sm:space-y-4">
-                    <motion.div
-                      animate={{ opacity: 1, y: 0 }}
-                      className="sm:px-3"
-                      exit={{ opacity: 0, y: 20 }}
-                      initial={{ opacity: 0, y: 20 }}
+                    <FadeAnimation
+                      as="h1"
+                      className="pointer-events-auto bg-gradient-to-br from-fg-default to-fg-tertiary/90 bg-clip-text font-semibold text-3xl/[1.2] text-transparent tracking-tight sm:mt-0 sm:text-4xl/[1.2] dark:to-fg-tertiary/80"
+                      delay={1}
+                      direction="up"
                     >
-                      <h1 className="pointer-events-auto bg-gradient-to-br from-fg-default to-fg-tertiary/90 bg-clip-text font-semibold text-3xl/[1.2] text-transparent tracking-tight sm:mt-0 sm:text-4xl/[1.2] dark:to-fg-tertiary/80">
-                        Ask Me Anything!
-                      </h1>
-                    </motion.div>
+                      Ask Me Anything!
+                    </FadeAnimation>
                     <div className="pointer-events-auto w-full">
                       <SuggestedQuestions
                         sendMessage={(msg) => sendMessage({ text: msg })}

@@ -12,17 +12,17 @@ export const TEAM_MEMBERS = {
   sann_ko_ko: {
     id: "sann_ko_ko",
     name: "Sann Ko Ko",
-    avatar: "/images/projects/team/sann_ko_ko.jpg",
+    avatar: "/images/people/sann_ko_ko.jpg",
   },
   wai_yan_phone_aant: {
     id: "wai_yan_phone_aant",
     name: "Wai Yan Phone Aant",
-    avatar: "/images/projects/team/wai_yan_phone_aant.jpg",
+    avatar: "/images/people/wai_yan_phone_aant.jpg",
   },
   htet_aung_lin: {
     id: "htet_aung_lin",
     name: "Htet Aung Lin",
-    avatar: "/images/projects/team/htet_aung_lin.jpg",
+    avatar: "/images/people/htet_aung_lin.jpg",
   },
   auung: {
     id: "auung",
@@ -32,17 +32,17 @@ export const TEAM_MEMBERS = {
   paing_soe_ko: {
     id: "paing_soe_ko",
     name: "Paing Soe Ko",
-    avatar: "/images/projects/team/paing_soe_ko.jpg",
+    avatar: "/images/people/paing_soe_ko.jpg",
   },
   zai185: {
     id: "zai185",
     name: "Zai185",
-    avatar: "/images/projects/team/zai185.jpg",
+    avatar: "/images/people/zai185.jpg",
   },
   aaron_htun: {
     id: "aaron_htun",
     name: "Aaron Htun",
-    avatar: "/images/projects/team/aaron_htun.jpg",
+    avatar: "/images/people/aaron_htun.jpg",
   },
 } as const;
 
