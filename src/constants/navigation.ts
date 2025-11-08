@@ -12,7 +12,7 @@ export type MainPageItem = BaseLinkItem & {};
 export const MAIN_PAGES: readonly MainPageItem[] = [
   { id: "home", title: "Home", href: "/" },
   { id: "projects", title: "Projects", href: "/projects" },
-  { id: "blogs", title: "Blogs", href: "/blogs" },
+  { id: "blogs", title: "Blogs", href: "/blog" },
   { id: "about", title: "About", href: "/about" },
   { id: "resume", title: "Resume", href: "/resume" },
 ];
@@ -27,7 +27,7 @@ export type SideQuestItem = BaseLinkItem & {
 export const SIDE_QUESTS: readonly SideQuestItem[] = [
   {
     id: "side-quest-1",
-    href: "/side-quests#gym",
+    href: "/side-quest#gym",
     image: "/images/side-quests/gym.png",
     alt: "Gym fitness journey",
     title: "GYM",
@@ -66,7 +66,7 @@ export type OtherPages = {
 
 export const OTHER_PAGES: Readonly<OtherPages> = {
   sideQuest: {
-    title: "Side Quest",
+    title: "Side Quests",
     description: "Things I do outside of work.",
     items: SIDE_QUESTS,
   },
