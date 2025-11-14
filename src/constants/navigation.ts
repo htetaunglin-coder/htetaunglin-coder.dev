@@ -12,7 +12,7 @@ export type MainPageItem = BaseLinkItem & {};
 export const MAIN_PAGES: readonly MainPageItem[] = [
   { id: "home", title: "Home", href: "/" },
   { id: "projects", title: "Projects", href: "/projects" },
-  { id: "blogs", title: "Blogs", href: "/blog" },
+  { id: "blog", title: "Blog", href: "/blog" },
   { id: "about", title: "About", href: "/about" },
   { id: "resume", title: "Resume", href: "/resume" },
 ];
@@ -27,22 +27,22 @@ export type SideQuestItem = BaseLinkItem & {
 export const SIDE_QUESTS: readonly SideQuestItem[] = [
   {
     id: "side-quest-1",
-    href: "/side-quest#gym",
-    image: "/images/side-quests/gym.png",
+    href: "/side-quests#gym",
+    image: "sidequest_gym.jpg",
     alt: "Gym fitness journey",
     title: "GYM",
   },
   {
     id: "side-quest-2",
     href: "/side-quests#guitar",
-    image: "/images/side-quests/guitar.jpg",
+    image: "sidequest_guitar.jpg",
     alt: "Guitar learning progress",
     title: "Guitar",
   },
   {
     id: "side-quest-3",
     href: "/side-quests#touch-grass",
-    image: "/images/side-quests/touch-grass.jpg",
+    image: "sidequest_nature.jpg",
     alt: "Touching grass and escaping screens",
     title: "Touch Grass",
   },
@@ -61,6 +61,7 @@ export type OtherPages = {
     title: string;
     description: string;
     items: readonly SideQuestItem[];
+    href: string;
   };
 };
 
@@ -69,6 +70,7 @@ export const OTHER_PAGES: Readonly<OtherPages> = {
     title: "Side Quests",
     description: "Things I do outside of work.",
     items: SIDE_QUESTS,
+    href: "/side-quests",
   },
   links: [
     {
@@ -76,7 +78,7 @@ export const OTHER_PAGES: Readonly<OtherPages> = {
       title: "Guestbook",
       description: "Leave me a message",
       icon: Contact,
-      href: "/guestbook",
+      href: "/guest-book",
     },
     {
       id: "music",

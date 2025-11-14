@@ -12,17 +12,17 @@ export const TEAM_MEMBERS = {
   sann_ko_ko: {
     id: "sann_ko_ko",
     name: "Sann Ko Ko",
-    avatar: "/images/people/sann_ko_ko.jpg",
+    avatar: "sann_ko_ko.jpg",
   },
   wai_yan_phone_aant: {
     id: "wai_yan_phone_aant",
     name: "Wai Yan Phone Aant",
-    avatar: "/images/people/wai_yan_phone_aant.jpg",
+    avatar: "wai_yan_phone_aant.jpg",
   },
   htet_aung_lin: {
     id: "htet_aung_lin",
     name: "Htet Aung Lin",
-    avatar: "/images/people/htet_aung_lin.jpg",
+    avatar: "htet_aung_lin.jpg",
   },
   auung: {
     id: "auung",
@@ -32,17 +32,17 @@ export const TEAM_MEMBERS = {
   paing_soe_ko: {
     id: "paing_soe_ko",
     name: "Paing Soe Ko",
-    avatar: "/images/people/paing_soe_ko.jpg",
+    avatar: "paing_soe_ko.jpg",
   },
   zai185: {
     id: "zai185",
     name: "Zai185",
-    avatar: "/images/people/zai185.jpg",
+    avatar: "zai185.jpg",
   },
   aaron_htun: {
     id: "aaron_htun",
     name: "Aaron Htun",
-    avatar: "/images/people/aaron_htun.jpg",
+    avatar: "aaron_htun.jpg",
   },
 } as const;
 
@@ -85,8 +85,8 @@ export const PROJECT_DATA: ProjectItem[] = [
       github: "https://github.com/htetaunglin-coder/Ai-Assistant",
     },
     image: {
-      light: "/images/projects/pica-ai-assistant-light.png",
-      dark: "/images/projects/pica-ai-assistant-dark.png",
+      light: "pica-ai-assistant-light_ccykei.png",
+      dark: "pica-ai-assistant-dark_mq3fqr.png",
     },
     teamMemberIds: ["sann_ko_ko", "wai_yan_phone_aant", "htet_aung_lin"],
     timeline: {
@@ -115,8 +115,8 @@ export const PROJECT_DATA: ProjectItem[] = [
       github: "https://github.com/mijn-ui/mijn-ui-react",
     },
     image: {
-      light: "/images/projects/mijnui-light.png",
-      dark: "/images/projects/mijnui-dark.png",
+      light: "mijnui-light_lzl7bq.png",
+      dark: "mijnui-dark_j0t9ms.png",
     },
     teamMemberIds: [
       "sann_ko_ko",
@@ -151,8 +151,8 @@ export const PROJECT_DATA: ProjectItem[] = [
       github: "https://github.com/htetaunglin-coder/react-resizable-layout",
     },
     image: {
-      light: "/images/projects/resizable-layout-light.png",
-      dark: "/images/projects/resizable-layout-dark.png",
+      light: "resizable-layout-light_hk3pdt.png",
+      dark: "resizable-layout-dark_pqjqwz.png",
     },
     personalProject: true,
     teamMemberIds: ["htet_aung_lin"],
@@ -177,7 +177,7 @@ export const PROJECT_DATA: ProjectItem[] = [
       preview: "http://cobalt-clone.netlify.app",
       github: "https://github.com/htetaunglin-coder/Desktop-Cobalt-Clone",
     },
-    image: "/images/projects/cobalt-clone.png",
+    image: "cobalt-clone_oca9rt.png",
     personalProject: true,
     teamMemberIds: ["htet_aung_lin"],
     timeline: {

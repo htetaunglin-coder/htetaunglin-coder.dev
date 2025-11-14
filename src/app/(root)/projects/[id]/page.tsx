@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GoBackButton } from "@/components/ui/go-back-button";
-import { ProjectDetailCard } from "@/features/projects/components/project-detail-card";
+import { ProjectDetail } from "@/features/projects/components/project-detail";
 import { PROJECT_DATA } from "@/features/projects/data";
 
 export function generateStaticParams() {
@@ -58,21 +58,27 @@ export async function generateMetadata({
   };
 }
 
-const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
-  const project = PROJECT_DATA.find((p) => p.id === params.id);
+const ProjectDetailPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+  const project = PROJECT_DATA.find((p) => p.id === id);
+
   if (!project) {
     notFound();
   }
 
   return (
-    <main className="pt-24 pb-28 md:pt-28">
+    <main className="pt-16 pb-24 sm:pt-24 md:pt-28">
       <section className="mx-auto w-full max-w-4xl">
         <div className="space-y-12 px-6 lg:px-0">
           <GoBackButton className="flex cursor-pointer items-center gap-1.5 font-medium text-base text-fg-tertiary hover:text-fg-accent hover:underline">
             <ArrowLeft />
             Go Back
           </GoBackButton>
-          <ProjectDetailCard project={project} />
+          <ProjectDetail project={project} />
         </div>
       </section>
     </main>

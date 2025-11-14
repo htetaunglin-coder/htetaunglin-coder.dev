@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { Profile } from "@/components/decorations/profile";
 import { Button } from "@/components/ui/button";
+import { NavLink } from "@/components/ui/nav-link";
 
 const Hero = () => (
   <div className="relative flex h-[36rem] w-full justify-between overflow-hidden">
@@ -31,7 +32,7 @@ const Hero = () => (
         <div className="mt-4 flex flex-wrap items-center gap-4 sm:mt-6">
           <Button variant="inverse">Download Resume</Button>
           <Button asChild>
-            <a href={"#contact-me"}>Contact Me</a>
+            <NavLink href={"#contact-me"}>Contact Me</NavLink>
           </Button>
         </div>
       </FadeStaggeredAnimation>

@@ -115,8 +115,8 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     linearDamping: 4,
   };
 
-  const { nodes, materials } = useGLTF("/images/landyard/card.glb") as any;
-  const texture = useTexture("/images/landyard/landyard.png");
+  const { nodes, materials } = useGLTF("/images/profile_card_3d.glb") as any;
+  const texture = useTexture("/images/profile_card_badge.png");
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([

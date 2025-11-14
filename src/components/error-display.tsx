@@ -3,6 +3,7 @@
 import { AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import { NavLink } from "./ui/nav-link";
 
 type ErrorDisplayProps = {
   title?: string;
@@ -18,6 +19,7 @@ export function ErrorDisplay({
   className,
 }: ErrorDisplayProps) {
   const repoUrl = process.env.NEXT_PUBLIC_GITHUB_REPO_URL;
+
   return (
     <div
       className={cn(
@@ -38,14 +40,14 @@ export function ErrorDisplay({
       )}
       <p className="mt-6 text-fg-tertiary/80 text-xs">
         If the problem persists, please report it on{" "}
-        <a
+        <NavLink
           className="underline underline-offset-2 transition-colors hover:text-fg-accent"
-          href={repoUrl}
+          href={repoUrl || ""}
           rel="noopener noreferrer"
           target="_blank"
         >
           GitHub
-        </a>
+        </NavLink>
         .
       </p>
     </div>

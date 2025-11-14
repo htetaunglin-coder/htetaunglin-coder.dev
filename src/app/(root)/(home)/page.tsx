@@ -8,7 +8,7 @@ import { Testimonial } from "@/features/home/components/testimonial";
 
 const HomePage = () => (
   <>
-    <main className="flex justify-center pt-24 pb-12 sm:pb-20 md:pt-52">
+    <main className="flex justify-center pt-16 pb-16 sm:pt-24 sm:pb-20 md:pt-52">
       <div className="w-full max-w-4xl">
         <section className="w-full" id="hero">
           <Hero />

@@ -20,7 +20,7 @@ const FadeStaggeredAnimation = ({
   children,
   className = "",
   staggerChildren = 0.1,
-  delay = 0.25,
+  delay = 0,
 }: FadeStaggeredAnimationProps) => {
   const MotionComponent = motion.create(Component, {
     forwardMotionProps: false,

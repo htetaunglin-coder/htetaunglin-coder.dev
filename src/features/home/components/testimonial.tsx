@@ -1,8 +1,8 @@
 "use client";
 
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
+import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { DashedLine } from "@/components/decorations/dashed-line";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 type TestimonialData = {
@@ -11,7 +11,7 @@ type TestimonialData = {
     name: string;
     role: string;
     company?: string;
-    avatarUrl?: string;
+    avatar?: string;
   };
   content: string;
 };
@@ -23,7 +23,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       name: "Sann Ko Ko",
       role: "Product Owner",
       company: "Praktikon B.V",
-      avatarUrl: "/images/people/sann_ko_ko.jpg",
+      avatar: "sann_ko_ko.jpg",
     },
     content:
       "Working with Htet was a fantastic experience. He has an incredible ability to turn ideas into reality, making the process very enjoyable. It's rare to find someone who can translate concepts into designs so perfectly on the first try.",
@@ -34,7 +34,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       name: "Khin Maung Htet",
       role: "Software Developer",
       company: "Pico",
-      avatarUrl: "/images/people/khin_mg_htet.jpg",
+      avatar: "khin_mg_htet.jpg",
     },
     content:
       "Working with Htet Aung Lin honestly changed the way I look at teamwork. He's incredibly organized and pays attention to every little detail, not in a rigid way, but in a way that shows how much he truly cares about what he's doing. His determination and consistency are on another level, and his work ethic just pulls me to work harder.",
@@ -45,7 +45,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       name: "Wai Yan Phone Aant",
       role: "Full Stack Developer",
       company: "Pico",
-      avatarUrl: "/images/people/wai_yan_phone_aant.jpg",
+      avatar: "wai_yan_phone_aant.jpg",
     },
     content:
       "It has been an absolute pleasure collaborating with Htet Aung Lin. He is an incredibly creative front-end developer, and I truly value the quality and aesthetic of the designs he consistently produces. As a backend engineer, I especially appreciate his flexibility and his open approach to discussion and negotiation.",
@@ -111,16 +111,15 @@ const TestimonialCard = ({
     >
       <div className="flex gap-6">
         <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
-          <Avatar className="size-full rounded-none">
-            <AvatarFallback className="rounded-none text-sm">
-              {author.name[0]}
-            </AvatarFallback>
-            <AvatarImage
-              alt={`${author.name} avatar`}
-              className="rounded-none"
-              src={author.avatarUrl}
-            />
-          </Avatar>
+          <CloudinaryAvatar
+            className="size-full rounded-none"
+            classNames={{
+              image: "rounded-none",
+              fallback: "rounded-none",
+            }}
+            name={author.name}
+            src={author.avatar}
+          />{" "}
         </div>
 
         <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import Giscus, { type Repo } from "@giscus/react";
+import Giscus from "@giscus/react";
 import { useTheme } from "next-themes";
 
 const Comment = () => {
@@ -9,15 +9,16 @@ const Comment = () => {
   return (
     <Giscus
       category="General"
+      categoryId="DIC_kwDOK7sW9s4CxjCC"
       emitMetadata="0"
       inputPosition="bottom"
       key={theme}
       lang="en"
       loading="lazy"
       mapping="pathname"
-      reactionsEnabled="1"
-      repo={(process.env.NEXT_PUBLIC_GISCUS_REPO as Repo) || ""}
-      repoId={process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ""}
+      reactionsEnabled="0"
+      repo={"htetaunglin-coder/Personal_Portfolio"}
+      repoId={"R_kgDOK7sW9g"}
       theme={theme}
     />
   );

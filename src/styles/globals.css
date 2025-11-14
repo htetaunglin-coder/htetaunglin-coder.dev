@@ -1,5 +1,8 @@
 @import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
 @import "tw-animate-css";
+
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -148,9 +151,6 @@
   --on-bg-danger-subtle: oklch(0.4 0.13 25.77);
   --outline-danger-subtle: oklch(0.88 0.06 18.39);
   --fg-danger: oklch(0.51 0.19 27.56);
-
-  --grainy-overlay-z-index: 50;
-  --above-grainy-overlay-z-index: 51;
 }
 
 .dark {
@@ -221,7 +221,16 @@
 /* -------------------------------------------------------------------------- */
 
 :root {
-  --header-height: 5rem;
+  --header-height: 6rem;
+
+  --grainy-overlay-z-index: 50;
+  --above-grainy-overlay-z-index: 60;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 4.925rem;
+  }
 }
 
 html {
@@ -304,4 +313,48 @@ html {
 
 .markdown ol {
   @apply pl-8;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.prose a {
+  @apply text-fg-brand;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  @apply scroll-m-24;
+}
+
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a {
+  @apply !text-fg-default !no-underline hover:!underline;
+}
+
+.prose h1 svg,
+.prose h2 svg,
+.prose h3 svg,
+.prose h4 svg,
+.prose h5 svg {
+  @apply !size-3.5 text-fg-tertiary;
+}
+
+.prose {
+  @apply text-fg-secondary/90;
+}
+
+.prose hr {
+  @apply border-outline-secondary;
+}
+
+.prose figure:has(pre) {
+  @apply shadow-none;
+}
+
+.prose :not(pre) > code {
+  @apply font-mono font-medium bg-bg-tertiary;
 }

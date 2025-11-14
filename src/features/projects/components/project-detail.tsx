@@ -1,19 +1,15 @@
 import { Globe } from "lucide-react";
 import { BasicMarkdown } from "@/components/basic-markdown-parser";
+import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { Icons } from "@/components/icons";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarGroup,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { AvatarGroup } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
 import { ThemeImage } from "@/components/ui/theme-image";
 import { cn, formatDate, formatDisplayUrl } from "@/lib/utils";
 import { getProjectTeamMembers, type ProjectItem } from "../data";
 
-const ProjectDetailCard = ({ project }: { project: ProjectItem }) => {
+const ProjectDetail = ({ project }: { project: ProjectItem }) => {
   const lightSrc =
     typeof project.image === "object" ? project.image.light : project.image;
   const darkSrc =
@@ -22,8 +18,8 @@ const ProjectDetailCard = ({ project }: { project: ProjectItem }) => {
   const teamMembers = getProjectTeamMembers(project);
 
   return (
-    <div className="space-y-16">
-      <div className="group relative z-[calc(var(--grainy-overlay-z-index)+1)] aspect-[16/9.5] w-full overflow-hidden rounded-2xl bg-zinc-500 brightness-90 dark:brightness-[0.875]">
+    <div className="space-y-12 sm:space-y-16">
+      <div className="group relative z-[var(--above-grainy-overlay-z-index)] aspect-[16/10] w-full overflow-hidden bg-zinc-500 brightness-90 sm:rounded-2xl dark:brightness-[0.875]">
         <ThemeImage
           alt={project.title}
           className="object-cover object-center"
@@ -95,12 +91,12 @@ const ProjectDetailCard = ({ project }: { project: ProjectItem }) => {
             max={5}
           >
             {teamMembers.map((member) => (
-              <Avatar className="size-5 text-xs sm:size-6" key={member.id}>
-                <AvatarImage src={member?.avatar} />
-                <AvatarFallback className="uppercase">
-                  {member.name.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
+              <CloudinaryAvatar
+                className="size-5 text-xs sm:size-6"
+                key={member.id}
+                name={member.name}
+                src={member.avatar}
+              />
             ))}
           </AvatarGroup>
         </div>
@@ -143,4 +139,4 @@ const ProjectDetailCard = ({ project }: { project: ProjectItem }) => {
   );
 };
 
-export { ProjectDetailCard };
+export { ProjectDetail };

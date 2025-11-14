@@ -43,7 +43,7 @@ const ChatView = () => {
 
   return (
     <>
-      <Header className="fixed inset-x-0 top-0" container={scrollRef} />
+      <Header className="fixed inset-x-0 top-0" containerRef={scrollRef} />
 
       <div className="relative h-svh w-full">
         <div

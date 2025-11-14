@@ -1,18 +1,12 @@
 import { ArrowRight, Globe } from "lucide-react";
-import { FadeAnimation } from "@/components/animations/fade-animation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
 import { ThemeImage } from "@/components/ui/theme-image";
 import { cn, formatDate, formatDisplayUrl } from "@/lib/utils";
 import type { ProjectItem } from "../data";
 
-const ProjectShowcaseCard = ({
-  project,
-  firestProject,
-}: {
-  project: ProjectItem;
-  firestProject: boolean;
-}) => {
+const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
   const lightSrc =
     typeof project.image === "object" ? project.image.light : project.image;
   const darkSrc =
@@ -20,11 +14,9 @@ const ProjectShowcaseCard = ({
 
   return (
     <div className="space-y-6">
-      <FadeAnimation
-        as="div"
-        className="group relative z-[calc(var(--grainy-overlay-z-index)+1)] aspect-[16/9.5] w-full overflow-hidden rounded-2xl bg-zinc-500 brightness-90 dark:brightness-[0.875]"
-        delay={firestProject ? 0.75 : 0}
-        direction="up"
+      <Link
+        className="group relative z-[var(--above-grainy-overlay-z-index)] block aspect-[16/10] w-full overflow-hidden bg-zinc-500 brightness-90 sm:rounded-2xl dark:brightness-[0.875]"
+        href={`/projects/${project.id}`}
       >
         <ThemeImage
           alt={project.title}
@@ -50,13 +42,9 @@ const ProjectShowcaseCard = ({
             </p>
           </div>
         </div>
-      </FadeAnimation>
+      </Link>
 
-      <FadeAnimation
-        as="div"
-        className="mt-2 flex justify-between gap-4 px-6"
-        direction="up"
-      >
+      <div className="mt-2 flex justify-between gap-4 sm:px-6">
         <div className="max-w-lg flex-grow">
           <h3 className="font-semibold text-fg-secondary text-lg">
             {project.title}
@@ -92,9 +80,9 @@ const ProjectShowcaseCard = ({
             )}
           </div>
         </div>
-      </FadeAnimation>
+      </div>
     </div>
   );
 };
 
-export { ProjectShowcaseCard };
+export { ProjectShowcase };
