@@ -39,6 +39,7 @@ next-env.d.ts
 
 # eslint cache
 .eslintcache
+.source
 
 # next-sitemap
 robots.txt

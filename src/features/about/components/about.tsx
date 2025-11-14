@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { BasicMarkdown } from "@/components/basic-markdown-parser";
+import { CloudinaryImage } from "@/components/cloudinary-image";
 import { cn } from "@/lib/utils";
 import { getAgeFromDOB } from "../utils";
 
@@ -49,15 +49,15 @@ const About = () => (
           <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-0">
             <Title>{section.title}</Title>
             {index === 0 && (
-              <div className="relative block size-24 overflow-hidden rounded-md bg-bg-tertiary sm:mr-6 sm:size-40 md:mr-12 2xl:hidden">
-                <Image
-                  alt="Htet Aung Lin Profile"
-                  className="select-none object-cover object-center"
-                  draggable={false}
-                  fill
-                  src="/images/people/profile-image.jpg"
-                />
-              </div>
+              <CloudinaryImage
+                alt="Htet Aung Lin Profile"
+                aspectRatio={"1:1"}
+                className="relative block size-24 select-none rounded-md bg-bg-tertiary object-cover object-center sm:mr-6 sm:size-40 md:mr-12 2xl:hidden"
+                draggable={false}
+                height={160}
+                src="htet_aung_lin.jpg"
+                width={160}
+              />
             )}
           </div>
           <p className="mt-2 text-base text-fg-secondary/90 sm:mt-4 sm:ml-20 sm:max-w-none sm:text-lg">
@@ -88,13 +88,14 @@ const About = () => (
           </div>
 
           {/* HangOut */}
-          <div className="group relative h-64 w-[260px] shrink-0 overflow-hidden rounded-4xl grayscale-25 transition duration-300 sm:w-[320px]">
-            <Image
+
+          <div className="group relative aspect-[5/4] w-[16.25rem] shrink-0 overflow-hidden rounded-4xl grayscale-25 transition duration-300 sm:w-[20rem]">
+            <CloudinaryImage
               alt="Friends hanging out — casual group photo"
-              className="select-none object-cover object-center"
-              draggable={false}
+              aspectRatio={"5:4"}
+              className="object-cover object-center"
               fill
-              src="/images/people/hangout.jpg"
+              src="friends_hangout.jpg"
             />
 
             <div className="pointer-events-none absolute inset-0 select-none bg-black/10 dark:bg-black/20">

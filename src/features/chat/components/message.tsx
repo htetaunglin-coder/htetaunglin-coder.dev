@@ -120,7 +120,10 @@ const UserMessage = ({ content }: { content: string }) => (
 const AssistantHeader = () => (
   <div className="mb-1 flex items-center gap-2">
     <Avatar size="2xs">
-      <AvatarImage alt="Htet Aung Lin" src="/images/profile-image.jpg" />
+      <AvatarImage
+        alt="Htet Aung Lin"
+        src={"/images/people/profile-image.jpg"}
+      />
       <AvatarFallback>H</AvatarFallback>
     </Avatar>
     <span className="font-medium text-fg-default text-xs">Htet Aung Lin</span>

@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.title,
-    images: "/opengraph-image.jpg",
+    images: "/images/opengraph-image.jpg",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: "/opengraph-image.jpg",
+    images: "/images/opengraph-image.jpg",
   },
 };
 

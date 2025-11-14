@@ -1,16 +1,17 @@
 "use client";
 
-import Image from "next/image";
+import type { CldImage } from "next-cloudinary";
 import { useTheme } from "next-themes";
 import type React from "react";
 import { useEffect, useState } from "react";
+import { CloudinaryImage } from "../cloudinary-image";
 
 type ThemeImageProps = {
   lightSrc: string;
   darkSrc: string;
   alt: string;
   className?: string;
-} & Omit<React.ComponentProps<typeof Image>, "src">;
+} & Omit<React.ComponentProps<typeof CldImage>, "src">;
 
 export const ThemeImage = ({
   lightSrc,
@@ -36,7 +37,7 @@ export const ThemeImage = ({
   const src = theme === "dark" ? darkSrc : lightSrc;
 
   return (
-    <Image
+    <CloudinaryImage
       alt={alt}
       className={className}
       height={height}

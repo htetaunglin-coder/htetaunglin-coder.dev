@@ -11,9 +11,8 @@ import {
 } from "@radix-ui/react-dialog";
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import Image from "next/image";
+import Link from "next/link";
 import { type RefObject, useRef, useState } from "react";
-
 import {
   type BaseLinkItem,
   MAIN_PAGES,
@@ -22,6 +21,7 @@ import {
 import { SOCIAL_LINKS } from "@/constants/social-links";
 import { cn } from "@/lib/utils";
 import { FadeStaggeredAnimation } from "./animations/fade-animation";
+import { CloudinaryImage } from "./cloudinary-image";
 import { AnimatedGradientText } from "./decorations/animated-gradient-text";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Button } from "./ui/button";
@@ -34,22 +34,22 @@ import {
 } from "./ui/popover";
 
 const Header = ({
-  container,
+  containerRef,
   className,
 }: {
-  container?: RefObject<HTMLElement | null>;
+  containerRef?: RefObject<HTMLElement | null>;
   className?: string;
 }) => (
   <Popover modal>
     <HeaderAutoHideWrapper
       className={cn(
-        "sticky top-0 z-[calc(var(--grainy-overlay-z-index)+10)] flex h-[var(--header-height)] w-full items-end justify-end px-6 sm:justify-center",
+        "pointer-events-none sticky top-0 z-[calc(var(--above-grainy-overlay-z-index)+10)] flex h-[var(--header-height)] w-full items-end justify-end px-6 sm:justify-center",
         className
       )}
-      container={container}
+      container={containerRef}
     >
       <PopoverAnchor>
-        <div className="flex w-fit max-w-4xl items-center gap-6 rounded-lg bg-bg-secondary/80 px-2 backdrop-blur-[3px]">
+        <div className="pointer-events-auto flex w-fit max-w-4xl items-center gap-6 rounded-lg bg-bg-secondary/80 px-2 backdrop-blur-[3px]">
           <div className="flex items-center">
             <FadeStaggeredAnimation
               as="ul"
@@ -111,7 +111,7 @@ const HeaderAutoHideWrapper = ({
       onFocusCapture={() => setIsHidden(false)}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       variants={{
-        hidden: { y: "-88%" },
+        hidden: { y: "-100%" },
         visible: { y: "0%" },
       }}
       whileHover="visible"
@@ -136,13 +136,15 @@ const MorePages = () => (
     </PopoverTrigger>
     <PopoverContent
       align="center"
-      className="z-[calc(var(--grainy-overlay-z-index)+10)] hidden h-64 w-full gap-2 rounded-lg bg-bg-secondary/80 p-3 backdrop-blur-[3px] sm:flex"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden h-64 w-full gap-2 rounded-lg bg-bg-secondary/80 p-3 backdrop-blur-[3px] sm:flex"
     >
       {/* ------------------------------- Side Quest ------------------------------- */}
       <div className="flex size-full w-sm flex-col gap-3 rounded-lg bg-bg-default p-3 md:w-md">
         <div>
-          <p className="font-medium text-base text-fg-secondary">
-            {OTHER_PAGES.sideQuest.title}
+          <p className="font-medium text-base text-fg-secondary hover:underline">
+            <Link href={OTHER_PAGES.sideQuest.href}>
+              {OTHER_PAGES.sideQuest.title}
+            </Link>
           </p>
           <p className="text-fg-tertiary text-sm">
             {OTHER_PAGES.sideQuest.description}
@@ -157,8 +159,9 @@ const MorePages = () => (
               key={item.id}
             >
               <div className="absolute inset-0 z-10 rounded-[11px] bg-gradient-to-b from-neutral-900/5 to-neutral-900/65 opacity-100 transition-opacity duration-300 group-hover/header-link:opacity-65 dark:from-neutral-900/35 dark:to-neutral-900/80" />
-              <Image
+              <CloudinaryImage
                 alt={item.alt}
+                aspectRatio={"14:16"}
                 className="object-cover object-top transition-transform duration-300 group-hover/header-link:scale-110"
                 fill
                 src={item.image}
@@ -207,7 +210,7 @@ const MorePages = () => (
           {OTHER_PAGES.links.map((link) => (
             <NavLink
               className="group/header-link flex w-full items-center justify-center space-y-1 rounded-lg bg-bg-default p-3 lg:min-w-60"
-              href="/guest-book"
+              href={link.href}
               key={link.id}
             >
               <div className="flex w-full items-center gap-2">
@@ -241,8 +244,8 @@ const MobileMenu = () => (
       </button>
     </DialogTrigger>
     <DialogPortal>
-      <DialogOverlay className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--grainy-overlay-z-index)+10)] bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in" />
-      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--grainy-overlay-z-index)+10)] flex flex-col overflow-y-scroll bg-bg-default transition duration-200 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
+      <DialogOverlay className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in" />
+      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] flex flex-col overflow-y-scroll bg-bg-default transition duration-200 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
         <DialogTitle className="sr-only">Menu</DialogTitle>
 
         <div className="sticky top-0 flex h-16 w-full shrink-0 items-center bg-bg-default px-8 py-6">

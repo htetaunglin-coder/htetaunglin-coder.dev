@@ -1,11 +1,14 @@
 "use client";
 
-import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
-import { ProjectShowcaseCard } from "@/features/projects/components/project-showcase-card";
+import {
+  FadeAnimation,
+  FadeStaggeredAnimation,
+} from "@/components/animations/fade-animation";
+import { ProjectShowcase } from "@/features/projects/components/project-showcase";
 import { PROJECT_DATA } from "@/features/projects/data";
 
 const ProjectPage = () => (
-  <main className="pt-24 pb-28 md:pt-32">
+  <main className="pt-16 pb-28 sm:pt-24 md:pt-32">
     <section className="mx-auto w-full max-w-4xl">
       <div className="px-6 lg:px-0">
         <FadeStaggeredAnimation className="max-w-xl" direction="up">
@@ -20,13 +23,16 @@ const ProjectPage = () => (
         <div className="mt-8 mb-16 h-px w-full select-none bg-outline-accent sm:mt-12 sm:mb-20" />
       </div>
 
-      <div className="space-y-40 px-6 lg:px-0">
-        {PROJECT_DATA.map((project, key) => (
-          <ProjectShowcaseCard
-            firestProject={key === 0}
+      <div className="space-y-24 px-6 sm:space-y-32 lg:px-0">
+        {PROJECT_DATA.map((project, index) => (
+          <FadeAnimation
+            as="div"
+            delay={index === 0 ? 0.75 : 0}
+            direction="up"
             key={project.id}
-            project={project}
-          />
+          >
+            <ProjectShowcase key={project.id} project={project} />
+          </FadeAnimation>
         ))}
       </div>
     </section>
