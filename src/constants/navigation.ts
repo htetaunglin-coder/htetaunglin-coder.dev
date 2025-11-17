@@ -1,4 +1,4 @@
-import { Contact, Music } from "lucide-react";
+import { Contact, Lightbulb } from "lucide-react";
 import type { ComponentType } from "react";
 
 export type BaseLinkItem = {
@@ -14,7 +14,11 @@ export const MAIN_PAGES: readonly MainPageItem[] = [
   { id: "projects", title: "Projects", href: "/projects" },
   { id: "blog", title: "Blog", href: "/blog" },
   { id: "about", title: "About", href: "/about" },
-  { id: "resume", title: "Resume", href: "/resume" },
+  {
+    id: "resume",
+    title: "Resume",
+    href: `${process.env.NEXT_PUBLIC_APP_URL}/resume`,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -41,7 +45,7 @@ export const SIDE_QUESTS: readonly SideQuestItem[] = [
   },
   {
     id: "side-quest-3",
-    href: "/side-quests#touch-grass",
+    href: "/side-quests#nature",
     image: "sidequest_nature.jpg",
     alt: "Touching grass and escaping screens",
     title: "Touch Grass",
@@ -76,16 +80,16 @@ export const OTHER_PAGES: Readonly<OtherPages> = {
     {
       id: "guestbook",
       title: "Guestbook",
-      description: "Leave me a message",
+      description: "Leave me a message.",
       icon: Contact,
       href: "/guest-book",
     },
     {
-      id: "music",
-      title: "Music",
-      description: "Discover my favorite playlists",
-      icon: Music,
-      href: "/music",
+      id: "resources",
+      title: "Resources",
+      description: "Links worth sharing.",
+      icon: Lightbulb,
+      href: "/resources",
     },
   ],
 };

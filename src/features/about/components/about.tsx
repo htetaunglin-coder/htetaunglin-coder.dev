@@ -19,7 +19,7 @@ const ABOUT_ME: readonly {
   {
     id: "section-0",
     title: "Who am I?",
-    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with a little over two years of experience. I enjoy building things that feel simple, fast, and thoughtful to use.`,
+    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with a little over two years of experience. I enjoy building things that feel simple, fast, and easy to use.`,
   },
   {
     id: "section-1",
