@@ -16,11 +16,11 @@ export default function Home() {
           <div className="px-6 lg:px-0">
             <FadeStaggeredAnimation className="max-w-xl" direction="up">
               <h1 className="bg-gradient-to-br from-fg-default to-fg-tertiary/90 bg-clip-text font-extrabold font-inter text-4xl/[1.2] text-transparent tracking-tight sm:text-5xl/[1.2] dark:to-fg-tertiary/80">
-                My Blog Posts
+                Blogs
               </h1>
               <p className="mt-2 text-base text-fg-tertiary sm:text-lg">
                 This is my blog. I write about psychology, life, and technical
-                things. Nothing perfect, just my honest thoughts.
+                topics. Just sharing what I&apos;m learning and thinking about.
               </p>
             </FadeStaggeredAnimation>
             <div className="mt-8 mb-16 h-px w-full select-none bg-outline-accent sm:mt-12 sm:mb-20" />

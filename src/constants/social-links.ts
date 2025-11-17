@@ -37,7 +37,7 @@ export const SOCIAL_LINKS: readonly SocialLinkItem[] = [
   },
   {
     id: "resume",
-    href: "#",
+    href: `${process.env.NEXT_PUBLIC_APP_URL}/resume`,
     icon: File,
     title: "Resume",
   },

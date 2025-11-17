@@ -86,6 +86,9 @@
     0 20px 24px rgba(16, 24, 40, 0.08), 0 8px 8px rgba(16, 24, 40, 0.03);
   --shadow-2xl: 0 24px 48px rgba(16, 24, 40, 0.18);
   --shadow-3xl: 0 32px 64px rgba(16, 24, 40, 0.14);
+
+  --ease-slow: cubic-bezier(0.405, 0, 0.025, 1);
+  --ease-minor-spring: cubic-bezier(0.18, 0.89, 0.82, 1.04);
 }
 
 :root {

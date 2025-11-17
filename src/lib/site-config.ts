@@ -9,5 +9,5 @@ export const siteConfig = {
     "React",
     "Next.js",
   ],
-  url: process.env.APP_URL,
+  url: process.env.NEXT_PUBLIC_APP_URL,
 };
