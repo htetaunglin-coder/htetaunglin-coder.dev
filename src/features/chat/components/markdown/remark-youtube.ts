@@ -37,7 +37,8 @@ const createIframeNode = (
       allowFullScreen: true,
       style: "width: 100%; height: 100%;",
       title: "YouTube video player",
-      className: "aspect-video bg-muted rounded-md outline-none",
+      className:
+        "youtube-iframe aspect-video bg-bg-tertiary rounded-md outline-none",
     },
   },
 });

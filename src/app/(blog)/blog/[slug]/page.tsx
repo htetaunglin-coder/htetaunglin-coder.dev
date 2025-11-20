@@ -11,6 +11,7 @@ import { CloudinaryImage } from "@/components/cloudinary-image";
 import Comment from "@/components/comment";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
+import { NavLink } from "@/components/ui/nav-link";
 import { getMDXComponents } from "@/features/blog/components/mdx-components";
 import { blogSource } from "@/lib/source";
 import { cn, formatDate } from "@/lib/utils";
@@ -37,7 +38,8 @@ export default async function Page(props: {
                 decoding="async"
                 fetchPriority="high"
                 fill
-                src={page.data.image}
+                loading="eager"
+                src={page.data.image.url}
                 style={{ color: "transparent" }}
                 title={page.data.title}
               />
@@ -48,6 +50,17 @@ export default async function Page(props: {
 
         <div className="flex w-full justify-center py-8 pt-38 text-left sm:pt-48">
           <div className="w-full max-w-6xl px-4 lg:px-6">
+            <div className="-mt-8 flex w-full justify-end text-fg-tertiary">
+              <p className="text-sm">
+                Photo By{" "}
+                <NavLink
+                  className="text-fg-brand underline"
+                  href={page.data.image.author_link}
+                >
+                  {page.data.image.author_name}
+                </NavLink>
+              </p>
+            </div>
             <div className="border-b border-b-outline-secondary py-12">
               <div className="mb-2 font-medium font-mono">
                 <div className="flex flex-wrap items-center gap-4">
@@ -57,7 +70,7 @@ export default async function Page(props: {
 
                   <div className="inline-flex items-center gap-1.5 text-fg-tertiary text-xs sm:text-sm">
                     <Calendar />
-                    <p>{formatDate(page.data.date)}</p>
+                    <p>{formatDate(page.data.date, { includeDay: true })}</p>
                   </div>
 
                   <p className="font-medium font-mono text-fg-tertiary text-xs sm:text-sm">
@@ -95,7 +108,7 @@ export default async function Page(props: {
             <DocsLayout
               containerProps={{
                 className: cn(
-                  "[&_#nd-toc_a]:data-[active=true]:!text-fg-default [&_#nd-toc_a]:data-[active=false]:!text-fg-tertiary/80 [&_#nd-toc]:!top-28 m-0 w-full [&_#nd-toc]:sticky [&_#nd-toc]:bg-bg-secondary/40 [&_#nd-toc]:py-12 [&_#nd-toc]:pl-6"
+                  "blog [&_#nd-toc_a]:data-[active=true]:!text-fg-default [&_#nd-toc_a]:data-[active=false]:!text-fg-tertiary/80 [&_#nd-toc]:!top-28 m-0 w-full [&_#nd-toc]:sticky [&_#nd-toc]:bg-bg-secondary/40 [&_#nd-toc]:py-12 [&_#nd-toc]:pl-6"
                 ),
               }}
               nav={{ enabled: false }}

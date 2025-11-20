@@ -21,8 +21,15 @@ export const blog = defineCollections({
         }
       }),
     tags: z.array(z.string()).optional(),
-    image: z.string(),
+    image: z.object({
+      url: z.string(),
+      author_name: z.string(),
+      author_link: z.url(),
+    }),
     draft: z.boolean().optional().default(false),
-    series: z.string().optional(),
+    series: z
+      .array(z.enum(["technology", "thoughts"]))
+      .min(1)
+      .max(2),
   }),
 });

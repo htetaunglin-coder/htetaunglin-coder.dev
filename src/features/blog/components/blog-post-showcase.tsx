@@ -1,4 +1,4 @@
-import { ArrowRight, Dot } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { CloudinaryImage } from "@/components/cloudinary-image";
 import type { blogSource } from "@/lib/source";
@@ -51,9 +51,9 @@ const BlogPostShowcase = ({
 
       {(post.data.author || post.data.date) && (
         <div className="flex items-center text-fg-tertiary/80 text-xs md:text-sm">
-          {post.data.author && <span>{post.data.author}</span>}
-          {post.data.author && post.data.date && <Dot className="text-3xl" />}
-          {post.data.date && <span>{formatDate(post.data.date)}</span>}
+          {post.data.date && (
+            <span>{formatDate(post.data.date, { includeDay: true })}</span>
+          )}
         </div>
       )}
 
@@ -73,7 +73,7 @@ const BlogPostShowcase = ({
         alt={post.data.title}
         className="object-cover object-bottom"
         fill
-        src={post.data.image}
+        src={post.data.image.url}
       />
     </Link>
   </article>

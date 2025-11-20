@@ -62,6 +62,7 @@ const Header = ({
                   <NavLink
                     className="flex h-12 items-center justify-center px-3 text-fg-tertiary outline-none ring-0 transition duration-300 hover:text-fg-default focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default data-[state=active]:text-fg-default data-[state=active]:underline"
                     href={page.href}
+                    matchPrefix={page.href !== "/"}
                   >
                     {page.title}
                   </NavLink>
@@ -245,7 +246,7 @@ const MobileMenu = () => (
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in" />
-      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] flex flex-col overflow-y-scroll bg-bg-default transition duration-200 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
+      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] flex flex-col overflow-y-scroll bg-bg-default transition duration-300 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
         <DialogTitle className="sr-only">Menu</DialogTitle>
 
         <div className="sticky top-0 flex h-16 w-full shrink-0 items-center bg-bg-default px-8 py-6">
@@ -266,11 +267,11 @@ const MobileMenu = () => (
         <nav className="flex h-full flex-col justify-center gap-6">
           <ul className="flex flex-col justify-center gap-12 overflow-y-auto p-8 text-start">
             <MobileNavItems items={[...MAIN_PAGES]} title="Main Pages" />
+            <MobileNavItems items={OTHER_PAGES.links} title="Other Pages" />
             <MobileNavItems
               items={[...OTHER_PAGES.sideQuest.items]}
               title={OTHER_PAGES.sideQuest.title}
             />
-            <MobileNavItems items={OTHER_PAGES.links} title="Other Pages" />
           </ul>
         </nav>
 

@@ -18,7 +18,7 @@ import { parseMarkdownIntoBlocks } from "./parse-block";
 import { parseIncompleteMarkdown } from "./parse-incomplete-markdown";
 import remarkYoutubePlugin from "./remark-youtube";
 
-const components: Options["components"] = {
+const MarkdownComponents: Options["components"] = {
   h1: ({ node: _, ...props }) => (
     <h1 className="font-semibold text-2xl sm:text-3xl" {...props} />
   ),
@@ -130,7 +130,7 @@ const PureMarkdown = ({
     >
       {blocks.map((block, index) => (
         <Block
-          components={{ ...components, ...options?.components }}
+          components={{ ...MarkdownComponents, ...options?.components }}
           content={block}
           // biome-ignore lint/suspicious/noArrayIndexKey: off
           key={`${generatedId}-block-${index}`}
