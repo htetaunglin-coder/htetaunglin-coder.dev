@@ -89,7 +89,7 @@ export const OTHER_PAGES: Readonly<OtherPages> = {
       title: "Resources",
       description: "Links worth sharing.",
       icon: Lightbulb,
-      href: "/resources",
+      href: "/blog/resources",
     },
   ],
 };

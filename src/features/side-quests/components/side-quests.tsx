@@ -38,7 +38,7 @@ const Views: ImageViewerProps["images"] = [
     id: "5",
     width: 480,
     height: 480,
-    alt: "Dog sitting on a car engine — only in Myanmar :3",
+    alt: "Dog sitting on a car engine - only in Myanmar :3",
     src: "view_ajpomu.jpg",
   },
   {
@@ -51,7 +51,7 @@ const Views: ImageViewerProps["images"] = [
 ];
 
 const SideQuests = () => (
-  <>
+  <div className="blog w-full">
     <div>
       <FadeStaggeredAnimation className="w-full max-w-xl" direction="up">
         <h1 className="bg-gradient-to-br from-fg-default to-fg-tertiary/90 bg-clip-text font-extrabold font-inter text-4xl/[1.2] text-transparent tracking-tight sm:text-5xl/[1.2] dark:to-fg-tertiary/80">
@@ -80,16 +80,23 @@ const SideQuests = () => (
             really looks like, beyond just projects and skills.
           </p>
           <p>
-            These days, with AI everywhere, it&apos;s easy for content to sound
-            perfect or elegant. I wanted to do the opposite, I just want to show
-            who I really am, without pretending to be someone I&apos;m not.
-            That&apos;s why most of the writing here is in simple English,
-            written by me, a non-native speaker.
+            These days, with AI everywhere, you can make any content sound
+            perfect or elegant. I think this is great, but the authenticity is
+            disappearing. You can write one or two lines of prompt and AI will
+            give you amazing content, but we do not know if the person actually
+            meant what they said or not.
           </p>
 
           <p>
-            I don&apos;t want to sound fake. I just want to be me. It may or may
-            not be good, but I am okay with this.
+            I want to do the opposite. I want to write things myself instead of
+            asking AI to generate perfect content that I do not even really
+            mean. Most of the writing here might feel a little off, because it
+            is written by me, a non-native speaker.
+          </p>
+
+          <p>
+            I do not want to sound fake. I just want to be me. It may or may not
+            be good, but I am okay with this.
           </p>
         </section>
       </FadeAnimation>
@@ -272,7 +279,7 @@ const SideQuests = () => (
         </section>
       </FadeAnimation>
     </div>
-  </>
+  </div>
 );
 
 export { SideQuests };

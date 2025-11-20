@@ -19,11 +19,9 @@ const SelectedProject = () => (
       delay={0.25}
       direction="up"
     >
-      <iframe
+      {/* <iframe
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         className="translate-z-0 box-border block border-none leading-0 outline-none"
-        data-ready="true"
-        frameBorder="0"
         referrerPolicy="strict-origin-when-cross-origin"
         src="https://player.vimeo.com/video/848991756?muted=1&amp;autoplay=1&amp;autopause=0&amp;controls=0&amp;loop=1&amp;app_id=122963"
         style={{
@@ -34,7 +32,7 @@ const SelectedProject = () => (
           height: "101%",
         }}
         title="Selected work 2023"
-      />
+      /> */}
 
       <div className="absolute inset-0 z-10 bg-black/15" />
     </FadeAnimation>
