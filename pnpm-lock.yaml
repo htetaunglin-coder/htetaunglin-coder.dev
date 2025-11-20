@@ -104,6 +104,9 @@ importers:
       marked:
         specifier: ^16.4.1
         version: 16.4.1
+      mdast:
+        specifier: ^3.0.0
+        version: 3.0.0
       meshline:
         specifier: ^3.3.1
         version: 3.3.1(three@0.180.0)
@@ -167,6 +170,9 @@ importers:
       three:
         specifier: ^0.180.0
         version: 0.180.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       use-stick-to-bottom:
         specifier: ^1.1.1
         version: 1.1.1(react@19.2.0)
@@ -2577,6 +2583,10 @@ packages:
 
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
+
+  mdast@3.0.0:
+    resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
+    deprecated: '`mdast` was renamed to `remark`'
 
   meow@12.1.1:
     resolution: {integrity: sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==}
@@ -5989,6 +5999,8 @@ snapshots:
   mdast-util-to-string@4.0.0:
     dependencies:
       '@types/mdast': 4.0.4
+
+  mdast@3.0.0: {}
 
   meow@12.1.1: {}
 
