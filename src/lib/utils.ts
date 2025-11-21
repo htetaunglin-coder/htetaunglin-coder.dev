@@ -51,3 +51,7 @@ export function formatDisplayUrl(url?: string | null): string | undefined {
     .replace(WWW_REGEX, "")
     .replace(TRAILING_SLASH_REGEX, "");
 }
+
+export function absoluteUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
+}

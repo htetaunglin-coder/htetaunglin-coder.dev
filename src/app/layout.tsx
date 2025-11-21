@@ -8,16 +8,15 @@ import { Toaster } from "@/components/ui/toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { fonts } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url as string),
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    template: `${siteConfig.title} | %s`,
   },
   description: siteConfig.description,
-  keywords: siteConfig.keywords,
   robots: { index: true, follow: true },
   icons: {
     icon: "/favicon/favicon.ico",
@@ -25,19 +24,34 @@ export const metadata: Metadata = {
     apple: "/favicon/apple-touch-icon.png",
   },
   openGraph: {
-    url: siteConfig.url,
+    url: absoluteUrl("/"),
     title: siteConfig.title,
     description: siteConfig.description,
-    siteName: siteConfig.title,
-    images: "/images/opengraph-image.jpg",
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: "/images/opengraph-image.jpg",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
+  keywords: siteConfig.keywords,
 };
 
 const RootLayout = async ({

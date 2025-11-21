@@ -14,11 +14,55 @@ import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
 import { getMDXComponents } from "@/features/blog/components/mdx-components";
 import { blogSource } from "@/lib/source";
-import { cn, formatDate } from "@/lib/utils";
+import { absoluteUrl, cn, formatDate } from "@/lib/utils";
 
-export default async function Page(props: {
+export function generateStaticParams(): { slug: string }[] {
+  return blogSource.getPages().map((page) => ({
+    slug: page.slugs[0],
+  }));
+}
+
+export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await props.params;
+  const page = blogSource.getPage([slug]);
+
+  if (!page) {
+    notFound();
+  }
+
+  const blog = page.data;
+
+  if (!(blog.title && blog.description)) {
+    notFound();
+  }
+
+  const ogUrl = `/og?title=${encodeURIComponent(
+    blog.title
+  )}&description=${encodeURIComponent(blog.description)}&img_url=${encodeURIComponent(blog.image.url)}&&blog=true`;
+
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      type: "article",
+      url: absoluteUrl(page.url),
+      images: ogUrl,
+      authors: ["Htet Aung Lin"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.description,
+      images: ogUrl,
+    },
+  };
+}
+
+const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
   const params = await props.params;
   const page = blogSource.getPage([params.slug]);
 
@@ -153,10 +197,6 @@ export default async function Page(props: {
       </div>
     </>
   );
-}
+};
 
-export function generateStaticParams(): { slug: string }[] {
-  return blogSource.getPages().map((page) => ({
-    slug: page.slugs[0],
-  }));
-}
+export default BlogPage;
