@@ -21,40 +21,16 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Project not found | Htet Aung Lin",
+      title: "Project not found",
       description: "The project you're looking for does not exist.",
     };
   }
 
   return {
-    title: `${project.title} | Htet Aung Lin`,
+    title: project.title,
     description:
       project.description ||
       `Learn more about ${project.title}, a project by Htet Aung Lin.`,
-    // openGraph: {
-    //   title: `${project.title} | Htet Aung Lin`,
-    //   description:
-    //     project.description ||
-    //     `Explore ${project.title}, built with modern web technologies.`,
-    //   type: "article",
-    //   url: `https://yourdomain.com/projects/${project.id}`,
-    //   images: [
-    //     {
-    //       url: project.thumbnail || "/og-default.png",
-    //       width: 1200,
-    //       height: 630,
-    //       alt: `${project.title} thumbnail`,
-    //     },
-    //   ],
-    // },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: `${project.title} | Htet Aung Lin`,
-    //   description:
-    //     project.description ||
-    //     `Learn more about ${project.title}, created by Htet Aung Lin.`,
-    //   images: [project.thumbnail || "/og-default.png"],
-    // },
   };
 }
 

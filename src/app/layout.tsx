@@ -54,12 +54,7 @@ export const metadata: Metadata = {
   keywords: siteConfig.keywords,
 };
 
-const RootLayout = async ({
-  children,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) => (
+const RootLayout = async ({ children }: { children: React.ReactNode }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={cn("min-h-screen font-sans", fonts)}>
       <ThemeProvider attribute="class">
