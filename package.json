@@ -82,6 +82,7 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^24.3.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
