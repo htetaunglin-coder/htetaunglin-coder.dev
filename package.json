@@ -85,6 +85,7 @@
     "@types/node": "^24.3.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.181.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.1",
     "tailwindcss": "^4",
