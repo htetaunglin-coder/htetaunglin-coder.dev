@@ -8,7 +8,7 @@ import {
 import { Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
 import { CloudinaryImage } from "@/components/cloudinary-image";
-import Comment from "@/components/comment";
+import { Comment } from "@/components/comment";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
