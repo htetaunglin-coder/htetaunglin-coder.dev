@@ -16,8 +16,8 @@ const Comment = () => {
       lang="en"
       loading="lazy"
       mapping="pathname"
-      reactionsEnabled="0"
-      repo={"htetaunglin-coder/Personal_Portfolio"}
+      reactionsEnabled="1"
+      repo={"htetaunglin-coder/htetaunglin-coder.dev"}
       repoId={"R_kgDOK7sW9g"}
       theme={theme}
     />

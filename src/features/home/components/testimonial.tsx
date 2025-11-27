@@ -17,17 +17,18 @@ type TestimonialData = {
 };
 
 const TESTIMONIALS: readonly TestimonialData[] = [
-  {
-    id: "sann-ko-ko",
-    author: {
-      name: "Sann Ko Ko",
-      role: "Product Owner",
-      company: "Praktikon B.V",
-      avatar: "sann_ko_ko.jpg",
-    },
-    content:
-      "Working with Htet was a fantastic experience. He has an incredible ability to turn ideas into reality, making the process very enjoyable. It's rare to find someone who can translate concepts into designs so perfectly on the first try.",
-  },
+  // Waiting for Ko Sann Ko Ko’s response for the testimonial.
+  // {
+  //   id: "sann-ko-ko",
+  //   author: {
+  //     name: "Sann Ko Ko",
+  //     role: "Product Owner",
+  //     company: "Praktikon B.V",
+  //     avatar: "sann_ko_ko.jpg",
+  //   },
+  //   content:
+  //     "",
+  // },
   {
     id: "khin-maung-htet",
     author: {
