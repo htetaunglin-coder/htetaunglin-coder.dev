@@ -1,5 +1,4 @@
 import { About } from "@/features/about/components/about";
-
 import { ProfileBadge3D } from "@/features/about/components/profile-badge";
 
 // We have to revalidate (AKA: update) the about me page every 7 days or so

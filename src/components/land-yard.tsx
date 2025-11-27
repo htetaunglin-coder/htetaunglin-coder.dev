@@ -117,6 +117,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
 
   const { nodes, materials } = useGLTF("/images/profile_card_3d.glb") as any;
   const texture = useTexture("/images/profile_card_badge.png");
+
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -284,7 +285,6 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
         </RigidBody>
       </group>
       <mesh ref={band}>
-        {/* eslint-disable */}
         {/* @ts-ignore */}
         <meshLineGeometry />
         {/* @ts-ignore */}
