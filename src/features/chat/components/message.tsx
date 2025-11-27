@@ -123,7 +123,7 @@ const AssistantHeader = () => (
       name={"Htet Aung Lin"}
       size="2xs"
       src={"htet_aung_lin.jpg"}
-      width={28}
+      width={48}
     />
 
     <span className="font-medium text-fg-default text-xs">Htet Aung Lin</span>
