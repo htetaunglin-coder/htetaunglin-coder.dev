@@ -1,5 +1,5 @@
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
-import Comment from "@/components/comment";
+import { Comment } from "@/components/comment";
 
 const GuestBook = () => (
   <main className="pt-16 pb-28 sm:pt-24 md:pt-32">

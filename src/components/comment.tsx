@@ -1,18 +1,18 @@
 "use client";
 
-import Giscus from "@giscus/react";
+import Giscus, { type Repo } from "@giscus/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const Comment = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
+  if (!(mounted && resolvedTheme)) {
     return null;
   }
 
@@ -22,16 +22,16 @@ const Comment = () => {
       categoryId="DIC_kwDOK7sW9s4CxjCC"
       emitMetadata="0"
       inputPosition="bottom"
-      key={theme}
+      key={resolvedTheme}
       lang="en"
       loading="lazy"
       mapping="pathname"
       reactionsEnabled="1"
-      repo={"htetaunglin-coder/htetaunglin-coder.dev"}
-      repoId={"R_kgDOK7sW9g"}
-      theme={theme ?? "dark"}
+      repo={(process.env.NEXT_PUBLIC_GISCUS_REPO as Repo) || ""}
+      repoId={process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ""}
+      theme={resolvedTheme}
     />
   );
 };
 
-export default Comment;
+export { Comment };
