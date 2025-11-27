@@ -41,13 +41,13 @@ const Views: ImageViewerProps["images"] = [
     alt: "Dog sitting on a car engine - only in Myanmar :3",
     src: "view_ajpomu.jpg",
   },
-  {
-    id: "6",
-    width: 840,
-    height: 840,
-    alt: "Mandalay pagoda view",
-    src: "view_vh1gu5.jpg",
-  },
+  // {
+  //   id: "6",
+  //   width: 840,
+  //   height: 840,
+  //   alt: "Mandalay pagoda view",
+  //   src: "view_vh1gu5.jpg",
+  // },
 ];
 
 const SideQuests = () => (
@@ -75,25 +75,15 @@ const SideQuests = () => (
             </NavLink>
           </h2>
           <p>
-            I added this page to give my website a bit more personality. I
-            wanted a place to share some of my achievements and what my life
-            really looks like, beyond just projects and skills.
+            I added this page to give my website a bit more personality, a place
+            to show what my life really looks like beyond projects and skills.
           </p>
           <p>
-            These days, with AI everywhere, you can make any content sound
-            perfect or elegant. I think this is great, but the authenticity is
-            disappearing. You can write one or two lines of prompt and AI will
-            give you amazing content, but we do not know if the person actually
-            meant what they said or not.
+            These days, AI can make anything sound perfect, but sometimes this
+            perfection hide the person who write it. I want to do the opposite:
+            write things myself. You might notice the writing is a little rough,
+            that's just me, a non-native speaker, sharing honestly.
           </p>
-
-          <p>
-            I want to do the opposite. I want to write things myself instead of
-            asking AI to generate perfect content that I do not even really
-            mean. Most of the writing here might feel a little off, because it
-            is written by me, a non-native speaker.
-          </p>
-
           <p>
             I do not want to sound fake. I just want to be me. It may or may not
             be good, but I am okay with this.
@@ -264,10 +254,10 @@ const SideQuests = () => (
               and fluently.
             </p>
             <p>
-              Also, a big shoutout to{" "}
+              Also, a big thanks to{" "}
               <NavLink href="https://chatgpt.com">ChatGPT</NavLink> for helping
-              me with my writing, without it, I wouldn&apos;t have much
-              confidence and I&apos;d still struggle with grammar mistakes.
+              me check my writing. I still make mistakes, but using it helps me
+              get better and feel more confident.
             </p>
             <p>
               Looking ahead, I want to work with more people on challenging web

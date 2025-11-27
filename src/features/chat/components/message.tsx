@@ -3,7 +3,7 @@
 import type { ChatStatus, UIMessage } from "ai";
 import { motion } from "motion/react";
 import { memo } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { cn } from "@/lib/utils";
 import { Markdown } from "./markdown/markdown";
@@ -119,13 +119,13 @@ const UserMessage = ({ content }: { content: string }) => (
 
 const AssistantHeader = () => (
   <div className="mb-1 flex items-center gap-2">
-    <Avatar size="2xs">
-      <AvatarImage
-        alt="Htet Aung Lin"
-        src={"/images/people/profile-image.jpg"}
-      />
-      <AvatarFallback>H</AvatarFallback>
-    </Avatar>
+    <CloudinaryAvatar
+      name={"Htet Aung Lin"}
+      size="2xs"
+      src={"htet_aung_lin.jpg"}
+      width={28}
+    />
+
     <span className="font-medium text-fg-default text-xs">Htet Aung Lin</span>
     <span className="text-fg-tertiary text-xs">•</span>
     <span className="font-medium text-fg-tertiary text-xs">Groq</span>

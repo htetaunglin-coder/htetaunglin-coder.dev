@@ -119,6 +119,7 @@ const TestimonialCard = ({
             }}
             name={author.name}
             src={author.avatar}
+            width={48}
           />{" "}
         </div>
 

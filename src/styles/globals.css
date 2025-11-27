@@ -8,9 +8,19 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-doto: var(--font-doto), sans-serif;
-  --font-mono: var(--font-mono), monospace;
+  --font-doto:
+    var(--font-doto), "Nunito", "Inter", "Segoe UI", "Helvetica Neue",
+    sans-serif;
+
+  --font-mono:
+    var(--font-mono), "JetBrains Mono", "Fira Code", "Menlo", "Consolas",
+    monospace;
+
   --font-inter: var(--font-inter), sans-serif;
+
+  --font-departure-mono:
+    var(--font-departure-mono), "Menlo", "Roboto Mono", "JetBrains Mono",
+    "SF Mono", "Consolas", monospace;
 
   --color-bg-default: var(--bg-default);
   --color-bg-default-alt: var(--bg-default-alt);
@@ -161,7 +171,7 @@
   --bg-default: oklch(0.1957 0 0);
   --bg-default-alt: oklch(0.27 0 0);
   --outline-default: oklch(0.37 0.01 285.84);
-  --fg-default: oklch(87% 0.004 286.32);
+  --fg-default: oklch(82.968% 0.00009 271.152);
 
   /* Secondary */
   --bg-secondary: oklch(0.269 0 0);

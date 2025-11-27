@@ -17,7 +17,8 @@
       "style": {
         "noMagicNumbers": "off",
         "useBlockStatements": "off",
-        "useAtIndex": "off"
+        "useAtIndex": "off",
+        "noNestedTernary": "off"
       },
       "nursery": {
         "noUselessUndefined": "off"

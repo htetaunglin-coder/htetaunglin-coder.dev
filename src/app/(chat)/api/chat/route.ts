@@ -11,29 +11,33 @@ import {
   type UIMessage,
 } from "ai";
 import { NextResponse } from "next/server";
-import type { RatelimitInfo } from "@/features/chat/types";
 import { systemPrompt } from "@/lib/ai";
-
-export const ratelimit = new Ratelimit({
-  redis: kv,
-  limiter: Ratelimit.fixedWindow(10, "1 s"),
-});
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
+const MAX_MESSAGE_PER_DAY = 10;
 const MAX_HISTORY = 5;
+
 const MAX_MESSAGE_LENGTH = 200;
+
+type RatelimitInfo = {
+  remaining: number;
+  limit: number;
+  reset: number;
+};
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.fixedWindow(MAX_MESSAGE_PER_DAY, "1d"),
+  prefix: "chat-ratelimit",
+});
 
 export async function POST(req: Request) {
   // biome-ignore lint/performance/useTopLevelRegex: off
   const ip = req.headers.get("x-forwarded-for")?.split(/, /)[0] || "127.0.0.1";
 
-  let rateLimitInfo: RatelimitInfo = {
-    remaining: 0,
-    limit: 10,
-    reset: 0,
-  };
+  let rateLimitInfo: RatelimitInfo | undefined;
 
   try {
     const { success, remaining, reset, limit } = await ratelimit.limit(ip);
@@ -46,7 +50,7 @@ export async function POST(req: Request) {
       );
 
       return createErrorResponse(
-        `You've reached your daily limit of 10 messages. Please try again in ${hoursUntilReset} hour${hoursUntilReset !== 1 ? "s" : ""}.`,
+        `You've reached your daily limit of ${MAX_MESSAGE_PER_DAY} messages. Please try again in ${hoursUntilReset} hour${hoursUntilReset !== 1 ? "s" : ""}.`,
         429
       );
     }
