@@ -11,6 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 import { absoluteUrl, cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
+  creator: "Htet Aung Lin (Kelvin)",
   metadataBase: new URL(siteConfig.url as string),
   title: {
     default: siteConfig.title,
@@ -52,6 +53,9 @@ export const metadata: Metadata = {
     ],
   },
   keywords: siteConfig.keywords,
+  verification: {
+    google: siteConfig.googleSiteVerificationId,
+  },
 };
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => (
