@@ -4,6 +4,8 @@ export const siteConfig = {
   description:
     "I build things for the web with React and a bit of design sense. I enjoy learning, improving, and making videos about what I discover along the way.",
   keywords: [
+    "Portfolio",
+    "Personal Portfolio",
     "Frontend Developer",
     "Next.js Developer",
     "React Developer",
@@ -11,4 +13,5 @@ export const siteConfig = {
     "Next.js",
   ],
   url: process.env.NEXT_PUBLIC_APP_URL,
+  googleSiteVerificationId: process.env.GOOGLE_SITE_VERIFICATION_ID || "",
 };
