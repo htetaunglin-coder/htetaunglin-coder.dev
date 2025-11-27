@@ -96,7 +96,7 @@ const ProjectDetail = ({ project }: { project: ProjectItem }) => {
                 key={member.id}
                 name={member.name}
                 src={member.avatar}
-                width={20}
+                width={48}
               />
             ))}
           </AvatarGroup>
