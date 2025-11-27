@@ -12,6 +12,8 @@ import { PreviewMessage, ThinkingMessage } from "./components/message";
 import { PromptArea } from "./components/prompt-area";
 import { SuggestedQuestions } from "./components/suggested-questions";
 
+const MAX_MESSAGE_LENGTH = 200;
+
 const ChatView = () => {
   const { scrollRef, contentRef, isAtBottom, scrollToBottom } =
     useStickToBottom({
@@ -111,6 +113,7 @@ const ChatView = () => {
           <div className="flex justify-center bg-bg-default p-4 pt-0 pb-8">
             <div className="relative w-full max-w-3xl">
               <PromptArea
+                maxLength={MAX_MESSAGE_LENGTH}
                 sendMessage={(msg) => sendMessage({ text: msg })}
                 status={status}
                 stop={stop}

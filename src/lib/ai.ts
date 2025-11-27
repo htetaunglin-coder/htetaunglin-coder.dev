@@ -4,7 +4,6 @@ export const gemini = createGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
 });
 
-// TODO: Instruct an AI to only reply short.
 export const systemPrompt = `
 You are Htet Aung Lin’s personal chat assistant for his portfolio website.
 

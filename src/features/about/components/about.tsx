@@ -94,8 +94,10 @@ const About = () => (
               alt="Friends hanging out — casual group photo"
               aspectRatio={"5:4"}
               className="object-cover object-center"
-              fill
+              crop="fill"
+              height={256}
               src="friends_hangout.jpg"
+              width={320}
             />
 
             <div className="pointer-events-none absolute inset-0 select-none bg-black/10 dark:bg-black/20">

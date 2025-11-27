@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { FadeAnimation } from "@/components/animations/fade-animation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -35,8 +34,11 @@ const Contact = () => {
 
     const result = await sendEmail(formData);
 
-    if (result.success) {
-      toast.success("Success", { description: result.success });
+    if ("success" in result) {
+      toast.success("Success", {
+        description:
+          "Message received! I appreciate you reaching out and will respond soon.",
+      });
       reset();
     } else {
       toast.error("Error", { description: result.error });
@@ -45,24 +47,16 @@ const Contact = () => {
 
   return (
     <div className="w-full">
-      <FadeAnimation
-        as="h2"
-        className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold"
-        direction="up"
-      >
+      <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
         Let&apos;s Connect
-      </FadeAnimation>
-      <FadeAnimation
-        as="p"
-        className="mt-1 w-full text-base/relaxed text-fg-tertiary sm:max-w-md"
-        delay={0.35}
-        direction="up"
-      >
+      </h2>
+
+      <p className="mt-1 w-full text-base/relaxed text-fg-tertiary sm:max-w-md">
         Have a project in mind or just want to say hi? My inbox is always open,
         I&apos;d love to hear from you.
-      </FadeAnimation>
+      </p>
       <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <FadeAnimation as="div" delay={0.45} direction="up">
+        <div>
           <Label
             className="mb-2 inline-block text-fg-secondary/80 text-sm"
             htmlFor="email"
@@ -81,8 +75,8 @@ const Contact = () => {
               {errors.email.message}
             </p>
           )}
-        </FadeAnimation>
-        <FadeAnimation as="div" delay={0.55} direction="up">
+        </div>
+        <div>
           <Label
             className="mb-2 inline-block text-fg-secondary/80 text-sm"
             htmlFor="message"
@@ -100,13 +94,8 @@ const Contact = () => {
               {errors.message.message}
             </p>
           )}
-        </FadeAnimation>
-        <FadeAnimation
-          as="div"
-          className="flex w-full justify-end pt-4"
-          delay={0.65}
-          direction="up"
-        >
+        </div>
+        <div className="flex w-full justify-end pt-4">
           <Button
             className="gap-2"
             disabled={isSubmitting}
@@ -116,7 +105,7 @@ const Contact = () => {
           >
             Submit
           </Button>
-        </FadeAnimation>
+        </div>
       </form>
     </div>
   );

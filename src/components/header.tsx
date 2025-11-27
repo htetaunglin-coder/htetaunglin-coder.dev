@@ -164,8 +164,9 @@ const MorePages = () => (
                 alt={item.alt}
                 aspectRatio={"14:16"}
                 className="object-cover object-top transition-transform duration-300 group-hover/header-link:scale-110"
-                fill
+                height={156}
                 src={item.image}
+                width={140}
               />
               <div className="absolute inset-x-0 bottom-0 z-20 w-full px-3 py-2">
                 <p className="font-medium text-sm text-zinc-200 group-hover/header-link:underline">

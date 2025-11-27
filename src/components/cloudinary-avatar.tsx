@@ -11,11 +11,13 @@ import {
 const CloudinaryAvatar = ({
   src,
   name,
+  width,
   ...props
-}: { src?: string; name: string } & AvatarProps) => {
+}: { src?: string; name: string; width?: number } & AvatarProps) => {
   const avatarUrl = src
     ? getCldImageUrl({
         src,
+        width,
       })
     : undefined;
 

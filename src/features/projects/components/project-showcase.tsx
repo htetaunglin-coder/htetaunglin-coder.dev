@@ -15,15 +15,16 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
   return (
     <div className="space-y-6">
       <Link
-        className="group relative z-[var(--above-grainy-overlay-z-index)] block aspect-[16/10] w-full overflow-hidden bg-zinc-500 brightness-90 sm:rounded-2xl dark:brightness-[0.875]"
+        className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl bg-zinc-500 brightness-90 hover:z-[var(--above-grainy-overlay-z-index)] sm:rounded-2xl dark:brightness-[0.875]"
         href={`/projects/${project.id}`}
       >
         <ThemeImage
           alt={project.title}
-          className="object-cover object-center"
+          className="absolute inset-0 object-cover object-center"
           darkSrc={darkSrc}
-          fill
+          height={560}
           lightSrc={lightSrc}
+          width={896}
         />
 
         <div

@@ -11,7 +11,7 @@ import { useSound } from "@/hooks/use-sound";
 import { cn } from "@/lib/utils";
 
 const Hero = () => (
-  <div className="relative flex h-[36rem] w-full justify-between overflow-hidden">
+  <div className="relative flex h-[36rem] w-full justify-between">
     <div className="px-6">
       <FadeStaggeredAnimation className="group" direction="up">
         <p className="flex items-center font-mono text-fg-tertiary/80 text-xs sm:text-sm">
@@ -40,7 +40,7 @@ const Hero = () => (
         <div className="mt-4 flex flex-wrap items-center gap-4 sm:mt-6">
           <Button variant="inverse">Download Resume</Button>
           <Button asChild>
-            <NavLink href={"#contact-me"}>Contact Me</NavLink>
+            <NavLink href={"#contact"}>Contact Me</NavLink>
           </Button>
         </div>
       </FadeStaggeredAnimation>
