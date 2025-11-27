@@ -29,7 +29,7 @@ const Comment = () => {
       reactionsEnabled="1"
       repo={"htetaunglin-coder/htetaunglin-coder.dev"}
       repoId={"R_kgDOK7sW9g"}
-      theme={theme}
+      theme={theme ?? "dark"}
     />
   );
 };
