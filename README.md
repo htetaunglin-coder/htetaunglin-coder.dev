@@ -6,6 +6,11 @@ This is **version 2** of my portfolio.
 If you'd like to see the old version, you can check it out here:  
 👉 [Portfolio v1](https://htetaunglin-coder.netlify.app)
 
+## Preview
+
+<img width="1719" height="967" alt="portfolio-preview" src="https://github.com/user-attachments/assets/fef0cce3-a690-4b33-9464-48440f8cc232" />
+
+
 ## Tech Stack
 
 - **Framework:** Next.js 16
@@ -47,18 +52,18 @@ Things I ~~wish~~ would like to implement in the future:
 
 2. **Install dependencies**
 
-```bash
-  npm install # or: pnpm install / yarn install / bun install
-```
+   ```bash
+   npm install # or: pnpm install / yarn install / bun install
+   ```
 
 3. **Add environment variables**
    Create a `.env.local` file and fill in the values (see `.env.example`).
 
 4. **Start the development server**
 
-```bash
-  npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 ## 🙏 Acknowledgements
 
@@ -73,6 +78,36 @@ Things I ~~wish~~ would like to implement in the future:
 - [Aceternity UI](https://ui.aceternity.com) - Beautiful animated components
 - [Magic UI](https://magicui.design) - Beautiful animated components
 - [Unsplash](https://unsplash.com) - Creative photography
+
+## Support Me
+
+If you found this useful and want to support my work, here are a few ways you can do so.
+
+### ⭐ Star the repo
+
+### ☕ Buy me a coffee
+
+#### KBZ Pay
+
+![kbz-pay](https://github.com/user-attachments/assets/9b40a610-1121-4110-82ae-78419f017927)
+
+My KBZ Pay Number
+
+```sh
+09756302537
+```
+
+#### Binance Pay
+
+<img width="900" height="950" alt="binance" src="https://github.com/user-attachments/assets/72d230f9-181c-44e3-a7cb-68660e266f4c" />
+
+My Binance Pay ID
+
+```sh
+1173131120
+```
+
+> All contributions are voluntary and greatly appreciated. Thank you for supporting my work!
 
 ## License
 
