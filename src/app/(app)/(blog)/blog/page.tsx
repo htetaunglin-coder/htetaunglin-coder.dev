@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="pt-24 pb-28 md:pt-32">
+      <main className="pt-16 pb-28 sm:pt-24 md:pt-32">
         <section className="mx-auto w-full max-w-4xl">
           <div className="px-6 lg:px-0">
             <FadeStaggeredAnimation className="max-w-xl" direction="up">
