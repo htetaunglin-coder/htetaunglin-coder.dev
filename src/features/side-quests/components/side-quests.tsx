@@ -200,8 +200,8 @@ const SideQuests = () => (
               <p>
                 To be honest, I&apos;m probably one of the nerdiest people
                 you&apos;ll ever meet. I barely go outside, except for the gym
-                or work. Most of the time, I&apos;m coding, playing chess, or
-                working out. That&apos;s my whole life.
+                or work. Most of the time, I&apos;m coding, doing housework,
+                playing chess, or working out. That&apos;s my whole life.
               </p>
               <p>
                 But it reached a point where I started feeling burned out and

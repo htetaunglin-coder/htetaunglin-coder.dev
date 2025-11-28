@@ -1,0 +1,216 @@
+---
+title: "React UI Rendering Process"
+author: Htet Aung Lin
+description: "This blog explains how React turns the code we write into the UI users see. We'll explore the full rendering process, including Reconciliation, Render Phase, and Commit Phase, helping you understand React internals, debug better, and prepare for interviews."
+image:
+  {
+    url: "unsplash-image_jahsxa.jpg",
+    author_name: "Rahul Mishra",
+    author_link: "https://unsplash.com/@rahuulmiishra",
+  }
+date: 2025-11-28
+tags: ["react", "frontend", "rendering", "reconciliation", "ui"]
+series: [technology]
+---
+
+## Introduction
+
+Today, we'll explore how React takes the code we write and renders it on the screen. Starting from the basics, I'll break down the process step by step so you'll understand:
+
+- What happens when state changes.
+- Core concepts like Reconciliation, Render Phase, and Commit Phase.
+- How understanding React internals helps you debug errors.
+
+If you know a fellow React developer who might benefit from this, feel free to share this post.
+
+---
+
+Okay, before I start explaining anything, I would like to explain a few words that I'm going to mention a lot in this blog.
+
+First is the word **UI**:
+
+- UI means every part of the application that the user can see or interact with.  
+  For example: buttons, text boxes, menus, layouts, and so on.
+
+Next is the word **Render:**
+
+- When we say _renders_, it means the browser takes the code we write, calculates everything, and shows the result to the user on the screen.
+
+But in the context of React, rendering means calculating the UI based on our code and deciding what needs to be updated.
+
+---
+
+## Core concepts
+
+Now that we know these basic words, let's continue with the **core concepts** we need to understand React's rendering process.
+
+- [What is JSX](#what-is-jsx)?
+- [React Elements](#what-is-react-elements)?
+- [React Components](#what-is-react-components)?
+
+I'll explain each of these one by one.
+
+### What is JSX
+
+JSX is a syntax that React gives us, so we can write UI using an HTML-like style inside a JavaScript file easily.
+
+Normally, if we want to write HTML inside JavaScript, we have to put everything inside a string, like this:
+
+```javascript
+container.innerHTML = `
+  <div class="card">
+    <h1>T-Shirt</h1>
+    <p class="price">$20</p>
+    <button onclick="handleClick()">+</button>
+    <p>Quantity: <span id="count">1</span></p>
+  </div>
+`;
+```
+
+Writing UI like this is uncomfortable.
+
+The formatting is hard, events like `onclick` must be inside a string, syntax highlighting isn't good.
+and it's also hard to detect errors.
+
+So instead of writing UI as a string, we want something that looks more like real HTML, easy to read, and easier to write events like `onClick`.
+
+And that's the reason why we use JSX.
+
+```jsx
+function Card() {
+  return (
+    <div className="card">
+      <h1>T-Shirt</h1>
+      <p className="price">$20</p>
+      <button onClick={handleClick}>+</button>
+      <p>
+        Quantity: <span>{count}</span>
+      </p>
+    </div>
+  );
+}
+```
+
+When you look at this code, it feels like writing real HTML inside a JavaScript file.
+It is clear and easy to read.
+
+But we call this **JSX**, not **HTML**.
+
+Also, the browser cannot understand JSX. it only understands normal JavaScript.
+
+So React automatically **converts (compiles)** JSX into normal JavaScript.
+
+For example:
+
+```jsx
+const element = <h1 className="title">This is JSX!</h1>;
+```
+
+React converts this into:
+
+```javascript
+const element = React.createElement(
+  "h1",
+  { className: "title" },
+  "This is JSX!"
+);
+```
+
+React creates a function call, and this function returns a **Virtual DOM node**, also known as a **React Element**, which is just a JavaScript object.
+
+So JSX is basically a shortcut that helps us write UI in a simple and clean way, instead of manually calling `React.createElement()` every time.
+
+### What is a React Element?
+
+We already saw that JSX is converted into `React.createElement()`. And that function returns a JavaScript object called a **React Element**.
+
+For example, if we write:
+
+```jsx
+const heading = <h1 className="title">This is JSX!</h1>;
+```
+
+React turns it into:
+
+```javascript
+const element = React.createElement(
+  "h1",
+  { className: "title" },
+  "This is JSX!"
+);
+```
+
+And if we log this function, we will see something like this:
+
+```javascript
+{
+  type: 'h1',
+  props: {
+    className: 'title',
+    children: 'This is JSX!'
+  }
+}
+```
+
+This object is what we call a React Element.
+
+When you look at the object, the two most important parts are:
+
+- **type** → represents the HTML element or React component.  
+   Example: `h1`, `div`, `button` or a component like `Card`, `Box`.
+- **props** → represents all the data inside the element.  
+   This includes things like `className`, `style`, `onClick`, and the `children`.
+
+So for the example above,
+
+the type is -> `h1`, and
+
+the props are -> `{ className: "title", children: "Hello World" }`.
+
+### What is a React Component?
+
+Now that we know what a React Element is, and understand where they come from.
+
+So, let's have a look at what **React Component** actually is.
+
+A **React Component** is simply a JavaScript function (or class) that **returns React Elements**.
+
+Let's have a look at this function as an example:
+
+```javascript
+function Greeting() {
+  return <h1 className="title">Hello World</h1>;
+}
+```
+
+We have a `Greeting` function which returns a `JSX`.
+
+And behind the scenes, React changes it to:
+
+```javascript
+function Greeting() {
+  return React.createElement("h1", { className: "title" }, "Hello World");
+}
+```
+
+As we learned earlier, `React.createElement()` returns an object - the React Element.
+
+So since this function returns a React Element, we call it a React Component.
+
+### Recap
+
+To recap, we can remember them like this:
+
+- **JSX** → makes UI easy to write. _Generates React.createElement() behind the scenes_
+- **React Element** → the JavaScript object created from JSX
+- **React Component** → a function that returns React Elements
+
+---
+
+> Hey, thank you so much for taking your time to read this. I have to stop here for now because I don’t have enough time to finish the whole blog, but I’ll continue writing it soon.
+>
+> If you're from Myanmar, I have some good news. I already made a full YouTube video about this topic, so you can watch it here:
+> [How does React UI Rendering process work? (In Burmese)](https://www.youtube.com/watch?v=E_x-IBN4MPg&t=338s)
+> And please don't forget to like and subscribe!, it helps me a lot.
+
+If this helped you, please consider giving the repo a star or buying me a coffee. I would really appreciate it. Thank you! 🙏

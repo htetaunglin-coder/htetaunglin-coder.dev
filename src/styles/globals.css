@@ -301,6 +301,10 @@ html {
     @apply !size-3.5 text-fg-tertiary;
   }
 
+  .prose li::marker {
+    @apply text-fg-tertiary py-0;
+  }
+
   .prose {
     @apply text-fg-secondary/90;
   }
@@ -314,10 +318,18 @@ html {
   }
 
   .prose :not(pre) > code {
-    @apply font-mono font-medium bg-bg-tertiary;
+    @apply font-mono font-medium bg-bg-secondary !py-px;
+  }
+
+  .prose strong {
+    @apply text-fg-secondary/90;
   }
 
   .prose p {
     @apply !my-1.5;
+  }
+
+  .prose blockquote {
+    @apply font-inter text-fg-tertiary border-outline-secondary;
   }
 }
