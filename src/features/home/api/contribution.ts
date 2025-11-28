@@ -10,7 +10,7 @@ export async function getGitHubContributions() {
   const res = await fetch(
     `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`,
     {
-      next: { revalidate: 0 },
+      next: { revalidate: 86_400 },
     }
   );
   const data = (await res.json()) as GitHubContributionsResponse;
