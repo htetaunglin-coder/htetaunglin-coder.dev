@@ -95,7 +95,7 @@ const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
         <div className="flex w-full justify-center py-8 pt-38 text-left sm:pt-48">
           <div className="w-full max-w-6xl px-4 lg:px-6">
             <div className="-mt-8 flex w-full justify-end text-fg-tertiary">
-              <p className="text-sm">
+              <p className="text-xs sm:text-sm">
                 Photo By{" "}
                 <NavLink
                   className="text-fg-brand underline"
