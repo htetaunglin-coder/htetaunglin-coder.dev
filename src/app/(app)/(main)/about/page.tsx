@@ -12,7 +12,9 @@ const AboutPage = () => (
       <About />
     </section>
 
-    <ProfileBadge3D />
+    <div className="hidden 2xl:block">
+      <ProfileBadge3D />
+    </div>
   </main>
 );
 

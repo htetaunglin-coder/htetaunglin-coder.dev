@@ -27,9 +27,9 @@ export { SelectedProject };
 
 const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
   const lightSrc =
-    typeof project.image === "object" ? project.image.light : project.image;
+    typeof project.cover === "object" ? project.cover.light : project.cover;
   const darkSrc =
-    typeof project.image === "object" ? project.image.dark : project.image;
+    typeof project.cover === "object" ? project.cover.dark : project.cover;
 
   return (
     <div className="space-y-6">

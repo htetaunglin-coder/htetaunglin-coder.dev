@@ -3,6 +3,7 @@
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { DashedLine } from "@/components/decorations/dashed-line";
+import { NavLink } from "@/components/ui/nav-link";
 import { cn } from "@/lib/utils";
 
 type TestimonialData = {
@@ -10,6 +11,7 @@ type TestimonialData = {
   author: {
     name: string;
     role: string;
+    url: string;
     company?: string;
     avatar?: string;
   };
@@ -36,6 +38,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       role: "Software Developer",
       company: "Pico",
       avatar: "khin_mg_htet.jpg",
+      url: "https://www.linkedin.com/in/khin-maung-htet",
     },
     content:
       "Working with Htet Aung Lin honestly changed the way I look at teamwork. He's incredibly organized and pays attention to every little detail, not in a rigid way, but in a way that shows how much he truly cares about what he's doing. His determination and consistency are on another level, and his work ethic just pulls me to work harder.",
@@ -47,6 +50,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       role: "Full Stack Developer",
       company: "Pico",
       avatar: "wai_yan_phone_aant.jpg",
+      url: "https://waiyanphoneaant.com",
     },
     content:
       "It has been an absolute pleasure collaborating with Htet Aung Lin. He is an incredibly creative front-end developer, and I truly value the quality and aesthetic of the designs he consistently produces. As a backend engineer, I especially appreciate his flexibility and his open approach to discussion and negotiation.",
@@ -56,6 +60,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
     author: {
       name: "Aung Khant Kyaw",
       role: "Software Developer",
+      url: "https://github.com/auung",
     },
     content:
       "Had a phenomenal experience collaborating with Htet Aung Lin on MijnUI React library. Not only is building an entire UI library solo an impressive technical feat, but his constructive and actionable code reviews are just as commendable. Truly a versatile, creative and remarkable developer!",
@@ -70,7 +75,7 @@ const Testimonial = () => (
       Testimonials
     </h2>
 
-    <p className="mt-1 max-w-3xl text-balance text-base/relaxed text-fg-tertiary">
+    <p className="mt-1 max-w-3xl text-balance text-fg-tertiary text-sm/relaxed sm:text-base/relaxed">
       I've had the chance to work with some amazing people. Here's what they
       think about our time building things together.
     </p>
@@ -106,11 +111,11 @@ const TestimonialCard = ({
   return (
     <div
       className={cn(
-        "flex size-full flex-col justify-center gap-6 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:p-12 sm:pt-8",
+        "flex size-full flex-col justify-center gap-4 p-2 [mask:radial-gradient(85%_85%_at_50%,rgb(0,0,0)_65%,rgba(0,0,0,0)_90%)] sm:gap-6 sm:p-12 sm:pt-8",
         className
       )}
     >
-      <div className="flex gap-6">
+      <NavLink className="flex gap-6" href={author.url}>
         <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
           <CloudinaryAvatar
             className="size-full rounded-none"
@@ -125,12 +130,14 @@ const TestimonialCard = ({
         </div>
 
         <div>
-          <h5 className="font-medium text-fg-default text-sm">{author.name}</h5>
+          <h5 className="font-medium text-fg-default text-sm underline hover:underline sm:no-underline">
+            {author.name}
+          </h5>
           <p className="text-fg-tertiary/80 text-xs">
             {author.role} {author.company && `at ${author.company}`}
           </p>
         </div>
-      </div>
+      </NavLink>
 
       <p className="text-fg-tertiary text-sm">{content}</p>
     </div>

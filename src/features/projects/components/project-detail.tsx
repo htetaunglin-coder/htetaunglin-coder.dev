@@ -1,31 +1,26 @@
 import { Globe } from "lucide-react";
+import { LightRaysAnimation } from "@/components/animations/light-rays-animation";
 import { BasicMarkdown } from "@/components/basic-markdown-parser";
 import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { Icons } from "@/components/icons";
+import { ImageStack } from "@/components/image-stack";
 import { AvatarGroup } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
-import { ThemeImage } from "@/components/ui/theme-image";
 import { cn, formatDate, formatDisplayUrl } from "@/lib/utils";
 import { getProjectTeamMembers, type ProjectItem } from "../data";
 
 const ProjectDetail = ({ project }: { project: ProjectItem }) => {
-  const lightSrc =
-    typeof project.image === "object" ? project.image.light : project.image;
-  const darkSrc =
-    typeof project.image === "object" ? project.image.dark : project.image;
-
   const teamMembers = getProjectTeamMembers(project);
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <div className="group relative z-[var(--above-grainy-overlay-z-index)] aspect-[16/10] w-full overflow-hidden bg-zinc-500 brightness-90 sm:rounded-2xl dark:brightness-[0.875]">
-        <ThemeImage
-          alt={project.title}
-          className="object-cover object-center"
-          darkSrc={darkSrc}
-          fill
-          lightSrc={lightSrc}
+      <div className="group/image-stack relative overflow-hidden rounded-2xl border border-outline-tertiary bg-bg-secondary px-2 sm:px-12 sm:pt-6">
+        <LightRaysAnimation length="100%" />
+
+        <ImageStack
+          className="group-hover/image-stack:z-[var(--above-grainy-overlay-z-index)]"
+          images={project.images}
         />
       </div>
 
