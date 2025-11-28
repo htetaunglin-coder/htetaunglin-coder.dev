@@ -1,6 +1,6 @@
-### Issue 😱:
+### Issue:
 
-Closes https://github.com/Skolaczk/next-starter/issues
+Closes https://github.com/htetaunglin-coder/htetaunglin-coder.dev
 
 ### What has been done ✅:
 

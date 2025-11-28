@@ -45,7 +45,12 @@ const Footer = ({ className }: { className?: string }) => (
 
         <p className="text-fg-tertiary/70 text-sm">
           Source code available on{" "}
-          <span className="font-medium text-fg-tertiary underline">Github</span>
+          <NavLink
+            className="font-medium text-fg-tertiary underline"
+            href={process.env.NEXT_PUBLIC_GITHUB_REPO_URL || ""}
+          >
+            Github
+          </NavLink>
         </p>
       </div>
     </div>

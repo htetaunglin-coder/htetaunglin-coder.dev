@@ -51,7 +51,7 @@ const Contact = () => {
         Let&apos;s Connect
       </h2>
 
-      <p className="mt-1 w-full text-base/relaxed text-fg-tertiary sm:max-w-md">
+      <p className="mt-1 w-full text-fg-tertiary text-sm/relaxed sm:max-w-md sm:text-base/relaxed">
         Have a project in mind or just want to say hi? My inbox is always open,
         I&apos;d love to hear from you.
       </p>

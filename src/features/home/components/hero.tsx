@@ -38,7 +38,14 @@ const Hero = () => (
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-4 sm:mt-6">
-          <Button variant="inverse">Download Resume</Button>
+          <Button asChild variant="inverse">
+            <a
+              download="HTET_AUNG_LIN_RESUME.pdf"
+              href="/HTET_AUNG_LIN_RESUME.pdf"
+            >
+              Download Resume
+            </a>
+          </Button>
           <Button asChild>
             <NavLink href={"#contact"}>Contact Me</NavLink>
           </Button>

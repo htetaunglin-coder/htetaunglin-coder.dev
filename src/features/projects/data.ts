@@ -62,7 +62,13 @@ export type ProjectItem = {
     github?: string;
     preview?: string;
   };
-  image: ProductImage;
+  cover: ProductImage;
+  images: {
+    id: string;
+    alt: string;
+    src: ProductImage;
+  }[];
+
   teamMemberIds: TeamMemberId[];
   personalProject?: boolean;
   timeline: {
@@ -81,13 +87,38 @@ export const PROJECT_DATA: ProjectItem[] = [
     description:
       "Pica Bot is an intelligent AI assistant that integrates with your ERP POS system to enhance customer support. It provides real-time chat and product recommendations for medical and supplement sales teams.",
     urls: {
-      preview: "https://pica-ai-assistant.vercel.app",
       github: "https://github.com/htetaunglin-coder/Ai-Assistant",
     },
-    image: {
+    cover: {
       light: "pica-ai-assistant-light_ccykei.png",
       dark: "pica-ai-assistant-dark_mq3fqr.png",
     },
+    images: [
+      {
+        id: "pica-ai-assistant-preview-image-1",
+        alt: "pica ai assistant sales chart conversation preview",
+        src: {
+          light: "pica-ai-assistant-preview-light-1.png",
+          dark: "pica-ai-assistant-preview-dark-1.png",
+        },
+      },
+      {
+        id: "pica-ai-assistant-preview-image-2",
+        alt: "pica ai assistant agent page preview",
+        src: {
+          light: "pica-ai-assistant-preview-light-2.png",
+          dark: "pica-ai-assistant-preview-dark-2.png",
+        },
+      },
+      {
+        id: "pica-ai-assistant-preview-image-3",
+        alt: "pica ai assistant product images conversation preview",
+        src: {
+          light: "pica-ai-assistant-preview-light-3.png",
+          dark: "pica-ai-assistant-preview-dark-3.png",
+        },
+      },
+    ],
     teamMemberIds: ["sann_ko_ko", "wai_yan_phone_aant", "htet_aung_lin"],
     timeline: {
       startDate: new Date(2025, 8, 25),
@@ -114,10 +145,36 @@ export const PROJECT_DATA: ProjectItem[] = [
       preview: "https://mijnui.com",
       github: "https://github.com/mijn-ui/mijn-ui-react",
     },
-    image: {
+    cover: {
       light: "mijnui-light_lzl7bq.png",
       dark: "mijnui-dark_j0t9ms.png",
     },
+    images: [
+      {
+        id: "mijnui-image-1",
+        alt: "mijnui home page preview",
+        src: {
+          light: "mijnui-preview-light-1.png",
+          dark: "mijnui-preview-dark-1.png",
+        },
+      },
+      {
+        id: "mijnui-image-2",
+        alt: "mijnui documentation introduction website preview",
+        src: {
+          light: "mijnui-preview-light-2.png",
+          dark: "mijnui-preview-dark-2.png",
+        },
+      },
+      {
+        id: "mijnui-image-3",
+        alt: "mijnui charts website preview",
+        src: {
+          light: "mijnui-preview-light-3.png",
+          dark: "mijnui-preview-dark-3.png",
+        },
+      },
+    ],
     teamMemberIds: [
       "sann_ko_ko",
       "htet_aung_lin",
@@ -150,10 +207,36 @@ export const PROJECT_DATA: ProjectItem[] = [
       preview: "https://react-animated-resizable-layout.vercel.app",
       github: "https://github.com/htetaunglin-coder/react-resizable-layout",
     },
-    image: {
+    cover: {
       light: "resizable-layout-light_hk3pdt.png",
       dark: "resizable-layout-dark_pqjqwz.png",
     },
+    images: [
+      {
+        id: "resizable-layout-preview-image-1",
+        alt: "resizable layout home page preview",
+        src: {
+          light: "resizable-layout-preview-light-1.png",
+          dark: "resizable-layout-preview-dark-1.png",
+        },
+      },
+      {
+        id: "resizable-layout-preview-image-2",
+        alt: "resizable layout component preview",
+        src: {
+          light: "resizable-layout-preview-light-2.png",
+          dark: "resizable-layout-preview-dark-2.png",
+        },
+      },
+      {
+        id: "resizable-layout-preview-image-3",
+        alt: "resizable layout component preview",
+        src: {
+          light: "resizable-layout-preview-light-3.png",
+          dark: "resizable-layout-preview-dark-3.png",
+        },
+      },
+    ],
     personalProject: true,
     teamMemberIds: ["htet_aung_lin"],
     timeline: {
@@ -177,7 +260,7 @@ export const PROJECT_DATA: ProjectItem[] = [
       preview: "http://cobalt-clone.netlify.app",
       github: "https://github.com/htetaunglin-coder/Desktop-Cobalt-Clone",
     },
-    image: "cobalt-clone_oca9rt.png",
+    cover: "cobalt-clone_oca9rt.png",
     personalProject: true,
     teamMemberIds: ["htet_aung_lin"],
     timeline: {
@@ -193,6 +276,13 @@ export const PROJECT_DATA: ProjectItem[] = [
     ],
     detail:
       "Built in **February 2024** as a personal challenge while learning **Next.js**, **Tailwind CSS**, and **Framer Motion**.\n\nIt recreates the **Cobalt financial landing page**, focusing on animation, layout, and responsiveness.\n\nIncludes a **React starfield animation** for the floating dots effect and **react-typewriter** for dynamic hero typing.\n\nThis was one of my **first completed projects** before becoming an intern developer, helping me gain confidence with modern React tools.",
+    images: [
+      {
+        id: "cobalt-clone-preview-image-3",
+        alt: "cobalt clone home page preview",
+        src: "colbalt-clone-preview-1.png",
+      },
+    ],
   },
 ];
 
