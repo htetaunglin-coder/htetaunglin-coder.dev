@@ -1,5 +1,6 @@
 import { groq } from "@ai-sdk/groq";
 import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { kv } from "@vercel/kv";
 import {
   convertToModelMessages,
@@ -26,6 +27,8 @@ type RatelimitInfo = {
   limit: number;
   reset: number;
 };
+
+Redis.fromEnv();
 
 const ratelimit = new Ratelimit({
   redis: kv,
