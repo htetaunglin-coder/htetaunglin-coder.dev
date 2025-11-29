@@ -1,16 +1,22 @@
 "use server";
 
 import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { kv } from "@vercel/kv";
 import { headers } from "next/headers";
 import { Resend } from "resend";
 
 const MAX_EMAIL_PER_DAY = 3;
 
+Redis.fromEnv();
+
+// Use environment variable for prefix, with fallback
+const RATELIMIT_PREFIX = process.env.KV_RATELIMIT_PREFIX || "email-ratelimit";
+
 const ratelimit = new Ratelimit({
   redis: kv,
   limiter: Ratelimit.fixedWindow(MAX_EMAIL_PER_DAY, "1d"),
-  prefix: "email-ratelimit",
+  prefix: RATELIMIT_PREFIX,
 });
 
 type ActionResponse = { success: string } | { error: string };
@@ -53,8 +59,6 @@ export async function sendEmail(formData: FormData): Promise<ActionResponse> {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-      // I need to switch this to my own domain later.
-      // For now I'll keep using the Resend default sender.
       from: "onboarding@resend.dev",
       to: process.env.RESEND_TO_EMAIL_ADDRESS,
       subject: `[Portfolio] New Contact Form Message from ${email}`,
