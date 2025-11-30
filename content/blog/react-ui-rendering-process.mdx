@@ -207,7 +207,29 @@ To recap, we can remember them like this:
 
 ---
 
-> Hey, thank you so much for taking your time to read this. I have to stop here for now because I don’t have enough time to finish the whole blog, but I’ll continue writing it soon.
+Now that we understand the basics, let's look at how React UI rendering process works - the main topic of this blog.
+
+## How React Renders the UI
+
+React's rendering process can be divided into three parts before anything appears on the screen.
+
+1. Render Start - What triggers rendering
+2. Render Phase - Calculates what should change
+3. Commit Phase - Apply these changes to the real DOM.
+
+### Render Start
+
+React starts rendering in two situations:
+
+1. Initial Render
+   - This happens when the app first loads. When a user opens your site, React runs the rendering process to show the initial UI.
+
+2. Re-render
+   - After the initial render, React re-renders again whenever the state changes - usually caused by user interactions like clicking, typing, scrolling, or dragging.
+
+---
+
+> Hey, thank you so much for taking your time to read this. I have to stop here for now because I don't have enough time to finish the whole blog, but I'll continue writing it soon.
 >
 > If you're from Myanmar, I have some good news. I already made a full YouTube video about this topic, so you can watch it here:
 > [How does React UI Rendering process work? (In Burmese)](https://www.youtube.com/watch?v=E_x-IBN4MPg&t=338s)
