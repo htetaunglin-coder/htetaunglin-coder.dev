@@ -1,7 +1,7 @@
 ---
 title: "React UI Rendering Process"
 author: Htet Aung Lin
-description: "This blog explains how React turns the code we write into the UI users see. We'll explore the full rendering process, including Reconciliation, Render Phase, and Commit Phase, helping you understand React internals, debug better, and prepare for interviews."
+description: "This blog explains how React turns the code we write into the UI users see. We'll explore the full rendering process, including Reconciliation, Render Phase, and Commit Phase."
 image:
   {
     url: "unsplash-image_jahsxa.jpg",
@@ -21,7 +21,7 @@ Today, we'll explore how React takes the code we write and renders it on the scr
 - Core concepts like Reconciliation, Render Phase, and Commit Phase.
 - How understanding React internals helps you debug errors.
 
-If you know a fellow React developer who might benefit from this, feel free to share this post.
+If you know a fellow React developer who might benefit from this, feel free to share this with them.
 
 ---
 
@@ -221,11 +221,57 @@ React's rendering process can be divided into three parts before anything appear
 
 React starts rendering in two situations:
 
-1. Initial Render
-   - This happens when the app first loads. When a user opens your site, React runs the rendering process to show the initial UI.
+#### Initial Render
 
-2. Re-render
-   - After the initial render, React re-renders again whenever the state changes - usually caused by user interactions like clicking, typing, scrolling, or dragging.
+This happens when the app first loads. When a user opens your site, React runs the rendering process to show the initial UI.
+
+#### Re-render
+
+After the initial render, React re-renders again whenever the state changes - usually caused by user interactions like clicking, typing, scrolling, or dragging.
+
+There are three things that causes react to re-render.
+
+<Accordions type="single">
+  <Accordion id="1-component's-state-changes" title="1. Component's State Changes">
+
+For example:
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    setCount(1);
+  };
+
+  return (
+    <div>
+      <p> Count: {count}</p>
+      <button onClick={handleClick}>Add</button>
+    </div>
+  );
+}
+```
+
+Let's say, we have a Counter Component with the button named `Add`.
+
+When a user clicks the button, `handleClick` calls `setCount(1)` and updates the `count` state.
+
+Once the state changes, React needs to show the updated value to the screen, so it starts the render process again. (re-render)
+
+  </Accordion>
+
+<Accordion
+  id="2-parent-component-re-renders"
+  title="2. Parent Component Re-renders">
+  in progress... :)
+</Accordion>
+
+  <Accordion id="3-context-value-changes" title="3. Context Value Changes">
+    in progress... :)
+  </Accordion>
+  
+</Accordions>
 
 ---
 
