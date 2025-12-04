@@ -142,7 +142,7 @@ export const PROJECT_DATA: ProjectItem[] = [
     description:
       "MijnUI offers flexible, ready-to-use components for building marketing sites, dashboards, and e-commerce platforms.",
     urls: {
-      preview: "https://mijnui.com",
+      preview: "https://mijnui.vercel.app",
       github: "https://github.com/mijn-ui/mijn-ui-react",
     },
     cover: {
