@@ -64,7 +64,7 @@ const Ray = ({
       opacity: [0, intensity, 0],
       rotate: [rotate - swing, rotate + swing, rotate - swing],
     }}
-    className="-top-[12%] -translate-x-1/2 pointer-events-none absolute left-[var(--ray-left)] h-[var(--light-rays-length)] w-[var(--ray-width)] origin-top rounded-full bg-gradient-to-b from-[color-mix(in_srgb,var(--light-rays-color)_70%,transparent)] to-transparent opacity-0 mix-blend-screen blur-[var(--light-rays-blur)]"
+    className="pointer-events-none absolute -top-[12%] left-[var(--ray-left)] h-[var(--light-rays-length)] w-[var(--ray-width)] origin-top -translate-x-1/2 rounded-full bg-gradient-to-b from-[color-mix(in_srgb,var(--light-rays-color)_70%,transparent)] to-transparent opacity-0 mix-blend-screen blur-[var(--light-rays-blur)]"
     initial={{ rotate }}
     style={
       {
