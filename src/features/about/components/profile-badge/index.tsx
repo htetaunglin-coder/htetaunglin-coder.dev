@@ -16,7 +16,7 @@ useGLTF.preload("/images/profile_card_3d.glb");
 useTexture.preload("/images/profile_card_badge.png");
 
 const ProfileBadge3D = () => (
-  <div className="-top-20 absolute right-0 z-0 flex h-screen w-md origin-center scale-100 transform items-center justify-center">
+  <div className="absolute -top-20 right-0 z-0 flex h-screen w-md origin-center scale-100 transform items-center justify-center">
     <Canvas
       camera={{ position: [0, 0, 13], fov: 25 }}
       style={{ backgroundColor: "transparent" }}

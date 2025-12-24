@@ -99,7 +99,7 @@ const ChatView = () => {
               isAtBottom
                 ? "pointer-events-none translate-y-4 opacity-0"
                 : "pointer-events-auto opacity-100",
-              "-translate-x-1/2 absolute bottom-44 left-1/2 z-30"
+              "absolute bottom-44 left-1/2 z-30 -translate-x-1/2"
             )}
             iconOnly
             onClick={() => scrollToBottom()}

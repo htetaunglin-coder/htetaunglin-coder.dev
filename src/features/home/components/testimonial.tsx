@@ -116,7 +116,7 @@ const TestimonialCard = ({
       )}
     >
       <NavLink className="flex gap-6" href={author.url}>
-        <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
+        <div className="size-12 shrink-0 -rotate-6 bg-white p-1">
           <CloudinaryAvatar
             className="size-full rounded-none"
             classNames={{
