@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
 import { MotionConfig } from "motion/react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import GrainyOverlay from "@/components/decorations/grainy-overlay";
 import { StructuredData } from "@/components/structured-data";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -69,6 +69,9 @@ export const metadata: Metadata = {
   },
   category: "technology",
   applicationName: siteConfig.name,
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#151515" },
