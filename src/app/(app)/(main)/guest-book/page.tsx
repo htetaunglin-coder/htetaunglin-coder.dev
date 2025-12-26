@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { Comment } from "@/components/comment";
+import { absoluteUrl } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Guest Book",
+  description:
+    "Write anything you'd like — feedback, appreciation, or a quick hello.",
+  robots: { index: false, follow: true },
+  alternates: {
+    canonical: absoluteUrl("/guest-book"),
+  },
+};
 
 const GuestBook = () => (
   <main className="pt-16 pb-28 sm:pt-24 md:pt-32">

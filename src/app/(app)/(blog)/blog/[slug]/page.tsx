@@ -6,14 +6,20 @@ import {
   DocsTitle,
 } from "fumadocs-ui/page";
 import { Calendar } from "lucide-react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CloudinaryImage } from "@/components/cloudinary-image";
 import { Comment } from "@/components/comment";
 import { Footer } from "@/components/footer";
+import { StructuredData } from "@/components/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
 import { getMDXComponents } from "@/features/blog/components/mdx-components";
 import { blogSource } from "@/lib/source";
+import {
+  getArticleStructuredData,
+  getBreadcrumbStructuredData,
+} from "@/lib/structured-data";
 import { absoluteUrl, cn, formatDate } from "@/lib/utils";
 
 export function generateStaticParams(): { slug: string }[] {
@@ -24,7 +30,7 @@ export function generateStaticParams(): { slug: string }[] {
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await props.params;
   const page = blogSource.getPage([slug]);
 
@@ -38,26 +44,46 @@ export async function generateMetadata(props: {
     notFound();
   }
 
-  const ogUrl = `/og?title=${encodeURIComponent(
-    blog.title
-  )}&description=${encodeURIComponent(blog.description)}&img_url=${encodeURIComponent(blog.image.url)}&&blog=true`;
+  const pageUrl = absoluteUrl(page.url);
+  const ogImageUrl = absoluteUrl(
+    `/og?title=${encodeURIComponent(
+      blog.title
+    )}&description=${encodeURIComponent(blog.description)}&img_url=${encodeURIComponent(blog.image.url)}&&blog=true`
+  );
+
+  const keywords = blog.tags || [];
 
   return {
     title: blog.title,
     description: blog.description,
+    keywords,
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title: blog.title,
       description: blog.description,
       type: "article",
-      url: absoluteUrl(page.url),
-      images: ogUrl,
+      url: pageUrl,
+      publishedTime: blog.date.toISOString(),
+      modifiedTime: blog.date.toISOString(),
       authors: ["Htet Aung Lin"],
+      tags: blog.tags,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: blog.title,
       description: blog.description,
-      images: ogUrl,
+      creator: "@htetaunglin-cdr",
+      images: [ogImageUrl],
     },
   };
 }
@@ -69,8 +95,25 @@ const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
   if (!page) notFound();
   const Mdx = page.data.body;
 
+  const articleStructuredData = getArticleStructuredData({
+    title: page.data.title,
+    description: page.data.description || "",
+    datePublished: page.data.date,
+    dateModified: page.data.date,
+    url: page.url,
+    tags: page.data.tags,
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: page.data.title },
+  ]);
+
   return (
     <>
+      <StructuredData data={articleStructuredData} />
+      <StructuredData data={breadcrumbStructuredData} />
       <main>
         <div>
           <figure className="pointer-events-none absolute top-0 left-0 z-[-1] h-[16rem] w-full overflow-hidden">

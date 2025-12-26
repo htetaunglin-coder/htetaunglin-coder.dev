@@ -13,9 +13,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     (page) =>
       ({
         url: url(page.url),
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.5,
+        lastModified: page.data.date || new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
       }) as MetadataRoute.Sitemap[number]
   );
 
@@ -23,46 +23,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     (project) =>
       ({
         url: url(`/projects/${project.id}`),
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.5,
+        lastModified: project.timeline.endDate || project.timeline.startDate,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
       }) as MetadataRoute.Sitemap[number]
   );
 
   return [
     {
       url: url("/"),
-      changeFrequency: "monthly",
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
       priority: 1,
     },
     {
-      url: url("/projects"),
-      changeFrequency: "monthly",
+      url: url("/blog"),
+      lastModified: blogs.length > 0 ? blogs[0]?.lastModified : new Date(),
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: url("/chat"),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: url("/resume"),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: url("/blogs"),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: url("/side-quest"),
-      changeFrequency: "monthly",
-      priority: 0.3,
+      url: url("/projects"),
+      lastModified:
+        projects.length > 0 ? projects[0]?.lastModified : new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     },
     {
       url: url("/about"),
-      changeFrequency: "monthly",
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: url("/resume"),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+    {
+      url: url("/chat"),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    },
+    {
+      url: url("/side-quests"),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
       priority: 0.3,
     },
 
