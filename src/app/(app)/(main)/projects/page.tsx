@@ -1,11 +1,33 @@
-"use client";
-
+import type { Metadata } from "next";
 import {
   FadeAnimation,
   FadeStaggeredAnimation,
 } from "@/components/animations/fade-animation";
 import { ProjectShowcase } from "@/features/projects/components/project-showcase";
 import { PROJECT_DATA } from "@/features/projects/data";
+import { absoluteUrl } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+  alternates: {
+    canonical: absoluteUrl("/projects"),
+  },
+  openGraph: {
+    title: "Projects | Htet Aung Lin",
+    description:
+      "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+    url: absoluteUrl("/projects"),
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Projects | Htet Aung Lin",
+    description:
+      "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+  },
+};
 
 const ProjectPage = () => (
   <main className="pt-16 pb-28 sm:pt-24 md:pt-32">

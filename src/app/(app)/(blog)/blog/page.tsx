@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   FadeAnimation,
   FadeStaggeredAnimation,
@@ -5,6 +6,29 @@ import {
 import { Footer } from "@/components/footer";
 import { BlogPostShowcase } from "@/features/blog/components/blog-post-showcase";
 import { blogSource } from "@/lib/source";
+import { absoluteUrl } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+  alternates: {
+    canonical: absoluteUrl("/blog"),
+  },
+  openGraph: {
+    title: "Blog | Htet Aung Lin",
+    description:
+      "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+    url: absoluteUrl("/blog"),
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Blog | Htet Aung Lin",
+    description:
+      "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+  },
+};
 
 export default function Home() {
   const posts = blogSource.getPages();

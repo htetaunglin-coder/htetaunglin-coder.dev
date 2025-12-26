@@ -19,7 +19,7 @@ export const SOCIAL_LINKS: readonly SocialLinkItem[] = [
   },
   {
     id: "facebook",
-    href: "https://www.facebook.com/htet.aung.lin.259028",
+    href: "https://www.facebook.com/htetaunglin.coder",
     icon: Icons.facebook,
     title: "Facebook",
   },
