@@ -30,9 +30,16 @@ export const metadata: Metadata = {
     canonical: absoluteUrl("/"),
   },
   icons: {
-    icon: "/favicon/favicon.ico",
-    shortcut: "/favicon/favicon-16x16.png",
-    apple: "/favicon/apple-touch-icon.png",
+    icon: [
+      { url: absoluteUrl("/favicon.ico"), sizes: "any" },
+      {
+        url: absoluteUrl("/favicon/favicon-16x16.png"),
+        sizes: "16x16",
+        type: "image/png",
+      },
+    ],
+    shortcut: absoluteUrl("/favicon/favicon-16x16.png"),
+    apple: absoluteUrl("/favicon/apple-touch-icon.png"),
   },
   openGraph: {
     url: absoluteUrl("/"),
