@@ -11,30 +11,57 @@ type TimelineItem = {
     month?: string;
     title: string;
     company?: string;
+    companyLink?: string;
     description: string;
   }[];
 };
 
 const TIMELINE_DATA: readonly TimelineItem[] = [
   {
+    id: "2026",
+    year: "2026",
+    events: [
+      {
+        id: "event-1",
+        month: "Jan - Present",
+        title: "Full Stack Developer",
+        company: "TalentOS (Full-Time)",
+        companyLink: "https://www.linkedin.com/company/talent-os/",
+        description:
+          "Working as a full stack developer with employers. Creating UI designs and revamping landing pages. Built WhatsApp and AI agent integrations using Twilio for communication between employers and candidates.",
+      },
+      {
+        id: "event-2",
+        month: "Jan - Present",
+        title: "Full Stack Developer",
+        company: "Pico Innovation (Freelance)",
+        companyLink: "https://www.linkedin.com/company/picoinno/",
+        description:
+          "Building an AI-block editor using MijnUI components that integrates with ERP AI agent database. The editor is deployed in Pico SBS for content creation and management.",
+      },
+    ],
+  },
+  {
     id: "2025",
     year: "2025",
     events: [
       {
         id: "event-1",
-        month: "Oct - Present",
-        title: "Building Pica Chat",
+        month: "Oct - Dec",
+        title: "Frontend Developer",
         company: "Pico Innovation (Part-Time)",
+        companyLink: "https://www.linkedin.com/company/picoinno/",
         description:
-          "After nine months full-time at Pico, I moved to a part-time role to focus on Pica Chat, a conversational AI assistant I'm building with Next.js. I've been researching existing AI chat apps and refining the frontend to feel simple, fast, and intuitive.",
+          "After nine months full-time at Pico, moved to a part-time role to focus on Pica Chat, a conversational AI assistant built with Next.js. Researched existing AI chat apps and worked on the frontend.",
       },
       {
         id: "event-2",
         month: "Jan - Sep",
-        title: "Component Systems & PDF Tools",
-        company: "Pico Innovation",
+        title: "Frontend Developer",
+        company: "Pico Innovation (Full-Time)",
+        companyLink: "https://www.linkedin.com/company/picoinno/",
         description:
-          "Built and documented a shared library of 25+ reusable components, worked on the in-house PDF editor, and shipped features like rich-text editing with Tiptap, all aimed at cleaner code and smoother design workflows.",
+          "Built and documented a shared library of 25+ reusable components, worked on the in-house PDF editor, and added rich-text editing with Tiptap.",
       },
     ],
   },
@@ -45,10 +72,11 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
       {
         id: "event-1",
         month: "May - Dec",
-        title: "Started as an Intern",
-        company: "Pico Innovation",
+        title: "Frontend Developer",
+        company: "Pico Innovation (Internship)",
+        companyLink: "https://www.linkedin.com/company/picoinno/",
         description:
-          "Started my journey as an intern, researching editor tools like Tiptap and Lexical. That early research and component work helped set the direction for the MijnUI design system that followed.",
+          "Started as an intern, researching editor tools like Tiptap and Lexical. The research and component work contributed to the MijnUI design system that followed.",
       },
     ],
   },
@@ -59,10 +87,10 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
       {
         id: "event-1",
         month: "Aug - Dec",
-        title: "Freelancing",
+        title: "Frontend Developer",
         company: "Upwork & Local Clients",
         description:
-          "Took on small frontend projects to learn from real client work. Focused on clean layouts, responsive design, and understanding how people interact with simple interfaces.",
+          "Took on small frontend projects to learn from client work. Worked on layouts, responsive design, and how people use interfaces.",
       },
     ],
   },
@@ -119,9 +147,20 @@ const Experience = () => (
                           <h4 className="font-medium text-base text-fg-secondary leading-5 md:text-lg">
                             {event.title}
                           </h4>
-                          <span className="text-fg-tertiary/80 text-sm dark:text-fg-tertiary/60">
-                            {event.company}
-                          </span>
+                          {event.companyLink ? (
+                            <a
+                              className="text-fg-tertiary/80 text-sm underline underline-offset-2 transition-colors hover:text-fg-brand dark:text-fg-tertiary/60"
+                              href={event.companyLink}
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              {event.company}
+                            </a>
+                          ) : (
+                            <span className="text-fg-tertiary/80 text-sm dark:text-fg-tertiary/60">
+                              {event.company}
+                            </span>
+                          )}
                         </div>
 
                         <p className="mb-1 shrink-0 text-fg-brand text-xs md:text-sm lg:text-sm">

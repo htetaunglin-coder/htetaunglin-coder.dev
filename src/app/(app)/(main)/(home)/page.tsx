@@ -1,5 +1,4 @@
 import { FadeAnimation } from "@/components/animations/fade-animation";
-import { BackgroundImageTexture } from "@/components/decorations/background-texture";
 import { Contact } from "@/features/home/components/contact";
 import { Contributions } from "@/features/home/components/contributions";
 import { Experience } from "@/features/home/components/experience";
@@ -36,7 +35,8 @@ const HomePage = () => (
       </section>
 
       <section className="px-6 pt-32 lg:pt-52" id="contact">
-        <FadeAnimation as="div" delay={0.25} direction="up">
+        {/* Not Anymore, I am grinding my ass of trying to meet all of the deadlines :3 */}
+        {/* <FadeAnimation as="div" delay={0.25} direction="up">
           <BackgroundImageTexture
             className="mb-6 w-full overflow-hidden bg-bg-secondary/40 p-2 sm:mb-12 sm:rounded-lg sm:px-4 sm:py-3 dark:bg-bg-secondary/10"
             opacity={0.5}
@@ -47,9 +47,9 @@ const HomePage = () => (
               to collaborate, feel free to message me.
             </p>
           </BackgroundImageTexture>
-        </FadeAnimation>
+        </FadeAnimation> */}
 
-        <FadeAnimation as="div" delay={0.5} direction="up">
+        <FadeAnimation as="div" delay={0.25} direction="up">
           <Contact />
         </FadeAnimation>
       </section>
