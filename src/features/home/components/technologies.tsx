@@ -28,6 +28,11 @@ const TECH_DATA: readonly TechnologyItem[] = [
     icon: <Icons.typescript />,
   },
   {
+    id: "convex",
+    label: "Convex",
+    icon: <Icons.convex />,
+  },
+  {
     id: "tailwind",
     label: "TailwindCSS",
     icon: <Icons.tailwindcss />,
