@@ -20,9 +20,9 @@ const inputStyles = tv({
   slots: {
     wrapper: "relative w-full",
     startIcon:
-      "absolute top-1/2 left-2 -translate-y-1/2 transform [&>svg]:size-5 [&>svg]:text-fg-tertiary",
+      "-translate-y-1/2 absolute top-1/2 left-2 transform [&>svg]:size-5 [&>svg]:text-fg-tertiary",
     endIcon:
-      "absolute top-1/2 right-3.5 -translate-y-1/2 transform [&>svg]:size-5 [&>svg]:text-fg-tertiary",
+      "-translate-y-1/2 absolute top-1/2 right-3.5 transform [&>svg]:size-5 [&>svg]:text-fg-tertiary",
     base: [
       "peer",
       "flex h-10 w-full bg-bg-default-alt px-3 py-2 text-sm",
@@ -30,7 +30,7 @@ const inputStyles = tv({
       "transition duration-300 file:border-0 file:bg-bg-default-alt file:font-medium file:text-sm",
     ],
     label: [
-      "absolute start-2 top-2 z-10 max-w-fit origin-[0] -translate-y-4 scale-75 cursor-text bg-bg-default-alt px-2 text-fg-tertiary text-sm duration-300",
+      "-translate-y-4 absolute start-2 top-2 z-10 max-w-fit origin-[0] scale-75 cursor-text bg-bg-default-alt px-2 text-fg-tertiary text-sm duration-300",
     ],
   },
   variants: {

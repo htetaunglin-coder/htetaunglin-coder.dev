@@ -129,11 +129,11 @@ const Experience = () => (
 
                 return (
                   <div className="relative" key={`${entry.id}-${event.id}`}>
-                    <div className="absolute top-0 bottom-0 left-0 sm:-left-2">
-                      <div className="absolute top-1 -left-1 h-2 w-2 rounded-full bg-fg-tertiary/70 dark:bg-fg-tertiary dark:brightness-50" />
+                    <div className="sm:-left-2 absolute top-0 bottom-0 left-0">
+                      <div className="-left-1 absolute top-1 h-2 w-2 rounded-full bg-fg-tertiary/70 dark:bg-fg-tertiary dark:brightness-50" />
                       <div
                         className={cn(
-                          "absolute top-2 -bottom-12 left-1/2 w-px -translate-x-1/2 transform",
+                          "-bottom-12 -translate-x-1/2 absolute top-2 left-1/2 w-px transform",
                           isLastGroup && isLastEvent
                             ? "bg-gradient-to-b from-fg-tertiary/70 to-transparent dark:from-fg-tertiary dark:brightness-50"
                             : "bg-fg-tertiary/70 dark:bg-fg-tertiary dark:brightness-50"

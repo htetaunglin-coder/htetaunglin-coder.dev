@@ -11,7 +11,7 @@ import { createContext } from "./utils";
 
 const avatarGroupStyles = tv({
   slots: {
-    group: "flex items-center justify-center -space-x-2",
+    group: "-space-x-2 flex items-center justify-center",
     groupRemainChildren:
       "!ml-1.5 flex items-center justify-center text-fg-secondary text-xs",
   },
