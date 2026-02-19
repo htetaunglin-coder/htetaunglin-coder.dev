@@ -24,6 +24,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
     author: {
       name: "Nay Myo Khant",
       role: "FullStack Developer",
+      company: "TalentOS",
       avatar: "nay_myo_khant.jpg",
       url: "https://github.com/Nmk78",
     },
