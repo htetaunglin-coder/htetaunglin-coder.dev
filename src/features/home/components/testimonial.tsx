@@ -19,18 +19,17 @@ type TestimonialData = {
 };
 
 const TESTIMONIALS: readonly TestimonialData[] = [
-  // Waiting for Ko Sann Ko Ko’s response for the testimonial.
-  // {
-  //   id: "sann-ko-ko",
-  //   author: {
-  //     name: "Sann Ko Ko",
-  //     role: "Product Owner",
-  //     company: "Praktikon B.V",
-  //     avatar: "sann_ko_ko.jpg",
-  //   },
-  //   content:
-  //     "",
-  // },
+  {
+    id: "nay-myo-khant",
+    author: {
+      name: "Nay Myo Khant",
+      role: "FullStack Developer",
+      avatar: "nay_myo_khant.jpg",
+      url: "https://github.com/Nmk78",
+    },
+    content:
+      "Working with Htet Aung Lin has always been a great experience. He has a strong eye for design and consistently delivers clean, thoughtful work. What I appreciate most is his calm personality — he handles challenges with patience and clarity. He’s also very responsive and easy to reach whenever needed, which makes collaboration smooth and stress-free. On top of that, he’s genuinely friendly and a pleasure to work with.",
+  },
   {
     id: "khin-maung-htet",
     author: {
@@ -116,7 +115,7 @@ const TestimonialCard = ({
       )}
     >
       <NavLink className="flex gap-6" href={author.url}>
-        <div className="size-12 shrink-0 -rotate-6 bg-white p-1">
+        <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
           <CloudinaryAvatar
             className="size-full rounded-none"
             classNames={{
