@@ -81,33 +81,7 @@ Things I ~~wish~~ would like to implement in the future:
 
 ## Support Me
 
-If you found this useful and want to support my work, here are a few ways you can do so.
-
-### ⭐ Star the repo
-
-### ☕ Buy me a coffee
-
-#### KBZ Pay
-
-![kbz-pay](https://github.com/user-attachments/assets/9b40a610-1121-4110-82ae-78419f017927)
-
-My KBZ Pay Number
-
-```sh
-09756302537
-```
-
-#### Binance Pay
-
-<img width="900" height="950" alt="binance" src="https://github.com/user-attachments/assets/72d230f9-181c-44e3-a7cb-68660e266f4c" />
-
-My Binance Pay ID
-
-```sh
-1173131120
-```
-
-> All contributions are voluntary and greatly appreciated. Thank you for supporting my work!
+If you found this useful and want to support my work, please ⭐ Star the repo!
 
 ## License
 
