@@ -9,10 +9,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@radix-ui/react-dialog";
-import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  Monitor,
+  Moon,
+  Sun,
+  X,
+} from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Link from "next/link";
-import { type RefObject, useRef, useState } from "react";
+import { useTheme } from "next-themes";
+import { type RefObject, useEffect, useRef, useState } from "react";
 import {
   type BaseLinkItem,
   MAIN_PAGES,
@@ -252,7 +261,21 @@ const MobileMenu = () => (
 
         <div className="sticky top-0 flex h-16 w-full shrink-0 items-center bg-bg-default px-8 py-6">
           <div className="flex w-full items-center justify-between gap-2">
-            <ThemeSwitcher className="border border-outline-secondary" />
+            <div className="flex items-center gap-2">
+              <MobileThemePopover />
+              <NavLink
+                className="group relative flex items-center gap-1"
+                href="/chat"
+              >
+                <span className="mr-0.5 text-sm opacity-70 dark:opacity-100">
+                  💭
+                </span>
+                <AnimatedGradientText className="font-medium text-xs">
+                  Ask AI about Me
+                </AnimatedGradientText>
+              </NavLink>
+            </div>
+
             <DialogClose asChild>
               <Button
                 className="text-2xl text-fg-tertiary"
@@ -306,6 +329,73 @@ const MobileMenu = () => (
     </DialogPortal>
   </Dialog>
 );
+
+const MobileThemePopover = () => (
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button
+        className="group h-8 rounded-full border border-outline-secondary bg-bg-default px-3 text-fg-tertiary text-xs hover:text-fg-default data-[state=open]:text-fg-default"
+        type="button"
+        variant="ghost"
+      >
+        Theme
+        <ChevronDown className="ml-1 size-3.5 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent
+      align="start"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_50)] w-40 rounded-md border border-outline-secondary bg-bg-default p-2 shadow-none"
+      sideOffset={8}
+    >
+      <MobileThemeOptions />
+    </PopoverContent>
+  </Popover>
+);
+
+const mobileThemeOptions = [
+  { key: "light", label: "Light", icon: Sun },
+  { key: "dark", label: "Dark", icon: Moon },
+  { key: "system", label: "System", icon: Monitor },
+] as const;
+
+const MobileThemeOptions = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <div className="flex min-w-28 flex-col gap-1">
+      {mobileThemeOptions.map((option) => {
+        const isActive = theme === option.key;
+        const Icon = option.icon;
+
+        return (
+          <button
+            className={cn(
+              "flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-colors duration-200",
+              isActive
+                ? "bg-bg-secondary font-medium text-fg-default"
+                : "text-fg-tertiary hover:bg-bg-secondary/70 hover:text-fg-default"
+            )}
+            key={option.key}
+            onClick={() => setTheme(option.key)}
+            type="button"
+          >
+            <Icon className="size-4 shrink-0" />
+            {option.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
 
 type NavSectionProps = {
   title: string;
