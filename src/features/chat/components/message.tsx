@@ -14,6 +14,32 @@ type PreviewMessageProps = {
   isLast: boolean;
 };
 
+// type AgentSelectionPart = {
+//   type: "data-agent-selection";
+//   data: {
+//     id: string;
+//     label: string;
+//     model: string;
+//     description: string;
+//   };
+// };
+
+// const isAgentSelectionPart = (
+//   part: UIMessage["parts"][number]
+// ): part is AgentSelectionPart => {
+//   if (part.type !== "data-agent-selection") return false;
+//   if (!("data" in part)) return false;
+//   if (typeof part.data !== "object" || part.data === null) return false;
+
+//   const data = part.data as Record<string, unknown>;
+//   return (
+//     typeof data.id === "string" &&
+//     typeof data.label === "string" &&
+//     typeof data.model === "string" &&
+//     typeof data.description === "string"
+//   );
+// };
+
 const PurePreviewMessage = ({
   message,
   status,

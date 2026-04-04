@@ -66,7 +66,7 @@ export default function Home() {
       </main>
 
       <div className="flex w-full justify-center">
-        <Footer className="max-w-4xl px-6" />
+        <Footer className="max-w-4xl px-6 sm:px-0" />
       </div>
     </>
   );
