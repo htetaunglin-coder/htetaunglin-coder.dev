@@ -11,6 +11,7 @@ type PromptAreaProps = {
   stop: () => void;
   sendMessage: (input: string) => void;
   maxLength?: number;
+  agentSelector?: React.ReactNode;
 };
 
 const PromptArea = ({
@@ -18,10 +19,15 @@ const PromptArea = ({
   stop,
   sendMessage,
   maxLength,
+  agentSelector,
 }: PromptAreaProps) => {
   const [input, setInput] = useState("");
   const [draft, setDraft] = useLocalStorage<string>("conversation_draft", "");
   const shouldSaveRef = useRef(true);
+  const submitLockRef = useRef(false);
+
+  const isBusy =
+    status === "submitted" || status === "streaming" || submitLockRef.current;
 
   // We only want to run this once as soon as the page load to restore the previous user draft.
   // biome-ignore lint/correctness/useExhaustiveDependencies: off
@@ -30,6 +36,12 @@ const PromptArea = ({
       setInput(draft);
     }
   }, []);
+
+  useEffect(() => {
+    if (status === "ready" || status === "error") {
+      submitLockRef.current = false;
+    }
+  }, [status]);
 
   const saveDraft = useDebounceCallback((content: string) => {
     if (!shouldSaveRef.current) return;
@@ -46,7 +58,7 @@ const PromptArea = ({
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && e.shiftKey === false) {
-      // if (isBusy) return;
+      if (isBusy) return;
       e.preventDefault();
       const form = e.currentTarget.form;
       if (form) {
@@ -58,12 +70,15 @@ const PromptArea = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isBusy) return;
+
     if (maxLength && input.length > maxLength) {
       return;
     }
 
     if (!input.trim()) return;
     const message = input.trim();
+    submitLockRef.current = true;
     sendMessage(message);
     setInput("");
     shouldSaveRef.current = false;
@@ -77,7 +92,7 @@ const PromptArea = ({
 
   const isSubmitDisabled =
     (!input && status === "ready") ||
-    status === "submitted" ||
+    isBusy ||
     !!(maxLength && charCount >= maxLength);
 
   return (
@@ -118,18 +133,25 @@ const PromptArea = ({
         </span>
       </div>
 
-      <Button
-        className="absolute right-3 bottom-3 gap-1.5 rounded-lg rounded-br-xl"
-        disabled={isSubmitDisabled}
-        iconOnly
-        onClick={() => status === "streaming" && stop()}
-        type="submit"
-        variant="brand"
+      <div
+        className={`absolute right-3 bottom-3 left-3 flex items-center gap-2 ${
+          agentSelector ? "justify-between" : "justify-end"
+        }`}
       >
-        {status === "submitted" && <Loader2Icon className="animate-spin" />}
-        {status === "streaming" && <Square className="bg-foreground" />}
-        {status !== "streaming" && status !== "submitted" && <SendIcon />}
-      </Button>
+        {agentSelector && <div className="min-w-0">{agentSelector}</div>}
+        <Button
+          className="shrink-0 gap-1.5 rounded-lg rounded-br-xl"
+          disabled={isSubmitDisabled}
+          iconOnly
+          onClick={() => status === "streaming" && stop()}
+          type="submit"
+          variant="brand"
+        >
+          {status === "submitted" && <Loader2Icon className="animate-spin" />}
+          {status === "streaming" && <Square className="bg-foreground" />}
+          {status !== "streaming" && status !== "submitted" && <SendIcon />}
+        </Button>
+      </div>
     </form>
   );
 };

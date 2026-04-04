@@ -1,20 +1,43 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { ArrowDownIcon } from "lucide-react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useStickToBottom } from "use-stick-to-bottom";
 import { FadeAnimation } from "@/components/animations/fade-animation";
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AgentSwitcher } from "./components/agent-switcher";
 import { PreviewMessage, ThinkingMessage } from "./components/message";
 import { PromptArea } from "./components/prompt-area";
 import { SuggestedQuestions } from "./components/suggested-questions";
+import {
+  type ChatAgentId,
+  chatAgents,
+  DEFAULT_CHAT_AGENT_ID,
+} from "./lib/agents";
 
 const MAX_MESSAGE_LENGTH = 200;
 
 const ChatView = () => {
+  const [selectedAgentId, setSelectedAgentId] = useState<ChatAgentId>(
+    DEFAULT_CHAT_AGENT_ID
+  );
+
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: "/api/chat",
+        body: {
+          agentId: selectedAgentId,
+        },
+      }),
+    [selectedAgentId]
+  );
+
   const { scrollRef, contentRef, isAtBottom, scrollToBottom } =
     useStickToBottom({
       initial: "smooth",
@@ -22,6 +45,7 @@ const ChatView = () => {
     });
 
   const { sendMessage, messages, status, stop } = useChat({
+    transport,
     onError: (error) => {
       let errorMessage = "An error occurred, please try again later.";
 
@@ -113,6 +137,14 @@ const ChatView = () => {
           <div className="flex justify-center bg-bg-default p-4 pt-0 pb-8">
             <div className="relative w-full max-w-3xl">
               <PromptArea
+                agentSelector={
+                  <AgentSwitcher
+                    agents={chatAgents}
+                    disabled={status === "streaming" || status === "submitted"}
+                    onChange={setSelectedAgentId}
+                    selectedAgentId={selectedAgentId}
+                  />
+                }
                 maxLength={MAX_MESSAGE_LENGTH}
                 sendMessage={(msg) => sendMessage({ text: msg })}
                 status={status}

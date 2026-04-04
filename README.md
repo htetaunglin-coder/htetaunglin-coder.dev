@@ -58,12 +58,33 @@ Things I ~~wish~~ would like to implement in the future:
 
 3. **Add environment variables**
    Create a `.env.local` file and fill in the values (see `.env.example`).
+   For AI chat and rate limiting, ensure `GROQ_API_KEY` and `KV_*` variables are set.
+   For production cron keepalive, also set `CRON_SECRET`.
 
 4. **Start the development server**
 
    ```bash
    npm run dev
    ```
+
+## KV Keepalive Cron
+
+- This repo includes a protected keepalive endpoint: `/api/cron/kv-keepalive`.
+- Vercel Cron schedule is configured in `vercel.json` to run every 3 days.
+- Vercel will send `Authorization: Bearer <CRON_SECRET>`, so set `CRON_SECRET` in project environment variables.
+
+## Agent Documentation
+
+This repo includes an agent-oriented documentation set for context-aware implementation:
+
+- `AGENTS.md` - short root instructions for coding agents
+- `agent_docs/project-map.md` - architecture and file map
+- `agent_docs/implementation-playbook.md` - research -> plan -> implement -> verify workflow
+- `agent_docs/code-organization.md` - colocation-first code organization conventions for this repo
+- `agent_docs/i18n-burmese-english.md` - Burmese/English internationalization plan
+- `agent_docs/generative-ai-extension.md` - advanced AI feature extension guide
+- `agent_docs/dependencies-and-doc-packages.md` - dependency/docs package update process
+- `agent_docs/context-engineering-principles.md` - principles adapted from HumanLayer references
 
 ## 🙏 Acknowledgements
 
