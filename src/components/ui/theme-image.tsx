@@ -20,6 +20,7 @@ export const ThemeImage = ({
   width,
   height,
   className,
+  preload = false,
   ...props
 }: ThemeImageProps) => {
   const [mounted, setMounted] = useState(false);
@@ -41,6 +42,7 @@ export const ThemeImage = ({
       alt={alt}
       className={className}
       height={height}
+      preload={preload}
       src={src}
       width={width}
       {...props}

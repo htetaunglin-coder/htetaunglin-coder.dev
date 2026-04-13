@@ -31,7 +31,9 @@ const lineNumberClassNames = cn(
   "[&_.line]:before:text-[13px]",
   "[&_.line]:before:text-right",
   "[&_.line]:before:text-fg-tertiary/50",
-  "[&_.line]:before:font-mono",
+  "[&_.line]:before:font-gloria-hallelujah",
+  "[&_.line]:before:italic",
+  "[&_.line]:before:tracking-normal",
   "[&_.line]:before:select-none"
 );
 

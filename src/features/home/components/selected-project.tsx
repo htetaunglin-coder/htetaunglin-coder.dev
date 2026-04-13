@@ -34,7 +34,7 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
   return (
     <div className="space-y-6">
       <Link
-        className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl bg-zinc-500 brightness-90 hover:z-[var(--above-grainy-overlay-z-index)] sm:rounded-2xl dark:brightness-[0.875]"
+        className="group relative block aspect-[16/10] w-full overflow-hidden bg-zinc-500 brightness-90 hover:z-[var(--above-grainy-overlay-z-index)] dark:brightness-[0.875]"
         href={`/projects/${project.id}`}
       >
         <ThemeImage
@@ -64,7 +64,7 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
         </div>
       </Link>
 
-      <div className="mt-2 flex justify-between gap-4 sm:px-6">
+      <div className="mt-2 flex justify-between gap-4">
         <div className="max-w-lg flex-grow">
           <h3>
             <NavLink

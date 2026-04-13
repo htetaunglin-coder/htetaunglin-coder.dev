@@ -12,9 +12,8 @@
     var(--font-doto), "Nunito", "Inter", "Segoe UI", "Helvetica Neue",
     sans-serif;
 
-  --font-mono:
-    var(--font-mono), "JetBrains Mono", "Fira Code", "Menlo", "Consolas",
-    monospace;
+  --font-gloria-hallelujah:
+    var(--font-gloria-hallelujah), "Gloria Hallelujah", "Arial", sans-serif;
 
   --font-inter: var(--font-inter), sans-serif;
 
@@ -190,18 +189,21 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-  /* background-color: rgb(83, 60, 150); */
-}
-
 @layer base {
   * {
     @apply border-outline-default;
   }
   body {
-    @apply bg-bg-default text-fg-default font-inter;
+    @apply bg-bg-default text-fg-default;
   }
+}
+
+body {
+  @apply font-inter;
+}
+
+* {
+  @apply tracking-tight;
 }
 
 @utility container {
@@ -235,6 +237,10 @@ html {
   }
 }
 
+:root,
+.dark {
+  --color-fd-card-foreground: var(--color-fg-default) !important;
+}
 /* -------------------------------------------------------------------------- */
 
 .markdown li::marker {
@@ -280,11 +286,11 @@ html {
   .prose h3 a,
   .prose h4 a,
   .prose h5 a {
-    @apply !text-fg-default !no-underline hover:!underline !font-bold;
+    @apply !text-fg-default !no-underline hover:!underline !font-bold font-inter;
   }
 
   .prose a {
-    @apply text-fg-brand;
+    @apply text-fg-brand font-gloria-hallelujah;
   }
 
   .prose h1,
@@ -318,7 +324,7 @@ html {
   }
 
   .prose :not(pre) > code {
-    @apply font-mono font-medium bg-bg-secondary !py-px;
+    @apply font-gloria-hallelujah italic tracking-normal font-medium bg-bg-secondary rounded-none border-none !pt-0 !pb-0.5;
   }
 
   .prose strong {

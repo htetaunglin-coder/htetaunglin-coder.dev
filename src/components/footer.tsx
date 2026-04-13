@@ -12,9 +12,9 @@ import { NavLink } from "./ui/nav-link";
 const Footer = ({ className }: { className?: string }) => (
   <footer className={cn("flex w-full justify-between", className)}>
     <div className="flex w-full flex-col justify-between gap-4 py-12 sm:flex-row">
-      <div className="flex flex-col-reverse gap-1.5 sm:flex-col">
-        <p className="text-fg-tertiary text-sm">
-          Designed and Built By{" "}
+      <div className="flex flex-col-reverse gap-3 sm:flex-col">
+        <p className="font-gloria-hallelujah text-fg-tertiary text-sm italic tracking-normal">
+          / Built By{" "}
           <NavLink
             className="font-medium text-fg-brand underline hover:text-fg-brand/80"
             href={"https://www.linkedin.com/in/htetaunglin-coder"}

@@ -1,21 +1,28 @@
-import { Doto, Inter, JetBrains_Mono } from "next/font/google";
+import { Doto, Gloria_Hallelujah, Inter } from "next/font/google";
 
-const fontSans = Inter({
+const fontInter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   fallback: ["system-ui", "arial"],
 });
 
-const fontMono = JetBrains_Mono({
+const fontGloriaHallelujah = Gloria_Hallelujah({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-gloria-hallelujah",
   fallback: ["system-ui", "arial"],
+  preload: false,
 });
 
 const doto = Doto({
   subsets: ["latin"],
   weight: ["800", "900"],
   variable: "--font-doto",
+  preload: false,
 });
 
-export const fonts = [fontSans.variable, fontMono.variable, doto.variable];
+export const fonts = [
+  fontInter.variable,
+  fontGloriaHallelujah.variable,
+  doto.variable,
+];

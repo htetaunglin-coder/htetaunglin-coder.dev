@@ -149,7 +149,7 @@ const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
               </p>
             </div>
             <div className="border-b border-b-outline-secondary py-12">
-              <div className="mb-2 font-medium font-mono">
+              <div className="mb-2 font-gloria-hallelujah font-medium italic tracking-normal">
                 <div className="flex flex-wrap items-center gap-4">
                   <p className="text-fg-tertiary text-xs uppercase sm:text-sm">
                     {page.data.series}
@@ -160,11 +160,9 @@ const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
                     <p>{formatDate(page.data.date, { includeDay: true })}</p>
                   </div>
 
-                  <p className="font-medium font-mono text-fg-tertiary text-xs sm:text-sm">
+                  <p className="font-medium text-fg-tertiary text-xs sm:text-sm">
                     — author:{" "}
-                    <span className="text-fg-brand italic">
-                      {page.data.author}
-                    </span>
+                    <span className="text-fg-brand">{page.data.author}</span>
                   </p>
                 </div>
               </div>
@@ -180,12 +178,12 @@ const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
                 <div className="flex flex-wrap gap-2">
                   {page.data.tags.map((tag) => (
                     <Badge
-                      className="inline-block px-2 py-1 font-medium font-mono text-xs"
+                      className="inline-flex items-center rounded-none px-2.5 pt-0 pb-1 font-gloria-hallelujah font-medium text-xs/relaxed italic tracking-normal"
                       key={tag}
                       radius="full"
                       variant="secondary"
                     >
-                      {tag}
+                      # {tag}
                     </Badge>
                   ))}
                 </div>

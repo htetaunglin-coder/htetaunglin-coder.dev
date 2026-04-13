@@ -19,10 +19,8 @@ export const metadata: Metadata = {
 };
 
 const SideQuestsPage = () => (
-  <main className="py-16 sm:pt-24 md:pt-32">
-    <div className="mx-auto w-full max-w-4xl px-6 lg:px-0">
-      <SideQuests />
-    </div>
+  <main className="pt-4 pb-16 sm:pt-24 md:pt-16">
+    <SideQuests />
   </main>
 );
 
