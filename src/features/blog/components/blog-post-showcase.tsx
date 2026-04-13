@@ -1,17 +1,19 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { CloudinaryImage } from "@/components/cloudinary-image";
+import { DashedDivider } from "@/components/decorations/dashed-divider";
 import type { blogSource } from "@/lib/source";
 import { formatDate } from "@/lib/utils";
 
 const BlogPostShowcase = ({
   post,
+  lastItem,
 }: {
+  lastItem: boolean;
   post: ReturnType<typeof blogSource.getPages>[number];
 }) => (
-  <article className="flex flex-col-reverse items-center gap-6 sm:flex-row md:gap-12">
+  <article className="relative flex flex-col-reverse items-center gap-6 pt-8 pb-12 sm:flex-row md:gap-12">
     <div className="w-full space-y-2 md:space-y-4">
-      {(post.data.tags || post.data.series) && (
+      {/* {(post.data.tags || post.data.series) && (
         <div className="hidden space-y-2 text-xs md:block md:text-sm">
           {post.data.tags && (
             <div className="flex items-center gap-4">
@@ -30,7 +32,7 @@ const BlogPostShowcase = ({
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       <div className="space-y-1 md:space-y-2">
         <h2>
@@ -50,9 +52,9 @@ const BlogPostShowcase = ({
       </div>
 
       {(post.data.author || post.data.date) && (
-        <div className="flex items-center text-fg-tertiary/80 text-xs md:text-sm">
+        <div className="flex items-center font-gloria-hallelujah text-fg-tertiary/80 text-xs italic md:text-sm">
           {post.data.date && (
-            <span>{formatDate(post.data.date, { includeDay: true })}</span>
+            <span>/ {formatDate(post.data.date, { includeDay: true })}</span>
           )}
         </div>
       )}
@@ -65,6 +67,7 @@ const BlogPostShowcase = ({
       </Link>
     </div>
 
+    {/* 
     <Link
       className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl grayscale-25 sm:w-44 sm:rounded-lg md:w-2/5 md:rounded-xl dark:brightness-90"
       href={post.url}
@@ -77,7 +80,11 @@ const BlogPostShowcase = ({
         src={post.data.image.url}
         width={360}
       />
-    </Link>
+    </Link> */}
+
+    {!lastItem && (
+      <DashedDivider className="absolute inset-x-0 bottom-0 opacity-35 lg:mx-[-3rem] xl:mx-[-6rem] dark:opacity-20" />
+    )}
   </article>
 );
 

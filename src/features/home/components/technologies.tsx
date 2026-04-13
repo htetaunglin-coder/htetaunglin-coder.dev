@@ -107,7 +107,7 @@ const Technologies = () => (
       delay={0.25}
       direction="up"
     >
-      These are the tools I use to craft{" "}
+      The tools I use to craft{" "}
       <span className="font-medium text-fg-brand">
         clean, performant web experiences.
       </span>

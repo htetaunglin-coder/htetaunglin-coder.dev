@@ -163,7 +163,7 @@ const Experience = () => (
                           )}
                         </div>
 
-                        <p className="mb-1 shrink-0 text-fg-brand text-xs md:text-sm lg:text-sm">
+                        <p className="mb-1 shrink-0 font-gloria-hallelujah font-normal text-fg-brand text-xs tracking-normal md:text-sm lg:text-sm">
                           {event.month}
                         </p>
                       </div>

@@ -24,5 +24,16 @@
         "noUselessUndefined": "off"
       }
     }
+  },
+  "files": {
+    "includes": [
+      "**",
+      "!.agents",
+      "!**/.agents",
+      "!!.next",
+      "!!**/.next",
+      "!!dist",
+      "!!**/dist"
+    ]
   }
 }

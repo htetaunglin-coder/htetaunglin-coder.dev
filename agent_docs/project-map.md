@@ -16,7 +16,11 @@
   - `src/app/(app)/(main)/layout.tsx`
 - Pages:
   - Home: `src/app/(app)/(main)/(home)/page.tsx`
+    - Name pronunciation sound initializes `AudioContext` only after user interaction to satisfy autoplay policies
   - Projects list/detail: `src/app/(app)/(main)/projects/page.tsx`, `src/app/(app)/(main)/projects/[id]/page.tsx`
+    - Projects list supports year filtering via query param: `year=all|before-2025|2025|2026`
+    - Cover in-view animation is per page visit (resets on page refresh/revisit), then disabled after first user interaction (for example, changing year tabs)
+    - Implementation note: `projects_cover_interacted` cookie is intentionally short-lived and used only to bridge client interaction state back to the server-rendered page during tab/query navigation
   - About: `src/app/(app)/(main)/about/page.tsx`
   - Side quests: `src/app/(app)/(main)/side-quests/page.tsx`
   - Guest book: `src/app/(app)/(main)/guest-book/page.tsx`
@@ -56,6 +60,10 @@
   - `src/lib/source.ts`
 - Blog content files:
   - `content/blog/*.mdx`
+- Blog list filtering:
+  - `src/app/(app)/(blog)/blog/page.tsx`
+  - Query param `category` supports `all` (default), `tech`, `life`
+  - Mapping: `tech -> series: technology`, `life -> series: thoughts`
 
 ## Metadata and SEO boundary
 

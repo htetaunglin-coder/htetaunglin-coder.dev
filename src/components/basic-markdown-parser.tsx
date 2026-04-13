@@ -118,7 +118,7 @@ const renderToken = (token: BasicMarkdownToken): React.ReactNode => {
     case "code":
       return (
         <code
-          className="rounded bg-bg-tertiary px-1.5 py-0.5 font-mono text-sm"
+          className="border-none bg-bg-tertiary px-1.5 pt-0 pb-0.5 font-gloria-hallelujah text-sm italic tracking-normal"
           key={token.id}
         >
           {token.content}

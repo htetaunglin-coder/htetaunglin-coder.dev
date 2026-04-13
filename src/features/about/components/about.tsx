@@ -60,7 +60,7 @@ const About = () => (
               />
             )}
           </div>
-          <p className="mt-2 text-base text-fg-secondary/90 sm:mt-4 sm:ml-20 sm:max-w-none sm:text-lg">
+          <p className="mt-4 text-base text-fg-tertiary sm:mt-8 sm:ml-20 sm:max-w-none sm:text-lg">
             <BasicMarkdown className="[&_strong]:font-medium [&_strong]:text-fg-brand">
               {section.content}
             </BasicMarkdown>
@@ -70,7 +70,7 @@ const About = () => (
 
       <FadeStaggeredAnimation delay={0.25} direction="up">
         <Title>Outside of coding</Title>
-        <p className="mt-2 text-base text-fg-secondary/90 sm:mt-4 sm:ml-20 sm:max-w-none sm:text-lg">
+        <p className="mt-4 text-base text-fg-secondary/90 sm:mt-8 sm:ml-20 sm:max-w-none sm:text-lg">
           I&apos;m really into psychology and stoicism, learning how thoughts
           and emotions shape how we live. When I&apos;m not coding, I love
           playing guitar or going to the gym to reset and stay balanced.
@@ -78,10 +78,10 @@ const About = () => (
 
         <div className="mx-auto mt-12 flex w-full max-w-2xl flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
-            <p className="font-bold font-mono text-fg-tertiary/50 text-lg sm:text-xl">
+            <p className="font-bold font-gloria-hallelujah text-fg-tertiary/50 text-lg italic tracking-normal sm:text-xl">
               And... of course,
             </p>
-            <p className="mt-2 font-bold font-mono text-base text-fg-tertiary/90 sm:text-lg">
+            <p className="mt-2 font-bold font-gloria-hallelujah text-base text-fg-tertiary/90 italic tracking-normal sm:text-lg">
               I enjoy spending time with friends, maybe a few drinks, good food,
               and laughter.
             </p>
@@ -113,8 +113,11 @@ const About = () => (
               <p className="absolute top-[220px] right-2 font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 @Kaung Khant Aung
               </p>
-              <p className="absolute bottom-0 left-2 p-2 font-mono font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                We Cooling 😎
+              <p className="absolute bottom-0 left-2 p-2 text-white tracking-normal opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="font-gloria-hallelujah font-semibold italic">
+                  We Cooling
+                </span>{" "}
+                😎
               </p>
             </div>
           </div>
@@ -137,7 +140,7 @@ const Title = ({
 }) => (
   <h1
     className={cn(
-      "font-medium font-mono text-3xl text-fg-tertiary/20 tracking-tighter sm:text-4xl md:text-5xl",
+      "font-gloria-hallelujah font-medium text-3xl text-fg-tertiary/20 italic tracking-normal tracking-tighter sm:text-4xl md:text-5xl dark:text-fg-tertiary/15",
       className
     )}
   >

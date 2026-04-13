@@ -25,8 +25,12 @@ import { useCallback, useEffect, useRef } from "react";
  * ```
  */
 export function useSound(url: string) {
+  const audioContextClassRef = useRef<
+    (typeof AudioContext & { new (): AudioContext }) | null
+  >(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const bufferRef = useRef<AudioBuffer | null>(null);
+  const loadingBufferPromiseRef = useRef<Promise<AudioBuffer> | null>(null);
 
   useEffect(() => {
     const AudioContextClass =
@@ -39,28 +43,51 @@ export function useSound(url: string) {
       return;
     }
 
-    const audioCtx = new AudioContextClass();
-    audioCtxRef.current = audioCtx;
+    audioContextClassRef.current = AudioContextClass;
 
-    fetch(url)
-      .then((res) => res.arrayBuffer())
-      .then((data) => audioCtx.decodeAudioData(data))
-      .then((decoded) => {
-        bufferRef.current = decoded;
-      })
-      .catch((err) => {
-        console.log(`Failed to load click sound from ${url}:`, err);
-      });
-  }, [url]);
-
-  const play = useCallback(() => {
-    if (audioCtxRef.current && bufferRef.current) {
-      const source = audioCtxRef.current.createBufferSource();
-      source.buffer = bufferRef.current;
-      source.connect(audioCtxRef.current.destination);
-      source.start(0);
-    }
+    return () => {
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close();
+        audioCtxRef.current = null;
+      }
+    };
   }, []);
+
+  const play = useCallback(async () => {
+    if (!audioContextClassRef.current) return;
+
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new audioContextClassRef.current();
+    }
+
+    const audioCtx = audioCtxRef.current;
+
+    if (audioCtx.state === "suspended") {
+      await audioCtx.resume();
+    }
+
+    if (!bufferRef.current) {
+      if (!loadingBufferPromiseRef.current) {
+        loadingBufferPromiseRef.current = fetch(url)
+          .then((res) => res.arrayBuffer())
+          .then((data) => audioCtx.decodeAudioData(data));
+      }
+
+      try {
+        bufferRef.current = await loadingBufferPromiseRef.current;
+      } catch (err) {
+        console.log(`Failed to load click sound from ${url}:`, err);
+        return;
+      } finally {
+        loadingBufferPromiseRef.current = null;
+      }
+    }
+
+    const source = audioCtx.createBufferSource();
+    source.buffer = bufferRef.current;
+    source.connect(audioCtx.destination);
+    source.start(0);
+  }, [url]);
 
   return play;
 }

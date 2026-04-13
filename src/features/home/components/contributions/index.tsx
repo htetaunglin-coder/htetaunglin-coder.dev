@@ -35,7 +35,7 @@ const Contributions = async () => {
         I code almost every day, some projects make it here, some don&apos;t.
         You can check the{" "}
         <NavLink
-          className="font-medium text-fg-brand underline"
+          className="font-gloria-hallelujah font-normal text-fg-brand italic tracking-normal underline"
           href={"/about"}
         >
           {" "}

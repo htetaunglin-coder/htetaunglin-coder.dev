@@ -78,6 +78,9 @@ const FadeStaggeredAnimation = ({
 type FadeAnimationProps = {
   className?: string;
   delay?: number;
+  distance?: number;
+  amount?: number | "some" | "all";
+  once?: boolean;
   as?: React.ElementType;
   direction: "up" | "down";
   children: React.ReactNode;
@@ -86,6 +89,9 @@ type FadeAnimationProps = {
 const FadeAnimation = ({
   direction,
   delay = 0,
+  distance = 18,
+  amount = 0.3,
+  once = true,
   className,
   as: Component = "span",
   children,
@@ -102,7 +108,7 @@ const FadeAnimation = ({
       variants={{
         hidden: {
           opacity: 0,
-          y: direction === "up" ? 18 : -18,
+          y: direction === "up" ? distance : -distance,
         },
         show: {
           opacity: 1,
@@ -114,7 +120,7 @@ const FadeAnimation = ({
           },
         },
       }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once, amount }}
       whileInView="show"
     >
       {children}
