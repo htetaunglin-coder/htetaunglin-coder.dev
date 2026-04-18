@@ -1,9 +1,6 @@
-"use client";
-
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { DashedLine } from "@/components/decorations/dashed-line";
-import { NavLink } from "@/components/ui/nav-link";
 import { cn } from "@/lib/utils";
 
 type TestimonialData = {
@@ -115,7 +112,12 @@ const TestimonialCard = ({
         className
       )}
     >
-      <NavLink className="flex gap-6" href={author.url}>
+      <a
+        className="new_tab_cursor flex gap-6"
+        href={author.url}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         <div className="-rotate-6 size-12 shrink-0 bg-white p-1">
           <CloudinaryAvatar
             className="size-full rounded-none"
@@ -130,14 +132,14 @@ const TestimonialCard = ({
         </div>
 
         <div>
-          <h5 className="font-medium text-fg-default text-sm underline hover:underline sm:no-underline">
+          <h3 className="font-medium text-fg-default text-sm underline hover:underline sm:no-underline">
             {author.name}
-          </h5>
+          </h3>
           <p className="text-fg-tertiary/80 text-xs">
             {author.role} {author.company && `at ${author.company}`}
           </p>
         </div>
-      </NavLink>
+      </a>
 
       <p className="text-fg-tertiary text-sm">{content}</p>
     </div>

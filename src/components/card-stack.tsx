@@ -53,12 +53,11 @@ export const CardStack = ({
         return (
           <motion.div
             animate={{
-              top: index * -CARD_OFFSET,
-              scale: 1 - index * SCALE_FACTOR, // decrease scale for cards that are behind
+              transform: `translateY(-${index * CARD_OFFSET}px) scale(${1 - index * SCALE_FACTOR})`,
               zIndex: cards.length - index, //  decrease z-index for the cards that are behind
               filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
             }}
-            className="absolute aspect-[16/9] w-full translate-y-20 overflow-hidden rounded-xl border border-outline-tertiary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
+            className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
             key={card.id}
             style={{
               transformOrigin: "top center",

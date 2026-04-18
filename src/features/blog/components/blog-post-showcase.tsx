@@ -60,10 +60,11 @@ const BlogPostShowcase = ({
       )}
 
       <Link
+        aria-label={`Read more about ${post.data.title}`}
         className="inline-flex items-center gap-2 text-fg-brand text-sm underline hover:brightness-80 md:text-base"
         href={post.url}
       >
-        Read More <ArrowRight />
+        Read More <ArrowRight aria-hidden="true" />
       </Link>
     </div>
 

@@ -1,5 +1,3 @@
-"use client";
-
 import type React from "react";
 import { FadeAnimation } from "@/components/animations/fade-animation";
 import { Icons } from "@/components/icons";
