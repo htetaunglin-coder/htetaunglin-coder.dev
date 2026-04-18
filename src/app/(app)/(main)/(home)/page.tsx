@@ -1,11 +1,22 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
 import { FadeAnimation } from "@/components/animations/fade-animation";
-import { Contact } from "@/features/home/components/contact";
 import { Contributions } from "@/features/home/components/contributions";
 import { Experience } from "@/features/home/components/experience";
 import { Hero } from "@/features/home/components/hero";
+import { LazyContact } from "@/features/home/components/lazy-contact";
 import { SelectedProject } from "@/features/home/components/selected-project";
 import { Technologies } from "@/features/home/components/technologies";
 import { Testimonial } from "@/features/home/components/testimonial";
+import { siteConfig } from "@/lib/site-config";
+import { absoluteUrl } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  description: siteConfig.description,
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+};
 
 const HomePage = () => (
   <main className="flex justify-center pt-16 pb-16 sm:pt-24 sm:pb-20 md:pt-52">
@@ -27,7 +38,9 @@ const HomePage = () => (
       </section>
 
       <section className="px-6 pt-32 lg:pt-52" id="contributions">
-        <Contributions />
+        <Suspense fallback={<ContributionsFallback />}>
+          <Contributions />
+        </Suspense>
       </section>
 
       <section className="px-6 pt-32 lg:pt-52" id="testimonial">
@@ -50,7 +63,7 @@ const HomePage = () => (
         </FadeAnimation> */}
 
         <FadeAnimation as="div" delay={0.25} direction="up">
-          <Contact />
+          <LazyContact />
         </FadeAnimation>
       </section>
     </div>
@@ -58,3 +71,12 @@ const HomePage = () => (
 );
 
 export default HomePage;
+
+const ContributionsFallback = () => (
+  <div className="w-full">
+    <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
+      Contributions
+    </h2>
+    <div className="mt-4 h-[162px] w-full rounded-md border-b border-b-outline-secondary bg-bg-secondary/40 pb-6 sm:mt-8" />
+  </div>
+);

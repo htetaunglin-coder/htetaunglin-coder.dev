@@ -1,3 +1,6 @@
+export const appUrl =
+  process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
 export const siteConfig = {
   name: "Htet Aung Lin (Kelvin)",
   title: "Htet Aung Lin",
@@ -15,6 +18,6 @@ export const siteConfig = {
     "Web Developer Portfolio",
     "UI Developer",
   ],
-  url: process.env.NEXT_PUBLIC_APP_URL,
+  url: appUrl,
   googleSiteVerificationId: process.env.GOOGLE_SITE_VERIFICATION_ID || "",
 };

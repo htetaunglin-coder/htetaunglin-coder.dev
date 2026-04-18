@@ -55,12 +55,11 @@ const ImageStack = ({
         return (
           <motion.div
             animate={{
-              top: index * -offset,
-              scale: 1 - index * scaleFactor, // decrease scale for cards that are behind
+              transform: `translateY(-${index * offset}px) scale(${1 - index * scaleFactor})`,
               zIndex: images.length - index, //  decrease z-index for the cards that are behind
               filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
             }}
-            className="absolute aspect-[16/9] w-full translate-y-20 overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
+            className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
             key={image.id}
             style={{
               transformOrigin: "top center",

@@ -28,15 +28,16 @@ const Footer = ({ className }: { className?: string }) => (
       <div className="space-y-1">
         <div className="flex items-center gap-1 sm:justify-start">
           {SOCIAL_LINKS.map((link) => (
-            <Tooltip asChild={false} content={link.title} key={link.id}>
+            <Tooltip content={link.title} key={link.id}>
               <Button
                 asChild
                 className="text-fg-tertiary text-lg"
                 iconOnly
                 variant="ghost"
               >
-                <NavLink href={link.href}>
+                <NavLink aria-label={link.title} href={link.href}>
                   <link.icon />
+                  <span className="sr-only">{link.title}</span>
                 </NavLink>
               </Button>
             </Tooltip>
@@ -69,6 +70,7 @@ const FooterSignature = () => {
 
   return (
     <NavLink
+      aria-label="Go to home page"
       className="inline-block h-12 w-20 text-fg-brand"
       href={"/"}
       ref={ref}

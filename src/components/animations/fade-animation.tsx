@@ -9,20 +9,27 @@ type FadeStaggeredAnimationProps = {
   className?: string;
   delay?: number;
   as?: React.ElementType;
+  childAs?: React.ElementType;
   direction: "up" | "down";
   children: React.ReactNode;
   staggerChildren?: number;
+  initialOpacity?: number;
 };
 
 const FadeStaggeredAnimation = ({
   as: Component = "div",
+  childAs: ChildComponent = "div",
   direction,
   children,
   className = "",
   staggerChildren = 0.1,
+  initialOpacity = 0,
   delay = 0,
 }: FadeStaggeredAnimationProps) => {
   const MotionComponent = motion.create(Component, {
+    forwardMotionProps: false,
+  });
+  const MotionChild = motion.create(ChildComponent, {
     forwardMotionProps: false,
   });
 
@@ -47,15 +54,15 @@ const FadeStaggeredAnimation = ({
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child) ? (
-          <motion.div
+          <MotionChild
             variants={{
               hidden: {
-                opacity: 0,
-                y: direction === "up" ? 18 : -18,
+                opacity: initialOpacity,
+                transform: `translateY(${direction === "up" ? 18 : -18}px)`,
               },
               show: {
                 opacity: 1,
-                y: 0,
+                transform: "translateY(0px)",
                 transition: {
                   type: "spring",
                   stiffness: 80,
@@ -64,7 +71,7 @@ const FadeStaggeredAnimation = ({
             }}
           >
             {child}
-          </motion.div>
+          </MotionChild>
         ) : (
           child
         )
@@ -108,11 +115,11 @@ const FadeAnimation = ({
       variants={{
         hidden: {
           opacity: 0,
-          y: direction === "up" ? distance : -distance,
+          transform: `translateY(${direction === "up" ? distance : -distance}px)`,
         },
         show: {
           opacity: 1,
-          y: 0,
+          transform: "translateY(0px)",
           transition: {
             type: "spring",
             stiffness: 80,

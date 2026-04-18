@@ -30,6 +30,7 @@
       "**",
       "!.agents",
       "!**/.agents",
+      "!graphify-out",
       "!!.next",
       "!!**/.next",
       "!!dist",

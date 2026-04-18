@@ -62,22 +62,25 @@ const Header = ({
           <div className="flex items-center">
             <FadeStaggeredAnimation
               as="ul"
+              childAs="li"
               className="hidden items-center text-base sm:flex"
               direction="down"
               staggerChildren={0.05}
             >
               {MAIN_PAGES.map((page) => (
-                <li key={page.id}>
-                  <NavLink
-                    className="flex h-12 items-center justify-center px-3 text-fg-tertiary outline-none ring-0 transition duration-300 hover:text-fg-default focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default data-[state=active]:text-fg-default data-[state=active]:underline"
-                    href={page.href}
-                    matchPrefix={page.href !== "/"}
-                  >
-                    {page.title}
-                  </NavLink>
-                </li>
+                <NavLink
+                  className="flex h-12 items-center justify-center px-3 text-fg-tertiary outline-none ring-0 transition duration-300 hover:text-fg-default focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default data-[state=active]:text-fg-default data-[state=active]:underline"
+                  href={page.href}
+                  key={page.id}
+                  matchPrefix={page.href !== "/"}
+                >
+                  {page.title}
+                </NavLink>
               ))}
-              <div className="h-8 w-px bg-outline-default" />
+              <span
+                aria-hidden="true"
+                className="block h-8 w-px bg-outline-default"
+              />
               <MorePages />
             </FadeStaggeredAnimation>
 
@@ -121,8 +124,8 @@ const HeaderAutoHideWrapper = ({
       onFocusCapture={() => setIsHidden(false)}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       variants={{
-        hidden: { y: "-100%" },
-        visible: { y: "0%" },
+        hidden: { transform: "translateY(-100%)" },
+        visible: { transform: "translateY(0%)" },
       }}
       whileHover="visible"
     >
@@ -334,6 +337,7 @@ const MobileThemePopover = () => (
   <Popover>
     <PopoverTrigger asChild>
       <Button
+        aria-label="Choose color theme"
         className="group h-8 rounded-full border border-outline-secondary bg-bg-default px-3 text-fg-tertiary text-xs hover:text-fg-default data-[state=open]:text-fg-default"
         type="button"
         variant="ghost"

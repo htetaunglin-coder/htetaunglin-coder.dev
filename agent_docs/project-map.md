@@ -17,6 +17,8 @@
 - Pages:
   - Home: `src/app/(app)/(main)/(home)/page.tsx`
     - Name pronunciation sound initializes `AudioContext` only after user interaction to satisfy autoplay policies
+    - Home entrance reveals use Motion wrappers from `src/components/animations/fade-animation.tsx`; the hero text starts at non-zero opacity for stable desktop LCP detection while still fading in, and below-the-fold contact form code is loaded near viewport via `src/features/home/components/lazy-contact.tsx`
+    - Selected project imagery uses explicit responsive `sizes` through `src/components/ui/theme-image.tsx` to avoid oversized Cloudinary downloads on the home page
   - Projects list/detail: `src/app/(app)/(main)/projects/page.tsx`, `src/app/(app)/(main)/projects/[id]/page.tsx`
     - Projects list supports year filtering via query param: `year=all|before-2025|2025|2026`
     - Cover in-view animation is per page visit (resets on page refresh/revisit), then disabled after first user interaction (for example, changing year tabs)
@@ -84,6 +86,7 @@
 ## Common env vars in use
 
 From `.env.example` and runtime code:
+
 - `NEXT_PUBLIC_APP_URL`
 - `GROQ_API_KEY`
 - `GOOGLE_GENERATIVE_AI_API_KEY` (provider initialized in `src/lib/ai.ts`)

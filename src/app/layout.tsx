@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`,
+        url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: siteConfig.name,
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     creator: "@htetaunglin_cdr",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`,
+        url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: siteConfig.name,

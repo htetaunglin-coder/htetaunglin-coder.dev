@@ -13,7 +13,12 @@ import { cn } from "@/lib/utils";
 const Hero = () => (
   <div className="relative flex h-[36rem] w-full justify-between font-inter">
     <div className="px-6">
-      <FadeStaggeredAnimation className="group" direction="up">
+      <FadeStaggeredAnimation
+        className="group"
+        direction="up"
+        initialOpacity={0.18}
+        staggerChildren={0.06}
+      >
         <p className="flex items-center gap-1 font-gloria-hallelujah text-fg-tertiary/80 text-xs italic tracking-normal sm:text-base">
           / Hey It&apos;s me,{" "}
           <span className="font-medium text-fg-brand text-xs sm:text-sm">
@@ -59,8 +64,8 @@ const Hero = () => (
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
       transition={{
-        delay: 1,
-        duration: 0.5,
+        delay: 0.2,
+        duration: 0.4,
         ease: "easeInOut",
       }}
     >

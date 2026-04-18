@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 import { PROJECT_DATA } from "@/features/projects/data";
+import { appUrl } from "@/lib/site-config";
 import { blogSource } from "@/lib/source";
 
 export const revalidate = false;
 
 // biome-ignore lint/suspicious/useAwait: off
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const url = (path: string): string =>
-    new URL(path, process.env.NEXT_PUBLIC_APP_URL).toString();
+  const url = (path: string): string => new URL(path, appUrl).toString();
 
   const blogs = blogSource.getPages().map(
     (page) =>

@@ -30,12 +30,9 @@ export const ThemeImage = ({
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
-  // Dynamically set the src based on the theme
-  const src = theme === "dark" ? darkSrc : lightSrc;
+  // Render a deterministic light image during SSR, then switch after hydration
+  // if the active client theme is dark.
+  const src = mounted && theme === "dark" ? darkSrc : lightSrc;
 
   return (
     <CloudinaryImage

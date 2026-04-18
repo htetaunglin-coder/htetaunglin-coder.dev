@@ -1,10 +1,7 @@
-"use client";
-
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { FadeAnimation } from "@/components/animations/fade-animation";
 import { Button } from "@/components/ui/button";
-import { NavLink } from "@/components/ui/nav-link";
 import { ThemeImage } from "@/components/ui/theme-image";
 import { PROJECT_DATA, type ProjectItem } from "@/features/projects/data";
 import { cn, formatDate } from "@/lib/utils";
@@ -43,6 +40,7 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
           darkSrc={darkSrc}
           height={530}
           lightSrc={lightSrc}
+          sizes="(max-width: 896px) calc(100vw - 48px), 848px"
           width={850}
         />
 
@@ -67,21 +65,21 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
       <div className="mt-2 flex justify-between gap-4">
         <div className="max-w-lg flex-grow">
           <h3>
-            <NavLink
+            <Link
               className="flex items-center gap-1 font-semibold text-fg-secondary text-lg hover:underline"
               href={`/projects/${project.id}`}
             >
               {project.title}
               <ArrowUpRight className="mt-0.5 text-md" />
-            </NavLink>
+            </Link>
           </h3>
           <p className="mt-1 text-fg-tertiary text-sm">{project.description}</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <Button asChild className="text-sm" variant="secondary">
-              <NavLink href={"/projects"}>
+              <Link href="/projects">
                 View All Projects <ArrowRight />
-              </NavLink>
+              </Link>
             </Button>
           </div>
         </div>

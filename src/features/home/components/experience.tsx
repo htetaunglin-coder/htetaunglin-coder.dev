@@ -1,5 +1,3 @@
-"use client";
-
 import { FadeAnimation } from "@/components/animations/fade-animation";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +30,7 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
       },
       {
         id: "event-2",
-        month: "Jan - Present",
+        month: "Jan - March",
         title: "Full Stack Developer",
         company: "Pico Innovation (Freelance)",
         companyLink: "https://www.linkedin.com/company/picoinno/",
@@ -144,12 +142,12 @@ const Experience = () => (
                     <div className="ml-3 sm:ml-5">
                       <div className="flex justify-between">
                         <div>
-                          <h4 className="font-medium text-base text-fg-secondary leading-5 md:text-lg">
+                          <h3 className="font-medium text-base text-fg-secondary leading-5 md:text-lg">
                             {event.title}
-                          </h4>
+                          </h3>
                           {event.companyLink ? (
                             <a
-                              className="text-fg-tertiary/80 text-sm underline underline-offset-2 transition-colors hover:text-fg-brand dark:text-fg-tertiary/60"
+                              className="text-fg-tertiary text-sm underline underline-offset-2 transition-colors hover:text-fg-brand dark:text-fg-tertiary/60"
                               href={event.companyLink}
                               rel="noopener noreferrer"
                               target="_blank"
