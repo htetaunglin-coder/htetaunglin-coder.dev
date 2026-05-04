@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeImage } from "./ui/theme-image";
-
-let interval: any;
 
 export type ImageItem = {
   id: string;
@@ -30,45 +28,46 @@ const ImageStack = ({
   className?: string;
 }) => {
   const [images, setImages] = useState<ImageItem[]>(items);
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: off
   useEffect(() => {
-    startFlipping();
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const startFlipping = () => {
-    interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setImages((prevCards: ImageItem[]) => {
-        const newArray = [...prevCards]; // create a copy of the array
+        const newArray = [...prevCards];
         // biome-ignore lint/style/noNonNullAssertion: off
-        newArray.unshift(newArray.pop()!); // move the last element to the front
+        newArray.unshift(newArray.pop()!);
         return newArray;
       });
     }, 3000);
-  };
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <div className={cn("relative aspect-[16/9] w-full", className)}>
-      {images.map((image, index) => {
-        return (
-          <motion.div
-            animate={{
-              transform: `translateY(-${index * offset}px) scale(${1 - index * scaleFactor})`,
-              zIndex: images.length - index, //  decrease z-index for the cards that are behind
-              filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
-            }}
-            className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
-            key={image.id}
-            style={{
-              transformOrigin: "top center",
-            }}
-          >
-            <DynamicImage alt={image.alt} src={image.src} />
-          </motion.div>
-        );
-      })}
+      {images.map((image, index) => (
+        <motion.div
+          animate={{
+            transform: `translateY(-${index * offset}px) scale(${1 - index * scaleFactor})`,
+            zIndex: images.length - index,
+            filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
+          }}
+          className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
+          initial={{
+            transform: `translateY(-${index * offset}px) scale(${1 - index * scaleFactor})`,
+            zIndex: images.length - index,
+            filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
+          }}
+          key={image.id}
+          style={{
+            transformOrigin: "top center",
+          }}
+        >
+          <DynamicImage alt={image.alt} src={image.src} />
+        </motion.div>
+      ))}
     </div>
   );
 };
