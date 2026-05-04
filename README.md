@@ -86,6 +86,11 @@ This repo includes an agent-oriented documentation set for context-aware impleme
 - `agent_docs/dependencies-and-doc-packages.md` - dependency/docs package update process
 - `agent_docs/context-engineering-principles.md` - principles adapted from HumanLayer references
 
+## Lighthouse Scores
+
+<img width="475" height="109" alt="Screenshot 2026-04-18 at 10 19 28 pm" src="https://github.com/user-attachments/assets/318ea081-e07b-4131-aff0-6f2211c7ede5" />
+
+
 ## 🙏 Acknowledgements
 
 ### Inspirations
