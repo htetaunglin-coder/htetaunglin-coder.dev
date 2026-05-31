@@ -21,11 +21,18 @@ const Contact = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     reset,
   } = useForm<ContactFormData>({
+    defaultValues: {
+      email: "",
+      message: "",
+    },
+    mode: "onChange",
     resolver: zodResolver(contactSchema),
   });
+
+  const isSubmitDisabled = isSubmitting || !isValid;
 
   async function onSubmit(data: ContactFormData) {
     const formData = new FormData();
@@ -98,10 +105,10 @@ const Contact = () => {
         <div className="flex w-full justify-end pt-4">
           <Button
             className="gap-2"
-            disabled={isSubmitting}
+            disabled={isSubmitDisabled}
             loading={isSubmitting}
             type="submit"
-            variant="inverse"
+            variant={isSubmitDisabled ? "secondary" : "inverse"}
           >
             Submit
           </Button>
