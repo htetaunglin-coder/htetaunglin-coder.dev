@@ -24,7 +24,7 @@ const ProjectShowcase = ({
 
   return (
     <div className="relative space-y-6 pt-8 pb-12 font-inter">
-      <div className="mt-2 flex justify-between gap-4">
+      <div className="mt-4 flex justify-between gap-4">
         <div className="max-w-lg flex-grow">
           <h3 className="font-medium text-fg-secondary text-lg tracking-tight sm:font-semibold sm:text-2xl">
             {project.title}
@@ -69,12 +69,12 @@ const ProjectShowcase = ({
 
         <div
           className={cn(
-            "absolute right-0 bottom-0 left-0 h-1/3 w-full opacity-0 backdrop-blur-sm transition duration-300 group-hover:opacity-100",
+            "absolute right-0 bottom-0 left-0 h-1/3 w-full opacity-0 backdrop-blur-sm transition duration-300 ease-out group-hover:opacity-100",
             "mask-image:_linear-gradient(to_top,_black_25%,_transparent_80%) pointer-events-none [-webkit-mask-image:_linear-gradient(to_top,_black_25%,_transparent_80%)]"
           )}
         />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-10 justify-end px-4 opacity-0 transition duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-10 justify-end px-4 opacity-0 transition duration-300 ease-out group-hover:opacity-100">
           <div className="h-fit rounded-md bg-bg-tertiary px-2 py-1.5">
             <p className="text-fg-secondary text-xs">
               {formatDate(project.timeline.startDate)}

@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { PROJECT_DATA } from "@/features/projects/data";
+import { DURATION, EASE } from "@/lib/motion";
 
 let interval: any;
 
@@ -57,11 +58,12 @@ export const CardStack = ({
               zIndex: cards.length - index, //  decrease z-index for the cards that are behind
               filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
             }}
-            className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
+            className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary shadow-black/[0.1] shadow-xl dark:shadow-white/[0.1]"
             key={card.id}
             style={{
               transformOrigin: "top center",
             }}
+            transition={{ duration: DURATION.base, ease: EASE.out }}
           >
             <Image
               alt={PROJECT_DATA[0].title}

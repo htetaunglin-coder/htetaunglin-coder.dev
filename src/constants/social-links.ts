@@ -1,4 +1,4 @@
-import { File } from "lucide-react";
+import { File, Instagram, Mail, Send } from "lucide-react";
 import type { ComponentType } from "react";
 
 import { Icons } from "@/components/icons";
@@ -6,39 +6,62 @@ import { Icons } from "@/components/icons";
 export type SocialLinkItem = {
   id: string;
   title: string;
-  icon: ComponentType;
+  icon: ComponentType<{ className?: string }>;
   href: string;
 };
 
-export const SOCIAL_LINKS: readonly SocialLinkItem[] = [
-  {
+const LINKS = {
+  github: {
     id: "github",
     href: "https://github.com/htetaunglin-coder",
     icon: Icons.github,
     title: "Github",
   },
-  {
-    id: "facebook",
-    href: "https://www.facebook.com/htetaunglin.coder",
-    icon: Icons.facebook,
-    title: "Facebook",
+  instagram: {
+    id: "instagram",
+    href: "https://www.instagram.com/htetaunglin_coder",
+    icon: Instagram,
+    title: "Instagram",
   },
-  {
+  linkedin: {
     id: "linkedin",
     href: "https://www.linkedin.com/in/htetaunglin-coder",
     icon: Icons.linkedin,
     title: "LinkedIn",
   },
-  {
-    id: "youtube",
-    href: "https://www.youtube.com/@htetaunglin-coder",
-    icon: Icons.youtube,
-    title: "Youtube",
+  email: {
+    id: "email",
+    href: "mailto:htetaunglin.coder@gmail.com",
+    icon: Mail,
+    title: "Email",
   },
-  {
+  telegram: {
+    id: "telegram",
+    href: "https://t.me/htetaunglin_coder",
+    icon: Send,
+    title: "Telegram",
+  },
+  resume: {
     id: "resume",
     href: `${process.env.NEXT_PUBLIC_APP_URL}/resume`,
     icon: File,
     title: "Resume",
   },
+} satisfies Record<string, SocialLinkItem>;
+
+// Footer / header: where to find me. Explicit order, no telegram.
+export const PROFILE_LINKS: readonly SocialLinkItem[] = [
+  LINKS.github,
+  LINKS.instagram,
+  LINKS.linkedin,
+  LINKS.email,
+  LINKS.resume,
+];
+
+// Contact modal: direct reply channels. No github/resume.
+export const CONTACT_LINKS: readonly SocialLinkItem[] = [
+  LINKS.instagram,
+  LINKS.linkedin,
+  LINKS.email,
+  LINKS.telegram,
 ];

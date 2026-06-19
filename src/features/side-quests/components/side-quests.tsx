@@ -67,9 +67,9 @@ const SideQuests = () => (
           SideQuests
         </h1>
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
-          Just hobbies and small habits that keep me growing, curious, and
-          balanced. Some of them started as escape, some as passion — but all of
-          them helped me understand myself a little more.
+          Just hobbies and small habits that hold me together. Some of them
+          started as escape, some as passion. But all of them helped me
+          understand myself a little more.
         </p>
       </FadeStaggeredAnimation>
     </div>
@@ -93,7 +93,7 @@ const SideQuests = () => (
               </p>
               <p>
                 These days, AI can make anything sound perfect, but sometimes
-                this perfection hide the person who write it. I want to do the
+                that perfection hides the person who wrote it. I want to do the
                 opposite, write things myself. You might notice the writing is a
                 little rough, because I wrote it by myself.
               </p>
@@ -283,8 +283,8 @@ const SideQuests = () => (
                   >
                     ChatGPT{" "}
                   </NavLink>{" "}
-                  for helping me check my writing. I still make mistakes, but
-                  using it helps me get better and feel more confident.
+                  for helping me check my writing. It&apos;s helped me get
+                  better and feel more confident.
                 </p>
                 <p>
                   Looking ahead, I want to work with more people on challenging

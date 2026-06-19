@@ -8,7 +8,7 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Guest Book",
   description:
-    "Write anything you'd like — feedback, appreciation, or a quick hello.",
+    "Write anything you'd like: feedback, appreciation, or a quick hello.",
   robots: { index: false, follow: true },
   alternates: {
     canonical: absoluteUrl("/guest-book"),
@@ -23,7 +23,7 @@ const GuestBook = () => (
           Guest Book
         </h1>
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
-          Write anything you&apos;d like — feedback, appreciation, or a quick
+          Write anything you&apos;d like: feedback, appreciation, or a quick
           hello.
         </p>
       </FadeStaggeredAnimation>

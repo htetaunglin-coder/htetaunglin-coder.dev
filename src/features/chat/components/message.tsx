@@ -1,10 +1,11 @@
 "use client";
 
 import type { ChatStatus, UIMessage } from "ai";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { memo } from "react";
 import { CloudinaryAvatar } from "@/components/cloudinary-avatar";
 import { CopyButton } from "@/components/ui/copy-button";
+import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { Markdown } from "./markdown/markdown";
 
@@ -53,6 +54,7 @@ const PurePreviewMessage = ({
     status === "submitted" &&
     isAssistant &&
     message.parts.length === 0;
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
@@ -63,12 +65,13 @@ const PurePreviewMessage = ({
         isAssistant && "flex-col"
       )}
       data-role={message.role}
-      exit={{ opacity: 0, y: -20 }}
-      initial={{ opacity: 0, y: 20 }}
-      transition={{
-        duration: 0.3,
-        ease: "easeOut",
-      }}
+      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { duration: DURATION.quick, ease: EASE.out }
+      }
     >
       {isAssistant && <AssistantHeader />}
 
@@ -130,18 +133,23 @@ const CopyMessage = ({ message }: { message: UIMessage }) => {
   );
 };
 
-const UserMessage = ({ content }: { content: string }) => (
-  <motion.div
-    animate={{ opacity: 1, scale: 1 }}
-    className="min-w-fit rounded-xl bg-bg-default-alt px-4 py-3 text-fg-default text-sm"
-    initial={{
-      opacity: 0,
-      scale: 0.95,
-    }}
-  >
-    <p className="whitespace-pre-wrap break-words">{content}</p>
-  </motion.div>
-);
+const UserMessage = ({ content }: { content: string }) => {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      animate={{ opacity: 1, scale: 1 }}
+      className="min-w-fit rounded-xl bg-bg-default-alt px-4 py-3 text-fg-default text-sm"
+      initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.97 }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { duration: DURATION.quick, ease: EASE.out }
+      }
+    >
+      <p className="whitespace-pre-wrap break-words">{content}</p>
+    </motion.div>
+  );
+};
 
 const AssistantHeader = () => (
   <div className="mb-1 flex items-center gap-2">
@@ -159,13 +167,19 @@ const AssistantHeader = () => (
 );
 
 const AssistantTextContent = ({ content }: { content: string }) => {
+  const reduceMotion = useReducedMotion();
   if (!content.trim()) return null;
 
   return (
     <motion.div
       animate={{ opacity: 1 }}
       className="group/message relative"
-      initial={{ opacity: 0 }}
+      initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { duration: DURATION.quick, ease: EASE.out }
+      }
     >
       <div className="prose prose-sm dark:prose-invert w-full max-w-none prose-hr:border-outline-default text-fg-default">
         <Markdown>{content}</Markdown>
@@ -174,21 +188,33 @@ const AssistantTextContent = ({ content }: { content: string }) => {
   );
 };
 
-export const ThinkingMessage = () => (
-  <motion.div
-    animate={{ opacity: 1, y: 0 }}
-    className="flex items-center gap-2 text-fg-tertiary text-sm"
-    initial={{ opacity: 0, y: 5 }}
-  >
+export const ThinkingMessage = () => {
+  const reduceMotion = useReducedMotion();
+
+  return (
     <motion.div
-      animate={{ rotate: 360 }}
-      className="size-3 rounded-full border border-fg-default border-t-transparent text-fg-tertiary"
-      transition={{
-        duration: 2,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "linear",
-      }}
-    />
-    <span>Thinking...</span>
-  </motion.div>
-);
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-center gap-2 text-fg-tertiary text-sm"
+      initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 5 }}
+      transition={reduceMotion ? { duration: 0 } : undefined}
+    >
+      {reduceMotion ? (
+        <span aria-hidden="true" className="text-fg-tertiary tracking-widest">
+          •••
+        </span>
+      ) : (
+        <motion.div
+          animate={{ rotate: 360 }}
+          aria-hidden="true"
+          className="size-3 rounded-full border border-fg-default border-t-transparent text-fg-tertiary"
+          transition={{
+            duration: 1.8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+        />
+      )}
+      <span>Thinking...</span>
+    </motion.div>
+  );
+};

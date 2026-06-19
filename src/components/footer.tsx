@@ -2,7 +2,7 @@
 
 import { useInView } from "motion/react";
 import { useRef } from "react";
-import { SOCIAL_LINKS } from "@/constants/social-links";
+import { PROFILE_LINKS } from "@/constants/social-links";
 import { cn } from "@/lib/utils";
 import { Signature } from "./icons/signature";
 import { Tooltip } from "./tooltip-wrapper";
@@ -27,7 +27,7 @@ const Footer = ({ className }: { className?: string }) => (
 
       <div className="space-y-1">
         <div className="flex items-center gap-1 sm:justify-start">
-          {SOCIAL_LINKS.map((link) => (
+          {PROFILE_LINKS.map((link) => (
             <Tooltip content={link.title} key={link.id}>
               <Button
                 asChild

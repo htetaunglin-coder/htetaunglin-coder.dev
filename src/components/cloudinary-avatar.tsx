@@ -8,16 +8,34 @@ import {
   type AvatarProps,
 } from "./ui/avatar";
 
+type CloudinaryAvatarProps = {
+  src?: string;
+  name: string;
+  width?: number;
+  height?: number;
+  crop?: "thumb" | "fill" | "scale" | "fit" | "lfill";
+  gravity?: "face" | "faces" | "auto" | "center";
+  zoom?: number;
+} & AvatarProps;
+
 const CloudinaryAvatar = ({
   src,
   name,
   width,
+  height,
+  crop,
+  gravity,
+  zoom,
   ...props
-}: { src?: string; name: string; width?: number } & AvatarProps) => {
+}: CloudinaryAvatarProps) => {
   const avatarUrl = src
     ? getCldImageUrl({
         src,
         width,
+        height,
+        crop,
+        gravity,
+        zoom: zoom?.toString(),
       })
     : undefined;
 

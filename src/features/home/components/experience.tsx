@@ -1,4 +1,5 @@
 import { FadeAnimation } from "@/components/animations/fade-animation";
+import { NavLink } from "@/components/ui/nav-link";
 import { cn } from "@/lib/utils";
 
 type TimelineItem = {
@@ -146,14 +147,14 @@ const Experience = () => (
                             {event.title}
                           </h3>
                           {event.companyLink ? (
-                            <a
+                            <NavLink
                               className="text-fg-tertiary text-sm underline underline-offset-2 transition-colors hover:text-fg-brand dark:text-fg-tertiary/60"
                               href={event.companyLink}
                               rel="noopener noreferrer"
                               target="_blank"
                             >
                               {event.company}
-                            </a>
+                            </NavLink>
                           ) : (
                             <span className="text-fg-tertiary/80 text-sm dark:text-fg-tertiary/60">
                               {event.company}

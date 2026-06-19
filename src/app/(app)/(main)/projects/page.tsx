@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import Link from "next/link";
-import Script from "next/script";
 import { FadeAnimation } from "@/components/animations/fade-animation";
 import { DashedDivider } from "@/components/decorations/dashed-divider";
 import { PageHeroImage } from "@/components/page-hero-image";
@@ -12,14 +10,14 @@ import { absoluteUrl, cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+    "Real things I've shipped, and a few things I built just because the problem wouldn't leave me alone.",
   alternates: {
     canonical: absoluteUrl("/projects"),
   },
   openGraph: {
     title: "Projects | Htet Aung Lin",
     description:
-      "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+      "Real things I've shipped, and a few things I built just because the problem wouldn't leave me alone.",
     url: absoluteUrl("/projects"),
     type: "website",
   },
@@ -27,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Projects | Htet Aung Lin",
     description:
-      "These projects represent my journey as a developer — learning, experimenting, and building things I truly enjoy.",
+      "Real things I've shipped, and a few things I built just because the problem wouldn't leave me alone.",
   },
 };
 
@@ -56,98 +54,11 @@ const sortProjectsByDateDesc = [...PROJECT_DATA].sort(
   (a, b) => b.timeline.startDate.getTime() - a.timeline.startDate.getTime()
 );
 
-/* -------------------------------------------------------------------------- */
-
-/**
- * This script exists to make the first project-cover animation work correctly.
- *
- * The animation flag (`animateCoverOnFullInView`) is decided in this Server
- * Component during render, but the user interactions that should disable/re-arm
- * that animation happen on the client. We use a cookie as a small bridge:
- * - no cookie on `/projects` entry -> first cover animates
- * - interaction on `/projects` -> set cookie, stop replaying in this visit
- * - leaving `/projects` -> clear cookie, so coming back can animate again
- */
-const PROJECTS_COVER_INTERACTION_COOKIE = "projects_cover_interacted";
-const PROJECTS_PAGE_PATH = "/projects";
-
-const projectsInteractionGateScript = `(() => {
-  // Register global listeners exactly once per document lifecycle.
-  if (window.__projectsCoverGateInitialized) return;
-  window.__projectsCoverGateInitialized = true;
-
-  const cookieName = "${PROJECTS_COVER_INTERACTION_COOKIE}";
-  const projectsPath = "${PROJECTS_PAGE_PATH}";
-
-  const isOnProjectsPage = () => window.location.pathname === projectsPath;
-
-  const setInteractedCookie = () => {
-    // Ignore global interactions from other routes.
-    if (!isOnProjectsPage()) return;
-    document.cookie = cookieName + "=1; path=/; SameSite=Lax";
-  };
-
-  const clearInteractedCookie = () => {
-    document.cookie = cookieName + "=; Max-Age=0; path=/; SameSite=Lax";
-  };
-
-  const handleRouteBoundary = () => {
-    // If we are outside /projects, reset so the next /projects visit is fresh.
-    if (!isOnProjectsPage()) {
-      clearInteractedCookie();
-    }
-  };
-
-  window.addEventListener("beforeunload", clearInteractedCookie);
-  window.addEventListener("pagehide", clearInteractedCookie);
-  window.addEventListener("pointerdown", setInteractedCookie, { passive: true });
-  window.addEventListener("keydown", setInteractedCookie);
-  window.addEventListener("wheel", setInteractedCookie, { passive: true });
-
-  document.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
-
-    const link = target.closest("a[href]");
-    if (!link) return;
-
-    const url = new URL(link.href, window.location.origin);
-    if (url.pathname !== projectsPath) {
-      clearInteractedCookie();
-    }
-  });
-
-  // Next.js client navigation relies on History API, so we patch both methods
-  // to eagerly clear the interaction cookie when route changes happen.
-  const { pushState, replaceState } = window.history;
-  window.history.pushState = function (...args) {
-    const result = pushState.apply(this, args);
-    handleRouteBoundary();
-    return result;
-  };
-  window.history.replaceState = function (...args) {
-    const result = replaceState.apply(this, args);
-    handleRouteBoundary();
-    return result;
-  };
-
-  window.addEventListener("popstate", handleRouteBoundary);
-  // Initial sync in case script runs while not currently on /projects.
-  handleRouteBoundary();
-})();`;
-
-/* -------------------------------------------------------------------------- */
-
 export default async function ProjectPage(props: {
   searchParams: Promise<{ year?: string | string[] }>;
 }) {
-  // Server read keeps animation gating stable and deterministic on render.
-  const cookieStore = await cookies();
   const { year } = await props.searchParams;
   const activeYear = normalizeYearFilter(year);
-
-  const hasInteractedOnThisVisit =
-    cookieStore.get(PROJECTS_COVER_INTERACTION_COOKIE)?.value === "1";
 
   const filteredProjects = sortProjectsByDateDesc.filter((project) => {
     const projectStartYear = project.timeline.startDate.getFullYear();
@@ -158,10 +69,6 @@ export default async function ProjectPage(props: {
 
   return (
     <>
-      <Script id="projects-cover-interaction-gate" strategy="afterInteractive">
-        {projectsInteractionGateScript}
-      </Script>
-
       <PageHeroImage
         alt="Butterfly"
         imageClassName="object-top object-cover"
@@ -175,8 +82,8 @@ export default async function ProjectPage(props: {
         </h1>
 
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
-          Projects represent my journey as a developer — learning,
-          experimenting, and building things I truly enjoy.
+          Real things I&apos;ve shipped, and a few things I built just because
+          the problem wouldn&apos;t leave me alone.
         </p>
       </div>
 
@@ -231,9 +138,7 @@ export default async function ProjectPage(props: {
             {filteredProjects.map((project, index) => (
               <FadeAnimation as="div" direction="up" key={project.id}>
                 <ProjectShowcase
-                  animateCoverOnFullInView={
-                    !hasInteractedOnThisVisit && index === 0
-                  }
+                  animateCoverOnFullInView={index === 0}
                   lastItem={index === filteredProjects.length - 1}
                   project={project}
                 />

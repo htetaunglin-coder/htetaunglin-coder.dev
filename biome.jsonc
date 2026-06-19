@@ -29,6 +29,7 @@
     "includes": [
       "**",
       "!.agents",
+      "!.claude",
       "!**/.agents",
       "!graphify-out",
       "!!.next",

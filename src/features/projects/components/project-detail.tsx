@@ -32,11 +32,11 @@ const ProjectDetail = ({ project }: { project: ProjectItem }) => {
 
         {project.detail && (
           <>
-            <h3 className="mt-8 font-medium text-fg-default text-xl">
+            <h3 className="mt-10 font-medium text-fg-default text-xl">
               Details
             </h3>
             <p className="mt-4">
-              <BasicMarkdown className="[&_strong]:font-medium [&_strong]:text-fg-brand">
+              <BasicMarkdown className="text-fg-tertiary [&_strong]:font-medium [&_strong]:text-fg-brand">
                 {project.detail}
               </BasicMarkdown>
             </p>
@@ -46,7 +46,7 @@ const ProjectDetail = ({ project }: { project: ProjectItem }) => {
 
       <hr />
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <h3 className="font-medium">Tech Stacks</h3>
         <div className="flex flex-wrap items-center gap-2">
           {project.techStacks.map((tech, index) => (
@@ -72,13 +72,13 @@ const ProjectDetail = ({ project }: { project: ProjectItem }) => {
 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-col">
-          <p className="text-fg-tertiary text-sm sm:text-base">Role</p>
-          <p className="font-medium text-fg-default text-sm sm:text-base">
+          <p className="text-fg-tertiary text-sm sm:text-sm">Role</p>
+          <p className="font-medium text-fg-secondary/90 text-sm sm:text-base">
             Frontend Developer
           </p>
         </div>
         <div className="flex flex-col gap-1.5">
-          <p className="text-fg-tertiary text-sm sm:text-base">Team</p>
+          <p className="text-fg-tertiary text-sm sm:text-sm">Team</p>
           <AvatarGroup
             classNames={{
               groupRemainChildren: "!ml-3 font-medium",
@@ -97,8 +97,8 @@ const ProjectDetail = ({ project }: { project: ProjectItem }) => {
           </AvatarGroup>
         </div>
         <div className="flex flex-col">
-          <p className="text-fg-tertiary text-sm sm:text-base">Timeline</p>
-          <p className="text-fg-default text-sm sm:text-base">
+          <p className="text-fg-tertiary text-sm sm:text-sm">Timeline</p>
+          <p className="text-fg-secondary/90 text-sm sm:text-base">
             {formatDate(project.timeline.startDate)}
             <span> - </span>
             {project.timeline.status === "on_going" && "Ongoing"}

@@ -19,7 +19,13 @@ const ABOUT_ME: readonly {
   {
     id: "section-0",
     title: "Who am I?",
-    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with over two years of experience. I enjoy building things that feel simple, fast, and easy to use.`,
+    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with over two years of experience. I spend most of my time on the small details, the ones that make an interface feel obvious.`,
+  },
+  {
+    id: "section-currently",
+    title: "Currently",
+    content:
+      "I work as a full-stack developer. I recently helped my team ship an MVP in under two months. We moved fast with AI-assisted code, but I pushed for an architecture we could keep building on instead of rewriting later.",
   },
   {
     id: "section-1",
@@ -31,7 +37,7 @@ const ABOUT_ME: readonly {
     id: "section-2",
     title: "What I've learned",
     content:
-      "Contributing to open-source projects taught me a lot, especially how to read and understand other people's code. It helped me grow not just as a developer, but also in how I think about structure, teamwork, and communication.",
+      "Contributing to open-source projects taught me a lot, especially how to read and understand other people's code. More than anything, it taught me to write code for the person reading it next, not for myself.",
   },
 ];
 
@@ -73,7 +79,8 @@ const About = () => (
         <p className="mt-4 text-base text-fg-secondary/90 sm:mt-8 sm:ml-20 sm:max-w-none sm:text-lg">
           I&apos;m really into psychology and stoicism, learning how thoughts
           and emotions shape how we live. When I&apos;m not coding, I love
-          playing guitar or going to the gym to reset and stay balanced.
+          playing guitar, or going to the gym to think about nothing for a
+          while.
         </p>
 
         <div className="mx-auto mt-12 flex w-full max-w-2xl flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
@@ -101,19 +108,19 @@ const About = () => (
             />
 
             <div className="pointer-events-none absolute inset-0 select-none bg-black/10 dark:bg-black/20">
-              <p className="absolute top-16 left-[80px] font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="absolute top-16 left-[80px] font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
                 @Aung Min Khant
               </p>
-              <p className="absolute top-[74px] left-4 font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="absolute top-[74px] left-4 font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
                 @Nay Lin Aung
               </p>
-              <p className="absolute top-[76px] right-8 bg-black px-1 font-semibold text-[#aca7d4] text-[9px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="absolute top-[76px] right-8 bg-black px-1 font-semibold text-[#aca7d4] text-[9px] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
                 @Htet Aung Lin
               </p>
-              <p className="absolute top-[220px] right-2 font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="absolute top-[220px] right-2 font-semibold text-[9px] text-white opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
                 @Kaung Khant Aung
               </p>
-              <p className="absolute bottom-0 left-2 p-2 text-white tracking-normal opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="absolute bottom-0 left-2 p-2 text-white tracking-normal opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
                 <span className="font-gloria-hallelujah font-semibold italic">
                   We Cooling
                 </span>{" "}

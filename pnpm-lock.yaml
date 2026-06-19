@@ -125,6 +125,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      prettier:
+        specifier: 3.6.2
+        version: 3.6.2
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -6333,8 +6336,7 @@ snapshots:
 
   preact@10.24.3: {}
 
-  prettier@3.6.2:
-    optional: true
+  prettier@3.6.2: {}
 
   promise-worker-transferable@1.0.4:
     dependencies:

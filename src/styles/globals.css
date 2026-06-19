@@ -176,11 +176,15 @@
 
 /* -------------------------------------------------------------------------- */
 
+html:has([data-smooth-scroll]) {
+  scroll-behavior: smooth;
+}
+
 :root {
   --header-height: 6rem;
 
-  --grainy-overlay-z-index: 50;
-  --above-grainy-overlay-z-index: 60;
+  --grainy-overlay-z-index: 99;
+  --above-grainy-overlay-z-index: 100;
 }
 
 @media (max-width: 640px) {
@@ -198,12 +202,19 @@
   }
 }
 
-body {
-  @apply font-inter;
+@layer components {
+  a,
+  button {
+    @apply outline-none focus-visible:ring-2 transition-[box-shadow] duration-300 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default focus-visible:ring-outline-brand;
+  }
 }
 
 * {
   @apply tracking-tight;
+}
+
+body {
+  @apply font-inter;
 }
 
 @utility container {
@@ -337,5 +348,55 @@ body {
 
   .prose blockquote {
     @apply font-inter text-fg-tertiary border-outline-secondary;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Hero entrance — pure CSS so it paints on first load, before JS hydrates.
+   Mirrors the motion tokens (easeOutExpo, 0.8s base, 0.08s stagger). */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0.18;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-stagger > * {
+  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-stagger > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.hero-stagger > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.hero-stagger > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.hero-portrait {
+  animation: hero-fade-scale 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stagger > *,
+  .hero-portrait {
+    animation: none;
   }
 }

@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { ThemeImage } from "./ui/theme-image";
 
@@ -54,7 +55,7 @@ const ImageStack = ({
             zIndex: images.length - index,
             filter: `brightness(${Math.max(50, 100 - index * 25)}%)`,
           }}
-          className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl duration-500 dark:shadow-white/[0.1]"
+          className="absolute top-20 aspect-[16/9] w-full overflow-hidden rounded-xl border border-outline-tertiary bg-bg-secondary shadow-black/[0.1] shadow-xl dark:shadow-white/[0.1]"
           initial={{
             transform: `translateY(-${index * offset}px) scale(${1 - index * scaleFactor})`,
             zIndex: images.length - index,
@@ -64,6 +65,7 @@ const ImageStack = ({
           style={{
             transformOrigin: "top center",
           }}
+          transition={{ duration: DURATION.base, ease: EASE.out }}
         >
           <DynamicImage alt={image.alt} src={image.src} />
         </motion.div>

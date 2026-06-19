@@ -27,7 +27,8 @@ import {
   MAIN_PAGES,
   OTHER_PAGES,
 } from "@/constants/navigation";
-import { SOCIAL_LINKS } from "@/constants/social-links";
+import { PROFILE_LINKS } from "@/constants/social-links";
+import { DURATION, EASE, STAGGER } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { FadeStaggeredAnimation } from "./animations/fade-animation";
 import { CloudinaryImage } from "./cloudinary-image";
@@ -49,7 +50,7 @@ const Header = ({
   containerRef?: RefObject<HTMLElement | null>;
   className?: string;
 }) => (
-  <Popover modal>
+  <Popover>
     <HeaderAutoHideWrapper
       className={cn(
         "pointer-events-none sticky top-0 z-[calc(var(--above-grainy-overlay-z-index)+10)] flex h-[var(--header-height)] w-full items-end justify-end px-6 sm:justify-center",
@@ -65,7 +66,7 @@ const Header = ({
               childAs="li"
               className="hidden items-center text-base sm:flex"
               direction="down"
-              staggerChildren={0.05}
+              staggerChildren={STAGGER.tight}
             >
               {MAIN_PAGES.map((page) => (
                 <NavLink
@@ -122,7 +123,7 @@ const HeaderAutoHideWrapper = ({
       animate={isHidden ? "hidden" : "visible"}
       className={className}
       onFocusCapture={() => setIsHidden(false)}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: DURATION.fast, ease: EASE.inOut }}
       variants={{
         hidden: { transform: "translateY(-100%)" },
         visible: { transform: "translateY(0%)" },
@@ -198,7 +199,7 @@ const MorePages = () => (
 
         <div className="flex w-full flex-col gap-2">
           <NavLink
-            className="group relative flex w-full items-center justify-center rounded-full bg-bg-default px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f]"
+            className="group relative flex w-full items-center justify-center rounded-full bg-bg-default px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-300 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f]"
             href="/chat"
           >
             <span
@@ -304,7 +305,7 @@ const MobileMenu = () => (
 
         <div className="sticky bottom-0 w-full space-y-0.5 bg-bg-default px-8 py-6">
           <div className="flex items-center justify-start gap-1">
-            {SOCIAL_LINKS.map((link) => (
+            {PROFILE_LINKS.map((link) => (
               <Button
                 asChild
                 className="text-fg-tertiary text-lg hover:shadow"
@@ -383,7 +384,7 @@ const MobileThemeOptions = () => {
         return (
           <button
             className={cn(
-              "flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-colors duration-200",
+              "flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-colors duration-300",
               isActive
                 ? "bg-bg-secondary font-medium text-fg-default"
                 : "text-fg-tertiary hover:bg-bg-secondary/70 hover:text-fg-default"

@@ -5,14 +5,14 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Side Quests",
   description:
-    "Personal projects, experiments, and side quests I'm working on.",
+    "Hobbies and small habits that hold me together: gym, guitar, time outside.",
   alternates: {
     canonical: absoluteUrl("/side-quests"),
   },
   openGraph: {
     title: "Side Quests | Htet Aung Lin",
     description:
-      "Personal projects, experiments, and side quests I'm working on.",
+      "Hobbies and small habits that hold me together: gym, guitar, time outside.",
     url: absoluteUrl("/side-quests"),
     type: "website",
   },

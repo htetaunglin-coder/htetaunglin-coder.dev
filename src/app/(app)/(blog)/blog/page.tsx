@@ -11,14 +11,14 @@ import { absoluteUrl, cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+    "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
   alternates: {
     canonical: absoluteUrl("/blog"),
   },
   openGraph: {
     title: "Blog | Htet Aung Lin",
     description:
-      "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+      "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
     url: absoluteUrl("/blog"),
     type: "website",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Blog | Htet Aung Lin",
     description:
-      "Blog posts about psychology, life, and technical topics. Sharing what I'm learning and thinking about.",
+      "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
   },
 };
 
@@ -81,8 +81,8 @@ export default async function Blog(props: {
         </h1>
 
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
-          I write about psychology, life, and technical topics. Just sharing
-          what I&apos;m learning and thinking about.
+          I write about psychology, life, and tech, usually whatever I
+          can&apos;t stop thinking about that week.
         </p>
       </div>
 

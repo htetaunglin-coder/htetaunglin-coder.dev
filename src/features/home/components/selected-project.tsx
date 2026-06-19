@@ -46,11 +46,11 @@ const ProjectShowcase = ({ project }: { project: ProjectItem }) => {
 
         <div
           className={cn(
-            "absolute right-0 bottom-0 left-0 h-1/3 w-full opacity-0 backdrop-blur-sm transition duration-300 group-hover:opacity-100",
+            "absolute right-0 bottom-0 left-0 h-1/3 w-full opacity-0 backdrop-blur-sm transition duration-300 ease-out group-hover:opacity-100",
             "mask-image:_linear-gradient(to_top,_black_25%,_transparent_80%) pointer-events-none [-webkit-mask-image:_linear-gradient(to_top,_black_25%,_transparent_80%)]"
           )}
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-10 justify-end px-4 opacity-0 transition duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-10 justify-end px-4 opacity-0 transition duration-300 ease-out group-hover:opacity-100">
           <div className="h-fit rounded-md bg-bg-tertiary px-2 py-1.5">
             <p className="text-fg-secondary text-xs">
               {formatDate(project.timeline.startDate)}

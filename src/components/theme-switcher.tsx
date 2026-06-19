@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const themes = [
@@ -62,7 +63,7 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
               <motion.div
                 className="absolute inset-0 rounded-full bg-bg-secondary"
                 layoutId="activeTheme"
-                transition={{ type: "spring", duration: 0.5 }}
+                transition={{ duration: DURATION.quick, ease: EASE.inOut }}
               />
             )}
             <Icon

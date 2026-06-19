@@ -45,12 +45,12 @@ const LazyContact = () => {
 const ContactFallback = () => (
   <div className="w-full">
     <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
-      Let&apos;s Connect
+      Say hello.
     </h2>
 
     <p className="mt-1 w-full text-fg-tertiary text-sm/relaxed sm:max-w-md sm:text-base/relaxed">
-      Have a project in mind or just want to say hi? My inbox is always open,
-      I&apos;d love to hear from you.
+      Tell me what you&apos;re building, or just send a quick note. I read
+      everything.
     </p>
 
     <div className="mt-8 space-y-4">

@@ -1,9 +1,7 @@
 "use client";
 
-import { Volume2Icon } from "lucide-react";
-import { motion } from "motion/react";
+import { ArrowDown, Volume2Icon } from "lucide-react";
 import { getCldVideoUrl } from "next-cloudinary";
-import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { Profile } from "@/components/decorations/profile";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
@@ -13,12 +11,7 @@ import { cn } from "@/lib/utils";
 const Hero = () => (
   <div className="relative flex h-[36rem] w-full justify-between font-inter">
     <div className="px-6">
-      <FadeStaggeredAnimation
-        className="group"
-        direction="up"
-        initialOpacity={0.18}
-        staggerChildren={0.06}
-      >
+      <div className="group hero-stagger">
         <p className="flex items-center gap-1 font-gloria-hallelujah text-fg-tertiary/80 text-xs italic tracking-normal sm:text-base">
           / Hey It&apos;s me,{" "}
           <span className="font-medium text-fg-brand text-xs sm:text-sm">
@@ -34,15 +27,13 @@ const Hero = () => (
         </div>
 
         <p className="mt-3 max-w-3xl text-base text-fg-tertiary sm:mt-2 sm:text-lg/relaxed">
-          I build things for the web with{" "}
-          <span className="font-medium text-fg-default">
-            React and a bit of design sense
-          </span>
-          . I enjoy learning, improving, and making videos about what I discover
-          along the way.
+          I build front ends that look great and last, fast, with{" "}
+          <span className="font-medium text-fg-default">AI agents</span>. I care
+          about the people I build with as much as the product. In my free time,
+          I make programming videos.
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-4 sm:mt-6">
+        <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-6">
           <Button asChild variant="inverse">
             <a
               download="HTET_AUNG_LIN_RESUME.pdf"
@@ -51,26 +42,22 @@ const Hero = () => (
               Download Resume
             </a>
           </Button>
-          <Button asChild>
-            <NavLink href={"#contact"}>Contact Me</NavLink>
+          <Button
+            asChild
+            className="items-center gap-1.5 text-fg-tertiary hover:text-fg-default"
+            variant="ghost"
+          >
+            <NavLink href={"#work-with-me"}>
+              Work with me <ArrowDown className="mt-1" />
+            </NavLink>
           </Button>
         </div>
-      </FadeStaggeredAnimation>
+      </div>
     </div>
 
-    <motion.div
-      animate={{ opacity: 1 }}
-      className="absolute right-0 bottom-10 h-[18.25rem] w-[18.25rem] md:h-[26.25rem] md:w-[26.25rem]"
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0 }}
-      transition={{
-        delay: 0.2,
-        duration: 0.4,
-        ease: "easeInOut",
-      }}
-    >
+    <div className="hero-portrait -z-1 absolute right-0 bottom-10 h-[18.25rem] w-[18.25rem] md:h-[26.25rem] md:w-[26.25rem]">
       <Profile className="size-full" />
-    </motion.div>
+    </div>
   </div>
 );
 
