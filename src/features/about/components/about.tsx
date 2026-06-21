@@ -3,13 +3,15 @@
 import { FadeStaggeredAnimation } from "@/components/animations/fade-animation";
 import { BasicMarkdown } from "@/components/basic-markdown-parser";
 import { CloudinaryImage } from "@/components/cloudinary-image";
-import { cn } from "@/lib/utils";
+import { cn, getYearsOfExperience } from "@/lib/utils";
 import { getAgeFromDOB } from "../utils";
 
 const age =
   process.env.NEXT_PUBLIC_DOB && getAgeFromDOB(process.env.NEXT_PUBLIC_DOB);
 
 const withAge = age ? `${age} years old and ` : "";
+
+const yoe = getYearsOfExperience();
 
 const ABOUT_ME: readonly {
   id: string;
@@ -19,7 +21,7 @@ const ABOUT_ME: readonly {
   {
     id: "section-0",
     title: "Who am I?",
-    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with over two years of experience. I spend most of my time on the small details, the ones that make an interface feel obvious.`,
+    content: `Hey, I'm **Htet Aung Lin**, but you can also call me **Kelvin**. I'm ${withAge}a frontend developer with ${yoe}+ years of experience. I spend most of my time on the small details, the ones that make an interface feel obvious.`,
   },
   {
     id: "section-currently",

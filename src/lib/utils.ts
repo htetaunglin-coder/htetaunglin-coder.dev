@@ -56,3 +56,18 @@ export function formatDisplayUrl(url?: string | null): string | undefined {
 export function absoluteUrl(path: string) {
   return new URL(path, appUrl).toString();
 }
+
+// Career start: Pico internship, May 2024.
+export const CAREER_START = "2024-05-01";
+
+// Whole years since `start` (e.g. "2024-05-01"). Used for "X+ years of experience".
+export function getYearsOfExperience(start: string = CAREER_START): number {
+  const from = new Date(start);
+  const now = new Date();
+  let years = now.getFullYear() - from.getFullYear();
+  const monthDiff = now.getMonth() - from.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < from.getDate())) {
+    years--;
+  }
+  return years;
+}
