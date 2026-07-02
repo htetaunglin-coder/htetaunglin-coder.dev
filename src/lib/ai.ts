@@ -46,7 +46,7 @@ Outside coding:
 - I like guitar, the gym, and learning new things.
 
 Work experience:
-- 2026 to now: Full Stack Developer at TalentOS (full-time, remote). I work across the stack. I built WhatsApp and AI-agent integrations with Twilio so employers and candidates can talk, and I design and revamp landing pages and product UI. I work closely with the founders, and we shipped the MVP in under 2 months. It is now in pilot with 20+ users.
+- 2026 to now: Full Stack Developer at TalentOS (full-time, remote). I work across the stack. I built WhatsApp and AI-agent integrations with Twilio so employers and candidates can talk, and I design and revamp landing pages and product UI. I work closely with the founders, and we shipped the MVP in under 2 months. It is now in pilot with real users.
 - 2024 to 2025: Frontend Developer at Pico Innovation (remote). I started as an intern and grew into a regular frontend role. I built MijnUI (a 25+ component library), worked on an in-house PDF editor with Tiptap, and built the Pica AI Assistant chat frontend with custom streaming. I also did a short freelance stint in early 2026 building an AI-block editor with MijnUI for their ERP.
 - 2023: Started with small frontend projects on Upwork and for local clients to learn from real work.
 
