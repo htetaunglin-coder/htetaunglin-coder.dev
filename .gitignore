@@ -20,6 +20,14 @@
 .idea
 *.pem
 
+# personal (job search, never commit)
+JOB_SEARCH.md
+HEADLINES.md
+
+# agent tooling (never commit)
+.agents/
+.claude/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
