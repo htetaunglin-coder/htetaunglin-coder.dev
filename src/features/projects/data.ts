@@ -86,9 +86,6 @@ export const PROJECT_DATA: ProjectItem[] = [
     title: "Pica AI Assistant",
     description:
       "Pica Bot is an intelligent AI assistant that integrates with your ERP POS system to enhance customer support. It provides real-time chat and product recommendations for medical and supplement sales teams.",
-    urls: {
-      github: "https://github.com/htetaunglin-coder/Ai-Assistant",
-    },
     cover: {
       light: "pica-ai-assistant-light_ccykei.png",
       dark: "pica-ai-assistant-dark_mq3fqr.png",
