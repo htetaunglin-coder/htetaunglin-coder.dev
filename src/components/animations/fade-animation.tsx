@@ -30,13 +30,17 @@ const FadeStaggeredAnimation = ({
   initialOpacity = 0,
   delay = 0,
 }: FadeStaggeredAnimationProps) => {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: false,
-  });
+  // memoize so motion.create isn't re-run each render — a new
+  // component type remounts the subtree and replays the entrance animation.
+  const MotionComponent = React.useMemo(
+    () => motion.create(Component, { forwardMotionProps: false }),
+    [Component]
+  );
 
-  const MotionChild = motion.create(ChildComponent, {
-    forwardMotionProps: false,
-  });
+  const MotionChild = React.useMemo(
+    () => motion.create(ChildComponent, { forwardMotionProps: false }),
+    [ChildComponent]
+  );
 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -112,9 +116,10 @@ const FadeAnimation = ({
   as: Component = "span",
   children,
 }: FadeAnimationProps) => {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: false,
-  });
+  const MotionComponent = React.useMemo(
+    () => motion.create(Component, { forwardMotionProps: false }),
+    [Component]
+  );
   const reduceMotion = useReducedMotion();
 
   return (
