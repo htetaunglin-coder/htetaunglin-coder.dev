@@ -2,8 +2,12 @@
   "name": "personal-portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "postinstall": "fumadocs-mdx",
+    "resume:pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=public/HTET_AUNG_LIN_RESUME.pdf \"file://$PWD/resume/resume.html\"",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
