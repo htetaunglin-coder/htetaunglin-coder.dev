@@ -46,7 +46,7 @@ const TESTIMONIALS: readonly TestimonialData[] = [
       url: "https://www.linkedin.com/in/moe-pwint-phyu",
     },
     content:
-      "I worked with Ko Htet Aung Lin (Kelvin) on the TalentOS Employer Dashboard, and he is one of the most detail-oriented developers I've worked with. The interfaces he builds are consistently clean and intuitive. He plans his work effectively, delivers consistently, and maintains a high level of productivity without compromising code quality.",
+      "I worked with Ko Htet Aung Lin (Kelvin) at TalentOS, and he is one of the most detail-oriented developers I've worked with. The interfaces he builds are consistently clean and intuitive. He plans his work effectively, delivers consistently, and maintains a high level of productivity without compromising code quality.",
   },
   {
     id: "wai-yan-phone-aant",

@@ -27,7 +27,7 @@ const ABOUT_ME: readonly {
     id: "section-currently",
     title: "Currently",
     content:
-      "I work as a full-stack developer. I recently helped my team ship an MVP in under two months. We moved fast with AI-assisted code, but I pushed for an architecture we could keep building on instead of rewriting later.",
+      "I work as a full-stack developer. Lately I've been moving fast with AI-assisted code, but I push for an architecture we can keep building on instead of rewriting later.",
   },
   {
     id: "section-1",

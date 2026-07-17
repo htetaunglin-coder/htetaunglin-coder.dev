@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Htet Aung Lin (Kelvin) - Resume</title>
+    <style>
+    /* ponytail: plain single-column layout on purpose, ATS parsers choke on columns/tables */
+    @page {
+      size: A4;
+      margin: 13mm 15mm;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 9.8pt;
+      line-height: 1.34;
+      color: #1a1a1a;
+      max-width: 180mm;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 20pt;
+      letter-spacing: -0.02em;
+    }
+    .title {
+      font-size: 11pt;
+      font-style: italic;
+      color: #2456d6;
+      margin-top: 1mm;
+    }
+    .contact {
+      margin-top: 2mm;
+      font-size: 9pt;
+      color: #333;
+    }
+    .contact span + span::before {
+      content: "  |  ";
+      color: #999;
+    }
+    h2 {
+      font-size: 11pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 1.5px solid #1a1a1a;
+      padding-bottom: 1mm;
+      margin: 3.2mm 0 2mm;
+    }
+    .job {
+      margin-bottom: 1.8mm;
+      break-inside: avoid;
+    }
+    .job-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .job-head .role {
+      font-weight: bold;
+    }
+    .job-head .role em {
+      font-weight: normal;
+      font-style: italic;
+    }
+    .job-head .when {
+      font-size: 9pt;
+      color: #333;
+      white-space: nowrap;
+    }
+    ul {
+      margin: 1mm 0 0 4.5mm;
+    }
+    li {
+      margin-bottom: 0.8mm;
+    }
+    .skills p {
+      margin-bottom: 1mm;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Htet Aung Lin (Kelvin)</h1>
+      <p class="title">
+        Frontend Engineer - React / Next.js, AI Chat Interfaces &amp; Design
+        Systems
+      </p>
+      <p class="contact">
+        <span>htetaunglin.coder@gmail.com</span><span>09756302537</span><span
+          >Yangon</span
+        ><span
+          ><a href="https://htetaunglin-coder.dev"
+            >htetaunglin-coder.dev</a
+          ></span
+        ><span
+          ><a href="https://linkedin.com/in/htetaunglin-coder"
+            >linkedin.com/in/htetaunglin-coder</a
+          ></span
+        ><span
+          ><a href="https://github.com/htetaunglin-coder"
+            >github.com/htetaunglin-coder</a
+          ></span
+        >
+      </p>
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p>
+        Frontend engineer with 2+ years building AI chat interfaces, design
+        systems, and React/Next.js apps. I built the streaming frontend for an
+        ERP AI assistant and MijnUI, a design system used in production across
+        several products. Now I work across the stack at a US startup on AI
+        agent and WhatsApp integrations with Twilio, working directly with
+        founders to ship features.
+      </p>
+    </section>
+
+    <section>
+      <h2>Work Experience</h2>
+
+      <div class="job">
+        <div class="job-head">
+          <p class="role">
+            Full Stack Developer, <em>TalentOS</em>
+          </p>
+          <p class="when">01/2026 &ndash; Present | Remote</p>
+        </div>
+        <ul>
+          <li>
+            Ship features across the full stack, from React/Next.js interfaces
+            to backend APIs, on an architecture built to keep extending.
+          </li>
+          <li>
+            Built conversational AI-agent features with WhatsApp and Twilio
+            integration, handling message flows and automated responses.
+          </li>
+          <li>
+            Design and revamp landing pages and product UI.
+          </li>
+          <li>
+            Work directly with founders, turning product goals into shipped
+            features.
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <p class="role">
+            Frontend Developer, <em>Pico Innovation</em>
+          </p>
+          <p class="when">10/2025 &ndash; 12/2025 | Remote</p>
+        </div>
+        <ul>
+          <li>
+            Built the Pico AI Assistant frontend in Next.js with streaming
+            messages via Zustand state management; the interface renders charts,
+            images, product cards, and text responses from ERP integrations.
+          </li>
+          <li>
+            Designed the message state flow to prevent UI blocking during API
+            streams: messages render as chunks arrive instead of waiting for
+            complete responses.
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <p class="role">
+            Junior Frontend Developer, <em>Pico Innovation</em>
+          </p>
+          <p class="when">01/2025 &ndash; 09/2025 | Remote</p>
+        </div>
+        <ul>
+          <li>
+            Built MijnUI, a component library of
+            <strong>25+ packages </strong>(React + Tailwind CSS), with a
+            consistent props API so the team could adopt components easily.
+          </li>
+          <li>
+            Integrated the Tiptap rich text editor and QR code generation into a
+            PDF editor product; moved duplicate rendering logic into shared
+            utilities to shrink component files.
+          </li>
+          <li>
+            Evaluated PDF manipulation tools (APIX Data, Canva, Penpot) against
+            product requirements and documented rendering performance, API
+            flexibility, and licensing trade-offs to inform technical decisions.
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <p class="role">
+            Frontend Developer Intern, <em>Pico Innovation</em>
+          </p>
+          <p class="when">05/2024 &ndash; 12/2024 | Remote</p>
+        </div>
+        <ul>
+          <li>
+            Researched rich text and PDF editor tooling and built early reusable
+            UI components, work that fed into MijnUI and the PDF editor product.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+
+      <div class="job">
+        <div class="job-head">
+          <p class="role">
+            Resizable Layout Component &ndash;
+            <em
+              ><a
+                href="https://github.com/htetaunglin-coder/react-resizable-layout"
+                >github.com/htetaunglin-coder/react-resizable-layout</a
+              ></em
+            >
+          </p>
+          <p class="when">08/2025 &ndash; Present</p>
+        </div>
+        <ul>
+          <li>
+            Built a collapsible panel system with react-resizable-panels that
+            fixes animation-timing jank during quick collapse/expand by syncing
+            CSS transitions with layout calculations.
+          </li>
+          <li>
+            Made it SSR-safe (no hydration mismatch) with user preferences
+            persisted via cookies, and published it as an open-source package
+            installable through the shadcn CLI.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="skills">
+      <h2>Skills</h2>
+      <p>
+        <strong>Languages: </strong>TypeScript, JavaScript, HTML5, CSS3
+      </p>
+      <p>
+        <strong>Frameworks: </strong>React, Next.js, Tailwind CSS
+      </p>
+      <p>
+        <strong>Frontend: </strong>React Query, Radix UI, Zustand, Storybook,
+        Tiptap, shadcn
+      </p>
+      <p>
+        <strong>Backend: </strong>Convex, Twilio, REST APIs, AI agent
+        integrations
+      </p>
+      <p>
+        <strong>Tooling: </strong>Git, monorepo &amp; npm publishing, Fumadocs
+      </p>
+    </section>
+  </body>
+</html>
