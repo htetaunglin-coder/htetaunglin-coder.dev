@@ -27,7 +27,7 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
         company: "TalentOS (Full-Time)",
         companyLink: "https://www.linkedin.com/company/talent-os/",
         description:
-          "Working as a full stack developer with employers. Creating UI designs and revamping landing pages. Built WhatsApp and AI agent integrations using Twilio for communication between employers and candidates.",
+          "Working across the full stack. Creating UI designs and revamping landing pages, and building conversational AI-agent features with WhatsApp and Twilio integration.",
       },
       {
         id: "event-2",
