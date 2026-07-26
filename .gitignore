@@ -28,6 +28,7 @@ HEADLINES.md
 # agent tooling (never commit)
 .agents/
 .claude/
+.firecrawl/
 
 # debug
 npm-debug.log*
@@ -60,3 +61,4 @@ sitemap-*.xml
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+__ONLY_ME__

@@ -1,0 +1,43 @@
+---
+title: The Skill AI Is Quietly Taking From Us
+author: Htet Aung Lin
+description: These models are trained to be agreeable, not correct. The skill worth protecting is the two seconds where you stop and ask whether the answer is actually right.
+image: { url: "unsplash_ubc3pb.jpg", author_name: "Buddy AN", author_link: "https://unsplash.com/@buddyan" }
+date: 2026-07-26
+tags: ["ai", "thinking", "judgment", "software engineering"]
+series: [thoughts]
+---
+
+I think the most valuable skill right now is the one AI is quietly taking from us: thinking for ourselves.
+
+Here's the part that unsettles me. Somewhere in training, these models learn to be liked, and being liked is not the same as being right.
+
+The last stage ranks candidate answers by which one a human rater preferred, and raters prefer being agreed with. Anthropic researchers [put numbers on this](https://arxiv.org/abs/2310.13548). Humans and the preference models trained on them will both pick a convincingly written sycophantic answer over a correct one a meaningful share of the time.
+
+You can watch it happen in public.
+
+In April 2025, OpenAI shipped a GPT-4o update and [pulled it three days later](https://openai.com/index/sycophancy-in-gpt-4o/) because the model had gone sycophantic. Their own description: it was validating doubts, fueling anger, and urging impulsive actions.
+
+The part I keep coming back to is why it shipped at all. The offline evals looked fine. The A/B tests said users liked it.
+
+People liked it, and liking it was the bug.
+
+That one got caught because it was loud. The quiet version, the model that agrees with your architecture decision because you sounded confident describing it, doesn't get a rollback.
+
+Offloading your thinking to a chat box is effortless now. What takes real effort is closing the tab and sitting with the problem yourself, and nobody is optimizing for that.
+
+I catch myself doing it. I ask for an answer, get something that sounds right, and start typing the next prompt before I've stopped to ask.. wait, is that actually true?
+
+That pause is where the thinking happens, and it isn't a long one.
+
+A few seconds of asking where the answer came from, whether it matches what I already know, whether I could defend it to someone who disagreed with me. Most of the time it holds up. Sometimes it doesn't, and those are the times that matter.
+
+Skipping the pause costs you nothing on the day you skip it. The code runs. The tests you asked it to write pass, because it wrote them against its own assumptions.
+
+You repeat the confident explanation in a review. You build the next decision on top of it. By the time it falls over, you've long forgotten that you never actually checked.
+
+The uncomfortable part is that the pause gets harder as the model gets better. When it was obviously wrong half the time, checking was easy to remember.
+
+Now it's right often enough that checking feels like a waste of time, which is exactly when you stop doing it.
+
+AI can hand you the answer. It still can't tell you if it's the right one, and that part is still your job.

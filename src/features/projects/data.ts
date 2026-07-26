@@ -85,7 +85,7 @@ export const PROJECT_DATA: ProjectItem[] = [
     id: "pica-ai-assistant",
     title: "Pica AI Assistant",
     description:
-      "Pica Bot is an intelligent AI assistant that integrates with your ERP POS system to enhance customer support. It provides real-time chat and product recommendations for medical and supplement sales teams.",
+      "Pica AI Assistant integrates with your ERP POS system to enhance customer support. It provides real-time chat and product recommendations for medical and supplement sales teams.",
     cover: {
       light: "pica-ai-assistant-light_ccykei.png",
       dark: "pica-ai-assistant-dark_mq3fqr.png",
@@ -131,7 +131,7 @@ export const PROJECT_DATA: ProjectItem[] = [
       { icon: Icons.framerMotion, iconSize: "md", title: "Framer Motion" },
     ],
     detail:
-      "Pica AI Assistant is an intelligent chat app that connects with ERP systems to make customer support and sales conversations faster and easier. The main goal is to let users **talk directly with their data**, from checking revenue to getting product suggestions.\n\nThe chat supports **charts, images, product cards**, and **documents**, making it more visual and interactive.\n\nI built the **frontend with Next.js**, designed the chat interface, and implemented **message streaming and AI responses**.\n\nSince both **authentication and AI requests** are managed by an external API, I wrote my own **token rotation and streaming logic** using Zustand for state management.\n\nThe project is currently in **beta**, and some of the main features like agent chat and file uploads are already built but not released yet.",
+      "Pica AI Assistant is a chat app that connects with ERP systems to make customer support and sales conversations faster and easier. The main goal is to let users **talk directly with their data**, from checking revenue to getting product suggestions.\n\nThe chat supports **charts, images, product cards**, and **documents**, making it more visual and interactive.\n\nI built the **frontend with Next.js**, designed the chat interface, and implemented **message streaming and AI responses**.\n\nSince both **authentication and AI requests** are managed by an external API, I wrote my own **auth token rotation and streaming logic** using Zustand for state management.\n\nWhen I worked on it, it was in **beta**, with features like agent chat and file uploads built but not yet released.",
   },
   {
     id: "mijnui",
