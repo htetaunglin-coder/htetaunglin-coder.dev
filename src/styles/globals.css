@@ -349,6 +349,11 @@ body {
   .prose blockquote {
     @apply font-inter text-fg-tertiary border-outline-secondary;
   }
+
+  .prose td,
+  .prose th {
+    @apply pl-3;
+  }
 }
 
 /* -------------------------------------------------------------------------- */

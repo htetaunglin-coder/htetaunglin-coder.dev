@@ -8,6 +8,7 @@ import { CloudinaryImage } from "@/components/cloudinary-image";
 import { NavLink } from "@/components/ui/nav-link";
 import { YoutubeIframe } from "@/components/youtube-iframe";
 import { cn } from "@/lib/utils";
+import { BannerShowcase } from "./banner-showcase";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -15,6 +16,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...components,
     CloudinaryImage,
     YoutubeIframe,
+    BannerShowcase,
     a: NavLink,
     Accordions,
     Accordion,
