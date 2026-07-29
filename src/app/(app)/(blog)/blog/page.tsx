@@ -53,7 +53,8 @@ const normalizeCategoryFilter = (
 export default async function Blog(props: {
   searchParams: Promise<{ category?: string | string[] }>;
 }) {
-  const posts = blogSource.getPages();
+  // Scoped: an unscoped call spans every locale, which would list Burmese posts here.
+  const posts = blogSource.getPages("en");
 
   const { category } = await props.searchParams;
 

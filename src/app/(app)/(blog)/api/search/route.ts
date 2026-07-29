@@ -5,8 +5,10 @@ export const revalidate = false;
 
 export const { staticGET: GET } = createSearchAPI("advanced", {
   indexes: [
+    // English only — Orama has no Burmese tokenizer, and Burmese has no
+    // whitespace word boundaries for the default one to split on.
     ...blogSource
-      .getPages()
+      .getPages("en")
       .filter((page) => !page.data.draft)
       .map((page) => ({
         title: page.data.title,

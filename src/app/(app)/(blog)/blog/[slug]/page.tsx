@@ -23,7 +23,7 @@ import {
 import { absoluteUrl, cn, formatDate } from "@/lib/utils";
 
 export function generateStaticParams(): { slug: string }[] {
-  return blogSource.getPages().map((page) => ({
+  return blogSource.getPages("en").map((page) => ({
     slug: page.slugs[0],
   }));
 }
@@ -32,7 +32,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
-  const page = blogSource.getPage([slug]);
+  const page = blogSource.getPage([slug], "en");
 
   if (!page) {
     notFound();
@@ -90,7 +90,7 @@ export async function generateMetadata(props: {
 
 const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
   const params = await props.params;
-  const page = blogSource.getPage([params.slug]);
+  const page = blogSource.getPage([params.slug], "en");
 
   if (!page) notFound();
   const Mdx = page.data.body;

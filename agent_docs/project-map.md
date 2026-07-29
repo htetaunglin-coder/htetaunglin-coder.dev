@@ -6,7 +6,7 @@
 - Feature modules: `src/features/*`
 - Shared UI and primitives: `src/components/*`
 - Shared utilities/config: `src/lib/*`, `src/constants/*`
-- Blog content: `content/blog/*.mdx` via Fumadocs (`source.config.ts`)
+- Blog content: `content/blog/<locale>/*.mdx` via Fumadocs (`source.config.ts`)
 
 ## Route map
 
@@ -60,8 +60,16 @@
 - Content source definitions:
   - `source.config.ts`
   - `src/lib/source.ts`
+  - `src/lib/i18n.ts` (locale config: `en` default, `my` reserved)
 - Blog content files:
-  - `content/blog/*.mdx`
+  - `content/blog/<locale>/*.mdx`
+  - `content/blog/` holds nothing but locale directories. `parser: "dir"` reads the
+    first directory as a locale and silently discards posts under any other name;
+    `src/lib/source.ts` counts loaded pages against source files and throws.
+- Locale scoping of loader calls:
+  - English index, English post route, and search index pass `"en"` explicitly
+  - `src/app/sitemap.ts` is deliberately unscoped so it spans every locale —
+    `page.url` already carries the `/my` prefix
 - Blog list filtering:
   - `src/app/(app)/(blog)/blog/page.tsx`
   - Query param `category` supports `all` (default), `tech`, `life`

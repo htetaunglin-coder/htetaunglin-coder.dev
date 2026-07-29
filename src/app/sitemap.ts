@@ -9,6 +9,8 @@ export const revalidate = false;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string): string => new URL(path, appUrl).toString();
 
+  // Deliberately unscoped: the sitemap wants every locale, and `page.url`
+  // already carries the right prefix. Do not add a locale argument here.
   const blogs = blogSource.getPages().map(
     (page) =>
       ({
