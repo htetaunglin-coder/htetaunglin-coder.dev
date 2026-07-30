@@ -1,0 +1,197 @@
+import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+} from "fumadocs-ui/page";
+import { Calendar } from "lucide-react";
+import { CloudinaryImage } from "@/components/cloudinary-image";
+import { Comment } from "@/components/comment";
+import { Footer } from "@/components/footer";
+import { StructuredData } from "@/components/structured-data";
+import { Badge } from "@/components/ui/badge";
+import { NavLink } from "@/components/ui/nav-link";
+import type { BlogPost } from "@/lib/source";
+import {
+  getArticleStructuredData,
+  getBreadcrumbStructuredData,
+} from "@/lib/structured-data";
+import { cn, formatDate } from "@/lib/utils";
+import { getMDXComponents } from "./mdx-components";
+
+type BlogPostViewProps = {
+  post: NonNullable<BlogPost>;
+  /**
+   * Declared on the post's own words only — title, description, tags, body. The
+   * byline, photo credit, comments and footer are site chrome and stay English,
+   * as does the table of contents' own "On this page" heading.
+   */
+  contentLang?: string;
+  /**
+   * Typeface for the post's words. Wider than `contentLang` on purpose: it also
+   * covers the table of contents, whose links are the post's Burmese headings
+   * and would otherwise fall back to whatever the reader's OS provides.
+   */
+  contentClassName?: string;
+};
+
+export const BlogPostView = ({
+  post,
+  contentLang,
+  contentClassName,
+}: BlogPostViewProps) => {
+  const Mdx = post.data.body;
+
+  const articleStructuredData = getArticleStructuredData({
+    title: post.data.title,
+    description: post.data.description || "",
+    datePublished: post.data.date,
+    dateModified: post.data.date,
+    url: post.url,
+    tags: post.data.tags,
+  });
+
+  const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.data.title },
+  ]);
+
+  return (
+    <>
+      <StructuredData data={articleStructuredData} />
+      <StructuredData data={breadcrumbStructuredData} />
+      <main>
+        <div>
+          <figure className="pointer-events-none absolute top-0 left-0 z-[-1] h-[16rem] w-full overflow-hidden">
+            <div className="absolute inset-0 z-[-1]">
+              <CloudinaryImage
+                alt={post.data.title}
+                className="object-cover object-bottom"
+                data-nimg={1}
+                decoding="async"
+                fetchPriority="high"
+                fill
+                loading="eager"
+                src={post.data.image.url}
+                style={{ color: "transparent" }}
+                title={post.data.title}
+              />
+            </div>
+          </figure>
+          <div className="absolute top-0 left-0 z-[-1] h-[16rem] w-full bg-gradient-to-b from-bg-default/5 to-bg-default" />
+        </div>
+
+        <div className="flex w-full justify-center py-8 pt-38 text-left sm:pt-48">
+          <div className="w-full max-w-6xl px-4 lg:px-6">
+            <div className="-mt-8 flex w-full justify-end text-fg-tertiary">
+              <p className="text-xs sm:text-sm">
+                Photo By{" "}
+                <NavLink
+                  className="text-fg-brand underline"
+                  href={post.data.image.author_link}
+                >
+                  {post.data.image.author_name}
+                </NavLink>
+              </p>
+            </div>
+            <div className="border-b border-b-outline-secondary py-12">
+              <div className="mb-2 font-gloria-hallelujah font-medium italic tracking-normal">
+                <div className="flex flex-wrap items-center gap-4">
+                  <p className="text-fg-tertiary text-xs uppercase sm:text-sm">
+                    {post.data.series}
+                  </p>
+
+                  <div className="inline-flex items-center gap-1.5 text-fg-tertiary text-xs sm:text-sm">
+                    <Calendar />
+                    <p>{formatDate(post.data.date, { includeDay: true })}</p>
+                  </div>
+
+                  <p className="font-medium text-fg-tertiary text-xs sm:text-sm">
+                    — author:{" "}
+                    <span className="text-fg-brand">{post.data.author}</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className={contentClassName} lang={contentLang}>
+                <DocsTitle className="mb-2 flex items-center text-left font-semibold text-fg-default text-xl sm:text-3xl">
+                  {post.data.title}
+                </DocsTitle>
+                <DocsDescription className="mb-6 w-full max-w-5xl text-left text-base text-fg-tertiary sm:text-lg">
+                  {post.data.description}
+                </DocsDescription>
+
+                {post.data.tags && (
+                  <div className="flex flex-wrap gap-2">
+                    {post.data.tags.map((tag) => (
+                      <Badge
+                        className="inline-flex items-center rounded-none px-2.5 pt-0 pb-1 font-gloria-hallelujah font-medium text-xs/relaxed italic tracking-normal"
+                        key={tag}
+                        radius="full"
+                        variant="secondary"
+                      >
+                        # {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* No `lang` here: this wraps the table of contents, whose own
+                heading is English. It goes on `DocsBody` below instead. */}
+            <div className={contentClassName}>
+              <DocsLayout
+                containerProps={{
+                  className: cn(
+                    "blog [&_#nd-toc_a]:data-[active=true]:!text-fg-default [&_#nd-toc_a]:data-[active=false]:!text-fg-tertiary/80 [&_#nd-toc]:!top-28 m-0 w-full [&_#nd-toc]:sticky [&_#nd-toc]:bg-bg-secondary/40 [&_#nd-toc]:py-12 [&_#nd-toc]:pl-6"
+                  ),
+                }}
+                nav={{ enabled: false }}
+                sidebar={{ enabled: false, prefetch: false, tabs: false }}
+                tree={{
+                  name: "Tree",
+                  children: [],
+                }}
+              >
+                <DocsPage
+                  article={{
+                    className: "max-w-none !px-0",
+                  }}
+                  container={{
+                    className: "pe-0 relative gap-16 items-start",
+                  }}
+                  footer={{
+                    enabled: false,
+                  }}
+                  full={post.data.full}
+                  tableOfContent={{
+                    style: "clerk",
+                    single: false,
+                  }}
+                  toc={post.data.toc}
+                >
+                  <DocsBody
+                    className="prose dark:prose-invert max-w-none"
+                    lang={contentLang}
+                  >
+                    <Mdx components={getMDXComponents()} />
+                  </DocsBody>
+                </DocsPage>
+              </DocsLayout>
+            </div>
+
+            <figure className="mt-28 min-h-[24rem]">
+              <Comment />
+            </figure>
+          </div>
+        </div>
+      </main>
+      <div className="mt-12 flex w-full justify-center">
+        <Footer className="max-w-6xl px-6" />
+      </div>
+    </>
+  );
+};

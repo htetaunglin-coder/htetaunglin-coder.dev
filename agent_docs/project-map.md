@@ -32,6 +32,7 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
   - Side quests: `src/app/(app)/(main)/side-quests/page.tsx`
   - Guest book: `src/app/(app)/(main)/guest-book/page.tsx` — Giscus thread via `src/components/comment.tsx`; `robots: noindex`
   - Blog list/post: `src/app/(app)/(blog)/blog/page.tsx`, `src/app/(app)/(blog)/blog/[slug]/page.tsx`
+  - Burmese post: `src/app/(app)/(blog)/my/blog/[slug]/page.tsx` under `src/app/(app)/(blog)/my/layout.tsx`. Both post routes render `src/features/blog/components/blog-post-view.tsx`; there is no Burmese index yet
   - Resume: `src/app/resume/page.tsx` (the printable source for the PDF is the standalone `resume/resume.html`, rendered by `pnpm resume:pdf`)
   - Chat page: `src/app/(chat)/chat/page.tsx`
 - Route handlers:
@@ -74,7 +75,7 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
 ## Content boundary (blog)
 
 - Collection definition and frontmatter schema: `source.config.ts`; loader in `src/lib/source.ts`; locale config in `src/lib/i18n.ts`
-- Content files: `content/blog/<locale>/*.mdx` — `en` today, `my` reserved. `content/blog/` holds **nothing but locale directories**: the loader's `parser: "dir"` reads the first directory as a locale and silently discards files under any other name. `src/lib/source.ts` counts loaded pages against source files and throws if any went missing.
+- Content files: `content/blog/<locale>/*.mdx` — `en` and `my`. `content/blog/` holds **nothing but locale directories**: the loader's `parser: "dir"` reads the first directory as a locale and silently discards files under any other name. `src/lib/source.ts` counts loaded pages against source files and throws if any went missing.
 - Locale scoping: the English index, the English post route, and the search index call `getPages("en")` / `getPage(slugs, "en")`. `src/app/sitemap.ts` is deliberately unscoped so it spans every locale; `page.url` already carries the `/my` prefix.
 - Required frontmatter: `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series` (1–2 of `technology` | `thoughts`). Optional: `tags`, `draft`. A malformed field fails the build.
 - Blog list filtering: `src/app/(app)/(blog)/blog/page.tsx`
@@ -89,7 +90,17 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
 
 ## i18n status
 
-Not implemented. There is no i18n framework, no `messages/` directory, and no locale routing. `<html lang>` is hardcoded to `en` in `src/app/layout.tsx`. The intended direction is described in `i18n-burmese-english.md` — that document is a plan, not shipped behavior.
+**Blog posts only.** There is no i18n framework and no `messages/` directory; every piece of site chrome (header, footer, byline, comments) is English on every route, and `<html lang>` stays `en` in `src/app/layout.tsx`.
+
+What ships today:
+
+- Burmese posts live at `/my/blog/<slug>`, generated from `content/blog/my/` by `generateStaticParams`. A `/my` address for a post with no Burmese file 404s — `i18n.fallbackLanguage` is `null`, so `getPage(slugs, "my")` never returns the English post.
+- `lang="my"` sits on the two subtrees holding the post's own words (title + description, and the body), passed in via `BlogPostView`'s `content` prop. Byline, photo credit and comments stay English and inherit `<html lang="en">`.
+- Noto Sans Myanmar is declared in `src/lib/fonts.ts` and applied by `src/app/(app)/(blog)/my/layout.tsx`, not by the root layout — nothing outside `/my` matches the family, so English readers never fetch the woff2. Its `@font-face` rules (~3 KB raw) do ship in the global CSS chunk, since the root layout imports `fonts.ts`; a separate font module would confine them to `/my`, and that trade was made knowingly.
+- `[lang=my] :not(pre, pre *, code, code *) { font-family: inherit !important }` in `globals.css` pulls the face back over the `.blog` prose rules, which otherwise pin Latin faces on headings, links and quotes. `pre`/`code` are excluded so code stays Latin and monospace.
+- Not done yet: Burmese index (#36), language switcher (#37), hreflang/alternates and Burmese breadcrumbs (#38), Burmese share cards (#39 — `/og` cannot shape Myanmar script, so Burmese posts declare no `og:image`).
+
+`i18n-burmese-english.md` describes a wider site-level plan that is still unimplemented.
 
 ## Environment variables
 

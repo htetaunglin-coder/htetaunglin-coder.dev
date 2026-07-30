@@ -11,15 +11,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Deliberately unscoped: the sitemap wants every locale, and `page.url`
   // already carries the right prefix. Do not add a locale argument here.
-  const blogs = blogSource.getPages().map(
-    (page) =>
-      ({
-        url: url(page.url),
-        lastModified: page.data.date || new Date(),
-        changeFrequency: "weekly" as const,
-        priority: 0.7,
-      }) as MetadataRoute.Sitemap[number]
-  );
+  const blogs = blogSource
+    .getPages()
+    // Drafts render as `noindex`; submitting them here would ask Google to
+    // index a page that tells it not to. `api/search/route.ts` filters the same.
+    .filter((page) => !page.data.draft)
+    .map(
+      (page) =>
+        ({
+          url: url(page.url),
+          lastModified: page.data.date || new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        }) as MetadataRoute.Sitemap[number]
+    );
 
   const projects = PROJECT_DATA.map(
     (project) =>

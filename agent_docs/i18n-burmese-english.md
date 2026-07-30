@@ -1,6 +1,8 @@
 # i18n Plan (Burmese + English)
 
-This file defines the expected implementation direction for Burmese/English internationalization. **None of it is implemented** — there is no i18n framework, no locale routing, and `<html lang>` is hardcoded to `en`. Treat this as a plan, not as a description of the code.
+This file defines the expected implementation direction for **site-wide** Burmese/English internationalization. **None of what follows is implemented** — there is no i18n framework, no `messages/` directory, and no locale routing outside the blog. Treat this as a plan, not as a description of the code.
+
+The blog is the exception and does not follow this plan. Burmese *posts* already ship at `/my/blog/<slug>`, driven by the Fumadocs loader's own locale config (`src/lib/i18n.ts`) rather than an `app/[locale]` segment — the routes are hand-written at their real paths so they stay statically generated. See the "i18n status" section of `project-map.md` for what actually exists. Do not restructure the blog to match the sketch below without reconciling the two.
 
 ## Scope goals
 
