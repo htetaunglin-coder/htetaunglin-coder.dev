@@ -1,6 +1,6 @@
 # i18n Plan (Burmese + English)
 
-This file defines the expected implementation direction for Burmese/English internationalization.
+This file defines the expected implementation direction for Burmese/English internationalization. **None of it is implemented** — there is no i18n framework, no locale routing, and `<html lang>` is hardcoded to `en`. Treat this as a plan, not as a description of the code.
 
 ## Scope goals
 
@@ -21,7 +21,7 @@ Example shape:
 ## Translation storage
 
 Current status:
-- `messages/` exists and is empty.
+- No `messages/` directory exists yet. Nothing here is implemented.
 
 Recommended structure:
 - `messages/en/common.json`
