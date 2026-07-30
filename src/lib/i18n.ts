@@ -19,3 +19,9 @@ export const i18n = defineI18n({
   // Also load-bearing for the content-loss guard in `source.ts` — read it first.
   fallbackLanguage: null,
 });
+
+/**
+ * Inferred from `languages` above rather than written out, so adding a locale
+ * there turns every unhandled `switch` and string table into a type error.
+ */
+export type Locale = (typeof i18n)["languages"][number];

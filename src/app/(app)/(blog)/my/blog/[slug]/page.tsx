@@ -73,14 +73,9 @@ const BurmeseBlogPage = async (props: {
 
   if (!page) notFound();
 
-  return (
-    <BlogPostView
-      // The font variable itself is applied by the layout above.
-      contentClassName="font-noto-sans-myanmar"
-      contentLang={LOCALE}
-      post={page}
-    />
-  );
+  // The font variable itself is applied by the `/my` layout above; `locale`
+  // only decides which elements claim the family and which strings they read.
+  return <BlogPostView locale={LOCALE} post={page} />;
 };
 
 export default BurmeseBlogPage;

@@ -12,6 +12,8 @@ import { Footer } from "@/components/footer";
 import { StructuredData } from "@/components/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
+import { getBlogStrings } from "@/features/blog/lib/blog-strings";
+import type { Locale } from "@/lib/i18n";
 import type { BlogPost } from "@/lib/source";
 import {
   getArticleStructuredData,
@@ -23,25 +25,33 @@ import { getMDXComponents } from "./mdx-components";
 type BlogPostViewProps = {
   post: NonNullable<BlogPost>;
   /**
-   * Declared on the post's own words only — title, description, tags, body. The
-   * byline, photo credit, comments and footer are site chrome and stay English,
-   * as does the table of contents' own "On this page" heading.
+   * Drives both the post's own words and the furniture immediately around them
+   * — date, category labels, photo credit, author label. Site navigation, the
+   * footer, the comment widget and the table of contents' own "On this page"
+   * heading stay English, because they lead to or belong to English pages.
    */
-  contentLang?: string;
-  /**
-   * Typeface for the post's words. Wider than `contentLang` on purpose: it also
-   * covers the table of contents, whose links are the post's Burmese headings
-   * and would otherwise fall back to whatever the reader's OS provides.
-   */
-  contentClassName?: string;
+  locale?: Locale;
 };
 
-export const BlogPostView = ({
-  post,
-  contentLang,
-  contentClassName,
-}: BlogPostViewProps) => {
+export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
   const Mdx = post.data.body;
+  const strings = getBlogStrings(locale);
+  const isBurmese = locale === "my";
+
+  // Declared on the post's own words only, so a screen reader switches voice
+  // for the article and not for the English chrome wrapped around it.
+  const contentLang = isBurmese ? locale : undefined;
+
+  // Wider than `contentLang` on purpose: it also covers the table of contents,
+  // whose links are the post's Burmese headings and would otherwise fall back
+  // to whatever the reader's OS provides.
+  const contentClassName = isBurmese ? "font-noto-sans-myanmar" : undefined;
+
+  // Gloria Hallelujah carries no Myanmar glyphs; Burmese digits and labels set
+  // in it land on the OS fallback, which on some machines is empty boxes.
+  const bylineFont = isBurmese
+    ? "font-noto-sans-myanmar"
+    : "font-gloria-hallelujah";
 
   const articleStructuredData = getArticleStructuredData({
     title: post.data.title,
@@ -86,8 +96,8 @@ export const BlogPostView = ({
         <div className="flex w-full justify-center py-8 pt-38 text-left sm:pt-48">
           <div className="w-full max-w-6xl px-4 lg:px-6">
             <div className="-mt-8 flex w-full justify-end text-fg-tertiary">
-              <p className="text-xs sm:text-sm">
-                Photo By{" "}
+              <p className={cn("text-xs sm:text-sm", contentClassName)}>
+                <span lang={contentLang}>{strings.photoBy}</span>{" "}
                 <NavLink
                   className="text-fg-brand underline"
                   href={post.data.image.author_link}
@@ -97,20 +107,44 @@ export const BlogPostView = ({
               </p>
             </div>
             <div className="border-b border-b-outline-secondary py-12">
-              <div className="mb-2 font-gloria-hallelujah font-medium italic tracking-normal">
+              <div
+                className={cn(
+                  "mb-2 font-medium italic tracking-normal",
+                  bylineFont
+                )}
+              >
                 <div className="flex flex-wrap items-center gap-4">
-                  <p className="text-fg-tertiary text-xs uppercase sm:text-sm">
-                    {post.data.series}
+                  <p
+                    className="text-fg-tertiary text-xs uppercase sm:text-sm"
+                    lang={contentLang}
+                  >
+                    {/* Joined rather than rendered as a bare array: a post in
+                        both categories otherwise prints them run together. */}
+                    {post.data.series
+                      .map((entry) => strings.series[entry])
+                      .join(", ")}
                   </p>
 
                   <div className="inline-flex items-center gap-1.5 text-fg-tertiary text-xs sm:text-sm">
                     <Calendar />
-                    <p>{formatDate(post.data.date, { includeDay: true })}</p>
+                    <p>
+                      {formatDate(post.data.date, {
+                        includeDay: true,
+                        locale,
+                      })}
+                    </p>
                   </div>
 
-                  <p className="font-medium text-fg-tertiary text-xs sm:text-sm">
-                    — author:{" "}
-                    <span className="text-fg-brand">{post.data.author}</span>
+                  <p
+                    className="font-medium text-fg-tertiary text-xs sm:text-sm"
+                    lang={contentLang}
+                  >
+                    {strings.authorLabel}{" "}
+                    {/* Latin in both languages on purpose, so the author entity
+                        in structured data does not fragment across two spellings. */}
+                    <span className="text-fg-brand" lang="en">
+                      {post.data.author}
+                    </span>
                   </p>
                 </div>
               </div>
