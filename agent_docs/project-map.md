@@ -90,15 +90,20 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
 
 ## i18n status
 
-**Blog posts only.** There is no i18n framework and no `messages/` directory; every piece of site chrome (header, footer, byline, comments) is English on every route, and `<html lang>` stays `en` in `src/app/layout.tsx`.
+**The blog only.** There is no i18n framework and no `messages/` directory; site navigation and the footer are English on every route, including Burmese ones, because they lead to English pages. `<html lang>` stays `en` in `src/app/layout.tsx`.
 
 What ships today:
 
 - Burmese posts live at `/my/blog/<slug>`, generated from `content/blog/my/` by `generateStaticParams`. A `/my` address for a post with no Burmese file 404s — `i18n.fallbackLanguage` is `null`, so `getPage(slugs, "my")` never returns the English post.
-- `lang="my"` sits on the two subtrees holding the post's own words (title + description, and the body), passed in via `BlogPostView`'s `content` prop. Byline, photo credit and comments stay English and inherit `<html lang="en">`.
-- Noto Sans Myanmar is declared in `src/lib/fonts.ts` and applied by `src/app/(app)/(blog)/my/layout.tsx`, not by the root layout — nothing outside `/my` matches the family, so English readers never fetch the woff2. Its `@font-face` rules (~3 KB raw) do ship in the global CSS chunk, since the root layout imports `fonts.ts`; a separate font module would confine them to `/my`, and that trade was made knowingly.
+- A Burmese index at `/my/blog` lists Burmese posts only, with the same category tabs. `BlogIndexView` serves both locales; `src/lib/i18n.ts` exports `Locale` (`"en" | "my"`, inferred from `languages`).
+- Blog furniture is a plain per-locale object in `src/features/blog/lib/blog-strings.ts` — heading, intro, tab labels, empty state, read-more, photo credit, author label, category names. `satisfies Record<Locale, BlogStrings>` makes a missing key a build error. English entries hold the raw frontmatter values for `series`, so English pages render as they always did.
+- Burmese dates come from the locale's own numbering system, so `formatDate(date, { locale: "my" })` yields Burmese digits. Doto and Gloria Hallelujah carry no Myanmar glyphs, so Burmese routes swap the Myanmar face in wherever those two were pinned.
+- `lang="my"` sits on the subtrees holding Burmese words. The author name stays `lang="en"` in both locales so the structured-data author entity does not fragment across two spellings.
+- `LanguageSwitch` (`src/features/blog/components/language-switch.tsx`) links between counterparts. On a post it renders only when `blogSource.getPage(post.slugs, otherLocale)` returns something — matching slugs are the only link between a pair, there is no frontmatter field, and there is deliberately no disabled or "coming soon" state. On an index it always renders, since both indexes exist. A Burmese-labelled control carries `myanmarFont` on the element itself, because English routes have no `/my` layout above them to declare the variable.
+- Noto Sans Myanmar is declared in `src/lib/fonts.ts` and applied by `src/app/(app)/(blog)/my/layout.tsx`, not by the root layout. `/blog` is otherwise free of it — the one exception is the `LanguageSwitch` label above, which is why an English reader now fetches the woff2 on the blog index and on any post that has a translation. Its `@font-face` rules (~3 KB raw) do ship in the global CSS chunk, since the root layout imports `fonts.ts`; a separate font module would confine them to `/my`, and that trade was made knowingly.
 - `[lang=my] :not(pre, pre *, code, code *) { font-family: inherit !important }` in `globals.css` pulls the face back over the `.blog` prose rules, which otherwise pin Latin faces on headings, links and quotes. `pre`/`code` are excluded so code stays Latin and monospace.
-- Not done yet: Burmese index (#36), language switcher (#37), hreflang/alternates and Burmese breadcrumbs (#38), Burmese share cards (#39 — `/og` cannot shape Myanmar script, so Burmese posts declare no `og:image`).
+- Nothing is automatic: no header sniffing, no cookie, no redirect. Language does not persist across the site — `my` is a destination, not a mode.
+- Not done yet: hreflang/alternates and Burmese breadcrumbs (#38 — a Burmese post's breadcrumb still points at `/blog`), Burmese share cards (#39 — `/og` cannot shape Myanmar script, so Burmese posts declare no `og:image`).
 
 `i18n-burmese-english.md` describes a wider site-level plan that is still unimplemented.
 

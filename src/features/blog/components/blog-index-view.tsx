@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/i18n";
 import { blogSource } from "@/lib/source";
 import { cn } from "@/lib/utils";
 import { BlogPostShowcase } from "./blog-post-showcase";
+import { LanguageSwitch } from "./language-switch";
 
 type BlogCategoryFilter = "all" | "tech" | "life";
 
@@ -33,6 +34,13 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
 
   const basePath = locale === "en" ? "/blog" : `/${locale}/blog`;
   const activeCategory = normalizeCategoryFilter(category);
+
+  // Both indexes always exist, so this link can never 404. It points at the
+  // unfiltered index rather than carrying `category` across: the other language
+  // may have nothing in that category, and landing on an empty list reads as a
+  // broken switch.
+  const otherLocale: Locale = locale === "en" ? "my" : "en";
+  const otherIndexPath = otherLocale === "en" ? "/blog" : "/my/blog";
 
   // Doto carries no Myanmar glyphs, so Burmese tab labels in it would render as
   // boxes. The tabs lose their display face on `/my/blog`; there is no Myanmar
@@ -86,31 +94,43 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
         <DashedDivider className="absolute inset-x-0 bottom-8 mx-auto max-w-[92rem] opacity-40 dark:opacity-20" />
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-0">
-          <div className="inline-flex h-8 w-full items-center">
-            {categoryTabs.map((tab) => {
-              const isActive = tab.key === activeCategory;
-              const href =
-                tab.key === "all"
-                  ? basePath
-                  : `${basePath}?category=${tab.key}`;
+          {/* The language control shares this row because that is where a
+              reader looks for it, but it is pushed to the opposite end and
+              styled as a link — it navigates to another index rather than
+              filtering this one, and must not read as a third category. */}
+          <div className="flex h-8 w-full items-center justify-between gap-4">
+            <div className="inline-flex h-full items-center">
+              {categoryTabs.map((tab) => {
+                const isActive = tab.key === activeCategory;
+                const href =
+                  tab.key === "all"
+                    ? basePath
+                    : `${basePath}?category=${tab.key}`;
 
-              return (
-                <Link
-                  className={cn(
-                    "flex h-full items-center gap-1 px-3 font-black text-xs outline-none transition-colors focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default sm:px-6 sm:text-base",
-                    displayFont,
-                    isActive
-                      ? "bg-fg-default/90 text-bg-default"
-                      : "text-fg-tertiary hover:text-fg-default"
-                  )}
-                  href={href}
-                  key={tab.key}
-                  lang={locale}
-                >
-                  <i className="hidden sm:block"># </i> {tab.label}
-                </Link>
-              );
-            })}
+                return (
+                  <Link
+                    className={cn(
+                      "flex h-full items-center gap-1 px-3 font-black text-xs outline-none transition-colors focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default sm:px-6 sm:text-base",
+                      displayFont,
+                      isActive
+                        ? "bg-fg-default/90 text-bg-default"
+                        : "text-fg-tertiary hover:text-fg-default"
+                    )}
+                    href={href}
+                    key={tab.key}
+                    lang={locale}
+                  >
+                    <i className="hidden sm:block"># </i> {tab.label}
+                  </Link>
+                );
+              })}
+            </div>
+
+            <LanguageSwitch
+              className="shrink-0 pr-3 sm:pr-6"
+              href={otherIndexPath}
+              to={otherLocale}
+            />
           </div>
 
           <DashedDivider

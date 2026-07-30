@@ -14,12 +14,13 @@ import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
 import { getBlogStrings } from "@/features/blog/lib/blog-strings";
 import type { Locale } from "@/lib/i18n";
-import type { BlogPost } from "@/lib/source";
+import { type BlogPost, blogSource } from "@/lib/source";
 import {
   getArticleStructuredData,
   getBreadcrumbStructuredData,
 } from "@/lib/structured-data";
 import { cn, formatDate } from "@/lib/utils";
+import { LanguageSwitch } from "./language-switch";
 import { getMDXComponents } from "./mdx-components";
 
 type BlogPostViewProps = {
@@ -52,6 +53,14 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
   const bylineFont = isBurmese
     ? "font-noto-sans-myanmar"
     : "font-gloria-hallelujah";
+
+  // Asking the loader for the same slug in the other locale is the entire test
+  // for whether a translation exists. Nothing in frontmatter links the two, so
+  // there is no linking metadata to maintain and nothing that can fall out of
+  // sync — and because `i18n.fallbackLanguage` is null, this returns undefined
+  // rather than handing back the post we are already rendering.
+  const counterpartLocale: Locale = isBurmese ? "en" : "my";
+  const counterpart = blogSource.getPage(post.slugs, counterpartLocale);
 
   const articleStructuredData = getArticleStructuredData({
     title: post.data.title,
@@ -95,7 +104,16 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
 
         <div className="flex w-full justify-center py-8 pt-38 text-left sm:pt-48">
           <div className="w-full max-w-6xl px-4 lg:px-6">
-            <div className="-mt-8 flex w-full justify-end text-fg-tertiary">
+            <div className="-mt-8 flex w-full items-center justify-end gap-4 text-fg-tertiary">
+              {/* `mr-auto` rather than `justify-between`, so a post with no
+                  counterpart lays out exactly as it did before this existed. */}
+              {counterpart && (
+                <LanguageSwitch
+                  className="mr-auto"
+                  href={counterpart.url}
+                  to={counterpartLocale}
+                />
+              )}
               <p className={cn("text-xs sm:text-sm", contentClassName)}>
                 <span lang={contentLang}>{strings.photoBy}</span>{" "}
                 <NavLink
