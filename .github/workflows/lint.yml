@@ -4,20 +4,49 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  lint:
-    name: Eslint, Typescript, prettier and test
+  check:
+    name: Lint, typecheck, build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      # `postinstall` runs `fumadocs-mdx`, which generates `.source` —
+      # both the typecheck and the build need it.
       - name: Install dependencies
-        run: npm install
-      - name: ESLint
-        run: npm run lint
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and format
+        run: pnpm check
+
       - name: Type check
-        run: npm run typecheck
-      - name: Prettier
-        run: npm run format:check
-      # - name: Tests
-      #   run: npm run test
+        run: pnpm types:check
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Placeholders, not secrets. A few of these are read at module scope
+          # during the build — next-cloudinary throws outright without a cloud
+          # name. Nothing is fetched at build time, so fake values are enough.
+          # Real values live in the Vercel project settings.
+          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: "placeholder"
+          NEXT_PUBLIC_APP_URL: "https://htetaunglin-coder.dev"
+          NEXT_PUBLIC_GITHUB_REPO_URL: "https://github.com/htetaunglin-coder/htetaunglin-coder.dev"
+          NEXT_PUBLIC_GISCUS_REPO: "htetaunglin-coder/htetaunglin-coder.dev"
+          NEXT_PUBLIC_GISCUS_REPO_ID: "placeholder"
+          NEXT_PUBLIC_DOB: "2000-01-01"
