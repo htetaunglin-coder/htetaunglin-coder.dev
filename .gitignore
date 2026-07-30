@@ -29,6 +29,7 @@ HEADLINES.md
 .agents/
 .claude/
 .firecrawl/
+graphify-out/
 
 # debug
 npm-debug.log*
