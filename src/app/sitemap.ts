@@ -26,6 +26,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }) as MetadataRoute.Sitemap[number]
     );
 
+  // Scoped, unlike `blogs` above: that list spans both locales, so borrowing an
+  // entry from it would date the Burmese index from an English post.
+  const burmesePosts = blogSource
+    .getPages("my")
+    .filter((page) => !page.data.draft);
+
   const projects = PROJECT_DATA.map(
     (project) =>
       ({
@@ -51,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: url("/my/blog"),
-      lastModified: blogs.length > 0 ? blogs[0]?.lastModified : new Date(),
+      lastModified: burmesePosts[0]?.data.date ?? new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },

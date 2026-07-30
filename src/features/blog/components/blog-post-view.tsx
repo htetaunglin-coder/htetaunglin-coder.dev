@@ -12,7 +12,6 @@ import { Footer } from "@/components/footer";
 import { StructuredData } from "@/components/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/ui/nav-link";
-import { getBlogStrings } from "@/features/blog/lib/blog-strings";
 import type { Locale } from "@/lib/i18n";
 import { type BlogPost, blogSource } from "@/lib/source";
 import {
@@ -20,6 +19,8 @@ import {
   getBreadcrumbStructuredData,
 } from "@/lib/structured-data";
 import { cn, formatDate } from "@/lib/utils";
+import { getDateLocale, localeFontClass } from "../lib/blog-locale";
+import { getBlogStrings } from "../lib/blog-strings";
 import { LanguageSwitch } from "./language-switch";
 import { getMDXComponents } from "./mdx-components";
 
@@ -46,13 +47,9 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
   // Wider than `contentLang` on purpose: it also covers the table of contents,
   // whose links are the post's Burmese headings and would otherwise fall back
   // to whatever the reader's OS provides.
-  const contentClassName = isBurmese ? "font-noto-sans-myanmar" : undefined;
+  const contentClassName = localeFontClass(locale);
 
-  // Gloria Hallelujah carries no Myanmar glyphs; Burmese digits and labels set
-  // in it land on the OS fallback, which on some machines is empty boxes.
-  const bylineFont = isBurmese
-    ? "font-noto-sans-myanmar"
-    : "font-gloria-hallelujah";
+  const bylineFont = localeFontClass(locale, "font-gloria-hallelujah");
 
   // Asking the loader for the same slug in the other locale is the entire test
   // for whether a translation exists. Nothing in frontmatter links the two, so
@@ -148,7 +145,7 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
                     <p>
                       {formatDate(post.data.date, {
                         includeDay: true,
-                        locale,
+                        locale: getDateLocale(locale),
                       })}
                     </p>
                   </div>

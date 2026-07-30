@@ -1,10 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { DashedDivider } from "@/components/decorations/dashed-divider";
-import { getBlogStrings } from "@/features/blog/lib/blog-strings";
 import type { Locale } from "@/lib/i18n";
 import type { blogSource } from "@/lib/source";
 import { cn, formatDate } from "@/lib/utils";
+import { getDateLocale, localeFontClass } from "../lib/blog-locale";
+import { getBlogStrings } from "../lib/blog-strings";
 
 const BlogPostShowcase = ({
   post,
@@ -16,13 +17,12 @@ const BlogPostShowcase = ({
   post: ReturnType<typeof blogSource.getPages>[number];
 }) => {
   const strings = getBlogStrings(locale);
-  const isBurmese = locale === "my";
 
   return (
     <article
       className={cn(
         "relative flex flex-col-reverse items-center gap-6 pt-8 pb-12 sm:flex-row md:gap-12",
-        isBurmese && "font-noto-sans-myanmar"
+        localeFontClass(locale)
       )}
       lang={locale}
     >
@@ -69,14 +69,16 @@ const BlogPostShowcase = ({
           <div
             className={cn(
               "flex items-center text-fg-tertiary/80 text-xs italic md:text-sm",
-              // Gloria Hallelujah has no Myanmar coverage, so Burmese digits in it
-              // fall through to whatever the OS provides.
-              isBurmese ? "font-noto-sans-myanmar" : "font-gloria-hallelujah"
+              localeFontClass(locale, "font-gloria-hallelujah")
             )}
           >
             {post.data.date && (
               <span>
-                / {formatDate(post.data.date, { includeDay: true, locale })}
+                /{" "}
+                {formatDate(post.data.date, {
+                  includeDay: true,
+                  locale: getDateLocale(locale),
+                })}
               </span>
             )}
           </div>

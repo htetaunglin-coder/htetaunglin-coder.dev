@@ -37,8 +37,8 @@ export const BLOG_STRINGS = {
     readMoreLabel: (title: string) => `Read more about ${title}`,
     photoBy: "Photo By",
     authorLabel: "— author:",
-    // Deliberately the raw frontmatter values: English post pages then render
-    // byte-identically to how they did before this table existed.
+    // Deliberately the raw frontmatter values, so introducing this table did
+    // not restyle English category labels.
     series: {
       technology: "technology",
       thoughts: "thoughts",
@@ -67,14 +67,3 @@ export const BLOG_STRINGS = {
 
 export const getBlogStrings = (locale: Locale): BlogStrings =>
   BLOG_STRINGS[locale];
-
-/**
- * Marks a subtree as Burmese words. `undefined` on English routes, so nothing
- * there changes. On Burmese routes it carries the face plus the `lang` marker
- * that the `[lang="my"]` rule in `globals.css` keys off to beat the `.blog`
- * prose rules, which otherwise pin Latin faces onto headings and links.
- */
-export const getBurmeseTextProps = (locale: Locale) =>
-  locale === "my"
-    ? { className: "font-noto-sans-myanmar", lang: "my" }
-    : { className: undefined, lang: undefined };

@@ -3,10 +3,11 @@ import { FadeAnimation } from "@/components/animations/fade-animation";
 import { DashedDivider } from "@/components/decorations/dashed-divider";
 import { Footer } from "@/components/footer";
 import { PageHeroImage } from "@/components/page-hero-image";
-import { getBlogStrings } from "@/features/blog/lib/blog-strings";
 import type { Locale } from "@/lib/i18n";
 import { blogSource } from "@/lib/source";
 import { cn } from "@/lib/utils";
+import { localeBlogPath, localeFontClass } from "../lib/blog-locale";
+import { getBlogStrings } from "../lib/blog-strings";
 import { BlogPostShowcase } from "./blog-post-showcase";
 import { LanguageSwitch } from "./language-switch";
 
@@ -32,7 +33,7 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
   // Burmese posts on the English index and vice versa.
   const posts = blogSource.getPages(locale);
 
-  const basePath = locale === "en" ? "/blog" : `/${locale}/blog`;
+  const basePath = localeBlogPath(locale);
   const activeCategory = normalizeCategoryFilter(category);
 
   // Both indexes always exist, so this link can never 404. It points at the
@@ -40,13 +41,12 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
   // may have nothing in that category, and landing on an empty list reads as a
   // broken switch.
   const otherLocale: Locale = locale === "en" ? "my" : "en";
-  const otherIndexPath = otherLocale === "en" ? "/blog" : "/my/blog";
+  const otherIndexPath = localeBlogPath(otherLocale);
 
-  // Doto carries no Myanmar glyphs, so Burmese tab labels in it would render as
-  // boxes. The tabs lose their display face on `/my/blog`; there is no Myanmar
-  // equivalent to swap in.
-  const displayFont = locale === "my" ? "font-noto-sans-myanmar" : "font-doto";
-  const bodyFont = locale === "my" ? "font-noto-sans-myanmar" : "font-inter";
+  // The tabs lose their display face on `/my/blog` — Doto has no Myanmar
+  // glyphs and there is no Myanmar equivalent to swap in.
+  const displayFont = localeFontClass(locale, "font-doto");
+  const bodyFont = localeFontClass(locale, "font-inter");
 
   const categoryTabs: Array<{ key: BlogCategoryFilter; label: string }> = [
     { key: "all", label: strings.categoryAll },
