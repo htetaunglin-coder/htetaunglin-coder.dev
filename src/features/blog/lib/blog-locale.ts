@@ -77,11 +77,11 @@ export const postAlternates = (
 /**
  * A post's path, or nothing if it may not join an `hreflang` cluster.
  *
- * A draft is writing the author has not published: it is held out of the
- * sitemap and the search index, and Burmese drafts render `noindex`. An
- * `hreflang` is an advertisement to a crawler, so a draft belongs in no
- * cluster, at either end — one missing side drops the whole set, since a
- * half-declared cluster is never reciprocated anyway.
+ * A draft is writing the author has not published: it renders `noindex`, and is
+ * held out of the indexes, the sitemap and the search index. An `hreflang` is
+ * an advertisement to a crawler, so a draft belongs in no cluster, at either
+ * end — one missing side drops the whole set, since a half-declared cluster is
+ * never reciprocated anyway.
  *
  * Narrower than the test `LanguageSwitch` uses on purpose: a draft translation
  * is still worth linking to for a reader looking straight at it.

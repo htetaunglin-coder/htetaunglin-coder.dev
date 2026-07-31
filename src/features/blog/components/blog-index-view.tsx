@@ -31,7 +31,12 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
 
   // Scoped on purpose: an unscoped call spans every locale, which would list
   // Burmese posts on the English index and vice versa.
-  const posts = blogSource.getPages(locale);
+  const posts = blogSource
+    .getPages(locale)
+    // A draft is unpublished. Listing one here would hand a crawler a followed
+    // link straight to a page that asks not to be indexed, and show a reader
+    // writing that is not finished. Drafts stay reachable at their own URL.
+    .filter((post) => !post.data.draft);
 
   const basePath = localeBlogPath(locale);
   const activeCategory = normalizeCategoryFilter(category);

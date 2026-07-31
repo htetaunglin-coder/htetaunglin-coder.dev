@@ -42,6 +42,10 @@ export async function generateMetadata(props: {
     title: blog.title,
     description: blog.description,
     keywords,
+    // A draft is unpublished writing. It still renders, so the author can read
+    // it at its real URL, but it must not be indexed there. `follow` so the
+    // links out of it still count.
+    robots: blog.draft ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: pageUrl,
       languages: postAlternates(page.slugs),

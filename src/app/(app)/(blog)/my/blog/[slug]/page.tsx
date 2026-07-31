@@ -38,7 +38,8 @@ export async function generateMetadata(props: {
     title: blog.title,
     description: blog.description,
     keywords: blog.tags || [],
-    // Placeholder scaffolding stays out of the index until it is real writing.
+    // Same rule as the English route: a draft renders at its real URL so the
+    // author can read it, but is not indexed there.
     robots: blog.draft ? { index: false, follow: true } : undefined,
     alternates: {
       // Itself, never the English post. Pointing a Burmese page at its English
