@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BlogIndexView } from "@/features/blog/components/blog-index-view";
+import { localeAlternates } from "@/features/blog/lib/blog-locale";
 import { getBlogStrings } from "@/features/blog/lib/blog-strings";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     // Points at itself, not at `/blog`. The two indexes list different posts,
     // so collapsing them into one result would hide the Burmese one.
     canonical: absoluteUrl("/my/blog"),
+    languages: localeAlternates({ en: "/blog", my: "/my/blog" }),
   },
   openGraph: {
     title: `${strings.indexTitle} | Htet Aung Lin`,

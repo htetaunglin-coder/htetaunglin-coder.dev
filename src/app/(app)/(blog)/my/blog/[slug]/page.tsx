@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostView } from "@/features/blog/components/blog-post-view";
+import { postAlternates } from "@/features/blog/lib/blog-locale";
 import { blogSource } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -40,7 +41,11 @@ export async function generateMetadata(props: {
     // Placeholder scaffolding stays out of the index until it is real writing.
     robots: blog.draft ? { index: false, follow: true } : undefined,
     alternates: {
+      // Itself, never the English post. Pointing a Burmese page at its English
+      // counterpart would fold the two into one result and undo the whole
+      // point of giving Burmese its own addresses.
       canonical: pageUrl,
+      languages: postAlternates(page.slugs),
     },
     openGraph: {
       title: blog.title,

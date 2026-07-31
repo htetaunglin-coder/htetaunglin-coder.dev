@@ -1,4 +1,8 @@
 import type { MetadataRoute } from "next";
+import {
+  localeAlternates,
+  postAlternates,
+} from "@/features/blog/lib/blog-locale";
 import { PROJECT_DATA } from "@/features/projects/data";
 import { appUrl } from "@/lib/site-config";
 import { blogSource } from "@/lib/source";
@@ -23,6 +27,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           lastModified: page.data.date || new Date(),
           changeFrequency: "weekly" as const,
           priority: 0.7,
+          // A second channel for what the pages already declare in `<link>`
+          // tags: a crawler that reads the sitemap before fetching either page
+          // learns the pair from here. The two must not disagree, which is why
+          // both go through `postAlternates`.
+          alternates: { languages: postAlternates(page.slugs) },
         }) as MetadataRoute.Sitemap[number]
     );
 
@@ -54,12 +63,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: blogs.length > 0 ? blogs[0]?.lastModified : new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+      alternates: { languages: indexAlternates },
     },
     {
       url: url("/my/blog"),
       lastModified: burmesePosts[0]?.data.date ?? new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+      alternates: { languages: indexAlternates },
     },
     {
       url: url("/projects"),
@@ -97,3 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...projects.filter((v) => v !== undefined),
   ];
 }
+
+// Unconditional, unlike a post's: both indexes always exist, so this pair can
+// never be half-present.
+const indexAlternates = localeAlternates({ en: "/blog", my: "/my/blog" });

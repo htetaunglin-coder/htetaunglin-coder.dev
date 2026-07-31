@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostView } from "@/features/blog/components/blog-post-view";
+import { postAlternates } from "@/features/blog/lib/blog-locale";
 import { blogSource } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 
+const LOCALE = "en";
+
 export function generateStaticParams(): { slug: string }[] {
-  return blogSource.getPages("en").map((page) => ({
+  return blogSource.getPages(LOCALE).map((page) => ({
     slug: page.slugs[0],
   }));
 }
@@ -14,7 +17,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
-  const page = blogSource.getPage([slug], "en");
+  const page = blogSource.getPage([slug], LOCALE);
 
   if (!page) {
     notFound();
@@ -41,6 +44,7 @@ export async function generateMetadata(props: {
     keywords,
     alternates: {
       canonical: pageUrl,
+      languages: postAlternates(page.slugs),
     },
     openGraph: {
       title: blog.title,
@@ -72,7 +76,7 @@ export async function generateMetadata(props: {
 
 const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
   const params = await props.params;
-  const page = blogSource.getPage([params.slug], "en");
+  const page = blogSource.getPage([params.slug], LOCALE);
 
   if (!page) notFound();
 

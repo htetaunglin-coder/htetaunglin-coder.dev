@@ -50,6 +50,7 @@ export type ArticleStructuredData = {
     "@type": "WebPage";
     "@id": string;
   };
+  inLanguage: string;
   keywords?: string | string[];
 };
 
@@ -108,6 +109,7 @@ export function getArticleStructuredData({
   dateModified,
   url,
   tags,
+  inLanguage,
 }: {
   title: string;
   description: string;
@@ -116,6 +118,13 @@ export function getArticleStructuredData({
   dateModified?: Date;
   url: string;
   tags?: string[];
+  /**
+   * BCP-47 tag for the article's own words. Required rather than optional: an
+   * unlabelled article is assumed to be in the site's language, which for a
+   * Burmese post is wrong, and the compiler is a better reminder than a
+   * default.
+   */
+  inLanguage: string;
 }): ArticleStructuredData {
   const authorUrl = siteConfig.url as string;
   const articleUrl = absoluteUrl(url);
@@ -142,6 +151,7 @@ export function getArticleStructuredData({
       "@type": "WebPage",
       "@id": articleUrl,
     },
+    inLanguage,
     keywords: tags?.join(", "),
   };
 }

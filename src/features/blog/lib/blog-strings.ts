@@ -11,6 +11,14 @@ type BlogStrings = {
   readMoreLabel: (title: string) => string;
   photoBy: string;
   authorLabel: string;
+  /**
+   * The blog crumb in a post's `BreadcrumbList`. Separate from `indexTitle`
+   * because a breadcrumb and a page heading are different surfaces — English
+   * shows "Blog" in the trail and "Blogs" at the top of the index, and always
+   * has. There is no `breadcrumbHome`: that crumb leads to the English home
+   * page and names itself in English in both locales.
+   */
+  breadcrumbBlog: string;
   series: Record<"technology" | "thoughts", string>;
 };
 
@@ -37,6 +45,7 @@ export const BLOG_STRINGS = {
     readMoreLabel: (title: string) => `Read more about ${title}`,
     photoBy: "Photo By",
     authorLabel: "— author:",
+    breadcrumbBlog: "Blog",
     // Deliberately the raw frontmatter values, so introducing this table did
     // not restyle English category labels.
     series: {
@@ -58,6 +67,7 @@ export const BLOG_STRINGS = {
     readMoreLabel: (title: string) => `${title} ကို ဆက်ဖတ်ရန်`,
     photoBy: "ဓာတ်ပုံ —",
     authorLabel: "— ရေးသားသူ:",
+    breadcrumbBlog: "ဆောင်းပါးများ",
     series: {
       technology: "နည်းပညာ",
       thoughts: "ဘဝ",

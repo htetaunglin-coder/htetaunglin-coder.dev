@@ -19,7 +19,11 @@ import {
   getBreadcrumbStructuredData,
 } from "@/lib/structured-data";
 import { cn, formatDate } from "@/lib/utils";
-import { getDateLocale, localeFontClass } from "../lib/blog-locale";
+import {
+  getDateLocale,
+  localeBlogPath,
+  localeFontClass,
+} from "../lib/blog-locale";
 import { getBlogStrings } from "../lib/blog-strings";
 import { LanguageSwitch } from "./language-switch";
 import { getMDXComponents } from "./mdx-components";
@@ -66,11 +70,17 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
     dateModified: post.data.date,
     url: post.url,
     tags: post.data.tags,
+    // The content locale, not `getDateLocale` — that one carries a regional
+    // subtag chosen for date formatting and says nothing about the writing.
+    inLanguage: locale,
   });
 
   const breadcrumbStructuredData = getBreadcrumbStructuredData([
+    // English in both locales: this crumb leads to the English home page.
     { name: "Home", url: "/" },
-    { name: "Blog", url: "/blog" },
+    // Both the label and the destination follow the post — a Burmese post's
+    // trail must climb to the Burmese index, not to `/blog`.
+    { name: strings.breadcrumbBlog, url: localeBlogPath(locale) },
     { name: post.data.title },
   ]);
 
