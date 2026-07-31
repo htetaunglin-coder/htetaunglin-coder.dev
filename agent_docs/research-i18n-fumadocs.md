@@ -2,7 +2,7 @@
 
 Implementation mechanics for `/blog/[slug]` (en) + `/my/blog/[slug]` (my). Verified against the installed packages and the `.next` build output on 2026-07-30 — `fumadocs-core@16.0.8`, `fumadocs-mdx@13.0.5`, `fumadocs-ui@16.0.8`, `next@16.0.10`. If something here contradicts the code, the code wins; fix this file in the same session.
 
-Nothing here is implemented. This is research for a decided design, not a description of shipped behavior.
+**This shipped.** These are the research notes that preceded it, kept for their source-level citations and left as written on 2026-07-30 — a record of what was verified and when, not a description of the current code. `i18n-burmese-english.md` is the current design and wins if the two disagree.
 
 ## Answers up front
 

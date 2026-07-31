@@ -1,6 +1,6 @@
 # Research: Burmese Typography and Date Formatting
 
-Research notes for the planned `my` locale (see `agent_docs/i18n-burmese-english.md`, still unimplemented). Verified against the installed `next@16.0.10` and live primary sources on 2026-07-30. **Nothing here is implemented.** If something contradicts the code, the code wins — fix this file in the same session.
+Research notes that preceded the shipped `my` locale — see `agent_docs/i18n-burmese-english.md` for the current design, which wins if the two disagree. Verified against the installed `next@16.0.10` and live primary sources on 2026-07-30, and **left as written**: this is a record of what was checked and when, kept for its source-level citations, not a description of the current code.
 
 Scope was fixed before research started: the font is **Noto Sans Myanmar**, loaded only on `/my/*`, not globally.
 
@@ -135,7 +135,7 @@ GPOS scripts: ['DFLT','latn','mym2'] features: dist kern mark mkmk       (7 look
 Rendered `မြန်မာဘာသာ`, `ကျွန်တော်`, `ဗုဒ္ဓ`, `ကြေးမုံ`, and `၂၉ ဇူလိုင် ၂၀၂၆` in headless Chrome with only `font-family` set: **all correct.** Ya-yit wraps its base consonant, `ဓ` stacks beneath `ဒ` with no visible virama, and `ေ` reorders to the left of its cluster.
 
 - **Do not set `font-feature-settings`.** The features above are *required* features that the shaper applies from the `mym2` script table automatically. Manually listing them in CSS risks disabling the ones you omit.
-- **Do set `lang="my"`** on the Burmese subtree. It drives the `locl` feature and font fallback selection, and it is what `agent_docs/i18n-burmese-english.md` already plans for `<html lang>`.
+- **Do set `lang="my"`** on the Burmese subtree. It drives the `locl` feature and font fallback selection. (This line originally pointed at a plan to set `<html lang>` at the document root; that was rejected — the attribute sits on the Burmese subtree only, so the English nav and footer keep the document language. See `i18n-burmese-english.md`.)
 
 ### Zawgyi: a real risk, but not one this site should try to solve
 

@@ -77,7 +77,7 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 
 ### Content
 
-- `must`: blog posts are MDX in `content/blog/<locale>/` (`en` today, `my` reserved) and must satisfy the frontmatter schema in `source.config.ts` — `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series`. A malformed field fails the build.
+- `must`: blog posts are MDX in `content/blog/<locale>/` — `en` and `my`, both live — and must satisfy the frontmatter schema in `source.config.ts` — `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series`. A malformed field fails the build. A post in any other directory is silently dropped, so the loader throws instead; see `agent_docs/i18n-burmese-english.md`.
 - `must not`: touch `JOB_SEARCH.md`, `__ONLY_ME__/`, or `resume/` unless asked.
 
 ### Style
@@ -100,7 +100,8 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 - `agent_docs/generative-ai-extension.md` — extending the AI surface
 - `agent_docs/dependencies-and-doc-packages.md` — upgrade risk groups
 - `agent_docs/context-engineering-principles.md` — why this doc set is shaped the way it is
-- `agent_docs/i18n-burmese-english.md` — planned `en`/`my` i18n, **not implemented**
+- `agent_docs/i18n-burmese-english.md` — the shipped `en`/`my` blog i18n. **Read before touching Burmese routes, blog metadata, or `content/blog/`** — it records three traps and several deliberate behaviours that read as bugs
+- `agent_docs/research-i18n-fumadocs.md`, `agent_docs/research-i18n-typography.md` — cited research behind the above, kept as historical record
 
 ## Agent skills
 

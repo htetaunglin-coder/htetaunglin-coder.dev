@@ -1,6 +1,6 @@
 # Project Map
 
-Architecture and route map for `htetaunglin-coder.dev`. Verified against the code on 2026-07-29 — if something here contradicts the code, the code wins; fix this file in the same session.
+Architecture and route map for `htetaunglin-coder.dev`. Verified against the code on 2026-08-01 — if something here contradicts the code, the code wins; fix this file in the same session.
 
 ## High-level architecture
 
@@ -32,7 +32,7 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
   - Side quests: `src/app/(app)/(main)/side-quests/page.tsx`
   - Guest book: `src/app/(app)/(main)/guest-book/page.tsx` — Giscus thread via `src/components/comment.tsx`; `robots: noindex`
   - Blog list/post: `src/app/(app)/(blog)/blog/page.tsx`, `src/app/(app)/(blog)/blog/[slug]/page.tsx`
-  - Burmese post: `src/app/(app)/(blog)/my/blog/[slug]/page.tsx` under `src/app/(app)/(blog)/my/layout.tsx`. Both post routes render `src/features/blog/components/blog-post-view.tsx`; there is no Burmese index yet
+  - Burmese list/post: `src/app/(app)/(blog)/my/blog/page.tsx`, `src/app/(app)/(blog)/my/blog/[slug]/page.tsx` — both under `src/app/(app)/(blog)/my/layout.tsx`, which applies the Myanmar font to the subtree. Both post routes render `blog-post-view.tsx` and both indexes render `blog-index-view.tsx`, each taking a `locale`. Both indexes are request-time rendered because they read `searchParams`
   - Resume: `src/app/resume/page.tsx` (the printable source for the PDF is the standalone `resume/resume.html`, rendered by `pnpm resume:pdf`)
   - Chat page: `src/app/(chat)/chat/page.tsx`
 - Route handlers:
@@ -91,27 +91,17 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
 
 ## i18n status
 
-**The blog only.** There is no i18n framework and no `messages/` directory; site navigation and the footer are English on every route, including Burmese ones, because they lead to English pages. `<html lang>` stays `en` in `src/app/layout.tsx`.
+**Shipped, and blog-only.** English at `/blog`, Burmese at `/my/blog`, both with posts and an index. No i18n framework, no `messages/` directory; site navigation and the footer stay English on every route, and `<html lang>` stays `en` in `src/app/layout.tsx`.
 
-What ships today:
+Where it lives:
 
-- Burmese posts live at `/my/blog/<slug>`, generated from `content/blog/my/` by `generateStaticParams`. A `/my` address for a post with no Burmese file 404s — `i18n.fallbackLanguage` is `null`, so `getPage(slugs, "my")` never returns the English post.
-- A Burmese index at `/my/blog` lists Burmese posts only, with the same category tabs. `BlogIndexView` serves both locales; `src/lib/i18n.ts` exports `Locale` (`"en" | "my"`, inferred from `languages`).
-- Blog furniture is a plain per-locale object in `src/features/blog/lib/blog-strings.ts` — heading, intro, tab labels, empty state, read-more, photo credit, author label, category names. `satisfies Record<Locale, BlogStrings>` makes a missing key a build error. English entries hold the raw frontmatter values for `series`, so English pages render as they always did.
-- `src/features/blog/lib/blog-locale.ts` maps a locale to its date tag, font class, and blog path. The date mapping is load-bearing: the content locale `"en"` resolves to en-US in ICU, and this site formats English dates as en-GB (`26 July 2026`), so passing the content locale straight to `formatDate` silently restyles every English date. Burmese needs no such distinction — `"my"` already yields Burmese digits from the locale's own numbering system. Doto, Inter and Gloria Hallelujah carry no Myanmar glyphs, so Burmese routes swap the Myanmar face in wherever those are pinned.
-- `lang="my"` sits on the subtrees holding Burmese words. The author name stays `lang="en"` in both locales so the structured-data author entity does not fragment across two spellings.
-- `LanguageSwitch` (`src/features/blog/components/language-switch.tsx`) links between counterparts. On a post it renders only when `blogSource.getPage(post.slugs, otherLocale)` returns something — matching slugs are the only link between a pair, there is no frontmatter field, and there is deliberately no disabled or "coming soon" state. On an index it always renders, since both indexes exist. A Burmese-labelled control carries `myanmarFont` on the element itself, because English routes have no `/my` layout above them to declare the variable.
-- Noto Sans Myanmar is declared in `src/lib/fonts.ts` and applied by `src/app/(app)/(blog)/my/layout.tsx`, not by the root layout. `/blog` is otherwise free of it — the one exception is the `LanguageSwitch` label above, which is why an English reader now fetches the woff2 on the blog index and on any post that has a translation. Its `@font-face` rules (~3 KB raw) do ship in the global CSS chunk, since the root layout imports `fonts.ts`; a separate font module would confine them to `/my`, and that trade was made knowingly.
-- `[lang=my] :not(pre, pre *, code, code *) { font-family: inherit !important }` in `globals.css` pulls the face back over the `.blog` prose rules, which otherwise pin Latin faces on headings, links and quotes. `pre`/`code` are excluded so code stays Latin and monospace.
-- Nothing is automatic: no header sniffing, no cookie, no redirect. Language does not persist across the site — `my` is a destination, not a mode.
-- Every canonical points at itself, including Burmese ones. Pointing a Burmese page at its English counterpart would fold the two into one result and undo the reason for giving Burmese its own addresses.
-- `postAlternates(slugs)` in `blog-locale.ts` builds a post's `hreflang` set: `en`, `my`, and `x-default` → English. It takes no locale — it asks the loader for *both* and lets the answer decide, so a pair emits the identical set from either end by construction rather than by two call sites agreeing. Used by both post routes and `sitemap.ts`; `localeAlternates({ en, my })` underneath it serves the two indexes, whose pair is unconditional. An untranslated post declares nothing at all.
-- Entry to a cluster is gated on `!draft`, at **both** ends, because an `hreflang` advertises a URL to a crawler. Narrower than `LanguageSwitch`'s test on purpose: a draft translation is still worth linking to for a reader looking straight at it.
-- Article JSON-LD carries `inLanguage`, from the content locale rather than `getDateLocale` — that one's regional subtag exists for date formatting and says nothing about the writing. `getArticleStructuredData` requires the field so a new caller cannot silently inherit the site's language.
-- A post's breadcrumb climbs to its own index (`localeBlogPath`), so a Burmese post's trail reaches `/my/blog`. The blog crumb's label is a per-locale string; the Home crumb stays "Home" in both, because it leads to the English home page. English breadcrumb output is unchanged.
-- Burmese share cards skip `/og` entirely: `getCldOgImageUrl` (already a dependency, used by `/og` itself) crops the post's own cover image to 1200×630 with no text drawn on it. `/og` renders the title into the card and its shaper handles Latin and Arabic only, so Burmese would arrive as boxes — or, given a Myanmar font, as malformed script with detached medials and unreordered prefix vowels, which reads worse than no text at all. English posts still use `/og` and are untouched. The Burmese index has no card of its own and inherits the site's static one; nothing renders Burmese through the generator.
+- `src/lib/i18n.ts` — loader locale config and the `Locale` type (`"en" | "my"`, inferred from `languages`)
+- `src/lib/source.ts` — the loader, plus a build guard that throws if the locale parser silently dropped a post
+- `content/blog/<locale>/` — one directory per locale; a translated pair is two files sharing a filename, with no linking metadata
+- `src/features/blog/lib/blog-strings.ts` — per-locale UI strings; `blog-locale.ts` — date tag, font class, blog path, `hreflang` sets
+- `src/features/blog/components/language-switch.tsx` — the control between counterparts
 
-`i18n-burmese-english.md` describes a wider site-level plan that is still unimplemented.
+**Read `i18n-burmese-english.md` before changing any of it.** Several behaviours here look like bugs and are not — the absent language control on untranslated posts, the English nav around a Burmese article, the text-free Burmese share card — and three findings in that file will otherwise be re-litigated at real cost.
 
 ## Environment variables
 

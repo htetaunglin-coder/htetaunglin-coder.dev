@@ -44,9 +44,10 @@ export const fonts = [
 ];
 
 // Deliberately not in `fonts` above: that array goes on `<body>` in the root
-// layout, whereas this is applied by the Burmese blog layout alone. No element
-// outside `/my` ever matches the family, so the woff2 files are never fetched
-// for an English reader — `preload: false` keeps that true.
+// layout, whereas this is applied by the Burmese blog layout. `preload: false`
+// means the woff2 is fetched only where a Burmese glyph is actually rendered —
+// which since `LanguageSwitch` shipped includes `/blog` and any translated
+// post, because its Burmese label carries this variable on the element itself.
 //
 // The `@font-face` rules themselves (~3 KB raw) do still ship in the global CSS
 // chunk, because the root layout imports this file. Moving this declaration to
