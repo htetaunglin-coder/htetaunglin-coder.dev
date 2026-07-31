@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getCldOgImageUrl } from "next-cloudinary";
 import { BlogPostView } from "@/features/blog/components/blog-post-view";
 import { postAlternates } from "@/features/blog/lib/blog-locale";
 import { blogSource } from "@/lib/source";
@@ -34,6 +35,18 @@ export async function generateMetadata(props: {
 
   const pageUrl = absoluteUrl(page.url);
 
+  // The cover image cropped to card size, with no text drawn over it. English
+  // posts go through `/og`, which renders the title into the image — that
+  // renderer ships shaping for Latin and Arabic only, so Burmese comes out
+  // either as boxes or, once a Myanmar font is supplied, as malformed script:
+  // medials detached, viramas visible, prefix vowels unreordered. A picture
+  // with no words beats words spelled wrong.
+  const ogImageUrl = getCldOgImageUrl({
+    src: blog.image.url,
+    width: 1200,
+    height: 630,
+  });
+
   return {
     title: blog.title,
     description: blog.description,
@@ -58,15 +71,21 @@ export async function generateMetadata(props: {
       modifiedTime: blog.date.toISOString(),
       authors: ["Htet Aung Lin"],
       tags: blog.tags,
-      // No `images` yet on purpose. `/og` renders title text into the card and
-      // cannot shape Myanmar script, so pointing at it would ship malformed
-      // Burmese into every share preview. Wiring these up is #39's job.
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: blog.title,
       description: blog.description,
       creator: "@htetaunglin-cdr",
+      images: [ogImageUrl],
     },
   };
 }

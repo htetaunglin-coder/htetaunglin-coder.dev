@@ -109,7 +109,7 @@ What ships today:
 - Entry to a cluster is gated on `!draft`, at **both** ends, because an `hreflang` advertises a URL to a crawler. Narrower than `LanguageSwitch`'s test on purpose: a draft translation is still worth linking to for a reader looking straight at it.
 - Article JSON-LD carries `inLanguage`, from the content locale rather than `getDateLocale` — that one's regional subtag exists for date formatting and says nothing about the writing. `getArticleStructuredData` requires the field so a new caller cannot silently inherit the site's language.
 - A post's breadcrumb climbs to its own index (`localeBlogPath`), so a Burmese post's trail reaches `/my/blog`. The blog crumb's label is a per-locale string; the Home crumb stays "Home" in both, because it leads to the English home page. English breadcrumb output is unchanged.
-- Not done yet: Burmese share cards (#39 — `/og` cannot shape Myanmar script, so Burmese posts declare no `og:image`).
+- Burmese share cards skip `/og` entirely: `getCldOgImageUrl` (already a dependency, used by `/og` itself) crops the post's own cover image to 1200×630 with no text drawn on it. `/og` renders the title into the card and its shaper handles Latin and Arabic only, so Burmese would arrive as boxes — or, given a Myanmar font, as malformed script with detached medials and unreordered prefix vowels, which reads worse than no text at all. English posts still use `/og` and are untouched. The Burmese index has no card of its own and inherits the site's static one; nothing renders Burmese through the generator.
 
 `i18n-burmese-english.md` describes a wider site-level plan that is still unimplemented.
 
