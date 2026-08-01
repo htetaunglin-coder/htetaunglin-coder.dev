@@ -78,6 +78,7 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 ### Content
 
 - `must`: blog posts are MDX in `content/blog/<locale>/` — `en` and `my`, both live — and must satisfy the frontmatter schema in `source.config.ts` — `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series`. A malformed field fails the build. A post in any other directory is silently dropped, so the loader throws instead; see `agent_docs/i18n-burmese-english.md`.
+- `must not`: inline the banner spec back into `banner-prompt-spec.mdx`. It is fetched at build time from a public Gist so readers can fork it, and that Gist is the source of truth; see `agent_docs/project-map.md`.
 - `must not`: touch `JOB_SEARCH.md`, `__ONLY_ME__/`, or `resume/` unless asked.
 
 ### Style

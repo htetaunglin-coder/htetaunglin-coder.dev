@@ -82,6 +82,7 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
 - Blog list filtering: `src/app/(app)/(blog)/blog/page.tsx`
   - Query param `category` supports `all` (default), `tech`, `life`
   - Mapping: `tech -> series: technology`, `life -> series: thoughts`
+- **One post has an external content dependency.** `banner-prompt-spec` renders `<BannerPromptSpec />` (`src/features/blog/components/banner-prompt-spec.tsx`) instead of an inline code fence: the spec is fetched from a public Gist by `src/features/blog/api/banner-prompt.ts` and highlighted server-side with `fumadocs-core/highlight`, wrapped in Fumadocs' `CodeBlock` so it looks identical to a normal fence. The Gist is the single source of truth so readers can fork it — do **not** paste the spec back into the MDX. Consequences: the post's route carries `Revalidate 1h` while every other post is fully static, and a Gist edit reaches the site within the hour without a deploy. Renaming or deleting `banner-prompt-spec.md` in the Gist degrades the post to a link-out fallback rather than breaking the build.
 
 ## Metadata and SEO boundary
 
