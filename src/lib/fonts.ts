@@ -43,14 +43,7 @@ export const fonts = [
   doto.variable,
 ];
 
-// Deliberately not in `fonts` above: that array goes on `<body>` in the root
-// layout, whereas this is applied by the Burmese blog layout. `preload: false`
-// means the woff2 is fetched only where a Burmese glyph is actually rendered —
-// which since `LanguageSwitch` shipped includes `/blog` and any translated
-// post, because its Burmese label carries this variable on the element itself.
-//
-// The `@font-face` rules themselves (~3 KB raw) do still ship in the global CSS
-// chunk, because the root layout imports this file. Moving this declaration to
-// its own module confines them to `/my`; measured and chosen against on purpose,
-// in favour of keeping one fonts file.
+// Not in `fonts` above, which the root layout puts on `<body>`: this one is
+// applied per-subtree, by the `/my` layout and by `LanguageSwitch` wherever a
+// Burmese label appears on an English route.
 export const myanmarFont = fontNotoSansMyanmar.variable;

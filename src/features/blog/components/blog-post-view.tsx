@@ -20,46 +20,40 @@ import {
 } from "@/lib/structured-data";
 import { cn, formatDate } from "@/lib/utils";
 import {
-  getDateLocale,
+  DATE_LOCALES,
   localeBlogPath,
-  localeFontClass,
+  myanmarFontClass,
 } from "../lib/blog-locale";
-import { getBlogStrings } from "../lib/blog-strings";
+import { BLOG_STRINGS } from "../lib/blog-strings";
 import { LanguageSwitch } from "./language-switch";
 import { getMDXComponents } from "./mdx-components";
 
 type BlogPostViewProps = {
   post: NonNullable<BlogPost>;
   /**
-   * Drives both the post's own words and the furniture immediately around them
-   * — date, category labels, photo credit, author label. Site navigation, the
-   * footer, the comment widget and the table of contents' own "On this page"
-   * heading stay English, because they lead to or belong to English pages.
+   * The post's own language, and that of the furniture touching it. Site
+   * navigation, the footer, the comment widget and the table of contents'
+   * "On this page" heading stay English — they lead to or belong to English
+   * pages.
    */
-  locale?: Locale;
+  locale: Locale;
 };
 
-export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
+export const BlogPostView = ({ post, locale }: BlogPostViewProps) => {
   const Mdx = post.data.body;
-  const strings = getBlogStrings(locale);
+  const strings = BLOG_STRINGS[locale];
   const isBurmese = locale === "my";
 
-  // Declared on the post's own words only, so a screen reader switches voice
-  // for the article and not for the English chrome wrapped around it.
-  const contentLang = isBurmese ? locale : undefined;
-
-  // Wider than `contentLang` on purpose: it also covers the table of contents,
-  // whose links are the post's Burmese headings and would otherwise fall back
-  // to whatever the reader's OS provides.
-  const contentClassName = localeFontClass(locale);
-
-  const bylineFont = localeFontClass(locale, "font-gloria-hallelujah");
+  const postLang = isBurmese ? locale : undefined;
+  // Wider than `postLang`: it also covers the table of contents, whose links
+  // are the post's Burmese headings.
+  const postFontClass = myanmarFontClass(locale);
+  const bylineFontClass = myanmarFontClass(locale) ?? "font-gloria-hallelujah";
 
   // Asking the loader for the same slug in the other locale is the entire test
-  // for whether a translation exists. Nothing in frontmatter links the two, so
-  // there is no linking metadata to maintain and nothing that can fall out of
-  // sync — and because `i18n.fallbackLanguage` is null, this returns undefined
-  // rather than handing back the post we are already rendering.
+  // for whether a translation exists — nothing in frontmatter links the two, so
+  // there is no metadata to keep in sync. Returns undefined rather than the
+  // post we are already rendering only because `i18n.fallbackLanguage` is null.
   const counterpartLocale: Locale = isBurmese ? "en" : "my";
   const counterpart = blogSource.getPage(post.slugs, counterpartLocale);
 
@@ -70,7 +64,7 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
     dateModified: post.data.date,
     url: post.url,
     tags: post.data.tags,
-    // The content locale, not `getDateLocale` — that one carries a regional
+    // The content locale, not `DATE_LOCALES` — that one carries a regional
     // subtag chosen for date formatting and says nothing about the writing.
     inLanguage: locale,
   });
@@ -78,8 +72,6 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
   const breadcrumbStructuredData = getBreadcrumbStructuredData([
     // English in both locales: this crumb leads to the English home page.
     { name: "Home", url: "/" },
-    // Both the label and the destination follow the post — a Burmese post's
-    // trail must climb to the Burmese index, not to `/blog`.
     { name: strings.breadcrumbBlog, url: localeBlogPath(locale) },
     { name: post.data.title },
   ]);
@@ -121,8 +113,8 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
                   to={counterpartLocale}
                 />
               )}
-              <p className={cn("text-xs sm:text-sm", contentClassName)}>
-                <span lang={contentLang}>{strings.photoBy}</span>{" "}
+              <p className={cn("text-xs sm:text-sm", postFontClass)}>
+                <span lang={postLang}>{strings.photoBy}</span>{" "}
                 <NavLink
                   className="text-fg-brand underline"
                   href={post.data.image.author_link}
@@ -135,16 +127,14 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
               <div
                 className={cn(
                   "mb-2 font-medium italic tracking-normal",
-                  bylineFont
+                  bylineFontClass
                 )}
               >
                 <div className="flex flex-wrap items-center gap-4">
                   <p
                     className="text-fg-tertiary text-xs uppercase sm:text-sm"
-                    lang={contentLang}
+                    lang={postLang}
                   >
-                    {/* Joined rather than rendered as a bare array: a post in
-                        both categories otherwise prints them run together. */}
                     {post.data.series
                       .map((entry) => strings.series[entry])
                       .join(", ")}
@@ -155,14 +145,14 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
                     <p>
                       {formatDate(post.data.date, {
                         includeDay: true,
-                        locale: getDateLocale(locale),
+                        locale: DATE_LOCALES[locale],
                       })}
                     </p>
                   </div>
 
                   <p
                     className="font-medium text-fg-tertiary text-xs sm:text-sm"
-                    lang={contentLang}
+                    lang={postLang}
                   >
                     {strings.authorLabel}{" "}
                     {/* Latin in both languages on purpose, so the author entity
@@ -174,7 +164,7 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
                 </div>
               </div>
 
-              <div className={contentClassName} lang={contentLang}>
+              <div className={postFontClass} lang={postLang}>
                 <DocsTitle className="mb-2 flex items-center text-left font-semibold text-fg-default text-xl sm:text-3xl">
                   {post.data.title}
                 </DocsTitle>
@@ -201,7 +191,7 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
 
             {/* No `lang` here: this wraps the table of contents, whose own
                 heading is English. It goes on `DocsBody` below instead. */}
-            <div className={contentClassName}>
+            <div className={postFontClass}>
               <DocsLayout
                 containerProps={{
                   className: cn(
@@ -234,7 +224,7 @@ export const BlogPostView = ({ post, locale = "en" }: BlogPostViewProps) => {
                 >
                   <DocsBody
                     className="prose dark:prose-invert max-w-none"
-                    lang={contentLang}
+                    lang={postLang}
                   >
                     <Mdx components={getMDXComponents()} />
                   </DocsBody>

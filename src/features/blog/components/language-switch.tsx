@@ -3,7 +3,7 @@ import Link from "next/link";
 import { myanmarFont } from "@/lib/fonts";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { localeFontClass } from "../lib/blog-locale";
+import { myanmarFontClass } from "../lib/blog-locale";
 
 type LanguageSwitchProps = {
   /** The locale this control leads to — never the one being viewed. */
@@ -36,7 +36,7 @@ export const LanguageSwitch = ({
       className={cn(
         "inline-flex items-center gap-1.5 text-fg-tertiary text-xs no-underline outline-none transition-colors hover:text-fg-default focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default sm:text-sm",
         "not-italic",
-        localeFontClass(to, "font-inter"),
+        myanmarFontClass(to) ?? "font-inter",
         // English routes sit outside `/my`, so nothing above them declares
         // `--font-noto-sans-myanmar`. A Burmese label therefore has to carry the
         // font variable on the element itself or it falls back to whatever the
