@@ -4,8 +4,7 @@ import { DashedDivider } from "@/components/decorations/dashed-divider";
 import type { Locale } from "@/lib/i18n";
 import type { blogSource } from "@/lib/source";
 import { cn, formatDate } from "@/lib/utils";
-import { getDateLocale, localeFontClass } from "../lib/blog-locale";
-import { INDEX_STRINGS } from "../lib/blog-strings";
+import { myanmarFontClass } from "../lib/blog-locale";
 
 const BlogPostShowcase = ({
   post,
@@ -17,10 +16,9 @@ const BlogPostShowcase = ({
   post: ReturnType<typeof blogSource.getPages>[number];
 }) => {
   // Only the post's own words carry the locale. The date and read-more below
-  // are the index talking, and the index is English on both locales — so
-  // `lang` and the Myanmar face go on the title/description block alone rather
-  // than on this wrapper.
-  const contentLang = locale === "my" ? locale : undefined;
+  // are the index talking, and the index is English on both locales — so this
+  // goes on the title/description block alone, not on the wrapper.
+  const postLang = locale === "my" ? locale : undefined;
 
   return (
     <article className="relative flex flex-col-reverse items-center gap-6 pt-8 pb-12 sm:flex-row md:gap-12">
@@ -47,8 +45,8 @@ const BlogPostShowcase = ({
       )} */}
 
         <div
-          className={cn("space-y-1 md:space-y-2", localeFontClass(locale))}
-          lang={contentLang}
+          className={cn("space-y-1 md:space-y-2", myanmarFontClass(locale))}
+          lang={postLang}
         >
           <h2>
             <Link
@@ -70,25 +68,21 @@ const BlogPostShowcase = ({
           <div className="flex items-center font-gloria-hallelujah text-fg-tertiary/80 text-xs italic md:text-sm">
             {post.data.date && (
               <span>
-                /{" "}
-                {/* `"en"`, not the post's locale: this date belongs to the
-                    English index, so a Burmese post still shows Latin digits
-                    here. The post page formats the same date in Burmese. */}
-                {formatDate(post.data.date, {
-                  includeDay: true,
-                  locale: getDateLocale("en"),
-                })}
+                {/* Left at the en-GB default: this date belongs to the English
+                    index, so a Burmese post still shows Latin digits here. The
+                    post page formats the same date in Burmese. */}
+                / {formatDate(post.data.date, { includeDay: true })}
               </span>
             )}
           </div>
         )}
 
         <Link
-          aria-label={INDEX_STRINGS.readMoreLabel(post.data.title)}
+          aria-label={`Read more about ${post.data.title}`}
           className="inline-flex items-center gap-2 text-fg-brand text-sm underline hover:brightness-80 md:text-base"
           href={post.url}
         >
-          {INDEX_STRINGS.readMore} <ArrowRight aria-hidden="true" />
+          Read More <ArrowRight aria-hidden="true" />
         </Link>
       </div>
 

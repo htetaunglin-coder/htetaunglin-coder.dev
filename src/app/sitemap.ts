@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import {
-  localeAlternates,
+  BLOG_INDEX_ALTERNATES,
   postAlternates,
 } from "@/features/blog/lib/blog-locale";
 import { PROJECT_DATA } from "@/features/projects/data";
@@ -63,14 +63,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: blogs.length > 0 ? blogs[0]?.lastModified : new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
-      alternates: { languages: indexAlternates },
+      alternates: { languages: BLOG_INDEX_ALTERNATES },
     },
     {
       url: url("/my/blog"),
       lastModified: burmesePosts[0]?.data.date ?? new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
-      alternates: { languages: indexAlternates },
+      alternates: { languages: BLOG_INDEX_ALTERNATES },
     },
     {
       url: url("/projects"),
@@ -108,7 +108,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...projects.filter((v) => v !== undefined),
   ];
 }
-
-// Unconditional, unlike a post's: both indexes always exist, so this pair can
-// never be half-present.
-const indexAlternates = localeAlternates({ en: "/blog", my: "/my/blog" });
