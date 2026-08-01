@@ -1,19 +1,29 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { DashedDivider } from "@/components/decorations/dashed-divider";
+import type { Locale } from "@/lib/i18n";
 import type { blogSource } from "@/lib/source";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
+import { myanmarFontClass } from "../lib/blog-locale";
 
 const BlogPostShowcase = ({
   post,
   lastItem,
+  locale,
 }: {
   lastItem: boolean;
+  locale: Locale;
   post: ReturnType<typeof blogSource.getPages>[number];
-}) => (
-  <article className="relative flex flex-col-reverse items-center gap-6 pt-8 pb-12 sm:flex-row md:gap-12">
-    <div className="w-full space-y-2 md:space-y-4">
-      {/* {(post.data.tags || post.data.series) && (
+}) => {
+  // Only the post's own words carry the locale. The date and read-more below
+  // are the index talking, and the index is English on both locales — so this
+  // goes on the title/description block alone, not on the wrapper.
+  const postLang = locale === "my" ? locale : undefined;
+
+  return (
+    <article className="relative flex flex-col-reverse items-center gap-6 pt-8 pb-12 sm:flex-row md:gap-12">
+      <div className="w-full space-y-2 md:space-y-4">
+        {/* {(post.data.tags || post.data.series) && (
         <div className="hidden space-y-2 text-xs md:block md:text-sm">
           {post.data.tags && (
             <div className="flex items-center gap-4">
@@ -34,41 +44,49 @@ const BlogPostShowcase = ({
         </div>
       )} */}
 
-      <div className="space-y-1 md:space-y-2">
-        <h2>
-          <Link
-            className="block font-medium text-fg-secondary/90 text-lg hover:underline md:text-2xl"
-            href={post.url}
-          >
-            {post.data.title}
-          </Link>
-        </h2>
+        <div
+          className={cn("space-y-1 md:space-y-2", myanmarFontClass(locale))}
+          lang={postLang}
+        >
+          <h2>
+            <Link
+              className="block font-medium text-fg-secondary/90 text-lg hover:underline md:text-2xl"
+              href={post.url}
+            >
+              {post.data.title}
+            </Link>
+          </h2>
 
-        {post.data.description && (
-          <p className="line-clamp-2 text-fg-tertiary text-sm md:line-clamp-none md:text-base">
-            {post.data.description}
-          </p>
-        )}
-      </div>
-
-      {(post.data.author || post.data.date) && (
-        <div className="flex items-center font-gloria-hallelujah text-fg-tertiary/80 text-xs italic md:text-sm">
-          {post.data.date && (
-            <span>/ {formatDate(post.data.date, { includeDay: true })}</span>
+          {post.data.description && (
+            <p className="line-clamp-2 text-fg-tertiary text-sm md:line-clamp-none md:text-base">
+              {post.data.description}
+            </p>
           )}
         </div>
-      )}
 
-      <Link
-        aria-label={`Read more about ${post.data.title}`}
-        className="inline-flex items-center gap-2 text-fg-brand text-sm underline hover:brightness-80 md:text-base"
-        href={post.url}
-      >
-        Read More <ArrowRight aria-hidden="true" />
-      </Link>
-    </div>
+        {(post.data.author || post.data.date) && (
+          <div className="flex items-center font-gloria-hallelujah text-fg-tertiary/80 text-xs italic md:text-sm">
+            {post.data.date && (
+              <span>
+                {/* Left at the en-GB default: this date belongs to the English
+                    index, so a Burmese post still shows Latin digits here. The
+                    post page formats the same date in Burmese. */}
+                / {formatDate(post.data.date, { includeDay: true })}
+              </span>
+            )}
+          </div>
+        )}
 
-    {/* 
+        <Link
+          aria-label={`Read more about ${post.data.title}`}
+          className="inline-flex items-center gap-2 text-fg-brand text-sm underline hover:brightness-80 md:text-base"
+          href={post.url}
+        >
+          Read More <ArrowRight aria-hidden="true" />
+        </Link>
+      </div>
+
+      {/* 
     <Link
       className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl grayscale-25 sm:w-44 sm:rounded-lg md:w-2/5 md:rounded-xl dark:brightness-90"
       href={post.url}
@@ -83,10 +101,11 @@ const BlogPostShowcase = ({
       />
     </Link> */}
 
-    {!lastItem && (
-      <DashedDivider className="absolute inset-x-0 bottom-0 opacity-35 lg:mx-[-3rem] xl:mx-[-6rem] dark:opacity-20" />
-    )}
-  </article>
-);
+      {!lastItem && (
+        <DashedDivider className="absolute inset-x-0 bottom-0 opacity-35 lg:mx-[-3rem] xl:mx-[-6rem] dark:opacity-20" />
+      )}
+    </article>
+  );
+};
 
 export { BlogPostShowcase };

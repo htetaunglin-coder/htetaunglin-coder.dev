@@ -5,6 +5,7 @@
   "engines": {
     "node": "24.x"
   },
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "postinstall": "fumadocs-mdx",
     "resume:pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=public/HTET_AUNG_LIN_RESUME.pdf \"file://$PWD/resume/resume.html\"",

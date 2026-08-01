@@ -15,7 +15,7 @@ They are adapted from the referenced HumanLayer materials and translated into re
 
 ## What this means in this repo
 
-- Root guidance lives in `AGENTS.md`.
+- Root guidance lives in `AGENTS.md`, mirrored byte-for-byte in `CLAUDE.md` so every tool reads the same rules.
 - Deep docs live in `agent_docs/*`.
 - Architecture mapping is explicit (`project-map.md`) to reduce repeated exploration.
 - Feature-specific plans (i18n, AI extensions, deps) are documented as focused files.

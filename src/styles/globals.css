@@ -17,6 +17,10 @@
 
   --font-inter: var(--font-inter), sans-serif;
 
+  /* Burmese posts only — applied by the `/my` layout, see `lib/fonts.ts`. */
+  --font-noto-sans-myanmar:
+    var(--font-noto-sans-myanmar), "Padauk", "Myanmar Text", sans-serif;
+
   --font-departure-mono:
     var(--font-departure-mono), "Menlo", "Roboto Mono", "JetBrains Mono",
     "SF Mono", "Consolas", monospace;
@@ -354,6 +358,20 @@ body {
   .prose th {
     @apply pl-3;
   }
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Burmese subtrees. The `.blog` rules above pin Latin faces (Inter, Gloria
+   Hallelujah) onto headings, links, quotes and badges, and they out-specify
+   anything inherited. Inside Burmese text that hands the reader whatever the OS
+   happens to have, which on a lot of machines is empty boxes — so walk the
+   family back up to the `lang="my"` wrapper. Blunt on purpose: enumerating the
+   Latin-face rules would silently drift the next time one is added.
+
+   `pre`/`code` stay out of it — code is Latin and wants its mono face. */
+[lang="my"] :not(pre, pre *, code, code *) {
+  font-family: inherit !important;
 }
 
 /* -------------------------------------------------------------------------- */

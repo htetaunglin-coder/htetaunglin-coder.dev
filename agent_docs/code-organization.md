@@ -33,7 +33,7 @@ src/
   lib/                -> pure/shared utilities and config
   constants/          -> shared static constants
 
-content/blog/         -> MDX blog content
+content/blog/<locale>/ -> MDX blog content, one directory per locale (`en`, `my`)
 messages/             -> reserved for upcoming i18n messages
 ```
 
@@ -133,4 +133,4 @@ This makes review and scanning faster.
 
 - Global app shell components (`header`, `footer`, theme provider) stay in shared locations.
 - Design-system primitives stay in `src/components/ui`.
-- Blog content remains in `content/blog` and follows Fumadocs conventions.
+- Blog content remains in `content/blog/<locale>` and follows Fumadocs conventions.

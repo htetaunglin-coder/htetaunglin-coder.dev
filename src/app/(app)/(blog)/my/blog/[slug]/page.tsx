@@ -4,8 +4,11 @@ import { BlogPostView } from "@/features/blog/components/blog-post-view";
 import { postMetadata } from "@/features/blog/lib/blog-metadata";
 import { blogSource } from "@/lib/source";
 
+// Only slugs that genuinely exist under `content/blog/my`. A slug that has only
+// an English version is not listed here and 404s below — never the English post
+// served a second time at a Burmese address.
 export function generateStaticParams(): { slug: string }[] {
-  return blogSource.getPages("en").map((page) => ({
+  return blogSource.getPages("my").map((page) => ({
     slug: page.slugs[0],
   }));
 }
@@ -15,16 +18,18 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { slug } = await props.params;
 
-  return postMetadata("en", slug);
+  return postMetadata("my", slug);
 }
 
-const BlogPage = async (props: { params: Promise<{ slug: string }> }) => {
+const BurmeseBlogPage = async (props: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await props.params;
-  const page = blogSource.getPage([slug], "en");
+  const page = blogSource.getPage([slug], "my");
 
   if (!page) notFound();
 
-  return <BlogPostView locale="en" post={page} />;
+  return <BlogPostView locale="my" post={page} />;
 };
 
-export default BlogPage;
+export default BurmeseBlogPage;
