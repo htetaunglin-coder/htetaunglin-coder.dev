@@ -82,7 +82,7 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 
 ### Style
 
-- `must`: comments explain *why*, never *what* — non-obvious intent, a workaround, a tradeoff, a gotcha. No section banners, no restating the next line.
+- `must`: prefer readable, self-documenting code—clear domain names and straightforward structure—over comments that narrate mechanics. When code is unclear, improve it first; use comments for context the code cannot express clearly, such as rationale, constraints, invariants, tradeoffs, workarounds, or surprising behavior. Do not restate the next line or signature, and keep comments current.
 - `must`: pushback over flattery — cite the code or the convention, not vibes. When the user is right, say so briefly and move on.
 
 ## Git
