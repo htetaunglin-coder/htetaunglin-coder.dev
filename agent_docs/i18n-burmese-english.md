@@ -56,9 +56,14 @@ Both indexes are request-time rendered because they read `searchParams` for the 
 
 ## Strings, fonts, dates
 
-**Strings.** `src/features/blog/lib/blog-strings.ts` is a plain keyed object, `satisfies Record<Locale, BlogStrings>` so a missing key is a build error. About a dozen strings; a translation framework would be more machinery than content.
+**Strings.** `src/features/blog/lib/blog-strings.ts` holds two collections, and the split is the whole design:
 
-Scope is the blog's own furniture — heading, intro, tab labels, empty state, read-more, photo credit, author label, category names, breadcrumb crumb. The rule is **chrome follows the destination, not the page**: text describing the Burmese post in front of the reader is Burmese; text leading to English pages stays English.
+- `INDEX_STRINGS` — **not keyed by locale**, because it does not vary by one. Heading, intro, category tabs, empty state, read-more. Both indexes render this in English, `/my/blog` included. An index is the site talking, and the site is English; what makes `/my/blog` Burmese is the posts it lists, whose titles and descriptions were written that way.
+- `BLOG_STRINGS` — per locale, `satisfies Record<Locale, BlogStrings>` so a missing key is a build error. Photo credit, author label, breadcrumb crumb, category names. **Post page only**, where the furniture follows the post's own language.
+
+The rule is **chrome follows the destination, not the page**: the site navigation, the footer, and the whole index chrome lead to or belong to English surfaces and stay English; the words wrapped around a Burmese article are Burmese.
+
+A Burmese translation of the index strings existed and was deliberately removed. If you are re-adding Burmese to an index, that is a product decision, not a gap someone forgot to fill.
 
 Category identity is unchanged: the underlying `series` keys stay as they are and only their display labels are translated. The English entries hold the raw frontmatter values, so introducing this table restyled nothing.
 
@@ -98,6 +103,7 @@ Each of these has been considered. Read the reason before changing it.
 - **No language control on an untranslated post.** There is no disabled or "coming soon" variant. A missing translation 404s, so a visible control leading nowhere would contradict that, and a post nobody intends to translate is not pending. Its absence needs no explanation.
 - **English site navigation wrapped around a Burmese article.** The navigation leads to English pages, so it is English. The markup describes the truth: the nav really is English and the article really is Burmese.
 - **The Burmese preview card has no text on it.** See trap 1.
+- **`/my/blog` reads English, and shows Burmese posts.** Heading, intro, tabs, empty state, each entry's date and read-more are English; only the post titles and descriptions are Burmese. Dates there are `en-GB` with Latin digits even for a Burmese post, because that line belongs to the index. Open the post and the same date renders in Burmese digits — that is the boundary working, not an inconsistency. The `<title>` is "Blog in Burmese", named rather than borrowing `/blog`'s "Blog" so two indexed URLs are tellable apart.
 - **`lang="my"` is set per element, not on the document root — and not on the `/my` layout either.** The layout only supplies the font variable; each component marks the elements that actually hold Burmese words (`blog-post-view.tsx`, `blog-index-view.tsx`, `blog-post-showcase.tsx`, `language-switch.tsx`). Do not go looking for it in the layout. Nearest-ancestor wins, so the English nav and footer correctly keep the document language; changing the root would need client-side mutation or multiple root layouts.
 - **A Burmese label on an English route carries the font variable inline.** English routes sit outside `/my`, so nothing above them declares `--font-noto-sans-myanmar`. This is why an English reader fetches the woff2 on the blog index and on any translated post.
 - **A translated post keeps the original's publication date.** The date field means "when this was written", and must keep meaning exactly that; a translation date would give one field two meanings depending on an invisible property of the post. If a newly translated older post ever needs to surface as new, add a separate optional field rather than overloading this one. (Note that neither index sorts today — order is whatever the loader returns — so this is a rule about what the field *means*, not about display order.)

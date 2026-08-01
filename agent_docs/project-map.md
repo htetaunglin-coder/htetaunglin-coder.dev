@@ -98,7 +98,7 @@ Where it lives:
 - `src/lib/i18n.ts` — loader locale config and the `Locale` type (`"en" | "my"`, inferred from `languages`)
 - `src/lib/source.ts` — the loader, plus a build guard that throws if the locale parser silently dropped a post
 - `content/blog/<locale>/` — one directory per locale; a translated pair is two files sharing a filename, with no linking metadata
-- `src/features/blog/lib/blog-strings.ts` — per-locale UI strings; `blog-locale.ts` — date tag, font class, blog path, `hreflang` sets
+- `src/features/blog/lib/blog-strings.ts` — `INDEX_STRINGS` (English on both indexes, not per-locale) and `BLOG_STRINGS` (per-locale, post page only); `blog-locale.ts` — date tag, font class, blog path, `hreflang` sets
 - `src/features/blog/components/language-switch.tsx` — the control between counterparts
 
 **Read `i18n-burmese-english.md` before changing any of it.** Several behaviours here look like bugs and are not — the absent language control on untranslated posts, the English nav around a Burmese article, the text-free Burmese share card — and three findings in that file will otherwise be re-litigated at real cost.

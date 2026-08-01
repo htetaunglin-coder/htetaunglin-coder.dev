@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BlogIndexView } from "@/features/blog/components/blog-index-view";
 import { localeAlternates } from "@/features/blog/lib/blog-locale";
+import { INDEX_STRINGS } from "@/features/blog/lib/blog-strings";
 import { absoluteUrl } from "@/lib/utils";
 
 // Unconditional, unlike a post's: both indexes always exist, so this pair can
@@ -9,24 +10,21 @@ const indexAlternates = localeAlternates({ en: "/blog", my: "/my/blog" });
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
+  description: INDEX_STRINGS.intro,
   alternates: {
     canonical: absoluteUrl("/blog"),
     languages: indexAlternates,
   },
   openGraph: {
     title: "Blog | Htet Aung Lin",
-    description:
-      "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
+    description: INDEX_STRINGS.intro,
     url: absoluteUrl("/blog"),
     type: "website",
   },
   twitter: {
     card: "summary",
     title: "Blog | Htet Aung Lin",
-    description:
-      "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
+    description: INDEX_STRINGS.intro,
   },
 };
 

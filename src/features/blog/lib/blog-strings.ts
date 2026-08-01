@@ -1,48 +1,55 @@
 import type { Locale } from "@/lib/i18n";
 
 type BlogStrings = {
-  indexTitle: string;
-  indexIntro: string;
-  categoryAll: string;
-  categoryTech: string;
-  categoryLife: string;
-  emptyCategory: string;
-  readMore: string;
-  readMoreLabel: (title: string) => string;
   photoBy: string;
   authorLabel: string;
   /**
-   * The blog crumb in a post's `BreadcrumbList`. Separate from `indexTitle`
-   * because a breadcrumb and a page heading are different surfaces — English
-   * shows "Blog" in the trail and "Blogs" at the top of the index, and always
-   * has. There is no `breadcrumbHome`: that crumb leads to the English home
-   * page and names itself in English in both locales.
+   * The blog crumb in a post's `BreadcrumbList`. English shows "Blog" in the
+   * trail and "Blogs" at the top of the index, and always has. There is no
+   * `breadcrumbHome`: that crumb leads to the English home page and names
+   * itself in English in both locales.
    */
   breadcrumbBlog: string;
   series: Record<"technology" | "thoughts", string>;
 };
 
 /**
- * Every user-facing string the blog renders around a post, per locale.
+ * The index chrome, English on **both** indexes.
+ *
+ * Not keyed by locale, because it does not vary by one. An index is the site
+ * talking — heading, intro, category tabs, empty state, read-more — and the
+ * site is English. What varies on `/my/blog` is the posts it lists, whose
+ * titles and descriptions are Burmese because they were written that way.
+ *
+ * A Burmese translation of these existed and was removed: the Burmese index
+ * reads English chrome by choice, and translations that never render are worse
+ * than none, since they look maintained.
+ */
+export const INDEX_STRINGS = {
+  heading: "Blogs",
+  intro:
+    "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
+  categoryAll: "All",
+  categoryTech: "Tech",
+  categoryLife: "Life",
+  emptyCategory: "No posts found for this category yet.",
+  readMore: "Read More",
+  readMoreLabel: (title: string) => `Read more about ${title}`,
+};
+
+/**
+ * The furniture around a post, which does follow the post's own language.
  *
  * A plain object on purpose. At this size a translation framework or a
  * `messages/` catalogue would be more machinery than content, and `satisfies`
  * makes a missing key a build error rather than a runtime fallback.
  *
- * Scope is the blog's own furniture. Site navigation and the footer stay
- * English on Burmese routes because they lead to English pages.
+ * Scope is the post page only. Site navigation, the footer, and the index
+ * chrome above stay English on Burmese routes, because they lead to or belong
+ * to English pages.
  */
 export const BLOG_STRINGS = {
   en: {
-    indexTitle: "Blogs",
-    indexIntro:
-      "I write about psychology, life, and tech, usually whatever I can't stop thinking about that week.",
-    categoryAll: "All",
-    categoryTech: "Tech",
-    categoryLife: "Life",
-    emptyCategory: "No posts found for this category yet.",
-    readMore: "Read More",
-    readMoreLabel: (title: string) => `Read more about ${title}`,
     photoBy: "Photo By",
     authorLabel: "— author:",
     breadcrumbBlog: "Blog",
@@ -54,17 +61,6 @@ export const BLOG_STRINGS = {
     },
   },
   my: {
-    indexTitle: "ဆောင်းပါးများ",
-    indexIntro:
-      "စိတ်ပညာ၊ ဘဝနှင့် နည်းပညာအကြောင်း ရေးသားပါသည်။ ထိုအပတ်အတွင်း စဉ်းစားမရပ်နိုင်ဖြစ်နေသည့် အကြောင်းအရာများ ဖြစ်တတ်ပါသည်။",
-    categoryAll: "အားလုံး",
-    categoryTech: "နည်းပညာ",
-    categoryLife: "ဘဝ",
-    emptyCategory: "ဤအမျိုးအစားအတွက် ဆောင်းပါး မရှိသေးပါ။",
-    readMore: "ဆက်ဖတ်ရန်",
-    // A function, not a prefix concatenated at the call site: Burmese puts the
-    // object before the verb, so the title cannot simply be appended.
-    readMoreLabel: (title: string) => `${title} ကို ဆက်ဖတ်ရန်`,
     photoBy: "ဓာတ်ပုံ —",
     authorLabel: "— ရေးသားသူ:",
     breadcrumbBlog: "ဆောင်းပါးများ",

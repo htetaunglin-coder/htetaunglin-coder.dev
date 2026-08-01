@@ -6,8 +6,8 @@ import { PageHeroImage } from "@/components/page-hero-image";
 import type { Locale } from "@/lib/i18n";
 import { blogSource } from "@/lib/source";
 import { cn } from "@/lib/utils";
-import { localeBlogPath, localeFontClass } from "../lib/blog-locale";
-import { getBlogStrings } from "../lib/blog-strings";
+import { localeBlogPath } from "../lib/blog-locale";
+import { INDEX_STRINGS } from "../lib/blog-strings";
 import { BlogPostShowcase } from "./blog-post-showcase";
 import { LanguageSwitch } from "./language-switch";
 
@@ -27,8 +27,6 @@ type BlogIndexViewProps = {
  * language boundary.
  */
 export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
-  const strings = getBlogStrings(locale);
-
   // Scoped on purpose: an unscoped call spans every locale, which would list
   // Burmese posts on the English index and vice versa.
   const posts = blogSource
@@ -48,15 +46,10 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
   const otherLocale: Locale = locale === "en" ? "my" : "en";
   const otherIndexPath = localeBlogPath(otherLocale);
 
-  // The tabs lose their display face on `/my/blog` — Doto has no Myanmar
-  // glyphs and there is no Myanmar equivalent to swap in.
-  const displayFont = localeFontClass(locale, "font-doto");
-  const bodyFont = localeFontClass(locale, "font-inter");
-
   const categoryTabs: Array<{ key: BlogCategoryFilter; label: string }> = [
-    { key: "all", label: strings.categoryAll },
-    { key: "tech", label: strings.categoryTech },
-    { key: "life", label: strings.categoryLife },
+    { key: "all", label: INDEX_STRINGS.categoryAll },
+    { key: "tech", label: INDEX_STRINGS.categoryTech },
+    { key: "life", label: INDEX_STRINGS.categoryLife },
   ];
 
   const filteredPosts = posts.filter((post) => {
@@ -74,21 +67,16 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
         src="illustration_mijd2q.png"
       />
 
-      <div
-        className={cn("mx-auto max-w-4xl px-6 pt-4 sm:pt-16 lg:px-0", bodyFont)}
-        lang={locale}
-      >
-        <h1
-          className={cn(
-            "bg-gradient-to-br from-black to-fg-tertiary bg-clip-text font-bold text-3xl/[1.2] text-transparent tracking-tight sm:text-4xl/[1.2] md:font-extrabold md:text-5xl/[1.2] dark:from-fg-default dark:to-fg-tertiary/80",
-            bodyFont
-          )}
-        >
-          {strings.indexTitle}
+      {/* No `lang` and no locale font here or on the tabs below: this chrome is
+          English on both indexes, so it inherits the document language and
+          keeps the Latin faces the design pins. */}
+      <div className="mx-auto max-w-4xl px-6 pt-4 font-inter sm:pt-16 lg:px-0">
+        <h1 className="bg-gradient-to-br from-black to-fg-tertiary bg-clip-text font-bold font-inter text-3xl/[1.2] text-transparent tracking-tight sm:text-4xl/[1.2] md:font-extrabold md:text-5xl/[1.2] dark:from-fg-default dark:to-fg-tertiary/80">
+          {INDEX_STRINGS.heading}
         </h1>
 
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
-          {strings.indexIntro}
+          {INDEX_STRINGS.intro}
         </p>
       </div>
 
@@ -115,15 +103,13 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
                 return (
                   <Link
                     className={cn(
-                      "flex h-full items-center gap-1 px-3 font-black text-xs outline-none transition-colors focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default sm:px-6 sm:text-base",
-                      displayFont,
+                      "flex h-full items-center gap-1 px-3 font-black font-doto text-xs outline-none transition-colors focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default sm:px-6 sm:text-base",
                       isActive
                         ? "bg-fg-default/90 text-bg-default"
                         : "text-fg-tertiary hover:text-fg-default"
                     )}
                     href={href}
                     key={tab.key}
-                    lang={locale}
                   >
                     <i className="hidden sm:block"># </i> {tab.label}
                   </Link>
@@ -149,11 +135,8 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
           />
 
           {filteredPosts.length === 0 && (
-            <p
-              className={cn("py-8 text-fg-tertiary text-sm", bodyFont)}
-              lang={locale}
-            >
-              {strings.emptyCategory}
+            <p className="py-8 font-inter text-fg-tertiary text-sm">
+              {INDEX_STRINGS.emptyCategory}
             </p>
           )}
 
