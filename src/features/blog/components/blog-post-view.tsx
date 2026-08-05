@@ -165,7 +165,12 @@ export const BlogPostView = ({ post, locale }: BlogPostViewProps) => {
               </div>
 
               <div className={postFontClass} lang={postLang}>
-                <DocsTitle className="mb-2 flex items-center text-left font-semibold text-fg-default text-xl sm:text-3xl">
+                <DocsTitle
+                  className={cn(
+                    "mb-2 flex items-center text-left font-semibold text-fg-default text-xl sm:text-3xl",
+                    isBurmese && "my-3"
+                  )}
+                >
                   {post.data.title}
                 </DocsTitle>
                 <DocsDescription className="mb-6 w-full max-w-5xl text-left text-base text-fg-tertiary sm:text-lg">
