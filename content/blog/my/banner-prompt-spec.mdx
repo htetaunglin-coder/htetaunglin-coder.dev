@@ -1,0 +1,174 @@
+---
+title: LinkedIn နဲ့ X platform Banner တွေ ဖန်တီးဖို့အတွက် AI Prompt
+author: Htet Aung Lin
+description: မေးခွန်းတွေ တစ်ခုပြီးတစ်ခု မေးမယ်၊ design option တွေကို သေချာရွေးပေးမယ်၊ ပြီးရင် ကိုယ့် personal brand အတွက် ပုံစံတစ်မျိုးတည်းနဲ့ banner ထုတ်ပေးမယ့် prompt အရှည်ကြီးတစ်ခုပါ။ ဘယ်လိုသုံးရမလဲနဲ့ option တစ်ခုချင်းစီက ဘာလုပ်ပေးလဲဆိုတာ ဒီမှာ ရှင်းပြထားတယ်။
+image: { url: "view_dcgygm.jpg", author_name: "Htet Aung Lin", author_link: "https://htetaunglin-coder.dev" }
+date: 2026-07-26
+tags: ["prompt engineering", "ai image generation", "design systems", "personal branding"]
+series: [technology]
+---
+
+အရင်နေ့က ကျွန်တော့် Social media profile အတွက်ဆိုပြီး banner လေးတစ်ခု လုပ်ရင်းနဲ့ အကုန်လုံး သုံးလို့ရအောင် လုပ်လို့ရမလားဆိုပြီး စမ်းကြည့်ဖို့ အကြံလေးရခဲ့တယ်။
+
+ဒါကတော့ ကျွန်တော့် linkedin profile မှာတင်ထားတယ့် banner လေးပါ။
+
+<CloudinaryImage
+  alt="ကျွန်တော့် LinkedIn profile ပေါ်မှာ generate လုပ်ထားတဲ့ banner ကို တင်ထားပုံ။ Headphone တပ်ထားတဲ့ marble bust က particle တွေအဖြစ် တဖြည်းဖြည်းပျောက်သွားပြီး နောက်မှာ ခရမ်းရောင်စက်ဝိုင်းရှိတယ်။ Headline က Frontend Engineer building product interfaces and design systems လို့ ရေးထားတယ်"
+  className="!rounded-none w-full h-auto"
+  height={920}
+  src="linkedin-preview_or4n6y"
+  width={1522}
+/>
+
+### Prompt
+
+<BannerPromptSpec />
+
+## အသုံးပြုပုံ
+
+1. Spec တစ်ခုလုံးကို ChatGPT၊ Gemini ဒါမှမဟုတ် ကိုယ်သုံးချင်တဲ့ AI image generator ထဲ paste လုပ်ပါ။
+2. သူမေးတဲ့ interview ကို ဖြေလည်းရတယ်၊ မဖြေလည်းရတယ်။ မေးခွန်းတစ်ခုချင်းစီ မေးသွားပြီး အဲ့ဒီ option တွေထဲက သင့်တော်မယ့်တစ်ခုကိုပါ အကြံပေးထားမယ်။ တစ်ခုပြီးတစ်ခု ကိုယ့်စကားနဲ့ကိုယ် ဖြေလို့ရသလို မေးခွန်းတစ်ခုအတွက် `your pick` လို့ပဲ ပြောလို့လည်းရတယ်။ အဲ့လိုမှမဟုတ်ဘူး ကျန်တာအားလုံး သူ့ဘာသာ ရွေးပေးစေချင်ရင် `choose the rest for me` လို့ ပြောလိုက်ရုံပါဘဲ။
+3. AI ကပေးတယ့် Summary ကို သေချာစစ်ပါ။ ပုံမဆွဲခင်မှာ lock လုပ်ထားတဲ့ option အားလုံးနဲ့ ပုံထဲက figure ကိုင်ထားမယ့် ပစ္စည်းအတိအကျကို ပြောပါလိမ့်မယ်။ ပြင်စရာရှိရင် generate လုပ်ပြီးမှ မပြင်ဘဲ ဒီနေရာမှာတင် ပြင်ရင် ပိုပြီးကောင်းပါတယ်။​ (အထူးသဖြင့် free plan နဲ့သုံးတယ့်သူတွေအတွက်ပါ)
+4. အားလုံးမှန်ရင် confirm လုပ်ပါ။ ပြီးတာနဲ့ Banner image လေး generate လုပ်ပေးပါလိမ့်မယ်။
+
+ပုံထဲမှာ ပါလာမယ့်စာက ကိုယ်ရေးပေးထားတဲ့ copy တစ်ခုပဲ။ ဒါကြောင့် မစခင် headline ကို အရင်ရေးထားပါ။ စာလုံး ကိုးလုံးထက် မပိုရဘူး။ Linkedin မှာ သုံးမယ်ဆို ကိုယ့်နာမည်နဲ့ အလုပ်အကိုင်ကိုလည်း က profile ထဲမှာပါပြီးသားမလို့ headline ထဲ ထပ်မရေးဖို့အကြံပေးချင်ပါတယ်။
+
+## ရွေးချယ်လို့ရတဲ့ Option များ
+
+| Category           | Options                                                                                      |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| Platform           | X header 1500×500, LinkedIn cover 1584×396, ဒါမှမဟုတ် custom size                            |
+| Layout             | L1 စာဘယ် / ပုံညာ၊ L2 ပုံဘယ် / စာညာ၊ L3 စာတစ်ခုတည်း (text only)/ L4 ပုံတစ်ခုတည်း (image only) |
+| Art family         | M marble sculpture၊ P painted storybook                                                      |
+| Art direction      | Marble အတွက် A1–A6 အထိရှိ၊ painted အတွက် B1–B6 အထိရှိ                                        |
+| Subject effect     | E0 clean cutout၊ E1 particle၊ E2 halftone၊ E3 engraving၊ E4 blueprint                        |
+| Palette            | P1 rust၊ P2 purple၊ P3 cobalt၊ P4 forest                                                     |
+| Background texture | F1 flat၊ F2 paper grain၊ F3 grainy gradient                                                  |
+| Typography         | T1 neo-grotesk၊ T2 soft geometric                                                            |
+
+## Examples
+
+<BannerShowcase
+  items={[
+    {
+      src: "linkedin-example-1_tclxdv",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "B3",
+      effect: "E1",
+      palette: "P3",
+      prop: "book",
+      alt: "အပြာရောင်စက်ဝိုင်းရှေ့မှာ အတောင်ပံပါတဲ့ painted figure တစ်ယောက်က စာအုပ်အနက်တစ်အုပ်ကို ကိုင်ပြီး ပျံနေတယ်။ Headline က Building teams for the AI-native era လို့ ရေးထားတယ်",
+    },
+    {
+      src: "linkedin-example-2_gzblrp",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "A1",
+      effect: "E1",
+      palette: "P1",
+      prop: "tablet and stylus",
+      alt: "Tablet နဲ့ stylus ကိုင်ထားတဲ့ marble bust တစ်ခု။ ခေါင်းနောက်မှာ rust color စက်ဝိုင်းရှိပြီး ညာဘက်အစွန်းမှာ rust color particle dust တွေ တဖြည်းဖြည်းလွင့်ပျောက်သွားတယ်",
+    },
+    {
+      src: "linkedin-example-3_n5vnpo",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "B2",
+      effect: "E0",
+      palette: "P4",
+      prop: "none — pose only",
+      alt: "အနီရောင်ဝတ်ရုံဝတ်ထားတဲ့ painted hero တစ်ယောက် လက်တစ်ဖက် မြှောက်ထားတယ်။ နောက်မှာ အစိမ်းရောင်စောင်းနေတဲ့ block ရှိပြီး kicker မှာ FOUNDER-LED LEADERSHIP လို့ ရေးထားတယ်",
+    },
+    {
+      src: "linkedin-example-4_yn0a2r",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "A2",
+      effect: "E4",
+      palette: "P4",
+      prop: "laptop",
+      alt: "Laptop သုံးနေတဲ့ ထိုင်လျက် marble scholar တစ်ယောက်။ အစိမ်းရောင်စက်ဝိုင်းနဲ့ ချိတ်ဆက်ထားပြီး ညာဘက်မှာ technical linework တွေ တဖြည်းဖြည်းပျောက်သွားတယ်",
+    },
+    {
+      src: "linkedin-example-5_j8eeax",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "B4",
+      effect: "E2",
+      palette: "P3",
+      prop: "tablet",
+      alt: "အစိမ်းရောင် velvet coat ဝတ်ပြီး tablet ကိုင်ထားတဲ့ Romantic ခေတ်က gentleman တစ်ယောက်။ အပြာရောင် halftone dot တွေ ညာဘက်ကို တဖြည်းဖြည်းပျောက်သွားတယ်",
+    },
+    {
+      src: "linkedin-example-6_ktobjg",
+      platform: "linkedin",
+      layout: "L1",
+      direction: "A2",
+      effect: "E3",
+      palette: "P3",
+      prop: "laptop",
+      alt: "မုတ်ဆိတ်နဲ့ marble figure တစ်ယောက်က ထိုင်ခုံပေါ်ထိုင်ပြီး laptop သုံးနေတယ်။ နောက်မှာ အပြာရောင် arch ရှိပြီး ညာဘက်မှာ engraved contour line တွေ ပါတယ်။ အောက်ခြေတစ်လျှောက် အပြာရောင်အစင်းတစ်ခုလည်း ရှိတယ်",
+    },
+    {
+      src: "x-example-1_faagnl",
+      platform: "x",
+      layout: "L2",
+      direction: "B1",
+      effect: "E1",
+      palette: "P1",
+      prop: "tablet",
+      alt: "X header တစ်ခုမှာ အဖြူရောင်ဂါဝန်ဝတ်ထားတဲ့ painted figure တစ်ယောက်က အလှဆင်ထားတဲ့ ထိုင်ခုံပေါ်ထိုင်ပြီး tablet ဖတ်နေတယ်။ ဘယ်ဘက်မှာ rust splatter anchor ရှိပြီး headline က Building AI products from idea to launch လို့ ရေးထားတယ်",
+    },
+    {
+      src: "x-example-2_bbbngc",
+      platform: "x",
+      layout: "L1",
+      direction: "B5",
+      effect: "E4",
+      palette: "P3",
+      prop: "none — pose only",
+      alt: "X header တစ်ခုမှာ အတောင်ပံပါတဲ့ painted figure တစ်ယောက် တိမ်ပေါ်ထိုင်နေတယ်။ အတောင်ပံတွေမှာ အပြာရောင် technical linework တွေ ပါပြီး headline က Building AI products people trust လို့ ရေးထားတယ်",
+    },
+    {
+      src: "x-example-3_n8uwlz",
+      platform: "x",
+      layout: "L1",
+      direction: "A3",
+      effect: "E3",
+      palette: "P1",
+      prop: "camera",
+      alt: "X header တစ်ခုမှာ camera ကိုင်ထားတဲ့ မတ်တပ်ရပ် marble figure တစ်ယောက် ရှိတယ်။ နောက်မှာ rust color စက်ဝိုင်းရှိပြီး engraved line တွေ ညာဘက်ကို ရွေ့သွားတယ်။ Headline က Turn attention into lasting brand momentum လို့ ရေးထားတယ်",
+    },
+  ]}
+/>
+
+> Note: ဒီစာမျက်နှာပေါ်က banner အားလုံးက one-shot result တွေပါ။ ChatGPT Pro နဲ့ ပုံတစ်ပုံစီကို တစ်ကြိမ်ပဲ generate လုပ်ထားတာပါ။ Image ထွက်လာပြီးနောက် ဘာမှပြန်ပြင်ခိုင်းထားတာ မရှိပါဘူး။
+
+ပုံတစ်ပုံနဲ့တစ်ပုံ size မတူတာလည်း ဒါကြောင့်ပါပဲ။ Model က ကိုယ်တောင်းထားတဲ့ size အတိအကျ အမြဲထုတ်မပေးဘူး။ ပထမရလဒ်ကို မကြိုက်ရင် နောက်တစ်ခါ generate ပြန်လုပ်ပြီး ဘာပြောင်းချင်လဲ ဆိုတာကို တော့ ပြန်ပြောပေးဖို့ လိုအပ်ပါလိမ့်မယ်။
+
+## ရေးသူရဲ့ မှတ်ချက်
+
+ဒီ prompt ကို မသုံးခင် သိထားသင့်တာတစ်ခု ရှိတယ်။
+
+သူ့မှာ ရွေးချယ်လို့ရတဲ့ variant (design အရေအတွက်ကို) ပုံသေသတ်မှတ်ထားတယ်။ လူအများစုက ဘာမှမပြောင်းဘဲ prompt ကိုဒီအတိုင်းသုံးဘဲသုံးမယ်ဆိုရင် banner တွေက တစ်ခုနဲ့တစ်ခု ဆင်နေပါလိမ့်မယ်။
+
+ဒါကြောင့် ဒီ prompt ကို ကိုယ်ပိုင် banner တစ်ခု generate လုပ်ဖို့အတွက် အစပြုစရာတစ်ခု၊ idea ယူစရာတစ်ခုလို့ပဲ သဘောထားပါ။
+
+သုံးလို့ရတဲ့ system တစ်ခုတော့ သူက ပေးမယ်။ ပြီးတော့ ရလာတယ့် Image တွေကို ကိုယ့်အကြိုက်နဲ့ ကိုက်အောင် unique ဖြစ်အောင် အစိတ်အပိုင်းတိုင်းကို လိုသလိုလိုက်ပြောင်းရင် ပိုကောင်းပါလိမ့်မယ်။
+
+> ထွက်လာတဲ့ result ကို ဒီအတိုင်းကြိုက်တယ်ဆိုလည်း ဘာမှမဖြစ်ဘူး။ ဒီအတိုင်းသုံးလို့ရပါတယ်။ မဖြစ်မနေ ပြောင်းစရာတော့မလိုပါဘူး။
+
+ဒါပေမယ့် ကိုယ်ပိုင်ပုံစံ design နဲ့ အများနဲ့ မတူအောင်လုပ်ရင်တယ်ဆိုရင် ကျွန်တော် လုပ်ခဲ့တယ့် process ကို အောက်မှာ ရှင်းပြထားပါတယ်။
+
+1. **Pinterest ကို အရင်သွားပြီး art တွေ ကြည့်ပါ။** ကျွန်တော်က marble sculpture art နဲ့ painted classical art တွေကို ရှာပြီး ကြိုက်တာတွေ save ထားခဲ့တယ်။ ပြီးတော့ designer တခြားလူတွေက halftone dot၊ particle dissolve လို effect တွေကို ဘယ်လိုသုံးလဲ သိချင်လို့ effect တွေ ထပ်ရှာကြည့်တယ်။
+
+   ဒီနေရာမှာ သတိထားရမယ့် အရေးကြီးတာတစ်ခု ရှိတယ်။ အဲ့ဒီပုံတွေကို reference အနေနဲ့ပဲ သုံးပါ။ ကူးချဖို့တော့ လုံးဝမသုံးပါနဲ့။ Pinterest ပေါ်က ပုံတွေမှာ ဖန်တီးထားတဲ့သူတွေရဲ့ ပိုင်ဆိုင်ခွင့်ရှိပြီး အများစုက အလကားယူသုံးလို့ရတာ မဟုတ်ပါဘူး။ ဒါကြောင့် ကိုယ်လိုချင်တဲ့ style ကို နားလည်ဖို့ပဲ ကြည့်ပါ။ အဲ့ဒီ style ကို ကိုယ့်စကားနဲ့ကိုယ် ပြန်ဖော်ပြပြီး AI ကို အသစ်တစ်ခု generate လုပ်ခိုင်းပါ။
+
+2. **ကိုယ်မြင်တာကို ချရေးပါ။** ကြိုက်တဲ့ art style တစ်ခု တွေ့ပြီဆိုရင် prompt ထဲက direction တွေ ရေးထားတဲ့ပုံစံအတိုင်း လိုက်ရေးကြည့်ပါ။ Figure က ဘာလုပ်နေလဲ၊ camera က ဘယ်လောက်နီးလဲ၊ surface က ဘယ်လိုလဲ၊ lighting က ဘယ်လိုကျလဲ—ဒီအချက်တွေကို ရေးပါ။ ပြီးရင် option အသစ်တစ်ခုအနေနဲ့ list ထဲ ထည့်လိုက်ပါ။
+
+3. **အရောင်တွေ ပြောင်းပါ။** Palette လေးခုဆိုတာ hex value တွေပါတဲ့ စာကြောင်းလေးကြောင်းပဲ။ Prompt ထဲက တခြား rule အားလုံးက အရောင်နာမည်ကို တိုက်ရိုက်မခေါ်ဘဲ သူ့အလုပ်အလိုက် field၊ ink၊ secondary၊ accent လို့ပဲ သုံးထားတယ်။ ဒါကြောင့် hex code တွေကိုပဲ အစားထိုးလိုက်ရင် တခြားဘာမှ မပျက်ဘူး။
+
+---
+
+ပြီးတော့ ဒီ prompt ကို ChatGPT ပေါ်မှာပဲ ကျွန်တော် စမ်းဖူးသေးတယ်။ ဘယ် model မှာမဆို သုံးလို့ရအောင် ရေးထားပြီး တခြားနေရာတွေမှာလည်း အလုပ်ဖြစ်မယ်လို့တော့ထင်ပါတယ်။

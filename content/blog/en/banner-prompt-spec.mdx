@@ -1,5 +1,5 @@
 ---
-title: A Prompt Spec That Generates My LinkedIn and X Banners
+title: An AI Prompt for Creating LinkedIn and X Banners
 author: Htet Aung Lin
 description: One long prompt that interviews you, locks a set of design options, and generates a personal-brand banner in a fixed house style. Here is how to use it and what every option does.
 image: { url: "view_dcgygm.jpg", author_name: "Htet Aung Lin", author_link: "https://htetaunglin-coder.dev" }
@@ -8,11 +8,9 @@ tags: ["prompt engineering", "ai image generation", "design systems", "personal 
 series: [technology]
 ---
 
-Most LinkedIn banners are either a canvas template thousands of other people are also using, or a one-shot AI image that came out glowing blue with a robot in it.
+The other day, while making a banner for one of my social media profiles, I had an idea: could I make this something anyone could use?
 
-This is a third option: a fixed house style you can regenerate as many times as you want, where the only things that change are the ones you pick.
-
-Here is mine, sitting on my actual profile.
+Here is the banner on my actual LinkedIn profile.
 
 <CloudinaryImage
   alt="My LinkedIn profile with the generated banner in place: a marble bust wearing headphones dissolving into particles, a purple circle behind it, headline reading Frontend Engineer building product interfaces and design systems"
@@ -28,28 +26,25 @@ Here is mine, sitting on my actual profile.
 
 ## How to use it
 
-1. Paste the whole spec into ChatGPT, Gemini or any ai image generator of your choice. Nothing else, no extra instructions.
-2. Answer the interview, or don't. It asks one question at a time and names a recommended pick for each. You can go through them one by one, answer in your own words, say "your pick" for a single question, or say "choose the rest for me" and let it decide everything that is left. Every example on this page shows the options that made it. If you like one of them, you can just use the same combination instead of choosing everything by yourself.
-3. Check the recap. It lists every locked option plus the exact prop the figure will hold before anything gets drawn. Fix it here, not after.
-4. Confirm, and it generates once.
-5. Crop. If the model can run code it delivers the exact platform size. If not, it tells you the pixel band to cut, e.g. `keep y=320–704, full width`.
+1. Paste the whole spec into ChatGPT, Gemini or any AI image generator of your choice.
+2. Answer the interview, or don't. It asks one question at a time and names a recommended pick for each. You can go through them one by one, answer in your own words, say "your pick" for a single question, or say "choose the rest for me" and let it decide everything that is left.
+3. Check the summary it gives you. It lists every locked option plus the exact prop the figure will hold before anything gets drawn. If something needs changing, fix it here instead of waiting until after it generates. This is especially useful if you are using a free plan.
+4. Confirm your choices, and it generates your banner.
 
-Your copy is the only text that appears in the image, so write the headline before you start. Nine words maximum, and it must not repeat your name or job title, since both already sit under the banner on the profile.
+Your copy is the only text that appears in the image, so write the headline before you start. Nine words maximum. If you are using it on LinkedIn, I recommend leaving your name and job title out of the headline because they are already on your profile.
 
 ## The options
 
-One option locked per category. Blending them is what turns a house style back into a generated image.
-
-| Category           | Options                                                                       |
-| ------------------ | ----------------------------------------------------------------------------- |
-| Platform           | X header 1500×500, LinkedIn cover 1584×396, or custom                         |
-| Layout             | L1 text left / art right, L2 art left / text right, L3 type only, L4 art only |
-| Art family         | M marble sculpture, P painted storybook                                       |
-| Art direction      | A1–A6 within marble, B1–B6 within painted                                     |
-| Subject effect     | E0 clean cutout, E1 particle, E2 halftone, E3 engraving, E4 blueprint         |
-| Palette            | P1 rust, P2 purple, P3 cobalt, P4 forest                                      |
-| Background texture | F1 flat, F2 paper grain, F3 grainy gradient                                   |
-| Typography         | T1 neo-grotesk, T2 soft geometric                                             |
+| Category           | Options                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Platform           | X header 1500×500, LinkedIn cover 1584×396, or custom                              |
+| Layout             | L1 text left / art right, L2 art left / text right, L3 text only, L4 image only    |
+| Art family         | M marble sculpture, P painted storybook                                            |
+| Art direction      | A1–A6 within marble, B1–B6 within painted                                          |
+| Subject effect     | E0 clean cutout, E1 particle, E2 halftone, E3 engraving, E4 blueprint              |
+| Palette            | P1 rust, P2 purple, P3 cobalt, P4 forest                                           |
+| Background texture | F1 flat, F2 paper grain, F3 grainy gradient                                        |
+| Typography         | T1 neo-grotesk, T2 soft geometric                                                  |
 
 ## Examples
 
@@ -148,7 +143,7 @@ One option locked per category. Blending them is what turns a house style back i
   ]}
 />
 
-> All the banners on this page are one-shot results. I used ChatGPT Pro and generated each one only one time. I did not ask for any fix after that.
+> Note: All the banners on this page are one-shot results. I used ChatGPT Pro and generated each one once. I did not ask for any revisions afterward.
 
 That is also why some of the image sizes are not the same. The model does not always give you the exact size you asked for. If the first result is not what you want, just ask again and tell it what to change.
 
@@ -156,13 +151,15 @@ That is also why some of the image sizes are not the same. The model does not al
 
 One thing you should know before you use it.
 
-This prompt has a fixed set of variants. If many people use it without changing anything, the banners will start to look like each other. Same twelve art directions, same four palettes, same five effects.
+This prompt comes with a fixed set of design variants. If a lot of people use it as-is, their banners will start to look alike.
 
-So think of this as a starting point and as inspiration. It gives you a working system, and you can change any part of it to fit yourself.
+So treat it as a starting point for your own banner, and as a source of inspiration.
+
+It gives you a working system. From there, you can change any part to fit your taste and make the result your own.
 
 > If you are happy with the result as it is, that is completely fine. You do not have to change anything.
 
-But if you want to make it your own, here is what I did.
+But if you want a design that feels like your own instead of everyone else's, here is the process I followed.
 
 1. **Go to Pinterest first and look at art.** I searched for marble sculpture art and for painted classical art, and I saved the ones I liked. Then I searched for effects, like halftone dots or particle dissolve, to see how other designers use them.
 
@@ -172,14 +169,6 @@ But if you want to make it your own, here is what I did.
 
 3. **Change the colors.** The four palettes are only four lines of hex values. Every other rule in the prompt talks about color by its role (field, ink, secondary, accent), not by its name, so you can replace the hex codes and nothing else breaks.
 
-The one thing I would keep is the structure: one option per category, no mixing, and the interview before it generates. The options are just taste. The rules are what keep the result consistent.
+---
 
-## Before you run it
-
-I have only tested this on ChatGPT. It is written to be model-agnostic and should work elsewhere, but treat that as untested rather than true.
-
-Check the spelling on every word in the output. Text rendering is still the weak point, and the fix is to regenerate rather than to accept it.
-
-Expect the model to want to fill empty space with labels, tiny UI, and icon rows. The spec bans all of it, and it still tries. If you see a word you did not write, regenerate.
-
-The banner sits above your name on a profile people read in two seconds. Fewer slots, bigger field, one clear line.
+I have only tested this prompt on ChatGPT. It is written to be model-agnostic, so it should work elsewhere too, but I have not tested that yet.
