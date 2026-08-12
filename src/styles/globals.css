@@ -184,6 +184,42 @@ html:has([data-smooth-scroll]) {
   scroll-behavior: smooth;
 }
 
+@utility thin_scrollbar {
+  scrollbar-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 35%,
+      transparent
+    )
+    transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 35%,
+      transparent
+    );
+    border-radius: 999px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 55%,
+      transparent
+    );
+  }
+}
+
 :root {
   --header-height: 6rem;
 
@@ -295,34 +331,35 @@ body {
 }
 
 /* -------------------------------------------------------------------------- */
+
+/* The `:not(:where(.not-prose, .not-prose *))` tail on each subject is how
+   in-article widgets opt out — `@scope (…) to (.not-prose)` says the same thing
+   once, but an engine without it drops the whole block and the article loses
+   every override at once. `:where()` keeps the guard at zero specificity, so
+   these stay exactly as specific as they read.
+
+   Unlayered on purpose. The typography plugin's `.prose :where(…)` rules sit in
+   `@layer utilities`, and unlayered declarations beat layered ones whatever the
+   specificity. Tuck this into a layer to tidy it up and every override here
+   goes quiet with no error. */
 .blog {
-  .prose h1 a,
-  .prose h2 a,
-  .prose h3 a,
-  .prose h4 a,
-  .prose h5 a {
+  .prose :is(h1, h2, h3, h4, h5) a:not(:where(.not-prose, .not-prose *)) {
     @apply !text-fg-default !no-underline hover:!underline !font-bold font-inter;
   }
 
-  .prose a {
+  .prose a:not(:where(.not-prose, .not-prose *)) {
     @apply text-fg-brand font-gloria-hallelujah;
   }
 
-  .prose h1,
-  .prose h2,
-  .prose h3 {
+  .prose :is(h1, h2, h3):not(:where(.not-prose, .not-prose *)) {
     @apply scroll-m-24;
   }
 
-  .prose h1 svg,
-  .prose h2 svg,
-  .prose h3 svg,
-  .prose h4 svg,
-  .prose h5 svg {
+  .prose :is(h1, h2, h3, h4, h5) svg:not(:where(.not-prose, .not-prose *)) {
     @apply !size-3.5 text-fg-tertiary;
   }
 
-  .prose li::marker {
+  .prose li:not(:where(.not-prose, .not-prose *))::marker {
     @apply text-fg-tertiary py-0;
   }
 
@@ -330,32 +367,31 @@ body {
     @apply text-fg-secondary/90;
   }
 
-  .prose hr {
+  .prose hr:not(:where(.not-prose, .not-prose *)) {
     @apply border-outline-secondary;
   }
 
-  .prose figure:has(pre) {
+  .prose figure:has(pre):not(:where(.not-prose, .not-prose *)) {
     @apply shadow-none;
   }
 
-  .prose :not(pre) > code {
+  .prose :not(pre) > code:not(:where(.not-prose, .not-prose *)) {
     @apply font-gloria-hallelujah italic tracking-normal font-medium bg-bg-secondary rounded-none border-none !pt-0 !pb-0.5;
   }
 
-  .prose strong {
+  .prose strong:not(:where(.not-prose, .not-prose *)) {
     @apply text-fg-secondary/90;
   }
 
-  .prose p {
+  .prose p:not(:where(.not-prose, .not-prose *)) {
     @apply !my-1.5;
   }
 
-  .prose blockquote {
+  .prose blockquote:not(:where(.not-prose, .not-prose *)) {
     @apply font-inter text-fg-tertiary border-outline-secondary;
   }
 
-  .prose td,
-  .prose th {
+  .prose :is(td, th):not(:where(.not-prose, .not-prose *)) {
     @apply pl-3;
   }
 }

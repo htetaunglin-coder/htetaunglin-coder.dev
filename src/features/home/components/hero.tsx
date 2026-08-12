@@ -72,14 +72,17 @@ const PronounceMyNameButton = ({ className }: { className?: string }) => {
 
   return (
     <Button
+      aria-label="Pronounce my name"
       className={cn("text-fg-tertiary hover:text-fg-default", className)}
       iconOnly
       onClick={() => play()}
       type="button"
       variant="ghost"
     >
-      <Volume2Icon className="sm:!size-4 md:!size-5 !size-3.5" />
-      <span className="sr-only">Pronounce my name</span>
+      <Volume2Icon
+        aria-hidden="true"
+        className="sm:!size-4 md:!size-5 !size-3.5"
+      />
     </Button>
   );
 };

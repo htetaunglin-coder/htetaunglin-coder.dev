@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Htet Aung Lin (Kelvin)",
   title: "Htet Aung Lin",
   description:
-    "I build things for the web with React and a bit of design sense. I enjoy learning, improving, and making videos about what I discover along the way.",
+    "Frontend developer. I build front ends that look great and last, fast, with AI agents. I care about the people I build with as much as the product.",
   keywords: [
     "Htet Aung Lin",
     "Frontend Developer",
