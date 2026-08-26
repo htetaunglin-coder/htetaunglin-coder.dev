@@ -33,7 +33,7 @@ const AgentSwitcher = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            className="h-8 justify-between gap-2 rounded-lg px-3 text-xs"
+            className="h-8 justify-between gap-2 rounded-lg rounded-bl-md px-3 text-xs"
             disabled={disabled}
             size="sm"
             type="button"

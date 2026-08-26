@@ -48,13 +48,14 @@ Longer process: `agent_docs/implementation-playbook.md`.
 - `prefer`: colocate first — promote to `src/hooks`, `src/lib`, or `src/components/ui` only on real reuse across 3+ features.
 - `must not`: cross-feature imports (`features/a` reaching into `features/b`). Extract upward instead.
 - `must`: kebab-case files, PascalCase components, `use-x.ts` hooks, no barrel `index.ts`.
-- `must`: file order — imports → types → main export → secondary exports → private helpers → constants.
+- `must`: file order — imports → types → constants → main export → secondary exports → private helpers.
 
 Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 
 ### UI
 
 - `must`: Tailwind v4 — theme tokens live in `@theme` in `src/styles/globals.css`, not a `tailwind.config`. Prefer the semantic tokens (`fg-default`, `bg-default`, `fg-brand`, …) over raw values. Compose with `cn()` from `src/lib/utils.ts`.
+- `must not`: hoist a Tailwind class string into a named constant just to reuse it — repetition never justifies it, not at 4–5+ call sites either. Repeating markup becomes a small component with its classes inline (see `Swatch` in `banner-showcase.tsx`); a class-string constant earns its place only when the name itself makes the code clearer, which is rare.
 - `must`: `src/components/ui` is hand-maintained Radix wrappers in shadcn style. There is no `components.json`, so `npx shadcn add` is not wired up — write the file to match its neighbours.
 - `must`: images go through `cloudinary-image.tsx` or `ui/theme-image.tsx` with explicit responsive `sizes`.
 - `must`: support light and dark. For theme-dependent client UI, read `resolvedTheme` and render `null` until mounted (`src/components/comment.tsx`).
@@ -102,6 +103,7 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 - `agent_docs/context-engineering-principles.md` — why this doc set is shaped the way it is
 - `agent_docs/i18n-burmese-english.md` — the shipped `en`/`my` blog i18n. **Read before touching Burmese routes, blog metadata, or `content/blog/`** — it records three traps and several deliberate behaviours that read as bugs
 - `agent_docs/research-i18n-fumadocs.md`, `agent_docs/research-i18n-typography.md` — cited research behind the above, kept as historical record
+- `agent_docs/banner-prompt-builder.md` — the banner prompt builder's file layout, its ID-union contract, and the measured sizing constraints that used to live in code comments
 - `agent_docs/research-prompt-builder-ux.md` — cited UX research behind the banner prompt builder's shape: progressive disclosure, defaults, in-article widgets, and a measured WCAG 1.4.11 failure in the option cards
 
 ## Agent skills

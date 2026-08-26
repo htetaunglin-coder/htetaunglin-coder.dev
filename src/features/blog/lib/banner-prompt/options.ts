@@ -6,8 +6,10 @@
  * that describes it in `GENERATION_STEP`.
  */
 
+export type PlatformId = "linkedin" | "x" | "custom";
+
 export type Platform = {
-  id: string;
+  id: PlatformId;
   label: string;
   description: string;
   /** Absent on the custom platform, where the reader supplies the size. */
@@ -34,23 +36,47 @@ export type ArtFamily = {
   recommended?: boolean;
 };
 
+export type ArtDirectionId =
+  | "A1"
+  | "A2"
+  | "A3"
+  | "A4"
+  | "A5"
+  | "A6"
+  | "B1"
+  | "B2"
+  | "B3"
+  | "B4"
+  | "B5"
+  | "B6";
+
 export type ArtDirection = {
-  id: string;
+  id: ArtDirectionId;
   family: ArtFamilyId;
   label: string;
   description: string;
+  /** Reference render — a Cloudinary public ID, served through `CloudinaryImage`. */
+  image?: {
+    src: string;
+    width: number;
+    height: number;
+  };
   recommended?: boolean;
 };
 
+export type EffectId = "E0" | "E1" | "E2" | "E3" | "E4";
+
 export type Effect = {
-  id: string;
+  id: EffectId;
   label: string;
   description: string;
   recommended?: boolean;
 };
 
+export type PaletteId = "P1" | "P2" | "P3" | "P4";
+
 export type Palette = {
-  id: string;
+  id: PaletteId;
   label: string;
   field: string;
   ink: string;
@@ -59,15 +85,19 @@ export type Palette = {
   recommended?: boolean;
 };
 
+export type FieldFinishId = "F1" | "F2" | "F3";
+
 export type FieldFinish = {
-  id: string;
+  id: FieldFinishId;
   label: string;
   description: string;
   recommended?: boolean;
 };
 
+export type TypographyId = "T1" | "T2";
+
 export type Typography = {
-  id: string;
+  id: TypographyId;
   label: string;
   description: string;
   recommended?: boolean;
@@ -145,7 +175,12 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     family: "M",
     label: "Serene Marble",
     description:
-      "Polished porcelain-white figure, eyes lowered, calm smooth studio finish.",
+      "Polished porcelain-white figure, head level and gaze steady, calm smooth studio finish.",
+    image: {
+      src: "a1-cutout_ligiwm",
+      width: 1123,
+      height: 1400,
+    },
     recommended: true,
   },
   {
@@ -154,13 +189,23 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Seated Scholar",
     description:
       "Figure seated deep in its work, prop in hand, grounded and thoughtful.",
+    image: {
+      src: "a2-cutout_quvcfu",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "A3",
     family: "M",
     label: "Standing Figure",
     description:
-      "Full-figure neoclassical stance, prop carried at rest, museum poise.",
+      "Full-figure neoclassical stance, head carried high, prop at rest, museum poise.",
+    image: {
+      src: "a3-cutout_efaoux",
+      width: 1024,
+      height: 1536,
+    },
   },
   {
     id: "A4",
@@ -168,19 +213,34 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Veiled Muse",
     description:
       "Head-and-shoulders drama: veil or diadem, warm veined marble, a strong head turn.",
+    image: {
+      src: "a4-cutout_zobdql",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "A5",
     family: "M",
     label: "Draped Motion",
     description:
-      "Raised arms and billowing drapery, baroque movement frozen mid-gesture.",
+      "Raised arms and a billowing mantle over a full gown, baroque movement frozen mid-gesture.",
+    image: {
+      src: "a5-cutout_d3evdi",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "A6",
     family: "M",
     label: "Winged Angel",
     description: "Serene angel with large feathered wings, hands quiet.",
+    image: {
+      src: "a6-cutout_cftnrh",
+      width: 720,
+      height: 900,
+    },
   },
   {
     id: "B1",
@@ -188,6 +248,11 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Seated Reader",
     description:
       "White-gowned figure curled in an ornate chair, absorbed in the prop.",
+    image: {
+      src: "b1-cutout_ux870q",
+      width: 600,
+      height: 900,
+    },
     recommended: true,
   },
   {
@@ -195,12 +260,22 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     family: "P",
     label: "Heroic Gesture",
     description: "Full-figure hero, red cloak billowing, arm flung high.",
+    image: {
+      src: "b2-cutout_ge1nmt",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "B3",
     family: "P",
     label: "Ascending Angel",
     description: "Angel mid-flight, layered colorful wings, drapery streaming.",
+    image: {
+      src: "b3-cutout_jntvze",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "B4",
@@ -208,6 +283,11 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Storybook Gentleman",
     description:
       "Romantic-era dress: embroidered coat, cravat, tall riding boots.",
+    image: {
+      src: "b4-cutout_cn6png",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "B5",
@@ -215,6 +295,11 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Cloud Daydreamer",
     description:
       "Winged figure seated on a cloud, chin in hand, lost in thought.",
+    image: {
+      src: "b5-cutout_cyd3li",
+      width: 600,
+      height: 900,
+    },
   },
   {
     id: "B6",
@@ -222,6 +307,11 @@ export const ART_DIRECTIONS: ArtDirection[] = [
     label: "Victorian Parlor",
     description:
       "Ornate lace-and-ribbon gown and flowered hat, prop held close.",
+    image: {
+      src: "b6-cutout_ad9eac",
+      width: 600,
+      height: 900,
+    },
   },
 ];
 
@@ -233,8 +323,8 @@ export const EFFECTS: Effect[] = [
   },
   {
     id: "E1",
-    label: "Particle Dissolve",
-    description: "One side breaks into fine dust.",
+    label: "Grain Fade",
+    description: "One side fades into fine grain.",
     recommended: true,
   },
   {
@@ -323,5 +413,20 @@ export const TYPOGRAPHY: Typography[] = [
   },
 ];
 
+export const PLATFORM_BY_ID = indexById(PLATFORMS);
+export const LAYOUT_BY_ID = indexById(LAYOUTS);
+export const ART_FAMILY_BY_ID = indexById(ART_FAMILIES);
+export const ART_DIRECTION_BY_ID = indexById(ART_DIRECTIONS);
+export const EFFECT_BY_ID = indexById(EFFECTS);
+export const PALETTE_BY_ID = indexById(PALETTES);
+export const FIELD_FINISH_BY_ID = indexById(FIELD_FINISHES);
+export const TYPOGRAPHY_BY_ID = indexById(TYPOGRAPHY);
+
 /** Nine words, per the spec's headline rule. */
 export const HEADLINE_WORD_LIMIT = 9;
+
+function indexById<Id extends string, T extends { id: Id }>(
+  list: T[]
+): Record<Id, T> {
+  return Object.fromEntries(list.map((one) => [one.id, one])) as Record<Id, T>;
+}

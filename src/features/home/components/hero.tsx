@@ -19,7 +19,7 @@ const Hero = () => (
           </span>
         </p>
         <div className="relative flex w-fit items-center gap-1 md:gap-2">
-          <h1 className="mt-1 bg-gradient-to-br from-fg-default to-fg-tertiary/90 bg-clip-text font-bold font-inter text-4xl/[1.2] text-transparent tracking-tight sm:mt-0 sm:font-extrabold sm:text-5xl/[1.2] md:text-7xl/[1.2] dark:to-fg-tertiary/80">
+          <h1 className="mt-1 bg-gradient-to-br from-fg-default to-fg-tertiary bg-clip-text font-bold font-inter text-4xl/[1.2] text-transparent tracking-tight sm:mt-0 sm:font-extrabold sm:text-5xl/[1.2] md:text-7xl/[1.2] dark:to-fg-tertiary/80">
             Htet Aung Lin
           </h1>
 
@@ -44,7 +44,7 @@ const Hero = () => (
           </Button>
           <Button
             asChild
-            className="items-center gap-1.5 text-fg-tertiary hover:text-fg-default"
+            className="items-center gap-1.5 px-2.5 pl-3 text-fg-tertiary hover:text-fg-default"
             variant="ghost"
           >
             <NavLink href={"#work-with-me"}>

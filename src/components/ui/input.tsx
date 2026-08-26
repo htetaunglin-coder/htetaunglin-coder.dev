@@ -37,7 +37,7 @@ const inputStyles = tv({
     variant: {
       default: {
         base: [
-          "rounded-md border",
+          "rounded-sm border",
           "focus-visible:border-outline-brand",
           "focus-visible:outline-none",
           "focus-visible:ring-2",
@@ -51,7 +51,7 @@ const inputStyles = tv({
       },
       danger: {
         base: [
-          "rounded-md border border-outline-danger",
+          "rounded-sm border border-outline-danger",
           "focus-visible:border-outline-danger",
           "focus-visible:outline-none",
           "focus-visible:ring-2",

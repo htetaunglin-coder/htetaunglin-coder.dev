@@ -24,9 +24,10 @@ const tabsStyles = tv({
   variants: {
     variant: {
       default: {
-        list: "gap-1 rounded-md bg-bg-secondary p-[3px]",
+        /* Concentric: trigger radius is the list's minus its padding, 6 - 4 = 2. */
+        list: "gap-1 rounded-sm bg-bg-secondary p-1",
         trigger: [
-          "rounded-sm px-3 py-1.5",
+          "rounded-2xs px-3 py-1.5",
           "data-[state=active]:bg-bg-default-alt data-[state=active]:text-fg-default data-[state=active]:shadow-xs",
         ],
       },

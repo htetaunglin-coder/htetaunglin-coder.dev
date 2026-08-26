@@ -1,6 +1,6 @@
 # Research: Banner prompt builder UX
 
-Research notes for the interactive builder embedded in `content/blog/{en,my}/banner-prompt-spec.mdx`. Every source below was fetched on **2026-08-11** and quoted from the page itself; where a page could not be fetched, it says so. This is a record of what was checked and when — if the shipped code disagrees, the code wins.
+Research notes for the interactive builder embedded in `content/blog/{en,my}/banner-prompt-spec.mdx`. Every source below was fetched on **2026-08-11** and quoted from the page itself, except the three in [§6's nested-scroll pass](#nested-scroll-areas--a-second-pass-fetched-2026-08-17), fetched **2026-08-17**; where a page could not be fetched, it says so. This is a record of what was checked and when — if the shipped code disagrees, the code wins.
 
 **The question asked:** the builder renders ~39 controls at once inside the article's prose column and overwhelms the reader mid-post. The tool must stay inside the article. An existing full-screen expandable panel (`src/components/animations/expandable-screen.tsx`) is available to reuse. What do primary sources actually say about staged disclosure, form length, defaults, wizard-vs-accordion, live output panels, in-article interactives, and the accessibility of the specific widgets in use?
 
@@ -17,6 +17,7 @@ Research notes for the interactive builder embedded in `content/blog/{en,my}/ban
 | Keep the "Recommended" badges off? | **Yes**, on redundancy grounds. No primary source exists in either direction ([§3](#3-defaults-and-smart-defaults)) |
 | Two-column form + preview? | **Not at this column width.** Material 3 puts two panes at **840dp+** only; the article body tops out near 840px ([§5](#5-live-preview-and-output-panels)) |
 | Any measured accessibility bug? | **Yes.** The checked-card indicator measures **2.35:1** against WCAG 1.4.11's 3:1 — and Material 3 independently says "Make sure color isn't the only way to show selection" ([§7](#7-accessibility-specifics)) |
+| A fixed-height scroll box for the raw spec? | **Not until the reader asks.** Baymard names the exact failure and `overscroll-behavior` cannot fix it, so the scroll sits behind a button ([§6](#nested-scroll-areas--a-second-pass-fetched-2026-08-17)) |
 
 ### Fetching note — two sources are SPAs, both have a first-party escape hatch
 
@@ -458,6 +459,38 @@ This is the best number in the file, and it sets the ceiling on everything else:
 
 ⚠️ **"X% of readers never interact with embedded widgets" does not exist.** Both Tse and Distill assert the direction without a number. Do not invent one.
 
+### Nested scroll areas — a second pass, fetched 2026-08-17
+
+Unlike the rest of this file, these three sources were fetched on **2026-08-17**, after the reader reported that scrolling the article past `raw-prompt.tsx` scrolled the widget instead of the page.
+
+[NN/g, "Scrolljacking 101"](https://www.nngroup.com/articles/scrolljacking-101/) defines the family and names the cost:
+
+> "Scrolljacking (or scroll hijacking) is a design pattern that changes the speed and, sometimes, the direction of scrolling on a web page."
+
+> "When a website alters the default scroll functionality, it 'hijacks' the user's control over their device and can generate disorientation."
+
+> "The majority of our study participants were at least mildly disoriented by scrolljacking."
+
+One of their recommendations — "include sticky navigation as an escape mechanism" — is why the expanded state carries a sticky Collapse rather than only a control at the top.
+
+[Baymard, "Avoid Inline Scroll Areas (26% Get it Wrong)"](https://baymard.com/blog/inline-scroll-areas) is the closer match, because it is about a fixed-height box inside a page rather than a scripted scroll rate:
+
+> "When scrolling the page via a mousewheel, an inline scroll area may be scrolled into the position 'occupied' by the user's cursor, causing the inline area to 'hijack' the page scrolling."
+
+> "The vast majority of all your tablet and smartphone users won't actually be able to tell where the inline scrollable areas are."
+
+That second quote indicts `thin_scrollbar` specifically. Baymard's prescribed alternatives are **truncation, progressive disclosure, or sub-categorization** — not a better-behaved scroll area, which is the finding that decided the fix.
+
+⚠️ **`overscroll-behavior` does not solve this.** `contain` stops scroll *chaining*, so the page never resumes once the inner box bottoms out — strictly a worse trap. No CSS property addresses wheel capture on pointer entry. The only fix is to not have the nested scroll container.
+
+**shadcn/ui's collapsible code block**, read from source at [`apps/v4/components/code-collapsible-wrapper.tsx`](https://github.com/shadcn-ui/ui/blob/main/apps/v4/components/code-collapsible-wrapper.tsx), is worth recording because it is often misremembered as "expand into a taller scroll box". It is not:
+
+- Closed: `data-[state=closed]:max-h-64` with `overflow-hidden` — **clipped, never scrollable**.
+- Open: the constraint is removed outright. No `max-height`, no `overflow`. The page grows and the document scroll stays the only scroll.
+- Two triggers: a small `Expand`/`Collapse` button pinned top-right, and a full-width `h-20` gradient band at the bottom that hides when open.
+
+This is the stricter answer — it never has a nested scroll container in any state. The builder did **not** take it, on the grounds in [§9](#the-raw-prompt-tab-is-a-document-not-a-control-surface): at 3.8k words the open state runs 5,500–6,000px through the middle of an article, and the reader who never clicks is already protected by the closed state alone.
+
 ---
 
 ## 7. Accessibility specifics
@@ -649,6 +682,16 @@ Inside the disclosure, keep it a **single scrolling column with headings**, whic
 
 Then cut the optional fields. NN/g's ceiling is "only 1 or 2 optional fields"; there are currently five. Kicker, sub-line and social proof are the obvious candidates — either drop them or put them behind their own single "Add more copy" control *inside* the disclosure, which does not add a level because the reader is already there.
 
+### The Raw prompt tab is a document, not a control surface
+
+The two tabs looked alike and are not. `step-flow.tsx` is a **fixed viewport over controls**, sized so the tallest step fits; only the artwork step overflows, and the reader operating it expects the pane to move. `raw-prompt.tsx` was a **document behind a peephole** — 3.8k words in a 440px box, on the default tab, in the path of every reader who is only scrolling past. Baymard's finding lands on the second and not the first.
+
+So: gate the raw spec's scroll behind a button, leave the control panel alone. The box opens at 440px with `overflow: hidden`, and "Read more" turns on the scroll and grows it to the Build panel's 627px so the two tabs match.
+
+That is a weaker fix than shadcn's, and knowingly so — the nested scroll returns the moment the button is pressed. It is defensible because of the numbers in [§6](#how-much-of-the-article-gets-read-at-all): readers get through 20–28% of a page's words, so almost nobody reaches the button, and the trap never arms for them. The reader who does press it has stopped scanning and started reading. The alternative — removing the height cap — puts 5,500–6,000px of monospace in the middle of the article for that same reader, which is its own harm.
+
+What shipped is in [`banner-prompt-builder.md`](./banner-prompt-builder.md).
+
 ### Where the full-screen panel earns its place
 
 Keep it — as a **secondary, opt-in** affordance, not the container. One small "Open full screen" control beside the prompt panel, for the reader who has decided to fiddle. That is what Apple prescribes when a task outgrows an inline surface ([Sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)): "For complex or prolonged user flows, consider alternatives to sheets … you might want to open a new window or let people enter full-screen mode instead." It also earns Tse's rule 1 — the click buys a genuinely roomier surface — and it is the only place this tool ever gets a two-pane form-and-preview layout, since the article column cannot clear 840dp ([§5](#5-live-preview-and-output-panels)).
@@ -679,7 +722,7 @@ If the prompt panel must stay reachable while the reader scrolls the options, pr
 - The recommended-first ordering in `options.ts` — but know it is a deliberate steer, not a neutral order, and GDS warns that frequency ordering "can reinforce bias".
 - The art-family → art-direction filter. Textbook staged disclosure, and it keeps the largest group at 6, under both Apple's and M3's option ceilings ([§2](#2-form-length-and-completion)).
 - The `useReducedMotion()` handling in `expandable-screen.tsx`.
-- The "Build it" / "Raw prompt" tabs — automatic activation is correct because both panels are prerendered ([§4](#4-wizard-vs-long-form-vs-accordion)).
+- The "Build it" / "Raw prompt" tabs — automatic activation is correct, though **not for the reason first recorded here**. Verified 2026-08-17 against the rendered page: the inactive panel is `hidden` *and empty*, because `TabsContent` has no `forceMount` and Radix unmounts inactive children. Both panels are not prerendered. Activation still costs only a client-side mount, so the conclusion holds ([§4](#4-wizard-vs-long-form-vs-accordion)).
 
 ### The honest caveat on all of it
 
@@ -700,12 +743,13 @@ Distill, an interactive-first journal, states that "There is limited empirical e
 
 ## Sources
 
-- **NN/g** — [Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/) · [Heuristics Applied to Complex Applications](https://www.nngroup.com/articles/usability-heuristics-complex-applications/) · [8 Design Guidelines for Complex Applications](https://www.nngroup.com/articles/complex-application-design/) · [Wizards](https://www.nngroup.com/articles/wizards/) · [Accordions Are Not Always the Answer](https://www.nngroup.com/articles/accordions-complex-content/) · [Accordions on Mobile](https://www.nngroup.com/articles/mobile-accordions/) · [Website Forms Usability](https://www.nngroup.com/articles/web-form-design/) · [4 Principles to Reduce Cognitive Load in Forms](https://www.nngroup.com/articles/4-principles-reduce-cognitive-load/) · [The Power of Defaults](https://www.nngroup.com/articles/the-power-of-defaults/) · [Marking Required Fields](https://www.nngroup.com/articles/required-fields/) · [Modal & Nonmodal Dialogs](https://www.nngroup.com/articles/modal-nonmodal-dialog/) · [Bottom Sheets](https://www.nngroup.com/articles/bottom-sheet/) · [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) · [R.I.P. WYSIWYG](https://www.nngroup.com/articles/rip-wysiwyg/) · [Sticky Headers](https://www.nngroup.com/articles/sticky-headers/) · [How Little Do Users Read?](https://www.nngroup.com/articles/how-little-do-users-read/) · [F-Shaped Pattern](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/)
+- **NN/g** — [Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/) · [Heuristics Applied to Complex Applications](https://www.nngroup.com/articles/usability-heuristics-complex-applications/) · [8 Design Guidelines for Complex Applications](https://www.nngroup.com/articles/complex-application-design/) · [Wizards](https://www.nngroup.com/articles/wizards/) · [Accordions Are Not Always the Answer](https://www.nngroup.com/articles/accordions-complex-content/) · [Accordions on Mobile](https://www.nngroup.com/articles/mobile-accordions/) · [Website Forms Usability](https://www.nngroup.com/articles/web-form-design/) · [4 Principles to Reduce Cognitive Load in Forms](https://www.nngroup.com/articles/4-principles-reduce-cognitive-load/) · [The Power of Defaults](https://www.nngroup.com/articles/the-power-of-defaults/) · [Marking Required Fields](https://www.nngroup.com/articles/required-fields/) · [Modal & Nonmodal Dialogs](https://www.nngroup.com/articles/modal-nonmodal-dialog/) · [Bottom Sheets](https://www.nngroup.com/articles/bottom-sheet/) · [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) · [R.I.P. WYSIWYG](https://www.nngroup.com/articles/rip-wysiwyg/) · [Sticky Headers](https://www.nngroup.com/articles/sticky-headers/) · [How Little Do Users Read?](https://www.nngroup.com/articles/how-little-do-users-read/) · [F-Shaped Pattern](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/) · [Scrolljacking 101](https://www.nngroup.com/articles/scrolljacking-101/)
 - **GOV.UK** — [Structuring forms](https://www.gov.uk/service-manual/design/form-structure) · [Collecting personal information](https://www.gov.uk/service-manual/design/collecting-personal-information-from-users) · [Designing good questions](https://www.gov.uk/service-manual/design/designing-good-questions) · [Question pages](https://design-system.service.gov.uk/patterns/question-pages/) · [Check answers](https://design-system.service.gov.uk/patterns/check-answers/) · [Complete multiple tasks](https://design-system.service.gov.uk/patterns/complete-multiple-tasks/) · [Accordion](https://design-system.service.gov.uk/components/accordion/) · [Details](https://design-system.service.gov.uk/components/details/) · [Radios](https://design-system.service.gov.uk/components/radios/) · [Select](https://design-system.service.gov.uk/components/select/)
 - **Apple** — [Disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls) · [Entering data](https://developer.apple.com/design/human-interface-guidelines/entering-data) · [Segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls) · [Modality](https://developer.apple.com/design/human-interface-guidelines/modality) · [Sheets](https://developer.apple.com/design/human-interface-guidelines/sheets) · [Split views](https://developer.apple.com/design/human-interface-guidelines/split-views) · [Panels](https://developer.apple.com/design/human-interface-guidelines/panels) · [WWDC17 802, Essential Design Principles](https://developer.apple.com/videos/play/wwdc2017/802/)
 - **Material Design 3** — [Breakpoints](https://m3.material.io/foundations/layout/breakpoints/overview) · [Canonical examples](https://m3.material.io/foundations/layout/canonical-examples/overview) · [Segmented buttons](https://m3.material.io/components/segmented-buttons/guidelines) · [Radio button](https://m3.material.io/components/radio-button/guidelines)
 - **Google (Android, server-rendered corroboration)** — [Window size classes](https://developer.android.com/develop/ui/compose/layouts/adaptive/window-size-classes) · [Canonical layouts](https://developer.android.com/develop/ui/compose/layouts/adaptive/canonical-layouts)
 - **W3C / WAI** — APG: [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) · [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) · [Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) · [Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) · [Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) · [Pattern index](https://www.w3.org/WAI/ARIA/apg/patterns/) · [Keyboard interface practice](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/) · [Read Me First](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/). Specs: [WAI-ARIA 1.2 `aria-current`](https://www.w3.org/TR/wai-aria-1.2/#aria-current) · [Using ARIA, Rule 1](https://www.w3.org/TR/using-aria/#rule1) · [Media Queries L5 `prefers-reduced-motion`](https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/#new-features-in-wcag-2-2). Understanding: [1.3.1](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) · [1.4.1](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html) · [1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) · [1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) · [1.4.13](https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html) · [2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html) · [2.3.3](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html) · [2.4.3](https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html) · [2.4.11](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html) · [2.4.13](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html) · [3.3.2](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html). Techniques: [G14](https://www.w3.org/WAI/WCAG22/Techniques/general/G14) · [G111](https://www.w3.org/WAI/WCAG22/Techniques/general/G111). Tutorials: [Multi-page forms](https://www.w3.org/WAI/tutorials/forms/multi-page/) · [Grouping controls](https://www.w3.org/WAI/tutorials/forms/grouping/)
-- **Baymard** — [Average form fields in checkout](https://baymard.com/blog/checkout-flow-average-form-fields) · [Checkout usability research](https://baymard.com/research/checkout-usability) · [Cart abandonment rate](https://baymard.com/lists/cart-abandonment-rate) · [Holistic view on checkout usability](https://baymard.com/blog/holistic-view-on-checkout-usability) · [Use buttons for size selection](https://baymard.com/blog/use-buttons-for-size-selection)
+- **Baymard** — [Average form fields in checkout](https://baymard.com/blog/checkout-flow-average-form-fields) · [Checkout usability research](https://baymard.com/research/checkout-usability) · [Cart abandonment rate](https://baymard.com/lists/cart-abandonment-rate) · [Holistic view on checkout usability](https://baymard.com/blog/holistic-view-on-checkout-usability) · [Use buttons for size selection](https://baymard.com/blog/use-buttons-for-size-selection) · [Avoid inline scroll areas](https://baymard.com/blog/inline-scroll-areas)
 - **In-article interactives** — [Archie Tse, "Why We Are Doing Fewer Interactives", Malofiej 2016 (author's own slides)](https://github.com/archietse/malofiej-2016/blob/master/tse-malofiej-2016-slides.pdf) · [Distill, Communicating with Interactive Articles](https://distill.pub/2020/communicating-with-interactive-articles/) · [Distill journal standards](https://distill.pub/journal/) · [Bret Victor, Explorable Explanations](https://worrydream.com/ExplorableExplanations/) · [Bret Victor, Up and Down the Ladder of Abstraction](https://worrydream.com/LadderOfAbstraction/)
+- **Other implementations read** — shadcn/ui [`apps/v4/components/code-collapsible-wrapper.tsx`](https://github.com/shadcn-ui/ui/blob/main/apps/v4/components/code-collapsible-wrapper.tsx), fetched from `raw.githubusercontent.com` on 2026-08-17
 - **Code read** — `src/features/blog/components/banner-prompt/{banner-prompt,builder,option-field}.tsx` · `src/features/blog/lib/banner-prompt/{compile,options}.ts` · `src/components/ui/radio-group.tsx` · `src/components/animations/expandable-screen.tsx` · `src/features/blog/components/blog-post-view.tsx` · `src/styles/globals.css` · `node_modules/@radix-ui/react-radio-group/dist/index.mjs`

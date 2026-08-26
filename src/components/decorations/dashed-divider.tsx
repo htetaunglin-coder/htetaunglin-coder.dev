@@ -8,11 +8,11 @@ type DashedDividerProps = {
   stroke?: string;
 };
 
-const DEFAULT_MASK_IMAGE: Record<"horizontal" | "vertical", string> = {
+const DEFAULT_MASK: Record<"horizontal" | "vertical", string> = {
   horizontal:
-    "linear-gradient(to left, transparent, white 12rem, white calc(100% - 12rem), transparent)",
+    "[mask-image:linear-gradient(to_left,transparent,white_12rem,white_calc(100%_-_12rem),transparent)]",
   vertical:
-    "linear-gradient(to bottom, transparent, white 5rem, white calc(100% - 16rem), transparent)",
+    "[mask-image:linear-gradient(to_bottom,transparent,white_5rem,white_calc(100%_-_16rem),transparent)]",
 };
 
 export function DashedDivider({
@@ -25,8 +25,11 @@ export function DashedDivider({
 
   return (
     <div
-      className={cn(isHorizontal ? "h-px" : "w-px", className)}
-      style={{ maskImage: maskImage ?? DEFAULT_MASK_IMAGE[orientation] }}
+      className={cn(
+        isHorizontal ? "h-px" : "w-px",
+        maskImage ? undefined : DEFAULT_MASK[orientation],
+        className
+      )}
     >
       <svg
         aria-hidden="true"

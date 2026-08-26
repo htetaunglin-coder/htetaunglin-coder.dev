@@ -4,36 +4,39 @@ import { type ReactNode, useId } from "react";
 import { RadioGroup, RadioGroupCard } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 
-export type OptionChoice = {
-  value: string;
+export type OptionChoice<Value extends string> = {
+  value: Value;
   label: string;
-  /** The spec's own ID (L1, A3, P2…), shown so the prompt stays legible. */
-  code?: string;
-  icon?: ReactNode;
   description?: string;
+  /** A thumbnail rendered above the label. */
   accessory?: ReactNode;
 };
 
-type OptionFieldProps = {
+type OptionFieldProps<Value extends string> = {
   title: string;
   hint?: string;
-  value: string;
-  options: OptionChoice[];
-  columns?: 1 | 2 | 3;
+  value: Value;
+  options: OptionChoice<Value>[];
+  columns?: 1 | 2 | 3 | 4;
+  /** Overrides the grid on the group itself — for a fixed count that opts out
+    of the responsive `columns` ramp. Neutralise each breakpoint it sets. */
+  columnsClassName?: string;
   hideTitle?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: Value) => void;
 };
 
-export function OptionField({
+export function OptionField<Value extends string>({
   title,
   hint,
   value,
   options,
   columns = 2,
+  columnsClassName,
   hideTitle = false,
   onChange,
-}: OptionFieldProps) {
+}: OptionFieldProps<Value>) {
   const headingId = useId();
+  const selected = options.find((option) => option.value === value);
 
   return (
     <section>
@@ -51,36 +54,50 @@ export function OptionField({
 
       <RadioGroup
         aria-labelledby={headingId}
-        className={hideTitle && !hint ? undefined : "mt-3"}
+        className={cn(!(hideTitle && !hint) && "mt-3", columnsClassName)}
         columns={columns}
-        onValueChange={onChange}
+        // Radix hands back a bare string; the option list is what pins it down.
+        onValueChange={(next) => onChange(next as Value)}
         value={value}
       >
         {options.map((option) => (
           <RadioGroupCard
-            description={option.description}
+            className="border-outline-default/60"
             key={option.value}
             label={
-              <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                {option.icon && (
-                  <span aria-hidden="true" className="[&>svg]:size-4">
-                    {option.icon}
-                  </span>
-                )}
-                {option.code && (
-                  <span className="font-departure-mono text-fg-tertiary text-xs">
-                    {option.code}
-                  </span>
-                )}
-                <span>{option.label}</span>
+              <span className="block truncate text-xs sm:text-sm">
+                {option.label}
               </span>
             }
+            media={option.accessory}
             value={option.value}
-          >
-            {option.accessory}
-          </RadioGroupCard>
+            variant="media"
+          />
         ))}
       </RadioGroup>
+
+      {selected?.description && (
+        <p aria-live="polite" className="mt-2 text-fg-tertiary text-xs">
+          {selected.description}
+        </p>
+      )}
     </section>
+  );
+}
+
+export function CodeLabel({
+  code,
+  children,
+}: {
+  code: string;
+  children: ReactNode;
+}) {
+  return (
+    <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <span className="hidden shrink-0 font-inter text-fg-tertiary text-xs sm:inline-block">
+        {code}
+      </span>
+      <span className="text-xs sm:text-sm">{children}</span>
+    </span>
   );
 }

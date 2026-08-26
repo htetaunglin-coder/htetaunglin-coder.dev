@@ -9,7 +9,7 @@ import type { ComponentSlots } from "./types";
 
 const buttonStyles = tv({
   slots: {
-    base: "inline-flex cursor-pointer items-center justify-center gap-0.5 font-medium text-sm outline-none duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default disabled:pointer-events-none disabled:opacity-50",
+    base: "inline-flex cursor-pointer items-center justify-center gap-1.5 font-medium text-sm outline-none duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default disabled:pointer-events-none disabled:opacity-50",
     icon: "size-5 animate-spin text-current",
   },
   variants: {
@@ -30,8 +30,8 @@ const buttonStyles = tv({
         "bg-bg-inverse text-fg-inverse shadow-xs hover:bg-bg-inverse/80 focus-visible:ring-bg-outline-inverse active:bg-bg-inverse/70",
     },
     size: {
-      sm: "h-8 rounded-md px-3",
-      md: "h-9 rounded-md px-3",
+      sm: "h-8 rounded-sm px-3",
+      md: "h-9 rounded-sm px-3",
       lg: "h-12 rounded-lg px-4",
     },
     iconOnly: {

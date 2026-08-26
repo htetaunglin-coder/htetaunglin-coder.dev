@@ -25,7 +25,7 @@ const PureSuggestedActions = ({
         key={suggestedMessage}
       >
         <button
-          className="w-full cursor-pointer rounded-md py-2 text-left text-fg-tertiary hover:bg-bg-secondary/60 sm:px-3"
+          className="w-full cursor-pointer rounded-sm py-2 text-left text-fg-tertiary hover:bg-bg-secondary/60 sm:px-3"
           onClick={() => sendMessage(suggestedMessage)}
           type="button"
         >

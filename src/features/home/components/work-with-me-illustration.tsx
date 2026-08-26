@@ -185,7 +185,7 @@ const WorkWithMeIllustration = ({ className }: WorkWithMeIllustrationProps) => (
     </div>
 
     <PixelCoffee size={150} />
-    <span className="relative mt-4 font-departure-mono text-[11px] text-fg-tertiary/70 tracking-wide">
+    <span className="relative mt-4 font-inter text-[11px] text-fg-tertiary/70 tracking-wide">
       brewed by a human
     </span>
   </div>
