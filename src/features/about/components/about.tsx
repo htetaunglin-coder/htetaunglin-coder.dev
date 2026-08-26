@@ -60,7 +60,7 @@ const About = () => (
               <CloudinaryImage
                 alt="Htet Aung Lin Profile"
                 aspectRatio={"1:1"}
-                className="relative block size-24 select-none rounded-md bg-bg-tertiary object-cover object-center sm:mr-6 sm:size-40 md:mr-12 2xl:hidden"
+                className="relative block size-24 select-none rounded-sm bg-bg-tertiary object-cover object-center sm:mr-6 sm:size-40 md:mr-12 2xl:hidden"
                 draggable={false}
                 height={160}
                 src="htet_aung_lin.jpg"
@@ -98,7 +98,7 @@ const About = () => (
 
           {/* HangOut */}
 
-          <div className="group relative aspect-[5/4] w-[16.25rem] shrink-0 overflow-hidden rounded-4xl grayscale-25 transition duration-300 sm:w-[20rem]">
+          <div className="group relative aspect-[5/4] w-[16.25rem] shrink-0 overflow-hidden rounded-2xl grayscale-25 transition duration-300 sm:w-[20rem]">
             <CloudinaryImage
               alt="Friends hanging out — casual group photo"
               aspectRatio={"5:4"}

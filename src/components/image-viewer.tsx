@@ -167,7 +167,7 @@ const ImageViewer = ({ images }: ImageViewerProps) => {
 
                   {!(shouldShowOverlay || isHidden) && (
                     <div className="pointer-events-none absolute inset-0 flex items-end justify-start bg-black/0 p-3 opacity-0 transition-colors group-hover/image-viewer:bg-black/10 group-hover/image-viewer:opacity-100">
-                      <span className="rounded bg-black/50 px-1.5 py-0.5 text-white text-xs backdrop-blur-sm">
+                      <span className="rounded-xs bg-black/50 px-1.5 py-0.5 text-white text-xs backdrop-blur-sm">
                         {index + 1} / {images.length}
                       </span>
                     </div>

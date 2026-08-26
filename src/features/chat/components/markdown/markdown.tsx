@@ -67,7 +67,7 @@ const MarkdownComponents: Options["components"] = {
     return (
       <code
         className={cn(
-          "whitespace-pre-wrap break-all rounded-md bg-bg-tertiary px-1.5 py-0.5 text-sm",
+          "whitespace-pre-wrap break-all rounded-none bg-bg-tertiary px-1.5 py-0.5 text-sm",
           className
         )}
         {...props}

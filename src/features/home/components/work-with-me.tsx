@@ -104,7 +104,7 @@ const WorkWithMe = () => {
                   <li key={link.id}>
                     <NavLink
                       className={cn(
-                        "rounded-md px-2 py-0.75 text-[#ebeaea]/80 text-base outline-none transition duration-300 hover:text-zinc-400 hover:underline focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:bg-bg-brand/70 dark:text-fg-inverse dark:focus-visible:ring-offset-bg-inverse dark:hover:text-fg-inverse/70",
+                        "rounded-sm px-2 py-0.75 text-[#ebeaea]/80 text-base outline-none transition duration-300 hover:text-zinc-400 hover:underline focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:bg-bg-brand/70 dark:text-fg-inverse dark:focus-visible:ring-offset-bg-inverse dark:hover:text-fg-inverse/70",
                         idx === 0 && "-ml-2"
                       )}
                       href={link.href}
@@ -138,7 +138,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const fieldClass = cn(
-  "w-full rounded-md border border-zinc-800 bg-white/5 px-3 py-2 text-[#ebeaea] text-sm",
+  "w-full rounded-sm border border-zinc-800 bg-white/5 px-3 py-2 text-[#ebeaea] text-sm",
   "outline-none transition-colors placeholder:text-zinc-600",
   "focus:border-outline-brand focus:bg-white/10",
   "disabled:opacity-50",

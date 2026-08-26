@@ -21,10 +21,6 @@
   --font-noto-sans-myanmar:
     var(--font-noto-sans-myanmar), "Padauk", "Myanmar Text", sans-serif;
 
-  --font-departure-mono:
-    var(--font-departure-mono), "Menlo", "Roboto Mono", "JetBrains Mono",
-    "SF Mono", "Consolas", monospace;
-
   /* Default */
   --color-bg-default: oklch(0.92 0 0);
   --color-bg-default-alt: oklch(0.98 0 0);
@@ -88,10 +84,11 @@
   --color-outline-danger-subtle: oklch(0.88 0.06 18.39);
   --color-fg-danger: oklch(0.51 0.19 27.56);
 
+  --radius-*: initial;
   --radius-2xs: 0.125rem; /* 2px */
   --radius-xs: 0.25rem; /* 4px */
   --radius-sm: 0.375rem; /* 6px */
-  --radius-base: 0.5rem; /* 8px */
+  --radius-md: 0.5rem; /* 8px */
   --radius-lg: 0.75rem; /* 12px */
   --radius-xl: 1rem; /* 16px */
   --radius-2xl: 1.25rem; /* 20px */
@@ -144,7 +141,7 @@
   /* Brand  */
   --color-bg-brand: oklch(0.4733 0.0763 289.08);
   --color-on-bg-brand: oklch(0.98 0.02 289.08);
-  --color-outline-brand: oklch(0.58 0.07 289.08);
+  --color-outline-brand: oklch(0.58 0.065 289.08);
   --color-bg-brand-subtle: oklch(0.52 0.05 289.08);
   --color-on-bg-brand-subtle: oklch(0.92 0.03 289.08);
   --color-outline-brand-subtle: oklch(0.48 0.06 289.08);
@@ -166,7 +163,7 @@
   --color-bg-warning-subtle: oklch(0.46 0.09 79.66);
   --color-on-bg-warning-subtle: oklch(0.95 0.06 86.07);
   --color-outline-warning-subtle: oklch(0.52 0.1 80.1);
-  --color-fg-warning: oklch(0.81 0.17 78.26);
+  --color-fg-warning: oklch(72.888% 0.07975 88.386);
 
   /* Danger */
   --color-bg-danger: oklch(0.71 0.17 22.18);
@@ -182,6 +179,42 @@
 
 html:has([data-smooth-scroll]) {
   scroll-behavior: smooth;
+}
+
+@utility thin_scrollbar {
+  scrollbar-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 35%,
+      transparent
+    )
+    transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 35%,
+      transparent
+    );
+    border-radius: 999px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklab,
+      var(--color-fg-tertiary) 55%,
+      transparent
+    );
+  }
 }
 
 :root {
@@ -295,68 +328,72 @@ body {
 }
 
 /* -------------------------------------------------------------------------- */
+
+/* The `:not(:where(.not-prose, .not-prose *))` tail on each subject is how
+   in-article widgets opt out — `@scope (…) to (.not-prose)` says the same thing
+   once, but an engine without it drops the whole block and the article loses
+   every override at once. `:where()` keeps the guard at zero specificity, so
+   these stay exactly as specific as they read.
+
+   Unlayered on purpose. The typography plugin's `.prose :where(…)` rules sit in
+   `@layer utilities`, and unlayered declarations beat layered ones whatever the
+   specificity. Tuck this into a layer to tidy it up and every override here
+   goes quiet with no error. */
 .blog {
-  .prose h1 a,
-  .prose h2 a,
-  .prose h3 a,
-  .prose h4 a,
-  .prose h5 a {
+  .prose :is(h1, h2, h3, h4, h5) a:not(:where(.not-prose, .not-prose *)) {
     @apply !text-fg-default !no-underline hover:!underline !font-bold font-inter;
   }
 
-  .prose a {
+  .prose a:not(:where(.not-prose, .not-prose *)) {
     @apply text-fg-brand font-gloria-hallelujah;
   }
 
-  .prose h1,
-  .prose h2,
-  .prose h3 {
+  .prose :is(h1, h2, h3):not(:where(.not-prose, .not-prose *)) {
     @apply scroll-m-24;
   }
 
-  .prose h1 svg,
-  .prose h2 svg,
-  .prose h3 svg,
-  .prose h4 svg,
-  .prose h5 svg {
+  .prose :is(h1, h2, h3, h4, h5) svg:not(:where(.not-prose, .not-prose *)) {
     @apply !size-3.5 text-fg-tertiary;
   }
 
-  .prose li::marker {
+  .prose li:not(:where(.not-prose, .not-prose *))::marker {
     @apply text-fg-tertiary py-0;
   }
 
   .prose {
-    @apply text-fg-secondary/90;
+    @apply max-w-none text-fg-secondary/90;
   }
 
-  .prose hr {
+  .prose hr:not(:where(.not-prose, .not-prose *)) {
     @apply border-outline-secondary;
   }
 
-  .prose figure:has(pre) {
+  .prose figure:has(pre):not(:where(.not-prose, .not-prose *)) {
     @apply shadow-none;
   }
 
-  .prose :not(pre) > code {
+  .prose :not(pre) > code:not(:where(.not-prose, .not-prose *)) {
     @apply font-gloria-hallelujah italic tracking-normal font-medium bg-bg-secondary rounded-none border-none !pt-0 !pb-0.5;
   }
 
-  .prose strong {
+  .prose strong:not(:where(.not-prose, .not-prose *)) {
     @apply text-fg-secondary/90;
   }
 
-  .prose p {
+  .prose p:not(:where(.not-prose, .not-prose *)) {
     @apply !my-1.5;
   }
 
-  .prose blockquote {
+  .prose blockquote:not(:where(.not-prose, .not-prose *)) {
     @apply font-inter text-fg-tertiary border-outline-secondary;
   }
 
-  .prose td,
-  .prose th {
-    @apply pl-3;
+  .prose table:not(:where(.not-prose, .not-prose *)) {
+    @apply rounded-lg;
+  }
+
+  .prose :is(td, th):not(:where(.not-prose, .not-prose *)) {
+    @apply pl-3 border-outline-default/75;
   }
 }
 
@@ -369,9 +406,17 @@ body {
    family back up to the `lang="my"` wrapper. Blunt on purpose: enumerating the
    Latin-face rules would silently drift the next time one is added.
 
-   `pre`/`code` stay out of it — code is Latin and wants its mono face. */
-[lang="my"] :not(pre, pre *, code, code *) {
+   `pre`/`code` stay out of it — code is Latin and wants its mono face, and so do
+   `.not-prose` widgets (the builder, the showcase): they are English UI, so they
+   opt out of the walk-back and re-base to Inter below. */
+[lang="my"] :not(pre, pre *, code, code *, .not-prose, .not-prose *) {
   font-family: inherit !important;
+}
+
+/* A `.not-prose` island is English chrome — render its plain text in Inter, while
+   its own `font-*` utilities (the Doto tabs, etc.) still win over this base. */
+[lang="my"] .not-prose {
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 /* -------------------------------------------------------------------------- */

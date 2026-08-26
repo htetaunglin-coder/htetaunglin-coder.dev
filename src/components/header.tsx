@@ -95,7 +95,11 @@ const Header = ({
 
 /* -------------------------------------------------------------------------- */
 
-const SCROLL_THRESHOLD = 50;
+/* Revealing deliberately costs more than hiding. Matching the two would put the
+   header back over the text on every small correction-scroll while reading. */
+const HIDE_AFTER_SCROLLING_DOWN = 50;
+const REVEAL_AFTER_SCROLLING_UP = 150;
+const ALWAYS_VISIBLE_ABOVE = 100;
 
 const HeaderAutoHideWrapper = ({
   children,
@@ -111,9 +115,19 @@ const HeaderAutoHideWrapper = ({
   const lastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (y) => {
+    if (y < ALWAYS_VISIBLE_ABOVE) {
+      setIsHidden(false);
+      lastYRef.current = y;
+      return;
+    }
+
     const difference = y - lastYRef.current;
-    if (Math.abs(difference) > SCROLL_THRESHOLD) {
-      setIsHidden(difference > 0);
+
+    if (difference > HIDE_AFTER_SCROLLING_DOWN) {
+      setIsHidden(true);
+      lastYRef.current = y;
+    } else if (difference < -REVEAL_AFTER_SCROLLING_UP) {
+      setIsHidden(false);
       lastYRef.current = y;
     }
   });
@@ -148,9 +162,11 @@ const MorePages = () => (
         <ChevronDown className="transition duration-300 group-data-[state=open]:rotate-180" />
       </button>
     </PopoverTrigger>
+    {/* Radius steps down with nesting depth: 20 shell - 8 padding = the 12 on
+        every card inside, and those step to 8 for thumbnails and icon tiles. */}
     <PopoverContent
       align="center"
-      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden h-64 w-full gap-2 rounded-lg bg-bg-secondary/80 p-3 backdrop-blur-[3px] sm:flex"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden h-64 w-full gap-2 rounded-2xl bg-bg-secondary/80 p-2 backdrop-blur-[3px] sm:flex"
     >
       {/* ------------------------------- Side Quest ------------------------------- */}
       <div className="flex size-full w-sm flex-col gap-3 rounded-lg bg-bg-default p-3 md:w-md">
@@ -168,11 +184,11 @@ const MorePages = () => (
         <div className="flex size-full gap-2">
           {OTHER_PAGES.sideQuest.items.map((item) => (
             <NavLink
-              className="group/header-link relative aspect-[14/16] w-full overflow-hidden rounded-lg"
+              className="group/header-link relative aspect-[14/16] w-full overflow-hidden rounded-md"
               href={item.href}
               key={item.id}
             >
-              <div className="absolute inset-0 z-10 rounded-[11px] bg-gradient-to-b from-neutral-900/5 to-neutral-900/65 opacity-100 transition-opacity duration-300 group-hover/header-link:opacity-65 dark:from-neutral-900/35 dark:to-neutral-900/80" />
+              <div className="absolute inset-0 z-10 rounded-[inherit] bg-gradient-to-b from-neutral-900/5 to-neutral-900/65 opacity-100 transition-opacity duration-300 group-hover/header-link:opacity-65 dark:from-neutral-900/35 dark:to-neutral-900/80" />
               <CloudinaryImage
                 alt={item.alt}
                 aspectRatio={"14:16"}
@@ -229,7 +245,7 @@ const MorePages = () => (
               key={link.id}
             >
               <div className="flex w-full items-center gap-2">
-                <div className="flex size-10 items-center justify-center rounded-lg bg-bg-secondary text-base text-fg-tertiary">
+                <div className="flex size-10 items-center justify-center rounded-md bg-bg-secondary text-base text-fg-tertiary">
                   <link.icon />
                 </div>
                 <div>
@@ -349,7 +365,7 @@ const MobileThemePopover = () => (
     </PopoverTrigger>
     <PopoverContent
       align="start"
-      className="z-[calc(var(--above-grainy-overlay-z-index)_+_50)] w-40 rounded-md border border-outline-secondary bg-bg-default p-2 shadow-none"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_50)] w-40 rounded-lg border border-outline-secondary bg-bg-default p-1 shadow-none"
       sideOffset={8}
     >
       <MobileThemeOptions />

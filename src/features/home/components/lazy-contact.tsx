@@ -55,15 +55,15 @@ const ContactFallback = () => (
 
     <div className="mt-8 space-y-4">
       <div>
-        <div className="mb-2 h-4 w-28 rounded bg-bg-secondary" />
-        <div className="h-9 w-full rounded-md border bg-bg-default-alt opacity-80" />
+        <div className="mb-2 h-4 w-28 rounded-xs bg-bg-secondary" />
+        <div className="h-9 w-full rounded-sm border bg-bg-default-alt opacity-80" />
       </div>
       <div>
-        <div className="mb-2 h-4 w-24 rounded bg-bg-secondary" />
-        <div className="min-h-24 w-full rounded-md border bg-bg-default-alt opacity-80" />
+        <div className="mb-2 h-4 w-24 rounded-xs bg-bg-secondary" />
+        <div className="min-h-24 w-full rounded-sm border bg-bg-default-alt opacity-80" />
       </div>
       <div className="flex w-full justify-end pt-4">
-        <div className="h-9 w-20 rounded-md bg-bg-inverse opacity-80" />
+        <div className="h-9 w-20 rounded-sm bg-bg-inverse opacity-80" />
       </div>
     </div>
   </div>

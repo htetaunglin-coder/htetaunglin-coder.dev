@@ -25,8 +25,8 @@ const inputStyles = tv({
       "-translate-y-1/2 absolute top-1/2 right-3.5 transform [&>svg]:size-5 [&>svg]:text-fg-tertiary",
     base: [
       "peer",
-      "flex h-10 w-full bg-bg-default-alt px-3 py-2 text-sm",
-      "placeholder:text-fg-tertiary",
+      "flex w-full bg-bg-default-alt px-3 py-2",
+      "placeholder:text-fg-tertiary/80",
       "transition duration-300 file:border-0 file:bg-bg-default-alt file:font-medium file:text-sm",
     ],
     label: [
@@ -37,7 +37,7 @@ const inputStyles = tv({
     variant: {
       default: {
         base: [
-          "rounded-md border",
+          "rounded-sm border",
           "focus-visible:border-outline-brand",
           "focus-visible:outline-none",
           "focus-visible:ring-2",
@@ -51,7 +51,7 @@ const inputStyles = tv({
       },
       danger: {
         base: [
-          "rounded-md border border-outline-danger",
+          "rounded-sm border border-outline-danger",
           "focus-visible:border-outline-danger",
           "focus-visible:outline-none",
           "focus-visible:ring-2",
@@ -60,6 +60,12 @@ const inputStyles = tv({
           "focus-visible:ring-offset-bg-default",
         ],
       },
+    },
+    // The label is left alone: at scale-75 it is already the smallest text in
+    // the field, and following the input down makes it unreadable.
+    size: {
+      sm: { base: "h-9 text-xs" },
+      md: { base: "h-10 text-sm" },
     },
     disabled: {
       true: {
@@ -90,6 +96,7 @@ const inputStyles = tv({
   ],
   defaultVariants: {
     variant: "default",
+    size: "md",
   },
 });
 
@@ -100,8 +107,9 @@ export { inputStyles };
 
 /* -------------------------------------------------------------------------- */
 
+// Omitting the native `size` attribute, which collides with the variant.
 type InputBaseProps = ComponentSlots<InputSlots> &
-  React.ComponentPropsWithRef<"input"> & {
+  Omit<React.ComponentPropsWithRef<"input">, "size"> & {
     startIcon?: React.ReactNode;
     endIcon?: React.ReactNode;
     label?: React.ReactNode;
@@ -112,6 +120,7 @@ export type InputProps = InputBaseProps &
 
 const Input = ({
   variant,
+  size,
   className,
   classNames,
   type,
@@ -130,6 +139,7 @@ const Input = ({
     label: labelStyles,
   } = inputStyles({
     variant,
+    size,
     disabled,
     startIcon: !!startIcon,
     endIcon: !!endIcon,

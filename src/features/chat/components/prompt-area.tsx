@@ -140,7 +140,7 @@ const PromptArea = ({
       >
         {agentSelector && <div className="min-w-0">{agentSelector}</div>}
         <Button
-          className="shrink-0 gap-1.5 rounded-lg rounded-br-xl"
+          className="shrink-0 gap-1.5 rounded-lg rounded-br-lg"
           disabled={isSubmitDisabled}
           iconOnly
           onClick={() => status === "streaming" && stop()}

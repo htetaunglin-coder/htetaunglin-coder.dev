@@ -14,7 +14,7 @@ const YoutubeIframe = ({
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
       className={cn(
-        "mt-2 mb-8 aspect-video size-full max-w-3xl rounded-md border-0 bg-bg-tertiary outline-none"
+        "mt-2 mb-8 aspect-video size-full max-w-3xl rounded-sm border-0 bg-bg-tertiary outline-none"
       )}
       referrerPolicy="strict-origin-when-cross-origin"
       src={`https://www.youtube.com/embed/${videoId}`}

@@ -4,7 +4,7 @@ import type { ComponentSlots } from "./types";
 
 const textareaStyles = tv({
   slots: {
-    base: "flex min-h-32 w-full rounded-md border bg-bg-default-alt px-3 py-2 text-sm outline-none transition duration-300 placeholder:text-fg-tertiary focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default disabled:cursor-not-allowed disabled:opacity-50",
+    base: "flex min-h-32 w-full rounded-sm border bg-bg-default-alt px-3 py-2 text-sm outline-none transition duration-300 placeholder:text-fg-tertiary/80 focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default disabled:cursor-not-allowed disabled:opacity-50",
   },
 });
 

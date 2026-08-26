@@ -71,6 +71,6 @@ const ContributionsFallback = () => (
     <h2 className="font-black font-doto text-2xl text-fg-default tracking-tight dark:font-extrabold">
       Contributions
     </h2>
-    <div className="mt-4 h-[162px] w-full rounded-md border-b border-b-outline-secondary bg-bg-secondary/40 pb-6 sm:mt-8" />
+    <div className="mt-4 h-[162px] w-full rounded-sm border-b border-b-outline-secondary bg-bg-secondary/40 pb-6 sm:mt-8" />
   </div>
 );

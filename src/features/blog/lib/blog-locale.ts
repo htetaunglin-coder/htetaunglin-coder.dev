@@ -3,10 +3,8 @@ import { type BlogPost, blogSource } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 
 /**
- * BCP-47 tags for `Intl`, which are not the content locale: `"en"` resolves to
- * en-US, while this site has always formatted English dates as en-GB
- * (`26 July 2026`, not `July 26, 2026`). `"my"` needs no such correction — it
- * already yields the locale's own numbering system, and so Burmese digits.
+ * BCP-47 tags for `Intl`, not content locales: `"en"` would resolve to en-US,
+ * and this site formats English dates as en-GB.
  */
 export const DATE_LOCALES: Record<Locale, string> = {
   en: "en-GB",
@@ -14,9 +12,8 @@ export const DATE_LOCALES: Record<Locale, string> = {
 };
 
 /**
- * Burmese has to override every Latin face the design pins, because none of
- * them carries Myanmar glyphs: text set in them falls through to whatever the
- * OS provides, which on some machines is empty boxes.
+ * No Latin face the design pins carries Myanmar glyphs, so Burmese text set in
+ * one falls through to whatever the OS has — on some machines, empty boxes.
  */
 export const myanmarFontClass = (locale: Locale): string | undefined =>
   locale === "my" ? "font-noto-sans-myanmar" : undefined;
@@ -25,19 +22,13 @@ export const myanmarFontClass = (locale: Locale): string | undefined =>
 export const localeBlogPath = (locale: Locale): string =>
   locale === "en" ? "/blog" : `/${locale}/blog`;
 
-/**
- * The `hreflang` set shared by both blog indexes. Unconditional, unlike a
- * post's: both indexes always exist, so this pair can never be half-present.
- */
+/** Unconditional, unlike a post's: both indexes always exist. */
 export const BLOG_INDEX_ALTERNATES = alternates("/blog", "/my/blog");
 
 /**
- * The `hreflang` set for a post, from its slug alone, or `undefined` unless
- * both languages exist.
- *
- * Deliberately blind to which language is being rendered: it asks the loader
- * for both and lets the answer decide, so the two ends of a pair emit the
- * identical set by construction rather than by two call sites agreeing.
+ * The `hreflang` set for a post, or `undefined` unless both languages exist.
+ * Blind to which one is rendering, so the two ends of a pair emit the identical
+ * set by construction. See `agent_docs/i18n-burmese-english.md`.
  */
 export const postAlternates = (
   slugs: string[]
@@ -48,15 +39,7 @@ export const postAlternates = (
   return en && my ? alternates(en, my) : undefined;
 };
 
-/**
- * Each language names the other *and* itself, because a crawler only trusts a
- * cluster whose members agree. `x-default` goes to English as the site's
- * default locale — not a claim that English is the real version, only where an
- * unmatched reader should land.
- *
- * Orthogonal to `canonical`, which always points at the page itself: alternates
- * group the pair, the canonical keeps them two results.
- */
+/** Each language names the other *and* itself: a crawler only trusts a cluster whose members agree. */
 function alternates(
   en: string,
   my: string
@@ -69,13 +52,8 @@ function alternates(
 }
 
 /**
- * A draft renders `noindex` and is held out of the indexes, the sitemap and the
- * search index. An `hreflang` is an advertisement to a crawler, so a draft
- * belongs in no cluster at either end — one missing side drops the whole set,
- * since a half-declared cluster is never reciprocated anyway.
- *
- * Narrower than the test `LanguageSwitch` uses on purpose: a draft translation
- * is still worth linking to for a reader looking straight at it.
+ * Narrower than the test `LanguageSwitch` uses on purpose: a draft belongs in no
+ * `hreflang` cluster, but is still worth linking to for a reader looking at it.
  */
 const indexablePostPath = (post: BlogPost): string | undefined =>
   post && !post.data.draft ? post.url : undefined;

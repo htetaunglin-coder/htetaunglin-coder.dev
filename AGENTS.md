@@ -48,13 +48,14 @@ Longer process: `agent_docs/implementation-playbook.md`.
 - `prefer`: colocate first — promote to `src/hooks`, `src/lib`, or `src/components/ui` only on real reuse across 3+ features.
 - `must not`: cross-feature imports (`features/a` reaching into `features/b`). Extract upward instead.
 - `must`: kebab-case files, PascalCase components, `use-x.ts` hooks, no barrel `index.ts`.
-- `must`: file order — imports → types → main export → secondary exports → private helpers → constants.
+- `must`: file order — imports → types → constants → main export → secondary exports → private helpers.
 
 Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 
 ### UI
 
 - `must`: Tailwind v4 — theme tokens live in `@theme` in `src/styles/globals.css`, not a `tailwind.config`. Prefer the semantic tokens (`fg-default`, `bg-default`, `fg-brand`, …) over raw values. Compose with `cn()` from `src/lib/utils.ts`.
+- `must not`: hoist a Tailwind class string into a named constant just to reuse it — repetition never justifies it, not at 4–5+ call sites either. Repeating markup becomes a small component with its classes inline (see `Swatch` in `banner-showcase.tsx`); a class-string constant earns its place only when the name itself makes the code clearer, which is rare.
 - `must`: `src/components/ui` is hand-maintained Radix wrappers in shadcn style. There is no `components.json`, so `npx shadcn add` is not wired up — write the file to match its neighbours.
 - `must`: images go through `cloudinary-image.tsx` or `ui/theme-image.tsx` with explicit responsive `sizes`.
 - `must`: support light and dark. For theme-dependent client UI, read `resolvedTheme` and render `null` until mounted (`src/components/comment.tsx`).
@@ -78,12 +79,11 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 ### Content
 
 - `must`: blog posts are MDX in `content/blog/<locale>/` — `en` and `my`, both live — and must satisfy the frontmatter schema in `source.config.ts` — `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series`. A malformed field fails the build. A post in any other directory is silently dropped, so the loader throws instead; see `agent_docs/i18n-burmese-english.md`.
-- `must not`: inline the banner spec back into `banner-prompt-spec.mdx`. It is fetched at build time from a public Gist so readers can fork it, and that Gist is the source of truth; see `agent_docs/project-map.md`.
 - `must not`: touch `JOB_SEARCH.md`, `__ONLY_ME__/`, or `resume/` unless asked.
 
 ### Style
 
-- `must`: prefer readable, self-documenting code—clear domain names and straightforward structure—over comments that narrate mechanics. When code is unclear, improve it first; use comments for context the code cannot express clearly, such as rationale, constraints, invariants, tradeoffs, workarounds, or surprising behavior. Do not restate the next line or signature, and keep comments current.
+- `must`: make the code say it — rename, extract, restructure — before reaching for a comment. When one is still needed, keep it to a line or two carrying only what the code cannot: the trap that reads as tidying, the measured constraint, the decision that looks like a mistake. The test is deletion — cut the comment, and a competent reader makes a wrong change. A docblock restating a signature, prose narrating the classes on the next line, or a paragraph of design rationale is doc rot in waiting; the rationale belongs in `agent_docs/`, where it is maintained.
 - `must`: pushback over flattery — cite the code or the convention, not vibes. When the user is right, say so briefly and move on.
 
 ## Git
@@ -103,6 +103,8 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 - `agent_docs/context-engineering-principles.md` — why this doc set is shaped the way it is
 - `agent_docs/i18n-burmese-english.md` — the shipped `en`/`my` blog i18n. **Read before touching Burmese routes, blog metadata, or `content/blog/`** — it records three traps and several deliberate behaviours that read as bugs
 - `agent_docs/research-i18n-fumadocs.md`, `agent_docs/research-i18n-typography.md` — cited research behind the above, kept as historical record
+- `agent_docs/banner-prompt-builder.md` — the banner prompt builder's file layout, its ID-union contract, and the measured sizing constraints that used to live in code comments
+- `agent_docs/research-prompt-builder-ux.md` — cited UX research behind the banner prompt builder's shape: progressive disclosure, defaults, in-article widgets, and a measured WCAG 1.4.11 failure in the option cards
 
 ## Agent skills
 
