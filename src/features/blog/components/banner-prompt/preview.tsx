@@ -217,6 +217,7 @@ function PreviewFrame({
               letterSpacing: "-0.02em",
               lineHeight: 1.14,
               margin: 0,
+              textAlign: answers.layoutId === "L2" ? "right" : "left",
             }}
           >
             {headlineParts(answers).map((part) => (
