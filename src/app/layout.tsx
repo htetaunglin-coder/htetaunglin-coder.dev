@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import { MotionConfig } from "motion/react";
 import type { Metadata, Viewport } from "next";
 import GrainyOverlay from "@/components/decorations/grainy-overlay";
@@ -103,6 +104,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Toaster expand={true} />
             <MotionConfig reducedMotion="user">{children}</MotionConfig>
             <GrainyOverlay />
+            <Analytics />
           </TooltipProvider>
         </ThemeProvider>
       </body>

@@ -48,6 +48,10 @@ Longer process: `agent_docs/implementation-playbook.md`.
 - `prefer`: colocate first — promote to `src/hooks`, `src/lib`, or `src/components/ui` only on real reuse across 3+ features.
 - `must not`: cross-feature imports (`features/a` reaching into `features/b`). Extract upward instead.
 - `must`: kebab-case files, PascalCase components, `use-x.ts` hooks, no barrel `index.ts`.
+  Exception: a file whose name is a third-party convention keeps the vendor's spelling,
+  so their docs and wizards still line up — e.g. `sentry.server.config.ts`. Framework-
+  mandated names (`instrumentation.ts`, `instrumentation-client.ts`) are not negotiable
+  either; renaming them silently stops them loading.
 - `must`: file order — imports → types → constants → main export → secondary exports → private helpers.
 
 Layer ownership and import boundaries: `agent_docs/code-organization.md`.
