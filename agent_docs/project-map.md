@@ -23,6 +23,7 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
     - Name pronunciation sound initializes `AudioContext` only after user interaction to satisfy autoplay policies
     - Entrance reveals use the Motion wrappers in `src/components/animations/fade-animation.tsx`; hero text starts at non-zero opacity so desktop LCP still resolves, and below-the-fold contact code loads near viewport via `src/features/home/components/lazy-contact.tsx`
     - Selected project imagery passes explicit responsive `sizes` through `src/components/ui/theme-image.tsx` to avoid oversized Cloudinary downloads
+  - Line animation preview: `src/app/(app)/(main)/line-animation/page.tsx` — unlinked, `noindex` preview of the main-text-coloured line reveal
   - Projects list/detail: `src/app/(app)/(main)/projects/page.tsx`, `src/app/(app)/(main)/projects/[id]/page.tsx`
     - Project content is static data in `src/features/projects/data.ts`; detail pages are SSG via `generateStaticParams`
     - Year filtering via query param: `year=all|before-2025|2025|2026`
@@ -59,6 +60,31 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
   `GroqChatModelId` union still lists the dead IDs and falls back to
   `string & {}`, so a decommissioned model is a runtime 404, never a type error.
   Verify against `GET https://api.groq.com/openai/v1/models` before changing it.
+
+- Web analytics: `@vercel/analytics` — `<Analytics />` in `src/app/layout.tsx`
+  - Hobby plan: 50,000 pageview events/month, 1-month reporting window, and **no custom
+    events** (Pro-only). Pageviews only, by design — this is a portfolio, not a product.
+  - Collects on Vercel deployments only; it no-ops in local dev.
+
+- Error tracking: `@sentry/nextjs` — `src/instrumentation-client.ts` (browser),
+  `src/sentry.server.config.ts` (Node), registered by `src/instrumentation.ts`, and
+  `next.config.mjs` wrapped in `withSentryConfig`
+  - **Errors only.** `tracesSampleRate` and both replay rates are `0`; tracing and replay
+    are what burn the 5,000-errors/month free tier.
+  - No `sentry.edge.config.ts` — this app has no edge runtime and no middleware.
+  - `sentry.server.config.ts` keeps Sentry's dotted filename on purpose (see the naming
+    exception in `CLAUDE.md`). Nothing auto-detects it — `instrumentation.ts` imports it by
+    path — but matching the vendor docs beats matching local kebab-case here.
+  - No-ops when `NEXT_PUBLIC_SENTRY_DSN` is unset, so forks build without a Sentry account.
+  - `import-in-the-middle` and `require-in-the-middle` are direct dependencies on purpose.
+    pnpm's layout leaves Sentry's OpenTelemetry transitive deps unresolvable from the
+    project root, which Turbopack warns about and which can fail at runtime on Vercel.
+  - Source maps upload only when `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, and `SENTRY_PROJECT`
+    are present at build time; without them production stack traces stay minified.
+  - `src/app/api/sentry-check/route.ts` throws on purpose to verify the pipeline end to end.
+    It is gated by `CRON_SECRET` (same pattern as the KV keepalive route) because an open
+    error route lets crawlers burn the 5,000-errors/month free tier. Locally it returns 500
+    without reporting, since the DSN is deliberately absent outside Vercel.
 
 - Route execution and limits: `src/app/(chat)/api/chat/route.ts`
   - Provider: Groq (`@ai-sdk/groq`), streamed through the AI SDK UI message stream
