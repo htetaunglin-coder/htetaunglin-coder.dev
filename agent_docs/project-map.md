@@ -48,14 +48,26 @@ Architecture and route map for `htetaunglin-coder.dev`. Verified against the cod
   - Also exports a `gemini` provider (`@ai-sdk/google`) that the chat route does **not** currently use; `GOOGLE_GENERATIVE_AI_API_KEY` is not in `.env.example`
 - Agent roster (single source of truth): `src/features/chat/lib/agents.ts`
 
-  | id | model | daily limit | cooldown |
-  | --- | --- | --- | --- |
-  | `fast` (default) | `llama-3.1-8b-instant` | 10 | 3s |
-  | `balanced` | `openai/gpt-oss-20b` | 6 | 18s |
-  | `deep` | `llama-3.3-70b-versatile` | 3 | 43s |
+  | id | model | reasoning effort | daily limit | cooldown |
+  | --- | --- | --- | --- | --- |
+  | `fast` (default) | `openai/gpt-oss-20b` | low | 10 | 3s |
+  | `balanced` | `openai/gpt-oss-120b` | low | 6 | 18s |
+  | `deep` | `openai/gpt-oss-120b` | medium | 3 | 43s |
+
+  Groq decommissioned every Llama model in 2026; the roster moved to `gpt-oss`
+  (open-weight, so Groq serves it on the free plan). `@ai-sdk/groq`'s
+  `GroqChatModelId` union still lists the dead IDs and falls back to
+  `string & {}`, so a decommissioned model is a runtime 404, never a type error.
+  Verify against `GET https://api.groq.com/openai/v1/models` before changing it.
 
 - Route execution and limits: `src/app/(chat)/api/chat/route.ts`
   - Provider: Groq (`@ai-sdk/groq`), streamed through the AI SDK UI message stream
+  - `providerOptions.groq.reasoningFormat: "hidden"` — `gpt-oss` always reasons, and
+    `message.tsx` renders only `text` parts, so reasoning is suppressed at the source
+  - Stream errors are returned as a `{ error }` JSON envelope, matching
+    `createErrorResponse`, so the client never renders raw provider text
+  - Groq free plan ceiling: 1,000 requests/day and 200,000 tokens/day, shared
+    across agents; the ~1,240-token system prompt makes tokens the real limit
   - Global per-IP cap of 10 messages/day **on top of** the per-agent daily limit above
   - Per-agent, per-IP cooldown stored in KV between requests
   - Max user message length: 200 chars
