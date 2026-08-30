@@ -207,6 +207,12 @@ export async function POST(req: Request) {
           model: groq(selectedAgent.model),
           system: `${systemPrompt}\n\nAgent mode: ${selectedAgent.instruction}`,
           messages: modelMessages,
+          providerOptions: {
+            groq: {
+              reasoningFormat: "hidden",
+              reasoningEffort: selectedAgent.reasoningEffort,
+            },
+          },
           experimental_telemetry: {
             isEnabled: false,
           },
@@ -237,25 +243,12 @@ export async function POST(req: Request) {
 
         result.consumeStream();
 
-        dataStream.merge(result.toUIMessageStream());
+        dataStream.merge(
+          result.toUIMessageStream({ onError: toClientSafeErrorPayload })
+        );
       },
 
-      onError: (error) => {
-        if (error instanceof Error) {
-          if (error.message.includes("Rate limit")) {
-            return "The AI service is experiencing high demand. Please try again in a moment.";
-          }
-          if (error.message.includes("timeout")) {
-            return "The request took too long. Please try again with a shorter message.";
-          }
-          if (error.message.includes("context")) {
-            return "Your conversation is too long. Please start a new chat.";
-          }
-        }
-
-        console.error("Stream error:", error);
-        return "Something went wrong while processing your message. Please try again.";
-      },
+      onError: toClientSafeErrorPayload,
     });
 
     return new Response(stream.pipeThrough(new JsonToSseTransformStream()));
@@ -284,4 +277,26 @@ function createErrorResponse(message: string, status: number) {
     },
     { status }
   );
+}
+
+function toClientSafeErrorPayload(error: unknown) {
+  console.error("Stream error:", error);
+
+  return JSON.stringify({ error: toClientSafeMessage(error) });
+}
+
+function toClientSafeMessage(error: unknown) {
+  if (error instanceof Error) {
+    if (error.message.includes("Rate limit")) {
+      return "The AI service is experiencing high demand. Please try again in a moment.";
+    }
+    if (error.message.includes("timeout")) {
+      return "The request took too long. Please try again with a shorter message.";
+    }
+    if (error.message.includes("context")) {
+      return "Your conversation is too long. Please start a new chat.";
+    }
+  }
+
+  return "Something went wrong while processing your message. Please try again.";
 }

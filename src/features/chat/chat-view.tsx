@@ -47,16 +47,7 @@ const ChatView = () => {
   const { sendMessage, messages, status, stop } = useChat({
     transport,
     onError: (error) => {
-      let errorMessage = "An error occurred, please try again later.";
-
-      try {
-        const parsed = JSON.parse(error.message);
-        errorMessage = parsed.error || errorMessage;
-      } catch {
-        errorMessage = error.message || errorMessage;
-      }
-
-      toast.error(errorMessage, {
+      toast.error(readServerErrorMessage(error), {
         richColors: true,
       });
     },
@@ -159,3 +150,17 @@ const ChatView = () => {
 };
 
 export { ChatView };
+
+function readServerErrorMessage(error: Error) {
+  try {
+    const payload = JSON.parse(error.message);
+
+    if (typeof payload?.error === "string") {
+      return payload.error;
+    }
+  } catch {
+    console.error("Chat error:", error);
+  }
+
+  return "An error occurred, please try again later.";
+}

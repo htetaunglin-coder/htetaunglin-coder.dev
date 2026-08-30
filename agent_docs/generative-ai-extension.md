@@ -55,9 +55,13 @@ This project already includes portfolio chat. This guide defines how to extend A
 - Source of truth:
   - `src/features/chat/lib/agents.ts`
 - Current agent mapping:
-  - `fast` -> `llama-3.1-8b-instant` (default)
-  - `balanced` -> `openai/gpt-oss-20b`
-  - `deep` -> `llama-3.3-70b-versatile`
+  - `fast` -> `openai/gpt-oss-20b`, reasoning effort `low` (default)
+  - `balanced` -> `openai/gpt-oss-120b`, reasoning effort `low`
+  - `deep` -> `openai/gpt-oss-120b`, reasoning effort `medium`
+  - `gpt-oss` rejects reasoning effort `none`; only `low`/`medium`/`high` are valid.
+    `high` can spend the whole budget reasoning and return empty content.
+  - The 120B is mixture-of-experts (117B total, 5.1B active), so it costs little
+    latency over the 20B and carries the same free-plan limits.
 - Current anti-abuse policy:
   - global limit: 10 messages/day per IP
   - `fast`: 10/day, 5s cooldown

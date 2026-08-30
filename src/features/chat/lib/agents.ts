@@ -3,7 +3,8 @@ const chatAgents = [
     id: "fast",
     label: "Fast",
     description: "Best for quick portfolio Q&A",
-    model: "llama-3.1-8b-instant",
+    model: "openai/gpt-oss-20b",
+    reasoningEffort: "low",
     dailyLimit: 10,
     cooldownSeconds: 3,
     instruction:
@@ -13,7 +14,8 @@ const chatAgents = [
     id: "balanced",
     label: "Balanced",
     description: "Better depth with moderate latency",
-    model: "openai/gpt-oss-20b",
+    model: "openai/gpt-oss-120b",
+    reasoningEffort: "low",
     dailyLimit: 6,
     cooldownSeconds: 18,
     instruction:
@@ -23,7 +25,8 @@ const chatAgents = [
     id: "deep",
     label: "Deep",
     description: "More detailed answers for harder questions",
-    model: "llama-3.3-70b-versatile",
+    model: "openai/gpt-oss-120b",
+    reasoningEffort: "medium",
     dailyLimit: 3,
     cooldownSeconds: 43,
     instruction:
