@@ -1,5 +1,9 @@
-import { Contact, Lightbulb } from "lucide-react";
+import { Component, Contact, Lightbulb, Mountain, Wrench } from "lucide-react";
 import type { ComponentType } from "react";
+import {
+  DesignSystemIllustration,
+  SkillsIllustration,
+} from "@/components/decorations/workshop-illustrations";
 
 export type BaseLinkItem = {
   id: string;
@@ -59,22 +63,53 @@ export type OtherPageLinkItem = BaseLinkItem & {
   icon: ComponentType;
 };
 
+export type WorkshopItem = OtherPageLinkItem & {
+  soon?: boolean;
+  illustration: ComponentType<{ className?: string }>;
+};
+
 export type OtherPages = {
   links: OtherPageLinkItem[];
-  sideQuest: {
+  workshop: {
     title: string;
-    description: string;
+    items: readonly WorkshopItem[];
+  };
+  sideQuest: OtherPageLinkItem & {
     items: readonly SideQuestItem[];
-    href: string;
   };
 };
 
 export const OTHER_PAGES: Readonly<OtherPages> = {
+  workshop: {
+    title: "Workshop",
+    items: [
+      {
+        id: "skills",
+        title: "Skills",
+        description: "Claude Code skills I use daily, written down once.",
+        icon: Wrench,
+        href: "/skills",
+        illustration: SkillsIllustration,
+        soon: true,
+      },
+      {
+        id: "design-system",
+        title: "Design System",
+        description: "The one running this site. Rules and components to copy.",
+        icon: Component,
+        href: "/design-system",
+        illustration: DesignSystemIllustration,
+        soon: true,
+      },
+    ],
+  },
   sideQuest: {
+    id: "side-quests",
     title: "Side Quests",
     description: "Things I do outside of work.",
-    items: SIDE_QUESTS,
+    icon: Mountain,
     href: "/side-quests",
+    items: SIDE_QUESTS,
   },
   links: [
     {

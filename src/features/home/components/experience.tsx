@@ -27,7 +27,7 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
         company: "TalentOS (Full-Time)",
         companyLink: "https://www.linkedin.com/company/talent-os/",
         description:
-          "Working across the full stack. Creating UI designs and revamping landing pages, and building conversational AI-agent features with WhatsApp and Twilio integration.",
+          "Working across the full stack. Set up the AI development infrastructure the team codes against, built conversational AI-agent features with WhatsApp and Twilio, and revamped landing pages and product UI.",
       },
       {
         id: "event-2",
@@ -56,7 +56,7 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
       {
         id: "event-2",
         month: "Jan - Sep",
-        title: "Frontend Developer",
+        title: "Junior Frontend Developer",
         company: "Pico Innovation (Full-Time)",
         companyLink: "https://www.linkedin.com/company/picoinno/",
         description:
@@ -87,9 +87,9 @@ const TIMELINE_DATA: readonly TimelineItem[] = [
         id: "event-1",
         month: "Aug - Dec",
         title: "Frontend Developer",
-        company: "Upwork & Local Clients",
+        company: "Upwork (Freelance)",
         description:
-          "Took on small frontend projects to learn from client work. Worked on layouts, responsive design, and how people use interfaces.",
+          "Freelanced on Upwork building landing pages, working from Figma files to pixel-accurate, responsive implementations.",
       },
     ],
   },

@@ -9,17 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@radix-ui/react-dialog";
-import {
-  ChevronDown,
-  ChevronRight,
-  Menu,
-  Monitor,
-  Moon,
-  Sun,
-  X,
-} from "lucide-react";
+import { ChevronDown, Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import Link from "next/link";
 import { useTheme } from "next-themes";
 import { type RefObject, useEffect, useRef, useState } from "react";
 import {
@@ -31,7 +22,6 @@ import { PROFILE_LINKS } from "@/constants/social-links";
 import { DURATION, EASE, STAGGER } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { FadeStaggeredAnimation } from "./animations/fade-animation";
-import { CloudinaryImage } from "./cloudinary-image";
 import { AnimatedGradientText } from "./decorations/animated-gradient-text";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Button } from "./ui/button";
@@ -151,6 +141,33 @@ const HeaderAutoHideWrapper = ({
 
 /* -------------------------------------------------------------------------- */
 
+const AskAiLink = () => (
+  <NavLink
+    className="group relative flex w-full shrink-0 items-center justify-center rounded-full bg-bg-default px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-300 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f]"
+    href="/chat"
+  >
+    <span
+      className={cn(
+        "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-[length:300%_100%] bg-gradient-to-r from-[#ff8c00]/50 via-[#9c40ff]/50 to-[#7a1fff]/50 p-[1px]"
+      )}
+      style={{
+        WebkitMask:
+          "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+        WebkitMaskComposite: "destination-out",
+        mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+        maskComposite: "subtract",
+        WebkitClipPath: "padding-box",
+      }}
+    />
+    <span className="mr-1.5 text-sm opacity-70 dark:opacity-100">💭</span>
+    <AnimatedGradientText className="font-medium text-sm">
+      Ask AI about Me
+    </AnimatedGradientText>
+  </NavLink>
+);
+
+/* -------------------------------------------------------------------------- */
+
 const MorePages = () => (
   <>
     <PopoverTrigger asChild>
@@ -162,44 +179,34 @@ const MorePages = () => (
         <ChevronDown className="transition duration-300 group-data-[state=open]:rotate-180" />
       </button>
     </PopoverTrigger>
-    {/* Radius steps down with nesting depth: 20 shell - 8 padding = the 12 on
-        every card inside, and those step to 8 for thumbnails and icon tiles. */}
+
     <PopoverContent
       align="center"
-      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden h-64 w-full gap-2 rounded-2xl bg-bg-secondary/80 p-2 backdrop-blur-[3px] sm:flex"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden w-full gap-2 rounded-2xl bg-bg-secondary/80 p-2 backdrop-blur-[3px] sm:flex"
     >
-      {/* ------------------------------- Side Quest ------------------------------- */}
-      <div className="flex size-full w-sm flex-col gap-3 rounded-lg bg-bg-default p-3 md:w-md">
-        <div>
-          <p className="font-medium text-base text-fg-secondary hover:underline">
-            <Link href={OTHER_PAGES.sideQuest.href}>
-              {OTHER_PAGES.sideQuest.title}
-            </Link>
-          </p>
-          <p className="text-fg-tertiary text-sm">
-            {OTHER_PAGES.sideQuest.description}
-          </p>
-        </div>
+      {/* -------------------------------- Workshop -------------------------------- */}
+      <div className="flex w-sm flex-col gap-3 rounded-lg bg-bg-default p-3.5 md:w-112">
+        <p className="font-medium text-base text-fg-secondary">
+          {OTHER_PAGES.workshop.title}
+        </p>
 
-        <div className="flex size-full gap-2">
-          {OTHER_PAGES.sideQuest.items.map((item) => (
+        <div className="flex flex-1 gap-2.5">
+          {OTHER_PAGES.workshop.items.map((item) => (
             <NavLink
-              className="group/header-link relative aspect-[14/16] w-full overflow-hidden rounded-md"
+              className="group/header-link relative flex min-h-44 flex-1 flex-col overflow-hidden rounded-md bg-bg-default-alt p-4 transition-colors duration-300"
               href={item.href}
               key={item.id}
             >
-              <div className="absolute inset-0 z-10 rounded-[inherit] bg-gradient-to-b from-neutral-900/5 to-neutral-900/65 opacity-100 transition-opacity duration-300 group-hover/header-link:opacity-65 dark:from-neutral-900/35 dark:to-neutral-900/80" />
-              <CloudinaryImage
-                alt={item.alt}
-                aspectRatio={"14:16"}
-                className="object-cover object-top transition-transform duration-300 group-hover/header-link:scale-110"
-                height={156}
-                src={item.image}
-                width={140}
-              />
-              <div className="absolute inset-x-0 bottom-0 z-20 w-full px-3 py-2">
-                <p className="font-medium text-sm text-zinc-200 group-hover/header-link:underline">
-                  {item.title}
+              <item.illustration className="pointer-events-none absolute inset-0 h-full w-full text-fg-tertiary opacity-70 transition-opacity duration-300 group-hover/header-link:opacity-95 dark:opacity-60 dark:group-hover/header-link:opacity-90" />
+
+              <div className="relative flex flex-1 flex-col gap-1.5">
+                <div className="flex items-center gap-2">
+                  <p className="font-medium text-fg-default text-sm group-hover/header-link:underline">
+                    {item.title}
+                  </p>
+                </div>
+                <p className="text-fg-tertiary text-xs leading-relaxed">
+                  {item.description}
                 </p>
               </div>
             </NavLink>
@@ -208,53 +215,31 @@ const MorePages = () => (
       </div>
 
       {/* ---------------------------------- Links --------------------------------- */}
-      <div className="flex size-full max-w-52 flex-col justify-between gap-2 md:max-w-64">
-        <div className="flex w-full justify-end">
-          <ThemeSwitcher className="border border-outline-secondary" />
-        </div>
+      <div className="flex w-full max-w-52 flex-col gap-2 md:max-w-60">
+        <ThemeSwitcher className="self-end border border-outline-secondary" />
 
-        <div className="flex w-full flex-col gap-2">
-          <NavLink
-            className="group relative flex w-full items-center justify-center rounded-full bg-bg-default px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-300 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f]"
-            href="/chat"
-          >
-            <span
-              className={cn(
-                "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-[length:300%_100%] bg-gradient-to-r from-[#ff8c00]/50 via-[#9c40ff]/50 to-[#7a1fff]/50 p-[1px]"
-              )}
-              style={{
-                WebkitMask:
-                  "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                WebkitMaskComposite: "destination-out",
-                mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                maskComposite: "subtract",
-                WebkitClipPath: "padding-box",
-              }}
-            />
-            <span className="mr-1.5 opacity-70 dark:opacity-100">💭</span>
-            <AnimatedGradientText className="font-medium text-sm">
-              Ask AI about Me
-            </AnimatedGradientText>
-            <ChevronRight className="ml-1.5 size-4 stroke-neutral-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-          </NavLink>
+        <AskAiLink />
 
-          {OTHER_PAGES.links.map((link) => (
+        {/* Rows split the leftover height evenly, so the card stays level with
+            the Workshop card whatever the tile copy does to it. */}
+        <div className="flex flex-1 flex-col rounded-lg bg-bg-default p-1.5">
+          {[...OTHER_PAGES.links, OTHER_PAGES.sideQuest].map((link) => (
             <NavLink
-              className="group/header-link flex w-full items-center justify-center space-y-1 rounded-lg bg-bg-default p-3 lg:min-w-60"
+              className="group/header-link flex flex-1 items-center gap-2 rounded-md px-2 outline-none transition-colors duration-300 hover:bg-bg-default-alt focus-visible:ring-2 focus-visible:ring-outline-brand"
               href={link.href}
               key={link.id}
             >
-              <div className="flex w-full items-center gap-2">
-                <div className="flex size-10 items-center justify-center rounded-md bg-bg-secondary text-base text-fg-tertiary">
-                  <link.icon />
-                </div>
-                <div>
-                  <p className="font-medium text-fg-default text-sm group-hover/header-link:underline">
-                    {link.title}
-                  </p>
-                  <p className="text-fg-tertiary text-xs">{link.description}</p>
-                </div>
-              </div>
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-bg-default-alt text-fg-tertiary transition-colors duration-300 group-hover/header-link:bg-bg-accent">
+                <link.icon />
+              </span>
+              <span>
+                <span className="block font-medium text-[0.8125rem] text-fg-default group-hover/header-link:underline">
+                  {link.title}
+                </span>
+                <span className="block text-fg-tertiary/80 text-xs">
+                  {link.description}
+                </span>
+              </span>
             </NavLink>
           ))}
         </div>
@@ -276,10 +261,10 @@ const MobileMenu = () => (
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in" />
-      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] flex flex-col overflow-y-scroll bg-bg-default transition duration-300 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
+      <DialogContent className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-[calc(var(--above-grainy-overlay-z-index)_+_10)] flex flex-col overflow-y-auto overscroll-contain bg-bg-default transition duration-300 ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in">
         <DialogTitle className="sr-only">Menu</DialogTitle>
 
-        <div className="sticky top-0 flex h-16 w-full shrink-0 items-center bg-bg-default px-8 py-6">
+        <div className="sticky top-0 flex w-full shrink-0 items-center bg-bg-default px-8 py-6">
           <div className="flex w-full items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <MobileThemePopover />
@@ -308,13 +293,16 @@ const MobileMenu = () => (
           </div>
         </div>
 
-        <nav className="flex h-full flex-col justify-center gap-6">
-          <ul className="flex flex-col justify-center gap-12 overflow-y-auto p-8 text-start">
+        <nav className="flex flex-1 flex-col justify-center">
+          <ul className="flex flex-col gap-10 p-8 text-start">
             <MobileNavItems items={[...MAIN_PAGES]} title="Main Pages" />
-            <MobileNavItems items={OTHER_PAGES.links} title="Other Pages" />
             <MobileNavItems
-              items={[...OTHER_PAGES.sideQuest.items]}
-              title={OTHER_PAGES.sideQuest.title}
+              items={[...OTHER_PAGES.workshop.items]}
+              title={OTHER_PAGES.workshop.title}
+            />
+            <MobileNavItems
+              items={[...OTHER_PAGES.links, OTHER_PAGES.sideQuest]}
+              title="Other Pages"
             />
           </ul>
         </nav>

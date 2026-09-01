@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { DotGrid } from "@/components/decorations/dot-grid";
 import { cn } from "@/lib/utils";
 
 /* pixloader — brew loader. Pixel-art coffee mug with animated rising steam,
@@ -150,12 +151,6 @@ const PixelCoffee = ({ size = 120 }: PixelCoffeeProps) => {
   );
 };
 
-const DOT_MASK =
-  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='27' fill='none'><path fill='black' d='M20 0h2v.993h-2V0ZM10 0h2v.993h-2V0ZM0 0h2v.993H0V0Zm20 8.993h2v1h-2v-1Zm-10 0h2v1h-2v-1Zm-10 0h2v1H0v-1Zm20 9h2v1h-2v-1Zm-10 0h2v1h-2v-1Zm-10 0h2v1H0v-1Z'/></svg>\")";
-
-const DOT_FADE =
-  "radial-gradient(circle at 50% 46%, black 34%, transparent 74%)";
-
 type WorkWithMeIllustrationProps = { className?: string };
 
 const WorkWithMeIllustration = ({ className }: WorkWithMeIllustrationProps) => (
@@ -165,24 +160,7 @@ const WorkWithMeIllustration = ({ className }: WorkWithMeIllustrationProps) => (
       className
     )}
   >
-    {/* dot grid, faded toward the edges so it reads as a tile, not a void */}
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0"
-      style={{ WebkitMaskImage: DOT_FADE, maskImage: DOT_FADE }}
-    >
-      <div
-        className="absolute inset-0 bg-fg-tertiary opacity-25 dark:opacity-15"
-        style={{
-          WebkitMaskImage: DOT_MASK,
-          WebkitMaskRepeat: "repeat",
-          WebkitMaskSize: "30px 27px",
-          maskImage: DOT_MASK,
-          maskRepeat: "repeat",
-          maskSize: "30px 27px",
-        }}
-      />
-    </div>
+    <DotGrid />
 
     <PixelCoffee size={150} />
     <span className="relative mt-4 font-inter text-[11px] text-fg-tertiary/70 tracking-wide">
