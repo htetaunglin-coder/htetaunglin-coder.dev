@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/react-dialog";
 import { ChevronDown, Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { type RefObject, useEffect, useRef, useState } from "react";
 import {
@@ -182,7 +183,7 @@ const MorePages = () => (
 
     <PopoverContent
       align="center"
-      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden w-full gap-2 rounded-2xl bg-bg-secondary/80 p-2 backdrop-blur-[3px] sm:flex"
+      className="z-[calc(var(--above-grainy-overlay-z-index)_+_10)] hidden w-full gap-2 rounded-2xl border-0 bg-bg-secondary/80 p-2 backdrop-blur-[3px] sm:flex"
     >
       {/* -------------------------------- Workshop -------------------------------- */}
       <div className="flex w-sm flex-col gap-3 rounded-lg bg-bg-default p-3.5 md:w-112">
@@ -193,19 +194,28 @@ const MorePages = () => (
         <div className="flex flex-1 gap-2.5">
           {OTHER_PAGES.workshop.items.map((item) => (
             <NavLink
-              className="group/header-link relative flex min-h-44 flex-1 flex-col overflow-hidden rounded-md bg-bg-default-alt p-4 transition-colors duration-300"
+              className="group/header-link relative flex min-h-44 flex-1 flex-col overflow-hidden rounded-md bg-bg-media/60 p-4 transition-colors duration-300"
               href={item.href}
               key={item.id}
             >
-              <item.illustration className="pointer-events-none absolute inset-0 h-full w-full text-fg-tertiary opacity-70 transition-opacity duration-300 group-hover/header-link:opacity-95 dark:opacity-60 dark:group-hover/header-link:opacity-90" />
+              <div className="-bottom-14 pointer-events-none absolute inset-x-0 top-0 rounded-[inherit]">
+                <Image
+                  alt={item.image.alt}
+                  className="rounded-[inherit] object-cover opacity-60 transition-opacity duration-300 group-hover/header-link:opacity-80"
+                  fill
+                  sizes="220px"
+                  src={item.image.src}
+                  style={{ objectPosition: item.image.position }}
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-35% from-bg-media/60 to-transparent" />
 
-              <div className="relative flex flex-1 flex-col gap-1.5">
-                <div className="flex items-center gap-2">
-                  <p className="font-medium text-fg-default text-sm group-hover/header-link:underline">
-                    {item.title}
-                  </p>
-                </div>
-                <p className="text-fg-tertiary text-xs leading-relaxed">
+              <div className="relative flex flex-1 flex-col gap-0.5 font-inter">
+                <p className="font-medium text-fg-media/95 text-sm group-hover/header-link:underline">
+                  {item.title}
+                </p>
+
+                <p className="text-fg-media/85 text-xs leading-snug">
                   {item.description}
                 </p>
               </div>

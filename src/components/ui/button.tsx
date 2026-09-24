@@ -28,6 +28,7 @@ const buttonStyles = tv({
         "text-fg-default hover:bg-bg-accent focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:bg-bg-accent/70",
       inverse:
         "bg-bg-inverse text-fg-inverse shadow-xs hover:bg-bg-inverse/80 focus-visible:ring-bg-outline-inverse active:bg-bg-inverse/70",
+      link: "text-fg-default underline underline-offset-4 hover:text-fg-brand focus-visible:ring-outline-brand focus-visible:ring-offset-2 active:text-fg-default/70",
     },
     size: {
       sm: "h-8 rounded-sm px-3",

@@ -42,24 +42,23 @@ Longer process: `agent_docs/implementation-playbook.md`.
 
 ## Rules
 
+### Frontend code
+
+- `must`: load the `frontend-standards` skill before writing or reviewing React, Next.js, TypeScript, or Tailwind code. It owns code shape — colocation, file order, comments, magic literals, conditional rendering, Tailwind class composition. The rules below add only facts about this repo.
+
 ### Structure
 
-- `must`: pages are Server Components unless the file opens with `"use client"`. Keep `page.tsx` to metadata and composition; behavior lives in `src/features/<domain>`.
-- `prefer`: colocate first — promote to `src/hooks`, `src/lib`, or `src/components/ui` only on real reuse across 3+ features.
-- `must not`: cross-feature imports (`features/a` reaching into `features/b`). Extract upward instead.
 - `must`: kebab-case files, PascalCase components, `use-x.ts` hooks, no barrel `index.ts`.
   Exception: a file whose name is a third-party convention keeps the vendor's spelling,
   so their docs and wizards still line up — e.g. `sentry.server.config.ts`. Framework-
   mandated names (`instrumentation.ts`, `instrumentation-client.ts`) are not negotiable
   either; renaming them silently stops them loading.
-- `must`: file order — imports → types → constants → main export → secondary exports → private helpers.
 
-Layer ownership and import boundaries: `agent_docs/code-organization.md`.
+Which folders fill the skill's scopes, and the import aliases: `agent_docs/code-organization.md`.
 
 ### UI
 
-- `must`: Tailwind v4 — theme tokens live in `@theme` in `src/styles/globals.css`, not a `tailwind.config`. Prefer the semantic tokens (`fg-default`, `bg-default`, `fg-brand`, …) over raw values. Compose with `cn()` from `src/lib/utils.ts`.
-- `must not`: hoist a Tailwind class string into a named constant just to reuse it — repetition never justifies it, not at 4–5+ call sites either. Repeating markup becomes a small component with its classes inline (see `Swatch` in `banner-showcase.tsx`); a class-string constant earns its place only when the name itself makes the code clearer, which is rare.
+- `must`: Tailwind v4 — theme tokens live in `@theme` in `src/styles/globals.css`, not a `tailwind.config`. Prefer the semantic tokens (`fg-default`, `bg-default`, `fg-brand`, …) over raw values.
 - `must`: `src/components/ui` is hand-maintained Radix wrappers in shadcn style. There is no `components.json`, so `npx shadcn add` is not wired up — write the file to match its neighbours.
 - `must`: images go through `cloudinary-image.tsx` or `ui/theme-image.tsx` with explicit responsive `sizes`.
 - `must`: support light and dark. For theme-dependent client UI, read `resolvedTheme` and render `null` until mounted (`src/components/comment.tsx`).
@@ -85,9 +84,8 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 - `must`: blog posts are MDX in `content/blog/<locale>/` — `en` and `my`, both live — and must satisfy the frontmatter schema in `source.config.ts` — `title`, `description`, `author`, `date`, `image` (`url`, `author_name`, `author_link`), `series`. A malformed field fails the build. A post in any other directory is silently dropped, so the loader throws instead; see `agent_docs/i18n-burmese-english.md`.
 - `must not`: touch `JOB_SEARCH.md`, `__ONLY_ME__/`, or `resume/` unless asked.
 
-### Style
+### Conduct
 
-- `must`: make the code say it — rename, extract, restructure — before reaching for a comment. When one is still needed, keep it to a line or two carrying only what the code cannot: the trap that reads as tidying, the measured constraint, the decision that looks like a mistake. The test is deletion — cut the comment, and a competent reader makes a wrong change. A docblock restating a signature, prose narrating the classes on the next line, or a paragraph of design rationale is doc rot in waiting; the rationale belongs in `agent_docs/`, where it is maintained.
 - `must`: pushback over flattery — cite the code or the convention, not vibes. When the user is right, say so briefly and move on.
 
 ## Git
@@ -100,7 +98,7 @@ Layer ownership and import boundaries: `agent_docs/code-organization.md`.
 ## Docs
 
 - `agent_docs/project-map.md` — architecture, routes, boundaries, env vars, CI
-- `agent_docs/code-organization.md` — layout, ownership, naming, imports
+- `agent_docs/code-organization.md` — folder map, layer ownership, naming, import aliases
 - `agent_docs/implementation-playbook.md` — research → plan → implement → verify → document
 - `agent_docs/generative-ai-extension.md` — extending the AI surface
 - `agent_docs/dependencies-and-doc-packages.md` — upgrade risk groups

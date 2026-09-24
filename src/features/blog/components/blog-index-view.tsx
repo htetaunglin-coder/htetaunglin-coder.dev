@@ -55,14 +55,11 @@ export const BlogIndexView = ({ locale, category }: BlogIndexViewProps) => {
     <>
       <PageHeroImage
         alt="Flowers"
-        imageContainerClassName="md:w-sm lg:w-lg object-top -mr-16 -mt-4 md:block hidden"
+        imageContainerClassName="mt-8 w-98 lg:w-98 -mr-24"
         src="illustration_mijd2q.png"
       />
 
-      {/* No `lang` and no locale font here or on the tabs below: this chrome is
-          English on both indexes, so it inherits the document language and
-          keeps the Latin faces the design pins. */}
-      <div className="mx-auto max-w-4xl px-6 pt-4 font-inter sm:pt-16 lg:px-0">
+      <div className="mx-auto max-w-4xl px-6 pt-4 font-inter sm:pt-12 lg:px-0">
         <h1 className="bg-gradient-to-br from-black to-fg-tertiary bg-clip-text font-bold font-inter text-3xl/[1.2] text-transparent tracking-tight sm:text-4xl/[1.2] md:font-extrabold md:text-5xl/[1.2] dark:from-fg-default dark:to-fg-tertiary/80">
           Blogs
         </h1>

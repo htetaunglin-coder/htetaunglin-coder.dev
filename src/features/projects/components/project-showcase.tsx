@@ -1,6 +1,5 @@
 import { ArrowRight, Globe } from "lucide-react";
 import Link from "next/link";
-import { FadeAnimation } from "@/components/animations/fade-animation";
 import { DashedDivider } from "@/components/decorations/dashed-divider";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/ui/nav-link";
@@ -10,11 +9,9 @@ import type { ProjectItem } from "../data";
 
 const ProjectShowcase = ({
   project,
-  animateCoverOnFullInView = false,
   lastItem,
 }: {
   project: ProjectItem;
-  animateCoverOnFullInView?: boolean;
   lastItem: boolean;
 }) => {
   const lightSrc =
@@ -39,33 +36,14 @@ const ProjectShowcase = ({
         className="group relative block aspect-[16/10] w-full overflow-hidden bg-bg-tertiary outline-none brightness-90 hover:z-[var(--above-grainy-overlay-z-index)] focus-visible:ring-2 focus-visible:ring-outline-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default dark:brightness-[0.875]"
         href={`/projects/${project.id}`}
       >
-        {animateCoverOnFullInView ? (
-          <FadeAnimation
-            amount="all"
-            as="div"
-            className="absolute inset-0"
-            direction="up"
-            distance={0}
-          >
-            <ThemeImage
-              alt={project.title}
-              className="absolute inset-0 object-cover object-center"
-              darkSrc={darkSrc}
-              height={560}
-              lightSrc={lightSrc}
-              width={896}
-            />
-          </FadeAnimation>
-        ) : (
-          <ThemeImage
-            alt={project.title}
-            className="absolute inset-0 object-cover object-center"
-            darkSrc={darkSrc}
-            height={560}
-            lightSrc={lightSrc}
-            width={896}
-          />
-        )}
+        <ThemeImage
+          alt={project.title}
+          className="absolute inset-0 object-cover object-center"
+          darkSrc={darkSrc}
+          height={560}
+          lightSrc={lightSrc}
+          width={896}
+        />
 
         <div
           className={cn(

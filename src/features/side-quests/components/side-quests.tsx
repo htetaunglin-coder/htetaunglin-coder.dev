@@ -43,21 +43,14 @@ const Views: ImageViewerProps["images"] = [
     alt: "Dog sitting on a car engine - only in Myanmar :3",
     src: "view_ajpomu.jpg",
   },
-  // {
-  //   id: "6",
-  //   width: 840,
-  //   height: 840,
-  //   alt: "Mandalay pagoda view",
-  //   src: "view_vh1gu5.jpg",
-  // },
 ];
 
 const SideQuests = () => (
   <>
     <PageHeroImage
       alt="Shorts"
-      imageClassName="object-top"
-      imageContainerClassName="-mr-28 w-md md:block hidden"
+      imageClassName="object-cover object-top"
+      imageContainerClassName="w-72 lg:w-72 mt-20 lg:mt-20 -mr-8"
       src="illustration_dgkvnf.png"
     />
 
@@ -68,16 +61,15 @@ const SideQuests = () => (
         </h1>
         <p className="mt-2 font-medium text-base text-neutral-900/80 tracking-tight sm:max-w-xl sm:text-lg/normal dark:text-fg-tertiary">
           Just hobbies and small habits that hold me together. Some of them
-          started as escape, some as passion. But all of them helped me
-          understand myself a little more.
+          started as escape, some as passion.
         </p>
       </FadeStaggeredAnimation>
     </div>
 
-    <div className="relative mt-12 w-full sm:mt-16">
-      <DashedDivider className="absolute inset-x-0 top-0 opacity-40 dark:opacity-20" />
+    <div className="relative mt-8 w-full md:mt-28">
+      <DashedDivider className="absolute inset-x-0 top-0 mx-auto max-w-[65rem] opacity-40 dark:opacity-20" />
 
-      <div className="blog mx-auto w-full max-w-4xl px-6 sm:pt-4 lg:px-0">
+      <div className="blog mx-auto w-full max-w-4xl px-6 md:pt-4 lg:px-0">
         <div className="prose dark:prose-invert max-w-none">
           <FadeAnimation as="div" direction="up">
             <section className="py-12 sm:py-16" id="why-i-added-this-page">

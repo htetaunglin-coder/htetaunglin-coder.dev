@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 const HomePage = () => (
   <main
-    className="flex justify-center pt-16 pb-16 sm:pt-24 sm:pb-20 md:pt-52"
+    className="flex justify-center pt-16 pb-16 sm:pt-24 sm:pb-20 md:pt-[clamp(4rem,calc((100dvh_-_var(--header-height)_-_28rem)/2),13rem)]"
     data-smooth-scroll
   >
     <div className="w-full max-w-4xl">

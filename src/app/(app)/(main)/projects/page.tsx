@@ -71,12 +71,11 @@ export default async function ProjectPage(props: {
     <>
       <PageHeroImage
         alt="Butterfly"
-        imageClassName="object-top object-cover"
-        imageContainerClassName="w-xs mt-12 md:block hidden -mr-20 lg:mr-0"
+        imageContainerClassName="mt-18 w-84 lg:w-84 -mr-16 lg:-mr-24"
         src="illustration_mg85hu.png"
       />
 
-      <div className="mx-auto max-w-4xl px-6 pt-4 font-inter sm:pt-16 lg:px-0">
+      <div className="mx-auto max-w-4xl px-6 pt-4 font-inter sm:pt-12 lg:px-0">
         <h1 className="bg-gradient-to-br from-black to-fg-tertiary bg-clip-text font-bold font-inter text-3xl/[1.2] text-transparent tracking-tight sm:text-4xl/[1.2] md:font-extrabold md:text-5xl/[1.2] dark:from-fg-default dark:to-fg-tertiary/80">
           Projects
         </h1>
@@ -138,7 +137,6 @@ export default async function ProjectPage(props: {
             {filteredProjects.map((project, index) => (
               <FadeAnimation as="div" direction="up" key={project.id}>
                 <ProjectShowcase
-                  animateCoverOnFullInView={index === 0}
                   lastItem={index === filteredProjects.length - 1}
                   project={project}
                 />

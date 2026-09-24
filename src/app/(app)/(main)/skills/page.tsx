@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { SKILLS_SKETCH } from "@/components/decorations/workshop-sketch-art";
-import { WorkshopView } from "@/features/workshop/components/workshop-view";
+import { SKILLS_PAGE } from "@/constants/navigation";
+import { getRepoSkills } from "@/features/workshop/api/github-skills";
+import { SkillsIndexView } from "@/features/workshop/components/skills-index-view";
 import { absoluteUrl } from "@/lib/utils";
+
+const PAGE_URL = absoluteUrl(SKILLS_PAGE.href);
 
 const DESCRIPTION =
   "Claude Code skills I build for my own workflow. Each one exists because I got tired of explaining the same thing to an agent twice.";
@@ -9,11 +12,11 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: "Skills",
   description: DESCRIPTION,
-  alternates: { canonical: absoluteUrl("/skills") },
+  alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Skills | Htet Aung Lin",
     description: DESCRIPTION,
-    url: absoluteUrl("/skills"),
+    url: PAGE_URL,
     type: "website",
   },
   twitter: {
@@ -23,11 +26,8 @@ export const metadata: Metadata = {
   },
 };
 
-const MESSAGE =
-  "I built these skills so I'd stop repeating myself to the agent, then never wrote them down anywhere. So I made this page first, now I have no choice but to finish them :3";
+export default async function SkillsPage() {
+  const repoSkills = await getRepoSkills();
 
-export default function SkillsPage() {
-  return (
-    <WorkshopView layers={SKILLS_SKETCH} message={MESSAGE} title="Skills" />
-  );
+  return <SkillsIndexView description={DESCRIPTION} skills={repoSkills} />;
 }
