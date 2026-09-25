@@ -84,7 +84,7 @@ export const SKILLS_PAGE: WorkshopItem = {
   icon: Wrench,
   href: "/skills",
   image: {
-    src: "/hero-skills.jpg",
+    src: "hero-skills_pseme1.jpg",
     alt: "A child watching TV static",
     position: "10% 50%",
   },
@@ -102,7 +102,7 @@ export const DESIGN_SYSTEM_PAGE: WorkshopItem = {
   icon: Component,
   href: "/design-system",
   image: {
-    src: "/hero-design-system.jpg",
+    src: "hero-design-system_qcmobx.jpg",
     alt: "One lit CRT in a dark room of switched-off screens",
     position: "50% 50%",
   },

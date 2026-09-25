@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import type { RepoSkill } from "../api/github-skills";
 import { SKILLS, type WorkshopEntry } from "../data";
 import { SkillText } from "./skill-text";
-import { WorkshopHero } from "./workshop-hero";
+import { WorkshopPage } from "./workshop-page";
 
 const STATUS_LABEL: Record<EntryStatus, string> = {
   "in-progress": "Coming soon",
@@ -33,38 +33,29 @@ export function SkillsIndexView({
   description: string;
   skills: RepoSkill[];
 }) {
-  const rows = [...skills.map(toPublishedRow), ...SKILLS.map(toWorkingOnRow)];
+  const rows = [...skills.map(toPublishedRow), ...SKILLS.map(toInProgressRow)];
 
   return (
-    <>
-      <WorkshopHero
-        description={description}
-        eyebrow="Workshop / 01"
-        image={SKILLS_PAGE.image}
-        title={SKILLS_PAGE.title}
-      />
-
-      <main className="relative mx-auto mt-8 max-w-4xl pb-8">
-        <DashedDivider className="opacity-40 lg:mx-[-3.5rem] dark:opacity-20" />
-
-        <div className="relative px-6 font-inter lg:px-0">
-          {rows.length === 0 ? (
-            <p className="py-8 text-fg-tertiary text-sm">Nothing here yet.</p>
-          ) : (
-            rows.map((row, index) => (
-              <Fragment key={row.title}>
-                {index > 0 && (
-                  <DashedDivider className="inset-x-0 opacity-40 lg:mx-[-3.5rem] dark:opacity-20" />
-                )}
-                <FadeAnimation as="div" direction="up">
-                  <SkillRow {...row} />
-                </FadeAnimation>
-              </Fragment>
-            ))
-          )}
-        </div>
-      </main>
-    </>
+    <WorkshopPage
+      description={description}
+      eyebrow="Workshop / 01"
+      page={SKILLS_PAGE}
+    >
+      {rows.length === 0 ? (
+        <p className="py-8 text-fg-tertiary text-sm">Nothing here yet.</p>
+      ) : (
+        rows.map((row, index) => (
+          <Fragment key={row.title}>
+            {index > 0 && (
+              <DashedDivider className="lg:-mx-14 opacity-40 dark:opacity-20" />
+            )}
+            <FadeAnimation as="div" direction="up">
+              <SkillRow {...row} />
+            </FadeAnimation>
+          </Fragment>
+        ))
+      )}
+    </WorkshopPage>
   );
 }
 
@@ -143,7 +134,7 @@ function toPublishedRow(skill: RepoSkill): SkillRowProps {
   };
 }
 
-function toWorkingOnRow(entry: WorkshopEntry): SkillRowProps {
+function toInProgressRow(entry: WorkshopEntry): SkillRowProps {
   return {
     title: entry.name,
     summary: entry.summary,

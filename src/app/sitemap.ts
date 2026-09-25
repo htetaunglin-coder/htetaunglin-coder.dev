@@ -13,7 +13,8 @@ import { getRepoSkills } from "@/features/workshop/api/github-skills";
 import { appUrl } from "@/lib/site-config";
 import { blogSource } from "@/lib/source";
 
-export const revalidate = false;
+// Matches the daily revalidate on the skills fetch below.
+export const revalidate = 86_400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string): string => new URL(path, appUrl).toString();
@@ -56,8 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }) as MetadataRoute.Sitemap[number]
   );
 
-  // This fetch's daily `revalidate` beats the route's `false`, so the whole
-  // sitemap now refreshes daily. Harmless, but not what the export above says.
   const skills = (await getRepoSkills()).map(
     (skill) =>
       ({

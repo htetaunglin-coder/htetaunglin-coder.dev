@@ -1,8 +1,10 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
+import { CloudinaryImage } from "@/components/cloudinary-image";
 import { cn } from "@/lib/utils";
 
 const IMAGE_WIDTH_PX = 1040;
+const IMAGE_MASK =
+  "radial-gradient(72% 62% at 52% 50%, #000 20%, transparent 72%)";
 
 type WorkshopHeroProps = {
   eyebrow: string;
@@ -33,19 +35,16 @@ export function WorkshopHero({
             )}
             style={{ "--image-width": `${IMAGE_WIDTH_PX}px` } as CSSProperties}
           >
-            <Image
+            <CloudinaryImage
               alt={image.alt}
               className="object-cover object-right"
               fill
               preload
-              sizes={`${IMAGE_WIDTH_PX}px`}
+              // Mobile hides the photo. The 1px slot there makes the preload
+              // fetch the smallest file, not a 1040px one.
+              sizes={`(min-width: 768px) ${IMAGE_WIDTH_PX}px, 1px`}
               src={image.src}
-              style={{
-                maskImage:
-                  "radial-gradient(72% 62% at 52% 50%, #000 20%, transparent 72%)",
-                WebkitMaskImage:
-                  "radial-gradient(72% 62% at 52% 50%, #000 20%, transparent 72%)",
-              }}
+              style={{ maskImage: IMAGE_MASK, WebkitMaskImage: IMAGE_MASK }}
             />
           </div>
         </div>

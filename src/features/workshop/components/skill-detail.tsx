@@ -6,7 +6,11 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import Link from "next/link";
 import { NavLink } from "@/components/ui/nav-link";
 import { SKILLS_PAGE } from "@/constants/navigation";
-import { type RepoSkill, skillInstallCommand } from "../api/github-skills";
+import {
+  type RepoSkill,
+  resolveSkillUrl,
+  skillInstallCommand,
+} from "../api/github-skills";
 import { InstallCodeBlock } from "./install-code-block";
 import { SkillText } from "./skill-text";
 
@@ -51,13 +55,19 @@ export async function SkillDetail({ skill }: { skill: RepoSkill }) {
           SKILL.md
         </h3>
 
-        <SkillContent baseUrl={skill.baseUrl} body={skill.body} />
+        <SkillContent body={skill.body} folderPath={skill.folderPath} />
       </section>
     </div>
   );
 }
 
-function SkillContent({ body, baseUrl }: { body: string; baseUrl: string }) {
+function SkillContent({
+  body,
+  folderPath,
+}: {
+  body: string;
+  folderPath: string;
+}) {
   return (
     // The article styles in globals.css apply only inside `.blog`. Without it,
     // this does not look like a blog post.
@@ -67,8 +77,23 @@ function SkillContent({ body, baseUrl }: { body: string; baseUrl: string }) {
           components={{
             ...defaultMdxComponents,
             a: ({ href = "", ...props }) => (
-              <NavLink href={resolveHref(href, baseUrl)} {...props} />
+              <NavLink
+                href={resolveSkillUrl(href, folderPath, "link")}
+                {...props}
+              />
             ),
+            // SKILL.md images live on GitHub with no known size, so neither
+            // cloudinary-image.tsx nor next/image can take them.
+            img: ({ src, alt = "" }) =>
+              typeof src === "string" ? (
+                // biome-ignore lint/correctness/useImageSize: the size is unknown, see above
+                // biome-ignore lint/performance/noImgElement: see above
+                <img
+                  alt={alt}
+                  loading="lazy"
+                  src={resolveSkillUrl(src, folderPath, "image")}
+                />
+              ) : null,
           }}
           rehypePlugins={[rehypeCode]}
           remarkPlugins={[remarkHeading]}
@@ -78,14 +103,4 @@ function SkillContent({ body, baseUrl }: { body: string; baseUrl: string }) {
       </div>
     </div>
   );
-}
-
-const ABSOLUTE_HREF_PATTERN = /^[a-z][a-z0-9+.-]*:|^#/i;
-
-function resolveHref(href: string, baseUrl: string) {
-  if (!href || ABSOLUTE_HREF_PATTERN.test(href)) {
-    return href;
-  }
-
-  return new URL(href, baseUrl).toString();
 }

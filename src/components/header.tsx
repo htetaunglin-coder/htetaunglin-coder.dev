@@ -11,7 +11,6 @@ import {
 } from "@radix-ui/react-dialog";
 import { ChevronDown, Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import Image from "next/image";
 import { useTheme } from "next-themes";
 import { type RefObject, useEffect, useRef, useState } from "react";
 import {
@@ -23,6 +22,7 @@ import { PROFILE_LINKS } from "@/constants/social-links";
 import { DURATION, EASE, STAGGER } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { FadeStaggeredAnimation } from "./animations/fade-animation";
+import { CloudinaryImage } from "./cloudinary-image";
 import { AnimatedGradientText } from "./decorations/animated-gradient-text";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Button } from "./ui/button";
@@ -199,7 +199,7 @@ const MorePages = () => (
               key={item.id}
             >
               <div className="-bottom-14 pointer-events-none absolute inset-x-0 top-0 rounded-[inherit]">
-                <Image
+                <CloudinaryImage
                   alt={item.image.alt}
                   className="rounded-[inherit] object-cover opacity-60 transition-opacity duration-300 group-hover/header-link:opacity-80"
                   fill
