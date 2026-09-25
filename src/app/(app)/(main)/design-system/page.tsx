@@ -1,37 +1,30 @@
 import type { Metadata } from "next";
-import { DESIGN_SYSTEM_SKETCH } from "@/components/decorations/workshop-sketch-art";
-import { WorkshopView } from "@/features/workshop/components/workshop-view";
+import { DESIGN_SYSTEM_PAGE } from "@/constants/navigation";
+import { DesignSystemView } from "@/features/workshop/components/design-system-view";
 import { absoluteUrl } from "@/lib/utils";
 
+const PAGE_URL = absoluteUrl(DESIGN_SYSTEM_PAGE.href);
+
 const DESCRIPTION =
-  "The design system running this site, not a general-purpose library. Rules, spacing, components and patterns — take what you need. Each section gets its full write-up as I go.";
+  "The design system running this site, not a general-purpose library. Rules, spacing, components and patterns.";
 
 export const metadata: Metadata = {
-  title: "Design System",
+  title: DESIGN_SYSTEM_PAGE.title,
   description: DESCRIPTION,
-  alternates: { canonical: absoluteUrl("/design-system") },
+  alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: "Design System | Htet Aung Lin",
+    title: `${DESIGN_SYSTEM_PAGE.title} | Htet Aung Lin`,
     description: DESCRIPTION,
-    url: absoluteUrl("/design-system"),
+    url: PAGE_URL,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Design System | Htet Aung Lin",
+    title: `${DESIGN_SYSTEM_PAGE.title} | Htet Aung Lin`,
     description: DESCRIPTION,
   },
 };
 
-const MESSAGE =
-  "You're actually looking at it right now, it runs this whole site. Writing it all down is the part I keep skipping, so I made this page to push myself :3";
-
 export default function DesignSystemPage() {
-  return (
-    <WorkshopView
-      layers={DESIGN_SYSTEM_SKETCH}
-      message={MESSAGE}
-      title="Design System"
-    />
-  );
+  return <DesignSystemView description={DESCRIPTION} />;
 }

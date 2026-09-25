@@ -120,12 +120,19 @@ const FadeAnimation = ({
     () => motion.create(Component, { forwardMotionProps: false }),
     [Component]
   );
+  // `useInView`, not `whileInView`: the prop's observer never unobserves, so
+  // an effect re-run (StrictMode in dev) re-observes a node the browser still
+  // tracks, gets no new entry, and WebKit leaves the node at opacity 0.
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once, amount });
   const reduceMotion = useReducedMotion();
 
   return (
     <MotionComponent
+      animate={isInView ? "show" : "hidden"}
       className={className}
       initial="hidden"
+      ref={ref}
       variants={{
         hidden: reduceMotion
           ? { opacity: 1 }
@@ -141,8 +148,6 @@ const FadeAnimation = ({
             : { duration: ENTER_DURATION, ease: EASE_OUT_EXPO, delay },
         },
       }}
-      viewport={{ once, amount }}
-      whileInView="show"
     >
       {children}
     </MotionComponent>

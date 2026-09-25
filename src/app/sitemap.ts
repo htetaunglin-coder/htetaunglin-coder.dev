@@ -1,15 +1,21 @@
 import type { MetadataRoute } from "next";
 import {
+  DESIGN_SYSTEM_PAGE,
+  SKILLS_PAGE,
+  skillPath,
+} from "@/constants/navigation";
+import {
   BLOG_INDEX_ALTERNATES,
   postAlternates,
 } from "@/features/blog/lib/blog-locale";
 import { PROJECT_DATA } from "@/features/projects/data";
+import { getRepoSkills } from "@/features/workshop/api/github-skills";
 import { appUrl } from "@/lib/site-config";
 import { blogSource } from "@/lib/source";
 
-export const revalidate = false;
+// Matches the daily revalidate on the skills fetch below.
+export const revalidate = 86_400;
 
-// biome-ignore lint/suspicious/useAwait: off
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string): string => new URL(path, appUrl).toString();
 
@@ -51,6 +57,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }) as MetadataRoute.Sitemap[number]
   );
 
+  const skills = (await getRepoSkills()).map(
+    (skill) =>
+      ({
+        url: url(skillPath(skill.slug)),
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.5,
+      }) as MetadataRoute.Sitemap[number]
+  );
+
   return [
     {
       url: url("/"),
@@ -80,13 +96,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: url("/skills"),
+      url: url(SKILLS_PAGE.href),
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
     {
-      url: url("/design-system"),
+      url: url(DESIGN_SYSTEM_PAGE.href),
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.5,
@@ -118,5 +134,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     ...blogs.filter((v) => v !== undefined),
     ...projects.filter((v) => v !== undefined),
+    ...skills,
   ];
 }

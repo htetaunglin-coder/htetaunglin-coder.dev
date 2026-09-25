@@ -4,9 +4,8 @@ import { Footer } from "@/components/footer";
 const MainLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     {children}
-    <div className="flex w-full justify-center px-6 pb-8">
-      <Footer className="max-w-4xl px-4 lg:px-6" />
-    </div>
+
+    <Footer className="mx-auto max-w-4xl px-6 lg:px-0" />
   </>
 );
 

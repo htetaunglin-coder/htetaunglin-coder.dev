@@ -48,6 +48,10 @@
   --color-fg-inverse: oklch(0.98 0 0);
   --color-outline-inverse: oklch(0.37 0.01 285.84);
 
+  /* Media: photo tiles and their text. The same in both themes. */
+  --color-bg-media: oklch(0.27 0 0);
+  --color-fg-media: oklch(0.98 0 0);
+
   /* Brand  */
   --color-bg-brand: oklch(0.38 0.09 289.08);
   --color-on-bg-brand: oklch(0.94 0.02 289.08);
@@ -236,6 +240,16 @@ html:has([data-smooth-scroll]) {
   }
   body {
     @apply bg-bg-default text-fg-default;
+  }
+
+  /* Gradient headings clip a background to glyphs painted transparent, so a
+     selection highlight would cover the letters with nothing. The fill has to
+     be restored alongside the colour, or the transparent glyphs still win. */
+  [class*="bg-clip-text"]::selection,
+  [class*="bg-clip-text"] ::selection {
+    background-color: Highlight;
+    color: HighlightText;
+    -webkit-text-fill-color: HighlightText;
   }
 }
 

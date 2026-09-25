@@ -1,9 +1,5 @@
 import { Component, Contact, Lightbulb, Mountain, Wrench } from "lucide-react";
 import type { ComponentType } from "react";
-import {
-  DesignSystemIllustration,
-  SkillsIllustration,
-} from "@/components/decorations/workshop-illustrations";
 
 export type BaseLinkItem = {
   id: string;
@@ -65,7 +61,9 @@ export type OtherPageLinkItem = BaseLinkItem & {
 
 export type WorkshopItem = OtherPageLinkItem & {
   soon?: boolean;
-  illustration: ComponentType<{ className?: string }>;
+  /** The page's own hero photo, cropped to the tile. `position` pans it; a
+   * photo wider than the tile only moves on x. */
+  image: { src: string; alt: string; position: string };
 };
 
 export type OtherPages = {
@@ -79,29 +77,42 @@ export type OtherPages = {
   };
 };
 
+export const SKILLS_PAGE: WorkshopItem = {
+  id: "skills",
+  title: "Skills",
+  description: "Claude Code skills I use daily, written down once.",
+  icon: Wrench,
+  href: "/skills",
+  image: {
+    src: "hero-skills_pseme1.jpg",
+    alt: "A child watching TV static",
+    position: "10% 50%",
+  },
+  soon: true,
+};
+
+export function skillPath(slug: string) {
+  return `${SKILLS_PAGE.href}/${slug}`;
+}
+
+export const DESIGN_SYSTEM_PAGE: WorkshopItem = {
+  id: "design-system",
+  title: "Design System",
+  description: "Rules and components to copy.",
+  icon: Component,
+  href: "/design-system",
+  image: {
+    src: "hero-design-system_qcmobx.jpg",
+    alt: "One lit CRT in a dark room of switched-off screens",
+    position: "50% 50%",
+  },
+  soon: true,
+};
+
 export const OTHER_PAGES: Readonly<OtherPages> = {
   workshop: {
     title: "Workshop",
-    items: [
-      {
-        id: "skills",
-        title: "Skills",
-        description: "Claude Code skills I use daily, written down once.",
-        icon: Wrench,
-        href: "/skills",
-        illustration: SkillsIllustration,
-        soon: true,
-      },
-      {
-        id: "design-system",
-        title: "Design System",
-        description: "The one running this site. Rules and components to copy.",
-        icon: Component,
-        href: "/design-system",
-        illustration: DesignSystemIllustration,
-        soon: true,
-      },
-    ],
+    items: [SKILLS_PAGE, DESIGN_SYSTEM_PAGE],
   },
   sideQuest: {
     id: "side-quests",
