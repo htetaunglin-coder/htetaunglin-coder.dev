@@ -40,7 +40,7 @@ If you'd like to see the old version, you can check it out here:
 Things I ~~wish~~ would like to implement in the future:
 
 - [x] Multi-model AI chat support
-- [ ] Blog internationalization (English + Burmese)
+- [x] Blog internationalization (English + Burmese)
 
 ## Installation
 
