@@ -5,7 +5,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     {children}
 
-    <Footer className="mx-auto max-w-4xl px-6 lg:px-0" />
+    <Footer className="mx-auto max-w-3xl px-6 lg:px-0" />
   </>
 );
 

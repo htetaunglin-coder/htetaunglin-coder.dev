@@ -30,7 +30,7 @@ export function WorkshopPage({
         title={page.title}
       />
 
-      <main className="relative mx-auto max-w-4xl pb-16">
+      <main className="relative mx-auto max-w-3xl pb-16">
         <div className="relative px-6 font-inter lg:px-0">{children}</div>
       </main>
     </>

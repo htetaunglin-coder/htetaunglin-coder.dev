@@ -60,7 +60,7 @@ export function WorkshopHero({
         <div className="absolute inset-0 hidden bg-[linear-gradient(to_bottom,transparent_35%,var(--color-bg-default)_100%),linear-gradient(to_right,var(--color-bg-default)_22%,transparent_58%)] md:dark:block" />
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-6 pt-4 font-inter md:pt-52 lg:px-0">
+      <div className="relative mx-auto max-w-3xl px-6 pt-4 font-inter md:pt-52 lg:px-0">
         <p className="font-gloria-hallelujah text-fg-tertiary/80 text-xs uppercase italic tracking-normal sm:text-sm">
           # {eyebrow}
         </p>

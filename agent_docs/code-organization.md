@@ -8,7 +8,7 @@ The `frontend-standards` skill owns code shape: colocation, file order, comments
 src/
   app/                -> Next.js routing, layout, metadata, route handlers
     (app)/            -> main website routes (home/projects/about/blog/... )
-      (main)/         -> most pages; layout adds the 4xl footer
+      (main)/         -> most pages; layout adds the 3xl footer
       (blog)/         -> blog routes; each view renders its own footer
     (chat)/           -> chat page + chat API route
   features/           -> feature/domain UI and logic
