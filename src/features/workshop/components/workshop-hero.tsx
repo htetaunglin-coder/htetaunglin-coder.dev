@@ -58,8 +58,8 @@ export function WorkshopHero({
       </div>
 
       <div className="relative mx-auto max-w-4xl px-6 pt-4 font-inter md:pt-52 lg:px-0">
-        <p className="font-mono text-fg-tertiary/80 text-xs uppercase tracking-[0.08em]">
-          {eyebrow}
+        <p className="font-gloria-hallelujah text-fg-tertiary/80 text-xs uppercase italic tracking-normal sm:text-sm">
+          # {eyebrow}
         </p>
 
         <h1 className="mt-3 bg-gradient-to-br from-black to-fg-tertiary bg-clip-text font-bold font-inter text-3xl/[1.2] text-transparent tracking-tight sm:text-4xl/[1.2] md:font-extrabold md:text-5xl/[1.2] dark:from-fg-default dark:to-fg-tertiary/80">

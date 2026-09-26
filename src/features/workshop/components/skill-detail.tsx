@@ -23,10 +23,10 @@ export async function SkillDetail({ skill }: { skill: RepoSkill }) {
   return (
     <div className="flex w-full flex-col gap-8 font-inter">
       <div>
-        <p className="font-gloria-hallelujah text-fg-brand text-xs uppercase italic tracking-[0.08em]">
+        <p className="font-gloria-hallelujah text-fg-tertiary/80 text-xs uppercase italic tracking-normal sm:text-sm">
           # Workshop /{" "}
           <Link
-            className="underline decoration-fg-brand/40 underline-offset-2 transition duration-300 hover:decoration-fg-brand"
+            className="text-fg-brand underline underline-offset-2 hover:brightness-80"
             href={SKILLS_PAGE.href}
           >
             {SKILLS_PAGE.title}
