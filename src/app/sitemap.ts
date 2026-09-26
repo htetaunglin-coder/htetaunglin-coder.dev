@@ -1,22 +1,16 @@
 import type { MetadataRoute } from "next";
-import {
-  DESIGN_SYSTEM_PAGE,
-  SKILLS_PAGE,
-  skillPath,
-} from "@/constants/navigation";
+import { DESIGN_SYSTEM_PAGE, SKILLS_PAGE } from "@/constants/navigation";
 import {
   BLOG_INDEX_ALTERNATES,
   postAlternates,
 } from "@/features/blog/lib/blog-locale";
 import { PROJECT_DATA } from "@/features/projects/data";
-import { getRepoSkills } from "@/features/workshop/api/github-skills";
 import { appUrl } from "@/lib/site-config";
 import { blogSource } from "@/lib/source";
 
-// Matches the daily revalidate on the skills fetch below.
-export const revalidate = 86_400;
+export const revalidate = false;
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string): string => new URL(path, appUrl).toString();
 
   // Deliberately unscoped: the sitemap wants every locale, and `page.url`
@@ -54,16 +48,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: project.timeline.endDate || project.timeline.startDate,
         changeFrequency: "monthly" as const,
         priority: 0.6,
-      }) as MetadataRoute.Sitemap[number]
-  );
-
-  const skills = (await getRepoSkills()).map(
-    (skill) =>
-      ({
-        url: url(skillPath(skill.slug)),
-        lastModified: new Date(),
-        changeFrequency: "monthly" as const,
-        priority: 0.5,
       }) as MetadataRoute.Sitemap[number]
   );
 
@@ -134,6 +118,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     ...blogs.filter((v) => v !== undefined),
     ...projects.filter((v) => v !== undefined),
-    ...skills,
   ];
 }

@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { CloudinaryImage } from "@/components/cloudinary-image";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,8 @@ type WorkshopHeroProps = {
   description: string;
   image: { src: string; alt: string };
   imageContainerClassName?: string;
+  /** The page's main action, kept in one group with the title. */
+  actions?: ReactNode;
 };
 
 export function WorkshopHero({
@@ -20,6 +22,7 @@ export function WorkshopHero({
   description,
   image,
   imageContainerClassName,
+  actions,
 }: WorkshopHeroProps) {
   return (
     <>
@@ -69,6 +72,8 @@ export function WorkshopHero({
         <p className="mt-2 max-w-xl font-medium text-base text-neutral-900/80 tracking-tight sm:text-lg/normal dark:text-fg-tertiary">
           {description}
         </p>
+
+        {actions ? <div className="mt-8">{actions}</div> : null}
       </div>
     </>
   );

@@ -11,18 +11,29 @@ import { cn } from "@/lib/utils";
 type InstallCodeBlockProps = {
   children: ReactNode;
   githubUrl: string;
+  skillsShUrl: string;
   className?: string;
 };
 
 export function InstallCodeBlock({
   children,
   githubUrl,
+  skillsShUrl,
   className,
 }: InstallCodeBlockProps) {
   return (
     <CodeBlock
       Actions={({ className: actionsClassName, children: copyButton }) => (
         <div className={cn("flex items-center", actionsClassName)}>
+          <NavLink
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "text-fd-muted-foreground! underline hover:text-fd-accent-foreground"
+            )}
+            href={skillsShUrl}
+          >
+            skills.sh
+          </NavLink>
           <NavLink
             className={cn(
               buttonVariants({ size: "sm" }),

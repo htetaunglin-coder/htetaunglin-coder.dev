@@ -12,6 +12,10 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+  // Skills have no detail page any more. Shared links land on the list.
+  redirects: () => [
+    { source: "/skills/:slug", destination: "/skills", permanent: true },
+  ],
 };
 
 const withMDX = createMDX({});

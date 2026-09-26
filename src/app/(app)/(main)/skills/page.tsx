@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SKILLS_PAGE } from "@/constants/navigation";
-import { getRepoSkills } from "@/features/workshop/api/github-skills";
 import { SkillsIndexView } from "@/features/workshop/components/skills-index-view";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -26,8 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function SkillsPage() {
-  const repoSkills = await getRepoSkills();
-
-  return <SkillsIndexView description={DESCRIPTION} skills={repoSkills} />;
+export default function SkillsPage() {
+  return <SkillsIndexView description={DESCRIPTION} />;
 }

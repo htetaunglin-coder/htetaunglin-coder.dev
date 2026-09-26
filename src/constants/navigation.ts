@@ -91,10 +91,6 @@ export const SKILLS_PAGE: WorkshopItem = {
   soon: true,
 };
 
-export function skillPath(slug: string) {
-  return `${SKILLS_PAGE.href}/${slug}`;
-}
-
 export const DESIGN_SYSTEM_PAGE: WorkshopItem = {
   id: "design-system",
   title: "Design System",
