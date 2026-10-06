@@ -16,7 +16,8 @@
     "fix": "npx ultracite fix",
     "preview": "next build && next start",
     "types:check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "map:generate": "node scripts/generate-world-map.mjs"
   },
   "husky": {
     "hooks": {
@@ -45,6 +46,7 @@
     "@react-three/rapier": "^2.1.0",
     "@sentry/nextjs": "^10.72.0",
     "@shikijs/transformers": "^3.14.0",
+    "@tanstack/charts": "1.0.0",
     "@types/mdx": "^2.0.13",
     "@upstash/ratelimit": "^2.0.6",
     "@upstash/redis": "^1.35.6",
@@ -53,6 +55,7 @@
     "ai": "^6.0.146",
     "cloudinary": "^2.8.0",
     "clsx": "^2.1.1",
+    "country-flag-icons": "1.6.20",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.18",
     "fumadocs-core": "^16.0.8",
@@ -94,11 +97,13 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/d3-geo": "^3.1.1",
     "@types/mdast": "^4.0.4",
     "@types/node": "^24.3.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.181.0",
+    "d3-geo": "^3.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.1",
     "tailwindcss": "^4",
