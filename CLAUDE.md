@@ -22,7 +22,7 @@ Alias: `@/*` → `src/*`. Route map, boundaries, and env vars: `agent_docs/proje
 
 ## Commands
 
-`pnpm dev` · `build` · `start` · `preview` · `types:check` (`tsc --noEmit`) · `check` (Ultracite) · `fix` (Ultracite autofix) · `resume:pdf` (regenerates the committed resume PDF via headless Chrome — only when asked).
+`pnpm dev` · `build` · `start` · `preview` · `types:check` (`tsc --noEmit`) · `check` (Ultracite) · `fix` (Ultracite autofix) · `resume:pdf` (regenerates the committed resume PDF via headless Chrome — only when asked) · `map:generate` (regenerates the analytics world map JSON from Natural Earth — only when the map should change).
 
 **There is no test runner.** No Vitest, no Playwright, no `pnpm test`. Don't invent one and never claim tests pass. Verification here is `types:check` + `check` + `build` + actually looking at the page.
 

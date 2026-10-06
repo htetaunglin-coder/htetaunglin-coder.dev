@@ -8,9 +8,12 @@ type DashedDividerProps = {
   stroke?: string;
 };
 
+/** The site's dotted line: 1px dots, 4px apart. Charts reuse it for grid lines. */
+export const DASH_PATTERN = "1 3";
+
 const DEFAULT_MASK: Record<"horizontal" | "vertical", string> = {
   horizontal:
-    "[mask-image:linear-gradient(to_left,transparent,white_12rem,white_calc(100%_-_12rem),transparent)]",
+    "[mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%_-_4rem),transparent)] md:[mask-image:linear-gradient(to_left,transparent,white_12rem,white_calc(100%_-_12rem),transparent)]",
   vertical:
     "[mask-image:linear-gradient(to_bottom,transparent,white_5rem,white_calc(100%_-_16rem),transparent)]",
 };
@@ -38,7 +41,7 @@ export function DashedDivider({
       >
         <line
           stroke={stroke}
-          strokeDasharray="1 3"
+          strokeDasharray={DASH_PATTERN}
           strokeWidth={2}
           x1={0}
           x2={isHorizontal ? "100%" : 0}

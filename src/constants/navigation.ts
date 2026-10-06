@@ -1,4 +1,10 @@
-import { Component, Contact, Lightbulb, Mountain, Wrench } from "lucide-react";
+import {
+  ChartArea,
+  Component,
+  Lightbulb,
+  Mountain,
+  Wrench,
+} from "lucide-react";
 import type { ComponentType } from "react";
 
 export type BaseLinkItem = {
@@ -120,11 +126,11 @@ export const OTHER_PAGES: Readonly<OtherPages> = {
   },
   links: [
     {
-      id: "guestbook",
-      title: "Guestbook",
-      description: "Leave me a message.",
-      icon: Contact,
-      href: "/guest-book",
+      id: "analytics",
+      title: "Analytics",
+      description: "Who visited, and from where.",
+      icon: ChartArea,
+      href: "/analytics",
     },
     {
       id: "resources",
