@@ -27,8 +27,8 @@ const Hero = () => (
         </div>
 
         <p className="mt-3 max-w-3xl text-base text-fg-tertiary sm:mt-2 sm:text-lg/relaxed">
-          Frontend engineer who appreciates good products and kind people. Loves
-          studying how the mind, emotions and ego work. (The ego is still
+          I appreciate good products and kind people. Play guitar, hit the gym.
+          Love learning how the mind, emotions and ego work. (The ego is still
           winning :3)
         </p>
 
