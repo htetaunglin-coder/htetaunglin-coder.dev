@@ -71,7 +71,7 @@ export function getPersonStructuredData(): PersonStructuredData {
     "@type": "Person",
     name: siteConfig.title,
     url: siteConfig.url as string,
-    jobTitle: "Frontend Developer",
+    jobTitle: "Frontend Engineer",
     description: siteConfig.description,
     sameAs: [
       "https://github.com/htetaunglin-coder",

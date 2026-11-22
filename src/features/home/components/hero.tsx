@@ -15,7 +15,7 @@ const Hero = () => (
         <p className="flex items-center gap-1 font-gloria-hallelujah text-fg-tertiary/80 text-xs italic tracking-normal sm:text-base">
           / Hey It&apos;s me,{" "}
           <span className="font-medium text-fg-brand text-xs sm:text-sm">
-            Frontend Developer
+            Frontend Engineer
           </span>
         </p>
         <div className="relative flex w-fit items-center gap-1 md:gap-2">
@@ -27,10 +27,9 @@ const Hero = () => (
         </div>
 
         <p className="mt-3 max-w-3xl text-base text-fg-tertiary sm:mt-2 sm:text-lg/relaxed">
-          I build front ends that look great and last, fast, with{" "}
-          <span className="font-medium text-fg-default">AI agents</span>. I care
-          about the people I build with as much as the product. In my free time,
-          I make programming videos.
+          Frontend engineer who appreciates good products and kind people. Loves
+          studying how the mind, emotions and ego work. (The ego is still
+          winning :3)
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-6">
